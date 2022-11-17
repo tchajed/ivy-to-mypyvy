@@ -1,6 +1,7 @@
 // basic tokenization
-char = { ASCII_ALPHANUMERIC | "." | "_" | ":" }
-WHITESPACE = _{ " " | NEWLINE }
+char = { ASCII_ALPHANUMERIC | "_" | ":" | "." }
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+// ident = @{ ASCII_ALPHA ~ (char* ~ ("." ~ char*)*) }
 ident = @{ char+ }
 
 // the top-level rule
@@ -26,5 +27,18 @@ if_rule = {
   ("else" ~ rule_block_or_step)?
 }
 
-// TODO: write this rule properly
-expr = { (!("{" | "}" | ";" | ":=") ~ ANY)+ }
+expr = { prefix* ~ term ~ (infix ~ prefix* ~ term)* }
+
+// the infix/prefix operators
+infix = _{ and | implies }
+and = { "&" }
+implies = { "->" }
+prefix = _{ not }
+not = { "~" }
+
+// some other expression constructs
+call_expr = { ident ~ "(" ~ ident ~ ")" }
+forall_expr = { "forall" ~ ident  ~ "." ~ expr }
+some_expr = { "some" ~ ident  ~ "." ~ expr }
+base_expr =  { call_expr | forall_expr | some_expr | ident }
+term = _{ base_expr | "(" ~ expr ~ ")" }
