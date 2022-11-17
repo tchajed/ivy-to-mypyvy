@@ -1,16 +1,11 @@
 extern crate pest;
+mod ivy_l2s;
 
 // import only for trait
 use clap::Parser as _;
-use pest::{
-    pratt_parser::{Assoc, Op, PrattParser},
-    Parser as _,
-};
+use ivy_l2s::{IvyParser, Rule};
+use pest::Parser as _;
 use std::fs;
-
-#[derive(pest_derive::Parser)]
-#[grammar = "ivy.pest"]
-pub struct IvyParser;
 
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
@@ -23,28 +18,10 @@ fn main() {
     let args = Args::parse();
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
 
-    IvyParser::parse(Rule::ident, "ext:mutex_protocol.step_atomic_store")
-        .expect("unsuccessful ident parse");
-    IvyParser::parse(Rule::ident, "fml:t:mutex_protocol.thread").expect("unsuccessful ident parse");
-    IvyParser::parse(Rule::expr, "forall V0.  l2s_a(V0)").expect("unsuccessful expr parse");
-    IvyParser::parse(Rule::expr, "l2s_g_1 -> ~(forall T. mutex_protocol.d(T))")
-        .expect("unsuccessful expr parse");
-    IvyParser::parse(Rule::forall_expr, "forall T. mutex_protocol.d(T)")
-        .expect("unsuccessful forall parse");
-    IvyParser::parse(Rule::expr, "forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0)")
-        .expect("unsuccessful expr parse");
-
     let file = IvyParser::parse(Rule::file, &unparsed_file)
         .expect("unsuccessful parse of input file")
         .next()
         .unwrap();
 
     println!("{:?}", file);
-
-    let _pratt = PrattParser::new()
-        .op(Op::infix(Rule::and, Assoc::Left))
-        .op(Op::infix(Rule::implies, Assoc::Left))
-        .op(Op::infix(Rule::iff, Assoc::Left))
-        .op(Op::infix(Rule::equal, Assoc::Left))
-        .op(Op::prefix(Rule::not));
 }
