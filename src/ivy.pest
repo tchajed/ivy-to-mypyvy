@@ -1,8 +1,9 @@
 // basic tokenization
-char = { ASCII_ALPHANUMERIC | "_" | ":" | "." }
+char = { ASCII_ALPHANUMERIC | "_" | ":" }
 WHITESPACE = _{ " " | "\t" | NEWLINE }
-// ident = @{ ASCII_ALPHA ~ (char* ~ ("." ~ char*)*) }
-ident = @{ char+ }
+// periods can only be in the middle of identifiers
+// (to disambiguate the period in forall T. e)
+ident = @{ char+ ~ ("." ~ char+)* }
 
 // the top-level rule
 file = { SOI ~ step_def* ~ EOI }
@@ -19,7 +20,8 @@ rule_block = {
 
 rule_step = { assign_rule | assume_rule | assert_rule | if_rule }
 
-assign_rule = { expr ~ ":=" ~ expr }
+lexpr = { call_expr | ident }
+assign_rule = { lexpr ~ ":=" ~ expr }
 assume_rule = {  "assume" ~ expr }
 assert_rule = {  "assert" ~ expr }
 if_rule = {
@@ -30,9 +32,11 @@ if_rule = {
 expr = { prefix* ~ term ~ (infix ~ prefix* ~ term)* }
 
 // the infix/prefix operators
-infix = _{ and | implies }
+infix = _{ and | implies | iff | equal }
 and = { "&" }
 implies = { "->" }
+iff = { "<->" }
+equal = { "=" }
 prefix = _{ not }
 not = { "~" }
 
@@ -40,5 +44,6 @@ not = { "~" }
 call_expr = { ident ~ "(" ~ ident ~ ")" }
 forall_expr = { "forall" ~ ident  ~ "." ~ expr }
 some_expr = { "some" ~ ident  ~ "." ~ expr }
-base_expr =  { call_expr | forall_expr | some_expr | ident }
+havoc_expr = { "*" }
+base_expr =  { call_expr | forall_expr | some_expr | havoc_expr |  ident }
 term = _{ base_expr | "(" ~ expr ~ ")" }
