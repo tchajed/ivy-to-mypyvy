@@ -1,11 +1,11 @@
 use pest::{
     iterators::Pair,
-    pratt_parser::{Assoc, Op, PrattParser},
+    pratt_parser::{Assoc, Op, PrattParser}, Parser,
 };
 
 #[derive(pest_derive::Parser)]
 #[grammar = "ivy.pest"]
-pub struct IvyParser;
+struct IvyParser;
 
 #[derive(PartialEq, Eq, Debug)]
 pub struct Transition {
@@ -224,7 +224,7 @@ fn parse_transition(step_def: Pair<Rule>) -> Transition {
     }
 }
 
-pub fn parse(file: Pair<Rule>) -> Vec<Transition> {
+fn parse_file(file: Pair<Rule>) -> Vec<Transition> {
     file.into_inner()
         .flat_map(|pair| {
             if pair.as_rule() == Rule::EOI {
@@ -234,6 +234,15 @@ pub fn parse(file: Pair<Rule>) -> Vec<Transition> {
             }
         })
         .collect()
+}
+
+pub fn parse(s: &str) -> Result<Vec<Transition>, String> {
+  IvyParser::parse(Rule::file, s).map(|mut pairs| {
+    parse_file(pairs.next().unwrap())
+  }).map_err(|err| {
+    // TODO: is there a better way to report this?
+    err.to_string()
+  })
 }
 
 #[cfg(test)]
