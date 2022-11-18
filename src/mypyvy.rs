@@ -1,15 +1,22 @@
-use std::{collections::HashMap, io};
+use std::{
+    collections::{HashMap, HashSet},
+    io,
+};
 
 use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition, Transitions};
 
-struct Relations {
+struct Relations<'a> {
     values: HashMap<Relation, Expr>,
+    havoc_relations: HashSet<Relation>,
+    havoc_num: &'a mut usize,
 }
 
-impl Relations {
-    fn new() -> Self {
+impl<'a> Relations<'a> {
+    fn new(havoc_num: &'a mut usize) -> Self {
         Self {
             values: HashMap::new(),
+            havoc_relations: HashSet::new(),
+            havoc_num,
         }
     }
 
@@ -75,7 +82,23 @@ impl Relations {
     #[allow(non_snake_case)]
     fn insert(&mut self, r: &Relation, e: &Expr) {
         let r_V = Relations::to_universal(r);
-        let e = self.eval(e);
+
+        let e = if e == &Expr::Havoc {
+            let name = format!("havoc_{}", self.havoc_num);
+            *self.havoc_num += 1;
+            let havoc_rel = match r {
+                Relation::Ident(_) => Relation::Ident(name),
+                Relation::Call(_, arg) => Relation::Call(name, arg.clone()),
+            };
+            // NOTE: we track these in case we want to associate some metadata
+            // later, or change the naming scheme; for now havoc_num tells us
+            // exactly which relations were created
+            self.havoc_relations.insert(havoc_rel.clone());
+            Expr::Relation(havoc_rel)
+        } else {
+            self.eval(e)
+        };
+
         if r == &r_V {
             self.values.insert(r_V, e);
         } else {
@@ -85,15 +108,13 @@ impl Relations {
             let V = Relation::Ident(Relations::arg(&r_V));
             // r is a relation at a particular value; need to manually construct an
             // expression for a mutation at a particular value
-            let e_not_eq = Expr::not_equal(Expr::Relation(V.clone()), Expr::Relation(v.clone()));
-            let e_eq = Expr::equal(Expr::Relation(V), Expr::Relation(v));
-            // (eval(R(V) & V != v) | (eval(e) & V = v))
+            let V_not_eq = Expr::not_equal(Expr::Relation(V.clone()), Expr::Relation(v.clone()));
+            let V_eq = Expr::equal(Expr::Relation(V), Expr::Relation(v));
+            let r_V_eval = self.eval(&Expr::Relation(r_V.clone()));
             self.values.insert(
-                r_V.clone(),
-                Expr::or(
-                    Expr::and(self.eval(&Expr::Relation(r_V)), e_not_eq),
-                    Expr::and(e, e_eq),
-                ),
+                r_V,
+                // (eval(R(V) & V != v) | (eval(e) & V = v))
+                Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e, V_eq)),
             );
         }
     }
@@ -195,7 +216,7 @@ fn step(w: &mut impl io::Write, rs: &mut Relations, s: &Step) -> io::Result<()> 
     Ok(())
 }
 
-fn transition(w: &mut impl io::Write, t: &Transition) -> io::Result<()> {
+fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> io::Result<()> {
     let args = match &t.bound {
         // TODO: arg actually has the type here
         Some(arg) => format!("({}: ???)", arg),
@@ -203,7 +224,7 @@ fn transition(w: &mut impl io::Write, t: &Transition) -> io::Result<()> {
     };
     writeln!(w, "transition {}{}", t.name, args)?;
 
-    let mut rs = Relations::new();
+    let mut rs = Relations::new(havoc_num);
     writeln!(w, "  # assumes:")?;
     for s in &t.steps {
         step(w, &mut rs, s)?;
@@ -219,8 +240,9 @@ fn transition(w: &mut impl io::Write, t: &Transition) -> io::Result<()> {
 }
 
 pub fn transitions(w: &mut impl io::Write, ts: &Transitions) -> io::Result<()> {
+    let mut havoc_num = 0;
     for t in ts.iter() {
-        transition(w, t)?;
+        transition(w, &mut havoc_num, t)?;
         writeln!(w)?;
     }
     Ok(())
