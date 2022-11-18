@@ -135,9 +135,8 @@ fn parenthesized(s: &str) -> bool {
     if !s.starts_with('(') {
         return false;
     }
-    let s = &s[1..];
     let mut depth = 1;
-    for c in s.chars() {
+    for c in s[1..].chars() {
         // some situation like (...) ...
         // so trailing stuff needs to be parenthesized
         if depth == 0 {
@@ -147,11 +146,11 @@ fn parenthesized(s: &str) -> bool {
             depth += 1;
         }
         if c == ')' {
-            assert!(depth > 0, "produced imbalanced parens");
+            assert!(depth > 0, "produced imbalanced parens: {s}");
             depth -= 1;
         }
     }
-    assert_eq!(depth, 0, "produced inbalanced parens");
+    assert_eq!(depth, 0, "produced inbalanced parens: {s}");
     return true;
 }
 
@@ -167,8 +166,8 @@ fn expr(e: &Expr) -> String {
     match e {
         Expr::Relation(r) => relation(r),
         Expr::Infix { lhs, op, rhs } => format!("({} {} {})", expr(lhs), bin_op(op), expr(rhs)),
-        Expr::Forall { bound, body } => format!("(forall {bound}. {}", expr(body)),
-        Expr::Some { bound, body } => format!("(exists {bound}. {}", expr(body)),
+        Expr::Forall { bound, body } => format!("(forall {bound}. {})", expr(body)),
+        Expr::Some { bound, body } => format!("(exists {bound}. {})", expr(body)),
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
         Expr::Havoc => "*".to_string(),
     }
