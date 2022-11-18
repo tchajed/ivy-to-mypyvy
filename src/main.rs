@@ -1,3 +1,4 @@
+#![allow(clippy::needless_return)]
 extern crate pest;
 mod ivy_l2s;
 mod mypyvy;

@@ -8,7 +8,7 @@ use pest::{
 #[grammar = "ivy.pest"]
 struct IvyParser;
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Transition {
     pub name: String,
     /// parameter to the transition (first argument to "action")
@@ -18,20 +18,21 @@ pub struct Transition {
 
 pub type Transitions = Vec<Transition>;
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
 pub enum BinOp {
     And,
+    Or,
     Implies,
     Equal,
     Iff,
 }
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
 pub enum PrefixOp {
     Not,
 }
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Hash, Clone)]
 pub enum Expr {
     Relation(Relation),
     Infix {
@@ -54,7 +55,44 @@ pub enum Expr {
     Havoc,
 }
 
-#[derive(PartialEq, Eq, Debug)]
+impl Expr {
+    pub fn and(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::Infix {
+            lhs: Box::new(lhs),
+            op: BinOp::And,
+            rhs: Box::new(rhs),
+        }
+    }
+
+    pub fn or(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::Infix {
+            lhs: Box::new(lhs),
+            op: BinOp::Or,
+            rhs: Box::new(rhs),
+        }
+    }
+
+    pub fn equal(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::Infix {
+            lhs: Box::new(lhs),
+            op: BinOp::Equal,
+            rhs: Box::new(rhs),
+        }
+    }
+
+    pub fn not_equal(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::Prefix {
+            op: PrefixOp::Not,
+            e: Box::new(Expr::Infix {
+                lhs: Box::new(lhs),
+                op: BinOp::Equal,
+                rhs: Box::new(rhs),
+            }),
+        }
+    }
+}
+
+#[derive(PartialEq, Eq, Hash, Debug, Clone)]
 pub enum Relation {
     // a nullary relation
     Ident(String),
@@ -65,7 +103,7 @@ pub enum Relation {
 type Steps = Vec<Step>;
 
 // TODO: grammar should use step rather than rule for consistency
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Step {
     Assume(Expr),
     Assert(Expr),
@@ -96,7 +134,7 @@ fn parse_relation(pair: Pair<Rule>) -> Relation {
 
 fn make_pratt() -> PrattParser<Rule> {
     PrattParser::new()
-        .op(Op::infix(Rule::and, Assoc::Left))
+        .op(Op::infix(Rule::and, Assoc::Left) | Op::infix(Rule::or, Assoc::Left))
         .op(Op::infix(Rule::implies, Assoc::Left))
         .op(Op::infix(Rule::iff, Assoc::Left))
         .op(Op::infix(Rule::equal, Assoc::Left))
@@ -138,6 +176,7 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
         .map_infix(|lhs, op, rhs| {
             let op = match op.as_rule() {
                 Rule::and => BinOp::And,
+                Rule::or => BinOp::Or,
                 Rule::implies => BinOp::Implies,
                 Rule::iff => BinOp::Iff,
                 Rule::equal => BinOp::Equal,

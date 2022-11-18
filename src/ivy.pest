@@ -32,8 +32,9 @@ if_rule = {
 expr = { prefix* ~ term ~ (infix ~ prefix* ~ term)* }
 
 // the infix/prefix operators
-infix = _{ and | implies | iff | equal }
+infix = _{ and | or | implies | iff | equal }
 and = { "&" }
+or = { "|" } // is this even the syntax?
 implies = { "->" }
 iff = { "<->" }
 equal = { "=" }
