@@ -172,9 +172,11 @@ fn transition(w: &mut impl io::Write, t: &Transition) -> io::Result<()> {
     writeln!(w, "transition {}{}", t.name, args)?;
 
     let mut rs = Relations::new();
+    writeln!(w, "  # assumes:")?;
     for s in &t.steps {
         step(w, &mut rs, s)?;
     }
+    writeln!(w, "  # transitions:")?;
     for (r, e) in rs.values.into_iter() {
         let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
         writeln!(w, "  ({conjunct}) &")?;
