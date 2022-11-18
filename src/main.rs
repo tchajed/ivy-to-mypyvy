@@ -7,6 +7,8 @@ use ivy_l2s::{IvyParser, Rule};
 use pest::Parser as _;
 use std::fs;
 
+use crate::ivy_l2s::parse;
+
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
 struct Args {
@@ -22,6 +24,7 @@ fn main() {
         .expect("unsuccessful parse of input file")
         .next()
         .unwrap();
+    let transitions = parse(file);
 
-    println!("{:?}", file);
+    println!("{:?}", transitions);
 }
