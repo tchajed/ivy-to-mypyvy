@@ -10,7 +10,7 @@ file = { SOI ~ step_def* ~ EOI }
 
 step_def = { ident ~ "=" ~  action }
 action = { "action" ~ ("(" ~ ident ~ ")")? ~ rule_block }
-rule_block_or_step = { rule_block | rule_step }
+rule_block_or_step = _{ rule_block | rule_step }
 rule_block = {
   // an empty rule block
   "{" ~ "}"
@@ -20,8 +20,8 @@ rule_block = {
 
 rule_step = { assign_rule | assume_rule | assert_rule | if_rule }
 
-lexpr = { call_expr | ident }
-assign_rule = { lexpr ~ ":=" ~ expr }
+relation = _{ call_expr | ident }
+assign_rule = { relation ~ ":=" ~ expr }
 assume_rule = {  "assume" ~ expr }
 assert_rule = {  "assert" ~ expr }
 if_rule = {
@@ -45,5 +45,5 @@ call_expr = { ident ~ "(" ~ ident ~ ")" }
 forall_expr = { "forall" ~ ident  ~ "." ~ expr }
 some_expr = { "some" ~ ident  ~ "." ~ expr }
 havoc_expr = { "*" }
-base_expr =  { call_expr | forall_expr | some_expr | havoc_expr |  ident }
+base_expr =  _{ forall_expr | some_expr | havoc_expr | relation }
 term = _{ base_expr | "(" ~ expr ~ ")" }

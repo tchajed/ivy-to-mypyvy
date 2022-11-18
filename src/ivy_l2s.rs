@@ -1,5 +1,5 @@
 use pest::{
-    iterators::{Pair, Pairs},
+    iterators::Pair,
     pratt_parser::{Assoc, Op, PrattParser},
 };
 
@@ -24,11 +24,17 @@ pub enum BinOp {
 }
 
 #[derive(PartialEq, Eq, Debug)]
+pub enum PrefixOp {
+    Not,
+}
+
+#[derive(PartialEq, Eq, Debug)]
 pub enum Expr {
-    Ident(String),
-    Infix(BinOp, Box<Expr>, Box<Expr>),
+    Relation(Relation),
+    Infix(Box<Expr>, BinOp, Box<Expr>),
     Forall(String, Box<Expr>),
     Some(String, Box<Expr>),
+    Prefix(PrefixOp, Box<Expr>),
     Havoc,
 }
 
@@ -52,12 +58,10 @@ pub enum Step {
 }
 
 fn parse_ident(ident: Pair<Rule>) -> String {
-  ident.as_str().to_string()
+    ident.as_str().to_string()
 }
 
-fn parse_lexpr(lexpr: Pair<Rule>) -> Relation {
-    assert_eq!(lexpr.as_rule(), Rule::lexpr);
-    let pair = lexpr.into_inner().next().unwrap();
+fn parse_relation(pair: Pair<Rule>) -> Relation {
     match pair.as_rule() {
         Rule::call_expr => {
             let mut pairs = pair.into_inner();
@@ -70,10 +74,59 @@ fn parse_lexpr(lexpr: Pair<Rule>) -> Relation {
     }
 }
 
+fn make_pratt() -> PrattParser<Rule> {
+    PrattParser::new()
+        .op(Op::infix(Rule::and, Assoc::Left))
+        .op(Op::infix(Rule::implies, Assoc::Left))
+        .op(Op::infix(Rule::iff, Assoc::Left))
+        .op(Op::infix(Rule::equal, Assoc::Left))
+        .op(Op::prefix(Rule::not))
+}
+
+fn parse_base_expr(expr: Pair<Rule>) -> Expr {
+    match expr.as_rule() {
+        Rule::ident | Rule::call_expr => Expr::Relation(parse_relation(expr)),
+        Rule::forall_expr => {
+            let mut pairs = expr.into_inner();
+            let bound = pairs.next().unwrap();
+            let e = pairs.next().unwrap();
+            Expr::Forall(parse_ident(bound), Box::new(parse_expr(e)))
+        }
+        Rule::some_expr => {
+            let mut pairs = expr.into_inner();
+            let bound = pairs.next().unwrap();
+            let e = pairs.next().unwrap();
+            Expr::Some(parse_ident(bound), Box::new(parse_expr(e)))
+        }
+                Rule::havoc_expr => Expr::Havoc,
+        Rule::expr => parse_expr(expr),
+        _ => unreachable!()
+    }
+}
+
 fn parse_expr(expr: Pair<Rule>) -> Expr {
     assert_eq!(expr.as_rule(), Rule::expr);
-    Expr::Ident("e".to_string())
-    // todo!()
+    let pratt = make_pratt();
+    pratt
+        .map_primary(parse_base_expr)
+        .map_infix(|lhs, op, rhs| {
+            let op = match op.as_rule() {
+                Rule::and => BinOp::And,
+                Rule::implies => BinOp::Implies,
+                Rule::iff => BinOp::Iff,
+                Rule::equal => BinOp::Equal,
+                _ => unreachable!(),
+            };
+            Expr::Infix(Box::new(lhs), op, Box::new(rhs))
+        })
+        .map_prefix(|op, e| {
+            let op = match op.as_rule() {
+                Rule::not => PrefixOp::Not,
+                _ => unreachable!(),
+            };
+            Expr::Prefix(op, Box::new(e))
+        })
+        .parse(expr.into_inner())
 }
 
 fn parse_step(step: Pair<Rule>) -> Step {
@@ -85,7 +138,7 @@ fn parse_step(step: Pair<Rule>) -> Step {
             let mut pairs = step.into_inner();
             let lexpr = pairs.next().unwrap();
             let e = pairs.next().unwrap();
-            Step::Assign(parse_lexpr(lexpr), parse_expr(e))
+            Step::Assign(parse_relation(lexpr), parse_expr(e))
         }
         Rule::assert_rule => {
             let e = step.into_inner().next().unwrap();
@@ -112,13 +165,11 @@ fn parse_step(step: Pair<Rule>) -> Step {
 
 /// Flatten the structure of a sequence of steps. Produces a sequence
 ///
-/// applies to rule_step, rule_block_or_step, and rule_block
+/// applies to rule_step, and rule_block
 fn flatten_steps(pair: Pair<Rule>) -> Vec<Pair<Rule>> {
     match pair.as_rule() {
         Rule::rule_step => vec![pair],
-        Rule::rule_block | Rule::rule_block_or_step => {
-            pair.into_inner().flat_map(flatten_steps).collect()
-        }
+        Rule::rule_block => pair.into_inner().flat_map(flatten_steps).collect(),
         _ => unreachable!(),
     }
 }
@@ -156,16 +207,6 @@ pub fn parse(file: Pair<Rule>) -> Vec<Transition> {
             }
         })
         .collect()
-}
-
-#[allow(dead_code)]
-pub fn pratt() -> PrattParser<Rule> {
-    PrattParser::new()
-        .op(Op::infix(Rule::and, Assoc::Left))
-        .op(Op::infix(Rule::implies, Assoc::Left))
-        .op(Op::infix(Rule::iff, Assoc::Left))
-        .op(Op::infix(Rule::equal, Assoc::Left))
-        .op(Op::prefix(Rule::not))
 }
 
 #[cfg(test)]
