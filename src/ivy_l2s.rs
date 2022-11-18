@@ -133,12 +133,16 @@ fn parse_relation(pair: Pair<Rule>) -> Relation {
 }
 
 fn make_pratt() -> PrattParser<Rule> {
+    // see https://kenmcmil.github.io/ivy/language.html#expressions
     PrattParser::new()
-        .op(Op::infix(Rule::and, Assoc::Left) | Op::infix(Rule::or, Assoc::Left))
-        .op(Op::infix(Rule::implies, Assoc::Left))
-        .op(Op::infix(Rule::iff, Assoc::Left))
-        .op(Op::infix(Rule::equal, Assoc::Left))
+        .op(Op::infix(Rule::or, Assoc::Left))
+        .op(Op::infix(Rule::and, Assoc::Left))
         .op(Op::prefix(Rule::not))
+        .op(Op::infix(Rule::equal, Assoc::Left))
+        // implies is actually left-associative (considered a bug in Ivy)
+        //
+        // therefore p -> q -> r means (p -> q) -> r (which is unintuitive)
+        .op(Op::infix(Rule::implies, Assoc::Left) | Op::infix(Rule::iff, Assoc::Left))
 }
 
 fn parse_base_expr(expr: Pair<Rule>) -> Expr {
