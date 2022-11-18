@@ -24,6 +24,7 @@ pub enum BinOp {
     Or,
     Implies,
     Equal,
+    NotEqual, // not in Ivy but available in mypyvy
     Iff,
 }
 
@@ -81,13 +82,10 @@ impl Expr {
     }
 
     pub fn not_equal(lhs: Expr, rhs: Expr) -> Expr {
-        Expr::Prefix {
-            op: PrefixOp::Not,
-            e: Box::new(Expr::Infix {
-                lhs: Box::new(lhs),
-                op: BinOp::Equal,
-                rhs: Box::new(rhs),
-            }),
+        Expr::Infix {
+            lhs: Box::new(lhs),
+            op: BinOp::NotEqual,
+            rhs: Box::new(rhs),
         }
     }
 }

@@ -112,6 +112,7 @@ fn bin_op(op: &BinOp) -> &'static str {
         BinOp::Or => "|",
         BinOp::Implies => "->",
         BinOp::Equal => "=",
+        BinOp::NotEqual => "!=",
         BinOp::Iff => "<->",
     }
 }
@@ -122,11 +123,43 @@ fn prefix_op(op: &PrefixOp) -> &'static str {
     }
 }
 
+/// Determine if s is already unambiguously parenthesized.
+///
+/// Returns true if s has no spaces (a special case), or if it starts with a (,
+/// ends with a ), and these two are matching parentheses.
+fn parenthesized(s: &str) -> bool {
+    if !s.contains(' ') {
+        return true;
+    }
+    // make sure we start at depth 1 from the beginning
+    if !s.starts_with('(') {
+        return false;
+    }
+    let s = &s[1..];
+    let mut depth = 1;
+    for c in s.chars() {
+        // some situation like (...) ...
+        // so trailing stuff needs to be parenthesized
+        if depth == 0 {
+            return false;
+        }
+        if c == '(' {
+            depth += 1;
+        }
+        if c == ')' {
+            assert!(depth > 0, "produced imbalanced parens");
+            depth -= 1;
+        }
+    }
+    assert_eq!(depth, 0, "produced inbalanced parens");
+    return true;
+}
+
 fn parens(s: &str) -> String {
-    if s.contains(' ') {
-        format!("({s})")
-    } else {
+    if parenthesized(s) {
         s.to_string()
+    } else {
+        format!("({s})")
     }
 }
 
