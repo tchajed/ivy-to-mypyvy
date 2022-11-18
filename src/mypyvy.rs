@@ -7,6 +7,7 @@ use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition, Transiti
 
 struct Relations<'a> {
     values: HashMap<Relation, Expr>,
+    assumes: Vec<Expr>,
     havoc_relations: HashSet<Relation>,
     havoc_num: &'a mut usize,
 }
@@ -15,6 +16,7 @@ impl<'a> Relations<'a> {
     fn new(havoc_num: &'a mut usize) -> Self {
         Self {
             values: HashMap::new(),
+            assumes: vec![],
             havoc_relations: HashSet::new(),
             havoc_num,
         }
@@ -39,6 +41,13 @@ impl<'a> Relations<'a> {
         match r {
             Relation::Call(_, arg) => arg.clone(),
             _ => panic!("attempt to get arg of non-call relation"),
+        }
+    }
+
+    fn base(r: &Relation) -> String {
+        match r {
+            Relation::Ident(name) => name.to_string(),
+            Relation::Call(f, _) => f.to_string(),
         }
     }
 
@@ -79,28 +88,30 @@ impl<'a> Relations<'a> {
         }
     }
 
+    /// Compute the right-hand side of a havoc assignment to r.
+    ///
+    /// This mutates self to record that a havoc relation was used for this
+    /// instance of havoc.
+    fn havoc_rel(&mut self, r: &Relation) -> Expr {
+        let name = format!("havoc_{}_{}", Relations::base(r), self.havoc_num);
+        *self.havoc_num += 1;
+        let havoc_rel = match r {
+            Relation::Ident(_) => Relation::Ident(name),
+            Relation::Call(_, arg) => Relation::Call(name, arg.clone()),
+        };
+        self.havoc_relations.insert(havoc_rel.clone());
+        Expr::Relation(havoc_rel)
+    }
+
+    /// Record an assignment to a relation.
+    ///
+    /// Assumes e is already evaluated.
     #[allow(non_snake_case)]
     fn insert(&mut self, r: &Relation, e: &Expr) {
         let r_V = Relations::to_universal(r);
 
-        let e = if e == &Expr::Havoc {
-            let name = format!("havoc_{}", self.havoc_num);
-            *self.havoc_num += 1;
-            let havoc_rel = match r {
-                Relation::Ident(_) => Relation::Ident(name),
-                Relation::Call(_, arg) => Relation::Call(name, arg.clone()),
-            };
-            // NOTE: we track these in case we want to associate some metadata
-            // later, or change the naming scheme; for now havoc_num tells us
-            // exactly which relations were created
-            self.havoc_relations.insert(havoc_rel.clone());
-            Expr::Relation(havoc_rel)
-        } else {
-            self.eval(e)
-        };
-
         if r == &r_V {
-            self.values.insert(r_V, e);
+            self.values.insert(r_V, e.clone());
         } else {
             // rename r to r_v reduce confusion
             let r_v = r.clone();
@@ -114,7 +125,7 @@ impl<'a> Relations<'a> {
             self.values.insert(
                 r_V,
                 // (eval(R(V) & V != v) | (eval(e) & V = v))
-                Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e, V_eq)),
+                Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e.clone(), V_eq)),
             );
         }
     }
@@ -194,26 +205,56 @@ fn expr(e: &Expr) -> String {
     }
 }
 
-fn step(w: &mut impl io::Write, rs: &mut Relations, s: &Step) -> io::Result<()> {
-    match s {
-        Step::Assume(e) => {
-            writeln!(w, "  {} &", expr(&rs.eval(e)))?;
-        }
-        Step::Assert(e) => writeln!(w, "  # unhandled assert {}", expr(e))?,
-        Step::Assign(r, e) => rs.insert(r, e),
-        Step::If { cond, then, else_ } => {
-            writeln!(w, "  # unhandled if {}", expr(cond))?;
-            // TODO: need to preserve the path condition of the if and modify
-            // all the assume/assigns in these blocks
-            for s in then.iter() {
-                step(w, rs, s)?;
+impl<'a> Relations<'a> {
+    fn step(&mut self, path_cond: Option<&Expr>, s: &Step) {
+        match s {
+            Step::Assume(e) => {
+                let e = match path_cond {
+                    Some(cond) => Expr::implies(cond.clone(), self.eval(e)),
+                    None => e.clone(),
+                };
+                self.assumes.push(e)
             }
-            for s in else_.iter() {
-                step(w, rs, s)?;
+            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(e)),
+            Step::Assign(r, e) => {
+                let e = if e == &Expr::Havoc {
+                    self.havoc_rel(r)
+                } else {
+                    self.eval(e)
+                };
+
+                let path_e = match path_cond {
+                    Some(cond) => Expr::or(
+                        Expr::and(cond.clone(), e),
+                        Expr::and(Expr::negate(cond.clone()), Expr::Relation(r.clone())),
+                    ),
+                    None => e,
+                };
+                self.insert(r, &path_e);
+            }
+            Step::If { cond, then, else_ } => {
+                let cond = if cond == &Expr::Havoc {
+                    self.havoc_rel(&Relation::Ident("path".to_string()))
+                } else {
+                    self.eval(cond)
+                };
+                let (then_cond, else_cond) = (cond.clone(), Expr::negate(cond));
+                let (then_cond, else_cond) = match path_cond {
+                    Some(c) => (
+                        Expr::and(c.clone(), then_cond),
+                        Expr::and(c.clone(), else_cond),
+                    ),
+                    None => (then_cond, else_cond),
+                };
+                for s in then.iter() {
+                    self.step(Some(&then_cond), s);
+                }
+                for s in else_.iter() {
+                    self.step(Some(&else_cond), s);
+                }
             }
         }
     }
-    Ok(())
 }
 
 fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> io::Result<()> {
@@ -225,9 +266,12 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     writeln!(w, "transition {}{}", t.name, args)?;
 
     let mut rs = Relations::new(havoc_num);
-    writeln!(w, "  # assumes:")?;
     for s in &t.steps {
-        step(w, &mut rs, s)?;
+        rs.step(None, s);
+    }
+    writeln!(w, "  # assumes:")?;
+    for e in rs.assumes.into_iter() {
+        writeln!(w, "  {} &", expr(&e))?;
     }
     writeln!(w, "  # transitions:")?;
     for (r, e) in rs.values.into_iter() {

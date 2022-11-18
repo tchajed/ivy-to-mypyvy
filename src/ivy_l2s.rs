@@ -65,6 +65,14 @@ impl Expr {
         }
     }
 
+    pub fn implies(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::Infix {
+            lhs: Box::new(lhs),
+            op: BinOp::Implies,
+            rhs: Box::new(rhs),
+        }
+    }
+
     pub fn or(lhs: Expr, rhs: Expr) -> Expr {
         Expr::Infix {
             lhs: Box::new(lhs),
@@ -86,6 +94,13 @@ impl Expr {
             lhs: Box::new(lhs),
             op: BinOp::NotEqual,
             rhs: Box::new(rhs),
+        }
+    }
+
+    pub fn negate(e: Expr) -> Expr {
+        Expr::Prefix {
+            op: PrefixOp::Not,
+            e: Box::new(e),
         }
     }
 }
