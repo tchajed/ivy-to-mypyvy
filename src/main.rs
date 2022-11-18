@@ -1,15 +1,12 @@
 #![allow(clippy::needless_return)]
 extern crate pest;
-mod ivy_l2s;
-mod mypyvy;
 
 use clap::Parser;
+use ivy_to_mypyvy::{ivy_l2s, mypyvy};
 use std::{
     fs,
     io::{self},
 };
-
-use crate::ivy_l2s::parse;
 
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
@@ -20,9 +17,9 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
 
-    let file = parse(&unparsed_file).expect("unsuccessful parse of input file");
-    // println!("{:?}", file);
+    let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
+    let file = ivy_l2s::parse(&unparsed_file).expect("unsuccessful parse of input file");
     mypyvy::transitions(&mut io::stdout(), &file).expect("could not write output");
+
 }
