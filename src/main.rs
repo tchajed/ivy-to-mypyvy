@@ -3,7 +3,10 @@ mod ivy_l2s;
 mod mypyvy;
 
 use clap::Parser;
-use std::fs;
+use std::{
+    fs,
+    io::{self},
+};
 
 use crate::ivy_l2s::parse;
 
@@ -20,5 +23,5 @@ fn main() {
 
     let file = parse(&unparsed_file).expect("unsuccessful parse of input file");
     // println!("{:?}", file);
-    mypyvy::transitions(&file);
+    mypyvy::transitions(&mut io::stdout(), &file).expect("could not write output");
 }
