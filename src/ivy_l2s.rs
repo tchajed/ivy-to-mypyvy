@@ -31,10 +31,23 @@ pub enum PrefixOp {
 #[derive(PartialEq, Eq, Debug)]
 pub enum Expr {
     Relation(Relation),
-    Infix(Box<Expr>, BinOp, Box<Expr>),
-    Forall(String, Box<Expr>),
-    Some(String, Box<Expr>),
-    Prefix(PrefixOp, Box<Expr>),
+    Infix {
+        lhs: Box<Expr>,
+        op: BinOp,
+        rhs: Box<Expr>,
+    },
+    Forall {
+        bound: String,
+        body: Box<Expr>,
+    },
+    Some {
+        bound: String,
+        body: Box<Expr>,
+    },
+    Prefix {
+        op: PrefixOp,
+        e: Box<Expr>,
+    },
     Havoc,
 }
 
@@ -54,7 +67,11 @@ pub enum Step {
     Assume(Expr),
     Assert(Expr),
     Assign(Relation, Expr),
-    If(Expr, Steps, Steps),
+    If {
+        cond: Expr,
+        then: Steps,
+        else_: Steps,
+    },
 }
 
 fn parse_ident(ident: Pair<Rule>) -> String {
@@ -90,17 +107,23 @@ fn parse_base_expr(expr: Pair<Rule>) -> Expr {
             let mut pairs = expr.into_inner();
             let bound = pairs.next().unwrap();
             let e = pairs.next().unwrap();
-            Expr::Forall(parse_ident(bound), Box::new(parse_expr(e)))
+            Expr::Forall {
+                bound: parse_ident(bound),
+                body: Box::new(parse_expr(e)),
+            }
         }
         Rule::some_expr => {
             let mut pairs = expr.into_inner();
             let bound = pairs.next().unwrap();
             let e = pairs.next().unwrap();
-            Expr::Some(parse_ident(bound), Box::new(parse_expr(e)))
+            Expr::Some {
+                bound: parse_ident(bound),
+                body: Box::new(parse_expr(e)),
+            }
         }
-                Rule::havoc_expr => Expr::Havoc,
+        Rule::havoc_expr => Expr::Havoc,
         Rule::expr => parse_expr(expr),
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 }
 
@@ -117,14 +140,18 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
                 Rule::equal => BinOp::Equal,
                 _ => unreachable!(),
             };
-            Expr::Infix(Box::new(lhs), op, Box::new(rhs))
+            Expr::Infix {
+                lhs: Box::new(lhs),
+                op,
+                rhs: Box::new(rhs),
+            }
         })
         .map_prefix(|op, e| {
             let op = match op.as_rule() {
                 Rule::not => PrefixOp::Not,
                 _ => unreachable!(),
             };
-            Expr::Prefix(op, Box::new(e))
+            Expr::Prefix { op, e: Box::new(e) }
         })
         .parse(expr.into_inner())
 }
@@ -153,11 +180,11 @@ fn parse_step(step: Pair<Rule>) -> Step {
             let cond = pairs.next().unwrap();
             let then = pairs.next().unwrap();
             let else_ = pairs.next();
-            Step::If(
-                parse_expr(cond),
-                parse_steps(then),
-                else_.map(parse_steps).unwrap_or_default(),
-            )
+            Step::If {
+                cond: parse_expr(cond),
+                then: parse_steps(then),
+                else_: else_.map(parse_steps).unwrap_or_default(),
+            }
         }
         _ => unreachable!(),
     }
