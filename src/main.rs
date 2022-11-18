@@ -1,5 +1,6 @@
 extern crate pest;
 mod ivy_l2s;
+mod mypyvy;
 
 use clap::Parser;
 use std::fs;
@@ -17,7 +18,7 @@ fn main() {
     let args = Args::parse();
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
 
-    let file = parse(&unparsed_file)
-        .expect("unsuccessful parse of input file");
-    println!("{:?}", file);
+    let file = parse(&unparsed_file).expect("unsuccessful parse of input file");
+    // println!("{:?}", file);
+    mypyvy::transitions(&file);
 }

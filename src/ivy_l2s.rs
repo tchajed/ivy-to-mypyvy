@@ -1,6 +1,7 @@
 use pest::{
     iterators::Pair,
-    pratt_parser::{Assoc, Op, PrattParser}, Parser,
+    pratt_parser::{Assoc, Op, PrattParser},
+    Parser,
 };
 
 #[derive(pest_derive::Parser)]
@@ -14,6 +15,8 @@ pub struct Transition {
     pub bound: Option<String>,
     pub steps: Vec<Step>,
 }
+
+pub type Transitions = Vec<Transition>;
 
 #[derive(PartialEq, Eq, Debug)]
 pub enum BinOp {
@@ -236,13 +239,13 @@ fn parse_file(file: Pair<Rule>) -> Vec<Transition> {
         .collect()
 }
 
-pub fn parse(s: &str) -> Result<Vec<Transition>, String> {
-  IvyParser::parse(Rule::file, s).map(|mut pairs| {
-    parse_file(pairs.next().unwrap())
-  }).map_err(|err| {
-    // TODO: is there a better way to report this?
-    err.to_string()
-  })
+pub fn parse(s: &str) -> Result<Transitions, String> {
+    IvyParser::parse(Rule::file, s)
+        .map(|mut pairs| parse_file(pairs.next().unwrap()))
+        .map_err(|err| {
+            // TODO: is there a better way to report this?
+            err.to_string()
+        })
 }
 
 #[cfg(test)]
