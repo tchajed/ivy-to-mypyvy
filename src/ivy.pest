@@ -6,27 +6,27 @@ WHITESPACE = _{ " " | "\t" | NEWLINE }
 ident = @{ char+ ~ ("." ~ char+)* }
 
 // the top-level rule
-file = { SOI ~ step_def* ~ EOI }
+file = { SOI ~ action_def* ~ EOI }
 
-step_def = { ident ~ "=" ~  action }
-action = { "action" ~ ("(" ~ ident ~ ")")? ~ rule_block }
-rule_block_or_step = _{ rule_block | rule_step }
-rule_block = {
-  // an empty rule block
+action_def = { ident ~ "=" ~  action }
+action = { "action" ~ ("(" ~ ident ~ ")")? ~ step_block }
+step_block_or_step = _{ step_block | step }
+step_block = {
+  // an empty step block
   "{" ~ "}"
-  | "{" ~ rule_block_or_step ~
-    (";" ~ rule_block_or_step)* ~ "}"
+  | "{" ~ step_block_or_step ~
+    (";" ~ step_block_or_step)* ~ "}"
 }
 
-rule_step = { assign_rule | assume_rule | assert_rule | if_rule }
+step = { assign | assume | assert | if_step }
 
 relation = _{ call_expr | ident }
-assign_rule = { relation ~ ":=" ~ expr }
-assume_rule = {  "assume" ~ expr }
-assert_rule = {  "assert" ~ expr }
-if_rule = {
-  "if" ~ expr ~ rule_block_or_step ~
-  ("else" ~ rule_block_or_step)?
+assign = { relation ~ ":=" ~ expr }
+assume = {  "assume" ~ expr }
+assert = {  "assert" ~ expr }
+if_step = {
+  "if" ~ expr ~ step_block_or_step ~
+  ("else" ~ step_block_or_step)?
 }
 
 expr = { prefix* ~ term ~ (infix ~ prefix* ~ term)* }

@@ -103,7 +103,6 @@ pub enum Relation {
 
 type Steps = Vec<Step>;
 
-// TODO: grammar should use step rather than rule for consistency
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Step {
     Assume(Expr),
@@ -205,25 +204,25 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
 }
 
 fn parse_step(step: Pair<Rule>) -> Step {
-    assert_eq!(step.as_rule(), Rule::rule_step);
+    assert_eq!(step.as_rule(), Rule::step);
     // step has exactly one inner Pair
     let step = step.into_inner().next().unwrap();
     match step.as_rule() {
-        Rule::assign_rule => {
+        Rule::assign => {
             let mut pairs = step.into_inner();
             let lexpr = pairs.next().unwrap();
             let e = pairs.next().unwrap();
             Step::Assign(parse_relation(lexpr), parse_expr(e))
         }
-        Rule::assert_rule => {
+        Rule::assert => {
             let e = step.into_inner().next().unwrap();
             Step::Assert(parse_expr(e))
         }
-        Rule::assume_rule => {
+        Rule::assume => {
             let e = step.into_inner().next().unwrap();
             Step::Assume(parse_expr(e))
         }
-        Rule::if_rule => {
+        Rule::if_step => {
             let mut pairs = step.into_inner();
             let cond = pairs.next().unwrap();
             let then = pairs.next().unwrap();
@@ -238,13 +237,13 @@ fn parse_step(step: Pair<Rule>) -> Step {
     }
 }
 
-/// Flatten the structure of a sequence of steps. Produces a sequence
+/// Flatten the structure of a sequence of steps, producing Rule::step Pairs.
 ///
-/// applies to rule_step, and rule_block
+/// applies to step and step_block
 fn flatten_steps(pair: Pair<Rule>) -> Vec<Pair<Rule>> {
     match pair.as_rule() {
-        Rule::rule_step => vec![pair],
-        Rule::rule_block => pair.into_inner().flat_map(flatten_steps).collect(),
+        Rule::step => vec![pair],
+        Rule::step_block => pair.into_inner().flat_map(flatten_steps).collect(),
         _ => unreachable!(),
     }
 }
@@ -253,9 +252,9 @@ fn parse_steps(pair: Pair<Rule>) -> Vec<Step> {
     flatten_steps(pair).into_iter().map(parse_step).collect()
 }
 
-fn parse_transition(step_def: Pair<Rule>) -> Transition {
-    assert_eq!(step_def.as_rule(), Rule::step_def);
-    let mut pairs = step_def.into_inner();
+fn parse_transition(action_def: Pair<Rule>) -> Transition {
+    assert_eq!(action_def.as_rule(), Rule::action_def);
+    let mut pairs = action_def.into_inner();
     let name = parse_ident(pairs.next().unwrap());
     let action = pairs.next().unwrap();
     let mut action_pairs = action.into_inner();
