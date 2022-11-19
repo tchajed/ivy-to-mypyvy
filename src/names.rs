@@ -36,11 +36,12 @@ fn expr(e: &Expr) -> Expr {
             op: *op,
             rhs: Box::new(expr(rhs)),
         },
-        Expr::Forall { bound, body } => Expr::Forall {
-            bound: ident(bound),
-            body: Box::new(expr(body)),
-        },
-        Expr::Some { bound, body } => Expr::Some {
+        Expr::Quantified {
+            quantifier: q,
+            bound,
+            body,
+        } => Expr::Quantified {
+            quantifier: *q,
             bound: ident(bound),
             body: Box::new(expr(body)),
         },

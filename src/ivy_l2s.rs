@@ -35,6 +35,12 @@ pub enum PrefixOp {
     Not,
 }
 
+#[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
+pub enum Quantifier {
+    Forall,
+    Some,
+}
+
 #[derive(PartialEq, Eq, Debug, Hash, Clone)]
 pub enum Expr {
     Relation(Relation),
@@ -43,11 +49,8 @@ pub enum Expr {
         op: BinOp,
         rhs: Box<Expr>,
     },
-    Forall {
-        bound: String,
-        body: Box<Expr>,
-    },
-    Some {
+    Quantified {
+        quantifier: Quantifier,
         bound: String,
         body: Box<Expr>,
     },
@@ -148,23 +151,24 @@ fn make_pratt() -> PrattParser<Rule> {
         .op(Op::infix(Rule::implies, Assoc::Left) | Op::infix(Rule::iff, Assoc::Left))
 }
 
+fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
+    match quantifier.as_rule() {
+        Rule::forall => Quantifier::Forall,
+        Rule::some => Quantifier::Some,
+        _ => unreachable!(),
+    }
+}
+
 fn parse_base_expr(expr: Pair<Rule>) -> Expr {
     match expr.as_rule() {
         Rule::ident | Rule::call_expr => Expr::Relation(parse_relation(expr)),
-        Rule::forall_expr => {
+        Rule::quantified_expr => {
             let mut pairs = expr.into_inner();
+            let quantifier = pairs.next().unwrap();
             let bound = pairs.next().unwrap();
             let e = pairs.next().unwrap();
-            Expr::Forall {
-                bound: parse_ident(bound),
-                body: Box::new(parse_expr(e)),
-            }
-        }
-        Rule::some_expr => {
-            let mut pairs = expr.into_inner();
-            let bound = pairs.next().unwrap();
-            let e = pairs.next().unwrap();
-            Expr::Some {
+            Expr::Quantified {
+                quantifier: parse_quantifer(quantifier),
                 bound: parse_ident(bound),
                 body: Box::new(parse_expr(e)),
             }
@@ -314,7 +318,7 @@ mod tests {
         IvyParser::parse(Rule::expr, "forall V0.  l2s_a(V0)").expect("unsuccessful expr parse");
         IvyParser::parse(Rule::expr, "l2s_g_1 -> ~(forall T. mutex_protocol.d(T))")
             .expect("unsuccessful expr parse");
-        IvyParser::parse(Rule::forall_expr, "forall T. mutex_protocol.d(T)")
+        IvyParser::parse(Rule::quantified_expr, "forall T. mutex_protocol.d(T)")
             .expect("unsuccessful forall parse");
         IvyParser::parse(Rule::expr, "forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0)")
             .expect("unsuccessful expr parse");

@@ -20,6 +20,7 @@ step_block = {
 
 step = { assign | assume | assert | if_step }
 
+call_expr = { ident ~ "(" ~ ident ~ ")" }
 relation = _{ call_expr | ident }
 assign = { relation ~ ":=" ~ expr }
 assume = {  "assume" ~ expr }
@@ -34,17 +35,18 @@ expr = { prefix* ~ term ~ (infix ~ prefix* ~ term)* }
 // the infix/prefix operators
 infix = _{ and | or | implies | iff | equal }
 and = { "&" }
-or = { "|" } // is this even the syntax?
+or = { "|" }
 implies = { "->" }
 iff = { "<->" }
 equal = { "=" }
 prefix = _{ not }
 not = { "~" }
 
-// some other expression constructs
-call_expr = { ident ~ "(" ~ ident ~ ")" }
-forall_expr = { "forall" ~ ident  ~ "." ~ expr }
-some_expr = { "some" ~ ident  ~ "." ~ expr }
+// remaining expression constructs
+quantifier = _{ forall | some }
+forall = { "forall" }
+some = { "some" }
+quantified_expr = { quantifier ~ ident  ~ "." ~ expr }
 havoc_expr = { "*" }
-base_expr =  _{ forall_expr | some_expr | havoc_expr | relation }
+base_expr =  _{ quantified_expr | havoc_expr | relation }
 term = _{ base_expr | "(" ~ expr ~ ")" }

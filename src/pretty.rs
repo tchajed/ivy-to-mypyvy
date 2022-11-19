@@ -1,7 +1,7 @@
 use std::io;
 
 use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, System, Transition},
+    ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
     printing::parens,
 };
 
@@ -31,6 +31,13 @@ fn prefix_op(op: &PrefixOp) -> &'static str {
     }
 }
 
+fn quantifier(q: &Quantifier) -> &'static str {
+    match q {
+        Quantifier::Forall => "forall",
+        Quantifier::Some => "some",
+    }
+}
+
 fn expr(e: &Expr) -> String {
     match e {
         Expr::Relation(r) => relation(r),
@@ -42,11 +49,12 @@ fn expr(e: &Expr) -> String {
                 parens(&expr(rhs))
             )
         }
-        Expr::Forall { bound, body } => {
-            format!("(forall {bound}. {})", expr(body),)
-        }
-        Expr::Some { bound, body } => {
-            format!("(some {bound}. {})", expr(body),)
+        Expr::Quantified {
+            quantifier: q,
+            bound,
+            body,
+        } => {
+            format!("({} {bound}. {})", quantifier(q), expr(body),)
         }
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
         Expr::Havoc => "*".to_string(),

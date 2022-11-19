@@ -4,7 +4,7 @@ use std::{
 };
 
 use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, System, Transition},
+    ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
     names,
     printing::parens,
 };
@@ -77,11 +77,12 @@ impl<'a> Relations<'a> {
                 op: *op,
                 rhs: Box::new(self.eval(rhs)),
             },
-            Expr::Forall { bound, body } => Expr::Forall {
-                bound: bound.clone(),
-                body: Box::new(self.eval(body)),
-            },
-            Expr::Some { bound, body } => Expr::Some {
+            Expr::Quantified {
+                quantifier,
+                bound,
+                body,
+            } => Expr::Quantified {
+                quantifier: *quantifier,
                 bound: bound.clone(),
                 body: Box::new(self.eval(body)),
             },
@@ -167,6 +168,13 @@ fn prefix_op(op: &PrefixOp) -> &'static str {
     }
 }
 
+fn quantifier(q: &Quantifier) -> &'static str {
+    match q {
+        Quantifier::Forall => "forall",
+        Quantifier::Some => "exists",
+    }
+}
+
 fn expr(e: &Expr) -> String {
     match e {
         Expr::Relation(r) => relation(r),
@@ -178,8 +186,11 @@ fn expr(e: &Expr) -> String {
                 parens(&expr(rhs))
             )
         }
-        Expr::Forall { bound, body } => format!("(forall {bound}. {})", expr(body)),
-        Expr::Some { bound, body } => format!("(exists {bound}. {})", expr(body)),
+        Expr::Quantified {
+            quantifier: q,
+            bound,
+            body,
+        } => format!("({} {bound}. {})", quantifier(q), expr(body)),
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
         Expr::Havoc => "*".to_string(),
     }
