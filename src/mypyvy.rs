@@ -130,6 +130,11 @@ impl<'a> Relations<'a> {
             );
         }
     }
+
+    /// Get a list of modified relations (without arguments, for unary relations).
+    fn modified(&self) -> Vec<String> {
+        self.values.keys().map( Relations::base).collect()
+    }
 }
 
 fn relation(r: &Relation) -> String {
@@ -269,6 +274,7 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     for s in &t.steps {
         rs.step(None, s);
     }
+    writeln!(w, "  modifies {}", rs.modified().join(", "))?;
     writeln!(w, "  # assumes:")?;
     for e in rs.assumes.into_iter() {
         writeln!(w, "  {} &", expr(&e))?;
