@@ -16,7 +16,9 @@ pub struct Transition {
     pub steps: Vec<Step>,
 }
 
-pub type Transitions = Vec<Transition>;
+pub struct System {
+    pub transitions: Vec<Transition>,
+}
 
 #[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
 pub enum BinOp {
@@ -271,8 +273,9 @@ fn parse_transition(action_def: Pair<Rule>) -> Transition {
     }
 }
 
-fn parse_file(file: Pair<Rule>) -> Vec<Transition> {
-    file.into_inner()
+fn parse_file(file: Pair<Rule>) -> System {
+    let transitions = file
+        .into_inner()
         .flat_map(|pair| {
             if pair.as_rule() == Rule::EOI {
                 None
@@ -280,10 +283,11 @@ fn parse_file(file: Pair<Rule>) -> Vec<Transition> {
                 Some(parse_transition(pair))
             }
         })
-        .collect()
+        .collect();
+    System { transitions }
 }
 
-pub fn parse(s: &str) -> Result<Transitions, String> {
+pub fn parse(s: &str) -> Result<System, String> {
     IvyParser::parse(Rule::file, s)
         .map(|mut pairs| parse_file(pairs.next().unwrap()))
         .map_err(|err| {

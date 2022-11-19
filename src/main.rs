@@ -1,8 +1,8 @@
 extern crate pest;
 
 use clap::Parser;
-use ivy_to_mypyvy::{ivy_l2s, mypyvy, pretty::print_transitions};
-use std::{fs, io};
+use ivy_to_mypyvy::{ivy_l2s, mypyvy, pretty::print_system};
+use std::{fs, io, process};
 
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
@@ -18,11 +18,18 @@ fn main() {
     let args = Args::parse();
 
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
-    let file = ivy_l2s::parse(&unparsed_file).expect("unsuccessful parse of input file");
+    let sys = match ivy_l2s::parse(&unparsed_file) {
+        Ok(sys) => sys,
+        Err(err) => {
+            eprintln!("could not parse input:");
+            eprintln!("{err}");
+            process::exit(1);
+        }
+    };
 
     if args.ivy {
-        print_transitions(&mut io::stdout(), &file);
+        print_system(&mut io::stdout(), &sys);
     } else {
-        mypyvy::emit_transitions(&mut io::stdout(), &file).expect("could not write output");
+        mypyvy::emit_transitions(&mut io::stdout(), &sys).expect("could not write output");
     }
 }

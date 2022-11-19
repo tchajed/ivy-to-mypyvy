@@ -1,7 +1,7 @@
 use std::io;
 
 use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition},
+    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, System, Transition},
     printing::parens,
 };
 
@@ -88,8 +88,8 @@ fn transition(t: &Transition) -> String {
     format!("{} = action{}{}", t.name, arg, steps(&t.steps))
 }
 
-pub fn print_transitions(w: &mut impl io::Write, ts: &[Transition]) {
-    for t in ts.iter() {
+pub fn print_system(w: &mut impl io::Write, sys: &System) {
+    for t in sys.transitions.iter() {
         writeln!(w, "{}", transition(t)).expect("could not write");
     }
 }

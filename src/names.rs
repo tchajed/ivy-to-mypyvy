@@ -1,4 +1,4 @@
-use crate::ivy_l2s::{Expr, Relation, Step, Transition, Transitions};
+use crate::ivy_l2s::{Expr, Relation, Step, System, Transition};
 
 /// Clean up names from Ivy output.
 
@@ -77,6 +77,8 @@ fn transition(t: &Transition) -> Transition {
     }
 }
 
-pub fn clean_transitions(t: &[Transition]) -> Transitions {
-    t.iter().map(transition).collect()
+pub fn clean_system(sys: &System) -> System {
+    System {
+        transitions: sys.transitions.iter().map(transition).collect(),
+    }
 }

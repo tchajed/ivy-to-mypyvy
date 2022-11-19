@@ -4,7 +4,7 @@ use std::{
 };
 
 use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition, Transitions},
+    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, System, Transition},
     names,
     printing::parens,
 };
@@ -269,10 +269,10 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     Ok(())
 }
 
-pub fn emit_transitions(w: &mut impl io::Write, ts: &Transitions) -> io::Result<()> {
-    let ts = names::clean_transitions(ts);
+pub fn emit_transitions(w: &mut impl io::Write, sys: &System) -> io::Result<()> {
+    let sys = names::clean_system(sys);
     let mut havoc_num = 0;
-    for t in ts.into_iter() {
+    for t in sys.transitions.into_iter() {
         transition(w, &mut havoc_num, &t)?;
         writeln!(w)?;
     }

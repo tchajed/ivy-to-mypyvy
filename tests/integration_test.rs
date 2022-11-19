@@ -1,7 +1,7 @@
 use std::fs;
 
 use ivy_to_mypyvy::{
-    ivy_l2s::{self, Transitions},
+    ivy_l2s::{self, System},
     mypyvy,
 };
 
@@ -12,15 +12,19 @@ fn read_input() -> String {
 #[test]
 fn mutex_l2s_output_parses() {
     let input = read_input();
-    let file = ivy_l2s::parse(&input).expect("unsuccessful parse of input file");
-    assert_eq!(file.len(), 7, "incorrect number of transitions parsed");
+    let sys = ivy_l2s::parse(&input).expect("unsuccessful parse of input file");
     assert_eq!(
-        file[0].name, "ext:mutex_protocol.step_atomic_store",
+        sys.transitions.len(),
+        7,
+        "incorrect number of transitions parsed"
+    );
+    assert_eq!(
+        sys.transitions[0].name, "ext:mutex_protocol.step_atomic_store",
         "incorrect name for first transition"
     );
 }
 
-fn mypyvy_output(file: &Transitions) -> String {
+fn mypyvy_output(file: &System) -> String {
     let mut buf = vec![];
     mypyvy::emit_transitions(&mut buf, file).expect("writing output");
     String::from_utf8(buf).expect("output is invalid utf-8")
