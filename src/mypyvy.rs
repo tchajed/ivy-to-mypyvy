@@ -305,3 +305,22 @@ pub fn emit_transitions(w: &mut impl io::Write, ts: &Transitions) -> io::Result<
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::parenthesized;
+
+    #[test]
+    fn test_parenthesized() {
+        assert!(parenthesized("nospaces"));
+        assert!(!parenthesized("has spaces"));
+        assert!(parenthesized("(already wrapped)"));
+        assert!(!parenthesized("(foo) (bar)"));
+    }
+
+    #[test]
+    #[should_panic(expected = "imbalanced")]
+    fn test_parenthesized_imbalanced() {
+        parenthesized("(imbalanced ()paren");
+    }
+}
