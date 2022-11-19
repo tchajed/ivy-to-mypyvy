@@ -133,7 +133,7 @@ impl<'a> Relations<'a> {
 
     /// Get a list of modified relations (without arguments, for unary relations).
     fn modified(&self) -> Vec<String> {
-        self.values.keys().map( Relations::base).collect()
+        self.values.keys().map(Relations::base).collect()
     }
 }
 
@@ -203,7 +203,14 @@ fn parens(s: &str) -> String {
 fn expr(e: &Expr) -> String {
     match e {
         Expr::Relation(r) => relation(r),
-        Expr::Infix { lhs, op, rhs } => format!("({} {} {})", expr(lhs), bin_op(op), expr(rhs)),
+        Expr::Infix { lhs, op, rhs } => {
+            format!(
+                "{} {} {}",
+                parens(&expr(lhs)),
+                bin_op(op),
+                parens(&expr(rhs))
+            )
+        }
         Expr::Forall { bound, body } => format!("(forall {bound}. {})", expr(body)),
         Expr::Some { bound, body } => format!("(exists {bound}. {})", expr(body)),
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
@@ -277,7 +284,7 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     writeln!(w, "  modifies {}", rs.modified().join(", "))?;
     writeln!(w, "  # assumes:")?;
     for e in rs.assumes.into_iter() {
-        writeln!(w, "  {} &", expr(&e))?;
+        writeln!(w, "  {} &", parens(&expr(&e)))?;
     }
     writeln!(w, "  # transitions:")?;
     for (r, e) in rs.values.into_iter() {
