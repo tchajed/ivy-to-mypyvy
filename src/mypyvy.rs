@@ -224,11 +224,11 @@ impl<'a> Relations<'a> {
             Step::Assume(e) => {
                 let e = match path_cond {
                     Some(cond) => Expr::implies(cond.clone(), self.eval(e)),
-                    None => e.clone(),
+                    None => self.eval(e),
                 };
                 self.assumes.push(e)
             }
-            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(e)),
+            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&self.eval(e))),
             Step::Assign(r, e) => {
                 let e = if e == &Expr::Havoc {
                     self.havoc_rel(r)
