@@ -57,44 +57,32 @@ pub enum Expr {
 }
 
 impl Expr {
-    pub fn and(lhs: Expr, rhs: Expr) -> Expr {
+    fn infix(op: BinOp, lhs: Expr, rhs: Expr) -> Expr {
         Expr::Infix {
             lhs: Box::new(lhs),
-            op: BinOp::And,
+            op,
             rhs: Box::new(rhs),
         }
+    }
+
+    pub fn and(lhs: Expr, rhs: Expr) -> Expr {
+        Expr::infix(BinOp::And, lhs, rhs)
     }
 
     pub fn implies(lhs: Expr, rhs: Expr) -> Expr {
-        Expr::Infix {
-            lhs: Box::new(lhs),
-            op: BinOp::Implies,
-            rhs: Box::new(rhs),
-        }
+        Expr::infix(BinOp::Implies, lhs, rhs)
     }
 
     pub fn or(lhs: Expr, rhs: Expr) -> Expr {
-        Expr::Infix {
-            lhs: Box::new(lhs),
-            op: BinOp::Or,
-            rhs: Box::new(rhs),
-        }
+        Expr::infix(BinOp::Or, lhs, rhs)
     }
 
     pub fn equal(lhs: Expr, rhs: Expr) -> Expr {
-        Expr::Infix {
-            lhs: Box::new(lhs),
-            op: BinOp::Equal,
-            rhs: Box::new(rhs),
-        }
+        Expr::infix(BinOp::Equal, lhs, rhs)
     }
 
     pub fn not_equal(lhs: Expr, rhs: Expr) -> Expr {
-        Expr::Infix {
-            lhs: Box::new(lhs),
-            op: BinOp::NotEqual,
-            rhs: Box::new(rhs),
-        }
+        Expr::infix(BinOp::NotEqual, lhs, rhs)
     }
 
     pub fn negate(e: Expr) -> Expr {
