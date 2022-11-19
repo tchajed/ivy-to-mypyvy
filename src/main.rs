@@ -16,5 +16,5 @@ fn main() {
 
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
     let file = ivy_l2s::parse(&unparsed_file).expect("unsuccessful parse of input file");
-    mypyvy::transitions(&mut io::stdout(), &file).expect("could not write output");
+    mypyvy::emit_transitions(&mut io::stdout(), &file).expect("could not write output");
 }

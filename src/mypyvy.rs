@@ -3,7 +3,10 @@ use std::{
     io,
 };
 
-use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition, Transitions};
+use crate::{
+    ivy_l2s::{BinOp, Expr, PrefixOp, Relation, Step, Transition, Transitions},
+    names,
+};
 
 struct Relations<'a> {
     values: HashMap<Relation, Expr>,
@@ -24,12 +27,10 @@ impl<'a> Relations<'a> {
 
     fn to_universal(r: &Relation) -> Relation {
         if let Relation::Call(f, arg) = r {
-            let upper_arg = match arg.rfind(&[':', '.']) {
-                None => arg.to_uppercase(),
-                Some(i) => {
-                    let (prefix, base) = arg.split_at(i);
-                    format!("{prefix}{}", base.to_uppercase())
-                }
+            let upper_arg = if let Some((base, typ)) = arg.split_once(':') {
+                format!("{}:{typ}", base.to_uppercase())
+            } else {
+                arg.to_uppercase()
             };
             Relation::Call(f.clone(), upper_arg)
         } else {
@@ -133,7 +134,7 @@ impl<'a> Relations<'a> {
 
 fn relation(r: &Relation) -> String {
     match r {
-        Relation::Ident(arg) => arg.to_string(),
+        Relation::Ident(f) => f.to_string(),
         Relation::Call(f, arg) => format!("{f}({arg})"),
     }
 }
@@ -259,8 +260,7 @@ impl<'a> Relations<'a> {
 
 fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> io::Result<()> {
     let args = match &t.bound {
-        // TODO: arg actually has the type here
-        Some(arg) => format!("({}: ???)", arg),
+        Some(arg) => format!("({})", arg),
         None => "".to_string(),
     };
     writeln!(w, "transition {}{}", t.name, args)?;
@@ -283,10 +283,11 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     Ok(())
 }
 
-pub fn transitions(w: &mut impl io::Write, ts: &Transitions) -> io::Result<()> {
+pub fn emit_transitions(w: &mut impl io::Write, ts: &Transitions) -> io::Result<()> {
+    let ts = names::clean_transitions(ts);
     let mut havoc_num = 0;
-    for t in ts.iter() {
-        transition(w, &mut havoc_num, t)?;
+    for t in ts.into_iter() {
+        transition(w, &mut havoc_num, &t)?;
         writeln!(w)?;
     }
     Ok(())
