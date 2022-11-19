@@ -26,6 +26,9 @@ impl<'a> Relations<'a> {
         }
     }
 
+    // TODO: this is wrong; we need to store the base relation name without
+    // arguments and then look that up. Capitalizing is only useful for
+    // identifying if something is already expressed as a forall.
     fn to_universal(r: &Relation) -> Relation {
         if let Relation::Call(f, arg) = r {
             let upper_arg = if let Some((base, typ)) = arg.split_once(':') {
