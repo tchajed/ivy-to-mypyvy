@@ -37,11 +37,11 @@ fn expr(e: &Expr) -> Expr {
             rhs: Box::new(expr(rhs)),
         },
         Expr::Forall { bound, body } => Expr::Forall {
-            bound: bound.to_string(),
+            bound: ident(bound),
             body: Box::new(expr(body)),
         },
         Expr::Some { bound, body } => Expr::Some {
-            bound: bound.to_string(),
+            bound: ident(bound),
             body: Box::new(expr(body)),
         },
         Expr::Prefix { op, e } => Expr::Prefix {
