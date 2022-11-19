@@ -41,15 +41,9 @@ fn mutex_l2s_file() {
     insta::assert_display_snapshot!(output);
 }
 
-fn ivy_output(sys: &System) -> String {
-    let mut buf = vec![];
-    pretty::print_system(&mut buf, sys);
-    String::from_utf8(buf).expect("output is invalid utf-8")
-}
-
 #[test]
 fn mutex_l2s_ivy_pretty_print() {
     let sys = parse_input();
-    let output = ivy_output(&sys);
+    let output = pretty::fmt_system(&sys);
     insta::assert_display_snapshot!(output);
 }

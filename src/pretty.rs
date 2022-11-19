@@ -1,4 +1,6 @@
-use std::io;
+use std::fmt::{self, Write};
+
+use indenter::CodeFormatter;
 
 use crate::{
     ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
@@ -97,16 +99,18 @@ fn transition(t: &Transition) -> String {
     format!("{} = action{}{}", t.name, arg, steps(&t.steps))
 }
 
-fn system(w: &mut impl io::Write, sys: &System) -> io::Result<()> {
+fn system(sys: &System) -> Result<String, fmt::Error> {
+    let mut buf = String::new();
+    let mut w = CodeFormatter::new(&mut buf, " ");
     writeln!(w, "let")?;
     for t in sys.transitions.iter() {
         writeln!(w, "{}", transition(t))?;
     }
     writeln!(w, "in")?;
     writeln!(w, "{}", steps(&sys.init))?;
-    Ok(())
+    Ok(buf)
 }
 
-pub fn print_system(w: &mut impl io::Write, sys: &System) {
-    system(w, sys).expect("could not write");
+pub fn fmt_system(sys: &System) -> String {
+    system(sys).expect("formatting error")
 }
