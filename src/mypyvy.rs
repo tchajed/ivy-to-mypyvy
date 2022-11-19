@@ -134,7 +134,9 @@ impl<'a> Relations<'a> {
 
     /// Get a list of modified relations (without arguments, for unary relations).
     fn modified(&self) -> Vec<String> {
-        self.values.keys().map(Relations::base).collect()
+        let mut relations = self.values.keys().map(Relations::base).collect::<Vec<_>>();
+        relations.sort();
+        relations
     }
 }
 
@@ -249,7 +251,13 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
         writeln!(w, "  {} &", parens(&expr(&e)))?;
     }
     writeln!(w, "  # transitions:")?;
-    for (r, e) in rs.values.into_iter() {
+    // print these in sorted order so output is stable
+    let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
+    new_relations.sort_by_key(|(k, _)| match k {
+        Relation::Ident(f) => (f.to_string(), "".to_string()),
+        Relation::Call(f, arg) => (f.to_string(), arg.to_string()),
+    });
+    for (r, e) in new_relations.into_iter() {
         let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
         writeln!(w, "  ({conjunct}) &")?;
     }

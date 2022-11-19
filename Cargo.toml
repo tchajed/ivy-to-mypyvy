@@ -9,3 +9,12 @@ edition = "2021"
 clap = { version = "4.0.26", features = ["derive"] }
 pest = "2.4.1"
 pest_derive = "2.4.1"
+
+[dev-dependencies]
+insta = { version = "1.21.1" }
+
+[profile.dev.package.insta]
+opt-level = 3
+
+[profile.dev.package.similar]
+opt-level = 3
