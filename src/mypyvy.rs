@@ -281,8 +281,24 @@ fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> 
     Ok(())
 }
 
+fn init_step(step: &Step) -> String {
+    match step {
+        Step::Assume(e) => format!("init {}", parens(&expr(e))),
+        Step::Assert(_) => panic!("unexpected `assert` in init"),
+        Step::Assign(r, e) => {
+            format!("init {} <-> {}", relation(r), parens(&expr(e)))
+        }
+        Step::If { .. } => unimplemented!("unhandled `if` in init"),
+    }
+}
+
 pub fn emit_transitions(w: &mut impl io::Write, sys: &System) -> io::Result<()> {
     let sys = names::clean_system(sys);
+
+    for s in sys.init.into_iter() {
+        writeln!(w, "{}", init_step(&s))?;
+    }
+
     let mut havoc_num = 0;
     for t in sys.transitions.into_iter() {
         transition(w, &mut havoc_num, &t)?;

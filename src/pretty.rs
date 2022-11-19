@@ -97,8 +97,16 @@ fn transition(t: &Transition) -> String {
     format!("{} = action{}{}", t.name, arg, steps(&t.steps))
 }
 
-pub fn print_system(w: &mut impl io::Write, sys: &System) {
+fn system(w: &mut impl io::Write, sys: &System) -> io::Result<()> {
+    writeln!(w, "let")?;
     for t in sys.transitions.iter() {
-        writeln!(w, "{}", transition(t)).expect("could not write");
+        writeln!(w, "{}", transition(t))?;
     }
+    writeln!(w, "in")?;
+    writeln!(w, "{}", steps(&sys.init))?;
+    Ok(())
+}
+
+pub fn print_system(w: &mut impl io::Write, sys: &System) {
+    system(w, sys).expect("could not write");
 }
