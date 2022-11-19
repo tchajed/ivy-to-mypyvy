@@ -172,6 +172,7 @@ fn quantifier(q: &Quantifier) -> &'static str {
     match q {
         Quantifier::Forall => "forall",
         Quantifier::Some => "exists",
+        Quantifier::Exists => "exists",
     }
 }
 

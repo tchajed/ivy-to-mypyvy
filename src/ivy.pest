@@ -6,7 +6,8 @@ WHITESPACE = _{ " " | "\t" | NEWLINE }
 ident = @{ char+ ~ ("." ~ char+)* }
 
 // the top-level rule
-file = { SOI ~ action_def* ~ EOI }
+file = { SOI ~ "let" ~ actions ~ "in" ~ step_block ~ EOI }
+actions = { action_def* }
 
 action_def = { ident ~ "=" ~  action }
 action = { "action" ~ ("(" ~ ident ~ ")")? ~ step_block }
@@ -43,10 +44,14 @@ prefix = _{ not }
 not = { "~" }
 
 // remaining expression constructs
-quantifier = _{ forall | some }
+
+quantifier = _{ forall | some | exists }
 forall = { "forall" }
+// TODO: some x. e is not actually an expression, it's only part of an if statement
 some = { "some" }
+exists = { "exists" }
 quantified_expr = { quantifier ~ ident  ~ "." ~ expr }
+
 havoc_expr = { "*" }
 base_expr =  _{ quantified_expr | havoc_expr | relation }
 term = _{ base_expr | "(" ~ expr ~ ")" }

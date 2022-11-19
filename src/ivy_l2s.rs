@@ -18,6 +18,7 @@ pub struct Transition {
 
 pub struct System {
     pub transitions: Vec<Transition>,
+    pub init: Vec<Step>,
 }
 
 #[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
@@ -38,7 +39,8 @@ pub enum PrefixOp {
 #[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
 pub enum Quantifier {
     Forall,
-    Some,
+    Some, // TODO: Some quantifier is not really an expression, it's part of `if some ...`
+    Exists,
 }
 
 #[derive(PartialEq, Eq, Debug, Hash, Clone)]
@@ -155,6 +157,7 @@ fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
     match quantifier.as_rule() {
         Rule::forall => Quantifier::Forall,
         Rule::some => Quantifier::Some,
+        Rule::exists => Quantifier::Exists,
         _ => unreachable!(),
     }
 }
@@ -277,9 +280,9 @@ fn parse_transition(action_def: Pair<Rule>) -> Transition {
     }
 }
 
-fn parse_file(file: Pair<Rule>) -> System {
-    let transitions = file
-        .into_inner()
+fn parse_actions(pair: Pair<Rule>) -> Vec<Transition> {
+    assert_eq!(pair.as_rule(), Rule::actions);
+    pair.into_inner()
         .flat_map(|pair| {
             if pair.as_rule() == Rule::EOI {
                 None
@@ -287,8 +290,17 @@ fn parse_file(file: Pair<Rule>) -> System {
                 Some(parse_transition(pair))
             }
         })
-        .collect();
-    System { transitions }
+        .collect()
+}
+
+fn parse_file(file: Pair<Rule>) -> System {
+    let mut pairs = file.into_inner();
+    let actions = pairs.next().unwrap();
+    let init = pairs.next().unwrap();
+    System {
+        transitions: parse_actions(actions),
+        init: parse_steps(init),
+    }
 }
 
 pub fn parse(s: &str) -> Result<System, String> {

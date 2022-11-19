@@ -81,5 +81,6 @@ fn transition(t: &Transition) -> Transition {
 pub fn clean_system(sys: &System) -> System {
     System {
         transitions: sys.transitions.iter().map(transition).collect(),
+        init: steps(&sys.init),
     }
 }

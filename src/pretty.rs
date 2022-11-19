@@ -35,6 +35,7 @@ fn quantifier(q: &Quantifier) -> &'static str {
     match q {
         Quantifier::Forall => "forall",
         Quantifier::Some => "some",
+        Quantifier::Exists => "exists",
     }
 }
 
