@@ -23,7 +23,7 @@ jobs:
           rustup update ${{ matrix.toolchain }}
           rustup default ${{ matrix.toolchain }}
           rustup component add clippy
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
       - run: cargo build --verbose
       - run: cargo test --verbose
       - run: cargo clippy --no-deps -- -D clippy::all
