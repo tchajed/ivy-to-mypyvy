@@ -30,30 +30,27 @@ impl<'a> Relations<'a> {
     // arguments and then look that up. Capitalizing is only useful for
     // identifying if something is already expressed as a forall.
     fn to_universal(r: &Relation) -> Relation {
-        if let Relation::Call(f, arg) = r {
-            let upper_arg = if let Some((base, typ)) = arg.split_once(':') {
-                format!("{}:{typ}", base.to_uppercase())
-            } else {
-                arg.to_uppercase()
-            };
-            Relation::Call(f.clone(), upper_arg)
-        } else {
-            r.clone()
+        Relation {
+            name: r.name.clone(),
+            args: r
+                .args
+                .iter()
+                .map(|arg| {
+                    if let Some((base, typ)) = arg.split_once(':') {
+                        format!("{}:{typ}", base.to_uppercase())
+                    } else {
+                        arg.to_uppercase()
+                    }
+                })
+                .collect(),
         }
     }
 
     fn arg(r: &Relation) -> String {
-        match r {
-            Relation::Call(_, arg) => arg.clone(),
-            _ => panic!("attempt to get arg of non-call relation"),
+        if r.args.len() == 1 {
+            return r.args[0].clone();
         }
-    }
-
-    fn base(r: &Relation) -> String {
-        match r {
-            Relation::Ident(name) => name.to_string(),
-            Relation::Call(f, _) => f.to_string(),
-        }
+        panic!("attempt to get arg of non-unary relation");
     }
 
     fn get(&self, r: &Relation) -> Expr {
@@ -99,11 +96,11 @@ impl<'a> Relations<'a> {
     /// This mutates self to record that a havoc relation was used for this
     /// instance of havoc.
     fn havoc_rel(&mut self, r: &Relation) -> Expr {
-        let name = format!("havoc_{}_{}", Relations::base(r), self.havoc_num);
+        let name = format!("havoc_{}_{}", r.name, self.havoc_num);
         *self.havoc_num += 1;
-        let havoc_rel = match r {
-            Relation::Ident(_) => Relation::Ident(name),
-            Relation::Call(_, arg) => Relation::Call(name, arg.clone()),
+        let havoc_rel = Relation {
+            name,
+            args: r.args.clone(),
         };
         self.havoc_relations.insert(havoc_rel.clone());
         Expr::Relation(havoc_rel)
@@ -119,10 +116,14 @@ impl<'a> Relations<'a> {
         if r == &r_V {
             self.values.insert(r_V, e.clone());
         } else {
+            // r has at least one lower-case (specialized) argument
+            //
+            // TODO: need to generalize to more than one argument, where some
+            // might be universal and others might be specialized
             // rename r to r_v reduce confusion
             let r_v = r.clone();
-            let v = Relation::Ident(Relations::arg(&r_v));
-            let V = Relation::Ident(Relations::arg(&r_V));
+            let v = Relation::ident(Relations::arg(&r_v));
+            let V = Relation::ident(Relations::arg(&r_V));
             // r is a relation at a particular value; need to manually construct an
             // expression for a mutation at a particular value
             let V_not_eq = Expr::not_equal(Expr::Relation(V.clone()), Expr::Relation(v.clone()));
@@ -136,18 +137,23 @@ impl<'a> Relations<'a> {
         }
     }
 
-    /// Get a list of modified relations (without arguments, for unary relations).
+    /// Get a list of modified relation names
     fn modified(&self) -> Vec<String> {
-        let mut relations = self.values.keys().map(Relations::base).collect::<Vec<_>>();
+        let mut relations = self
+            .values
+            .keys()
+            .map(|r| r.name.clone())
+            .collect::<Vec<_>>();
         relations.sort();
         relations
     }
 }
 
 fn relation(r: &Relation) -> String {
-    match r {
-        Relation::Ident(f) => f.to_string(),
-        Relation::Call(f, arg) => format!("{f}({arg})"),
+    if r.args.is_empty() {
+        r.name.clone()
+    } else {
+        format!("{}({})", r.name, r.args.join(", "))
     }
 }
 
@@ -226,7 +232,7 @@ impl<'a> Relations<'a> {
             }
             Step::If { cond, then, else_ } => {
                 let cond = if cond == &Expr::Havoc {
-                    self.havoc_rel(&Relation::Ident("path".to_string()))
+                    self.havoc_rel(&Relation::ident("path".to_string()))
                 } else {
                     self.eval(cond)
                 };
@@ -271,10 +277,7 @@ fn transition(havoc_num: &mut usize, t: &Transition) -> String {
         writeln!(w, "# transitions:")?;
         // print these in sorted order so output is stable
         let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
-        new_relations.sort_by_key(|(k, _)| match k {
-            Relation::Ident(f) => (f.to_string(), "".to_string()),
-            Relation::Call(f, arg) => (f.to_string(), arg.to_string()),
-        });
+        new_relations.sort_by_key(|(k, _)| k.clone());
         for (r, e) in new_relations.into_iter() {
             let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
             writeln!(w, "& ({conjunct})")?;

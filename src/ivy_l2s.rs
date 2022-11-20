@@ -100,12 +100,17 @@ impl Expr {
     }
 }
 
-#[derive(PartialEq, Eq, Hash, Debug, Clone)]
-pub enum Relation {
-    // a nullary relation
-    Ident(String),
-    // a unary relation
-    Call(String, String),
+#[derive(PartialEq, Eq, Hash, Debug, Clone, PartialOrd, Ord)]
+pub struct Relation {
+    pub name: String,
+    pub args: Vec<String>,
+}
+
+impl Relation {
+    /// Constructor to build a nullary relation.
+    pub fn ident(name: String) -> Self {
+        Self { name, args: vec![] }
+    }
 }
 
 type Steps = Vec<Step>;
@@ -127,15 +132,12 @@ fn parse_ident(ident: Pair<Rule>) -> String {
 }
 
 fn parse_relation(pair: Pair<Rule>) -> Relation {
-    match pair.as_rule() {
-        Rule::call_expr => {
-            let mut pairs = pair.into_inner();
-            let f = pairs.next().unwrap();
-            let arg = pairs.next().unwrap();
-            Relation::Call(parse_ident(f), parse_ident(arg))
-        }
-        Rule::ident => Relation::Ident(parse_ident(pair)),
-        _ => unreachable!(),
+    assert_eq!(pair.as_rule(), Rule::relation);
+    let mut pairs = pair.into_inner();
+    let name = parse_ident(pairs.next().unwrap());
+    Relation {
+        name,
+        args: pairs.map(parse_ident).collect(),
     }
 }
 
@@ -150,7 +152,7 @@ fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
 
 fn parse_base_expr(expr: Pair<Rule>) -> Expr {
     match expr.as_rule() {
-        Rule::ident | Rule::call_expr => Expr::Relation(parse_relation(expr)),
+        Rule::relation => Expr::Relation(parse_relation(expr)),
         Rule::quantified_expr => {
             let mut pairs = expr.into_inner();
             let quantifier = pairs.next().unwrap();

@@ -8,9 +8,10 @@ use crate::{
 };
 
 fn relation(r: &Relation) -> String {
-    match r {
-        Relation::Ident(f) => f.to_string(),
-        Relation::Call(f, arg) => format!("{f}({arg})"),
+    if r.args.is_empty() {
+        r.name.clone()
+    } else {
+        format!("{}({})", r.name, r.args.join(", "))
     }
 }
 

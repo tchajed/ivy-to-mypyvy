@@ -22,9 +22,9 @@ fn ident(name: &str) -> String {
 }
 
 fn relation(r: &Relation) -> Relation {
-    match r {
-        Relation::Ident(f) => Relation::Ident(ident(f)),
-        Relation::Call(f, arg) => Relation::Call(ident(f), ident(arg)),
+    Relation {
+        name: ident(&r.name),
+        args: r.args.iter().map(|arg| ident(arg)).collect(),
     }
 }
 

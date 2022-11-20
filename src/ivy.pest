@@ -21,8 +21,11 @@ step_block = {
 
 step = { assign | assume | assert | if_step }
 
-call_expr = { ident ~ "(" ~ ident ~ ")" }
-relation = _{ call_expr | ident }
+relation = { ident ~
+  ( // explicit call to nullary relation
+    "(" ~ ")" |
+    // some arguments
+    "(" ~ ident ~ ("," ~ ident)* ~ ")" )? }
 assign = { relation ~ ":=" ~ expr }
 assume = {  "assume" ~ expr }
 assert = {  "assert" ~ expr }
