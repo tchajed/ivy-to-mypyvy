@@ -266,7 +266,7 @@ fn transition(havoc_num: &mut usize, t: &Transition) -> String {
         writeln!(w, "modifies {}", rs.modified().join(", "))?;
         writeln!(w, "# assumes:")?;
         for e in rs.assumes.into_iter() {
-            writeln!(w, "{} &", parens(&expr(&e)))?;
+            writeln!(w, "& {}", parens(&expr(&e)))?;
         }
         writeln!(w, "# transitions:")?;
         // print these in sorted order so output is stable
@@ -277,10 +277,8 @@ fn transition(havoc_num: &mut usize, t: &Transition) -> String {
         });
         for (r, e) in new_relations.into_iter() {
             let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
-            writeln!(w, "({conjunct}) &")?;
+            writeln!(w, "& ({conjunct})")?;
         }
-        // need to terminate the list of & conjuncts
-        writeln!(w, "true")?;
         Ok(())
     })
 }
