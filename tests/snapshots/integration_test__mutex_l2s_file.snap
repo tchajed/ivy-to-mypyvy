@@ -24,6 +24,7 @@ init (l2s_g_0 -> !pc_finished(t0))
 init (forall V0. l2s_g_3(V0) -> !scheduled(V0))
 init (forall V0. l2s_g_2(V0) -> !pc_finished(V0))
 init (!(((exists T0. l2s_g_2(T0)) -> l2s_g_0) & (!(l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. !l2s_g_2(T)))))))
+
 transition step_atomic_store(t:thread)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, locked, pc_atomic_store, pc_futex_wake, scheduled
   # assumes:

@@ -298,6 +298,7 @@ pub fn emit_transitions(w: &mut impl io::Write, sys: &System) -> io::Result<()> 
     for s in sys.init.into_iter() {
         writeln!(w, "{}", init_step(&s))?;
     }
+    writeln!(w)?;
 
     let mut havoc_num = 0;
     for t in sys.transitions.into_iter() {
