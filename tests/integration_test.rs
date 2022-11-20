@@ -28,16 +28,10 @@ fn mutex_l2s_output_parses() {
     );
 }
 
-fn mypyvy_output(file: &System) -> String {
-    let mut buf = vec![];
-    mypyvy::emit_transitions(&mut buf, file).expect("writing output");
-    String::from_utf8(buf).expect("output is invalid utf-8")
-}
-
 #[test]
 fn mutex_l2s_file() {
     let sys = parse_input();
-    let output = mypyvy_output(&sys);
+    let output = mypyvy::fmt_system(&sys);
     insta::assert_display_snapshot!(output);
 }
 

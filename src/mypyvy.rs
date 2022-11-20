@@ -1,12 +1,12 @@
 use std::{
     collections::{HashMap, HashSet},
-    io,
+    fmt::Write,
 };
 
 use crate::{
     ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
     names,
-    printing::parens,
+    printing::{self, indented, parens},
 };
 
 struct Relations<'a> {
@@ -249,36 +249,40 @@ impl<'a> Relations<'a> {
     }
 }
 
-fn transition(w: &mut impl io::Write, havoc_num: &mut usize, t: &Transition) -> io::Result<()> {
-    let args = match &t.bound {
-        Some(arg) => format!("({})", arg),
-        None => "".to_string(),
-    };
-    writeln!(w, "transition {}{}", t.name, args)?;
+fn transition(havoc_num: &mut usize, t: &Transition) -> String {
+    printing::with_buf(|w| {
+        let args = match &t.bound {
+            Some(arg) => format!("({})", arg),
+            None => "".to_string(),
+        };
+        writeln!(w, "transition {}{}", t.name, args)?;
 
-    let mut rs = Relations::new(havoc_num);
-    for s in &t.steps {
-        rs.step(None, s);
-    }
-    writeln!(w, "  modifies {}", rs.modified().join(", "))?;
-    writeln!(w, "  # assumes:")?;
-    for e in rs.assumes.into_iter() {
-        writeln!(w, "  {} &", parens(&expr(&e)))?;
-    }
-    writeln!(w, "  # transitions:")?;
-    // print these in sorted order so output is stable
-    let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
-    new_relations.sort_by_key(|(k, _)| match k {
-        Relation::Ident(f) => (f.to_string(), "".to_string()),
-        Relation::Call(f, arg) => (f.to_string(), arg.to_string()),
-    });
-    for (r, e) in new_relations.into_iter() {
-        let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
-        writeln!(w, "  ({conjunct}) &")?;
-    }
-    // need to terminate the list of & conjuncts
-    writeln!(w, "  true")?;
-    Ok(())
+        let w = &mut indented(w);
+        let mut rs = Relations::new(havoc_num);
+        for s in &t.steps {
+            rs.step(None, s);
+        }
+
+        writeln!(w, "modifies {}", rs.modified().join(", "))?;
+        writeln!(w, "# assumes:")?;
+        for e in rs.assumes.into_iter() {
+            writeln!(w, "{} &", parens(&expr(&e)))?;
+        }
+        writeln!(w, "# transitions:")?;
+        // print these in sorted order so output is stable
+        let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
+        new_relations.sort_by_key(|(k, _)| match k {
+            Relation::Ident(f) => (f.to_string(), "".to_string()),
+            Relation::Call(f, arg) => (f.to_string(), arg.to_string()),
+        });
+        for (r, e) in new_relations.into_iter() {
+            let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
+            writeln!(w, "({conjunct}) &")?;
+        }
+        // need to terminate the list of & conjuncts
+        writeln!(w, "true")?;
+        Ok(())
+    })
 }
 
 fn init_step(step: &Step) -> String {
@@ -292,18 +296,20 @@ fn init_step(step: &Step) -> String {
     }
 }
 
-pub fn emit_transitions(w: &mut impl io::Write, sys: &System) -> io::Result<()> {
-    let sys = names::clean_system(sys);
+pub fn fmt_system(sys: &System) -> String {
+    printing::with_buf(|w| {
+        let sys = names::clean_system(sys);
 
-    for s in sys.init.into_iter() {
-        writeln!(w, "{}", init_step(&s))?;
-    }
-    writeln!(w)?;
-
-    let mut havoc_num = 0;
-    for t in sys.transitions.into_iter() {
-        transition(w, &mut havoc_num, &t)?;
+        for s in sys.init.into_iter() {
+            writeln!(w, "{}", init_step(&s))?;
+        }
         writeln!(w)?;
-    }
-    Ok(())
+
+        let mut havoc_num = 0;
+        for t in sys.transitions.into_iter() {
+            write!(w, "{}", transition(&mut havoc_num, &t))?;
+            writeln!(w)?;
+        }
+        Ok(())
+    })
 }

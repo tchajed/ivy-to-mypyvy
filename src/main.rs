@@ -2,7 +2,7 @@ extern crate pest;
 
 use clap::Parser;
 use ivy_to_mypyvy::{ivy_l2s, mypyvy, pretty::fmt_system};
-use std::{fs, io, process};
+use std::{fs, process};
 
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
@@ -30,6 +30,6 @@ fn main() {
     if args.ivy {
         print!("{}", fmt_system(&sys));
     } else {
-        mypyvy::emit_transitions(&mut io::stdout(), &sys).expect("could not write output");
+        print!("{}", mypyvy::fmt_system(&sys));
     }
 }
