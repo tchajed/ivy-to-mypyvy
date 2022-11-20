@@ -308,10 +308,10 @@ fn parse_file(file: Pair<Rule>) -> System {
 pub fn parse(s: &str) -> Result<System, String> {
     IvyParser::parse(Rule::file, s)
         .map(|mut pairs| parse_file(pairs.next().unwrap()))
-        .map_err(|err| {
-            // TODO: is there a better way to report this?
-            err.to_string()
-        })
+        // NOTE: it's possible to rename rules for better parsing error
+        // reporting, but we don't expect users to get parsing errors since the
+        // input is machine generated
+        .map_err(|err| format!("{err}"))
 }
 
 #[cfg(test)]
