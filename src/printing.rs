@@ -1,3 +1,5 @@
+use std::fmt;
+
 /// Determine if s is already unambiguously parenthesized.
 ///
 /// Returns true if s has no spaces (a special case), or if it starts with a (,
@@ -35,6 +37,16 @@ pub fn parens(s: &str) -> String {
     } else {
         format!("({s})")
     }
+}
+
+pub fn with_buf<F: FnOnce(&mut String) -> fmt::Result>(f: F) -> String {
+    let mut buf = String::new();
+    f(&mut buf).expect("could not write to buf");
+    buf
+}
+
+pub fn indented(buf: &'_ mut String) -> impl fmt::Write + '_ {
+    indenter::indented(buf).with_str("  ")
 }
 
 #[cfg(test)]

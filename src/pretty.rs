@@ -1,13 +1,11 @@
-use std::fmt::{self, Write};
+//! Pretty-printer to print back parsed Ivy output.
 
-use indenter::CodeFormatter;
+use std::fmt::Write;
 
 use crate::{
     ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
-    printing::parens,
+    printing::{self, indented, parens},
 };
-
-/// Pretty-printer to print back parsed Ivy output.
 
 fn relation(r: &Relation) -> String {
     match r {
@@ -65,10 +63,7 @@ fn expr(e: &Expr) -> String {
 }
 
 fn steps(steps: &[Step]) -> String {
-    format!(
-        "{{{}}}",
-        steps.iter().map(step).collect::<Vec<_>>().join(";\n")
-    )
+    steps.iter().map(step).collect::<Vec<_>>().join(";\n")
 }
 
 fn step(s: &Step) -> String {
@@ -76,18 +71,18 @@ fn step(s: &Step) -> String {
         Step::Assume(e) => format!("assume {}", expr(e)),
         Step::Assert(e) => format!("assert {}", expr(e)),
         Step::Assign(r, e) => format!("{} := {}", relation(r), expr(e)),
-        Step::If { cond, then, else_ } => {
+        Step::If { cond, then, else_ } => printing::with_buf(|w| {
+            writeln!(w, "if {} {{", expr(cond))?;
+            writeln!(indented(w), "{}", steps(then))?;
             if else_.is_empty() {
-                format!("if {cond}\n{then}", cond = expr(cond), then = steps(then))
+                write!(w, "}}")?;
             } else {
-                format!(
-                    "if {cond}\n{then}\nelse {else_}",
-                    cond = expr(cond),
-                    then = steps(then),
-                    else_ = steps(else_),
-                )
+                writeln!(w, "}} else {{")?;
+                writeln!(indented(w), "{}", steps(else_))?;
+                write!(w, "}}")?;
             }
-        }
+            Ok(())
+        }),
     }
 }
 
@@ -96,21 +91,24 @@ fn transition(t: &Transition) -> String {
         Some(name) => format!("({name})"),
         None => "".to_string(),
     };
-    format!("{} = action{}{}", t.name, arg, steps(&t.steps))
-}
-
-fn system(sys: &System) -> Result<String, fmt::Error> {
-    let mut buf = String::new();
-    let mut w = CodeFormatter::new(&mut buf, " ");
-    writeln!(w, "let")?;
-    for t in sys.transitions.iter() {
-        writeln!(w, "{}", transition(t))?;
-    }
-    writeln!(w, "in")?;
-    writeln!(w, "{}", steps(&sys.init))?;
-    Ok(buf)
+    printing::with_buf(|w| {
+        writeln!(w, "{} = action{}{{", t.name, arg)?;
+        writeln!(indented(w), "{}", steps(&t.steps))?;
+        write!(w, "}}")?;
+        Ok(())
+    })
 }
 
 pub fn fmt_system(sys: &System) -> String {
-    system(sys).expect("formatting error")
+    printing::with_buf(|w| {
+        writeln!(w, "let")?;
+        for t in sys.transitions.iter() {
+            writeln!(w, "{}", transition(t))?;
+            writeln!(w)?;
+        }
+        writeln!(w, "in {{")?;
+        writeln!(indented(w), "{}", steps(&sys.init))?;
+        writeln!(w, "}}")?;
+        Ok(())
+    })
 }
