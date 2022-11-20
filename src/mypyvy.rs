@@ -1,28 +1,48 @@
-use std::{
-    collections::{HashMap, HashSet},
-    fmt::Write,
-};
+use std::{collections::HashMap, fmt::Write};
 
-use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
-    names,
-    printing::{self, indented, parens},
-};
+use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition};
+use crate::names;
+use crate::printing::{self, indented, parens};
 
-struct Relations<'a> {
-    values: HashMap<Relation, Expr>,
-    assumes: Vec<Expr>,
-    havoc_relations: HashSet<Relation>,
-    havoc_num: &'a mut usize,
+struct SysState {
+    havoc_num: usize,
+    havoc_relations: Vec<Relation>,
 }
 
-impl<'a> Relations<'a> {
-    fn new(havoc_num: &'a mut usize) -> Self {
+impl SysState {
+    fn new() -> Self {
+        Self {
+            havoc_num: 0,
+            havoc_relations: vec![],
+        }
+    }
+
+    /// Compute the right-hand side of a havoc assignment to r.
+    ///
+    /// This mutates self to record that a havoc relation was used for this
+    /// instance of havoc.
+    fn havoc_rel(&mut self, r: &Relation) -> Expr {
+        let name = format!("havoc_{}_{}", r.name, self.havoc_num);
+        self.havoc_num += 1;
+        let havoc_rel = Relation {
+            name,
+            args: r.args.clone(),
+        };
+        self.havoc_relations.push(havoc_rel.clone());
+        Expr::Relation(havoc_rel)
+    }
+}
+
+struct Relations {
+    values: HashMap<Relation, Expr>,
+    assumes: Vec<Expr>,
+}
+
+impl Relations {
+    fn new() -> Self {
         Self {
             values: HashMap::new(),
             assumes: vec![],
-            havoc_relations: HashSet::new(),
-            havoc_num,
         }
     }
 
@@ -89,21 +109,6 @@ impl<'a> Relations<'a> {
             },
             Expr::Havoc => Expr::Havoc,
         }
-    }
-
-    /// Compute the right-hand side of a havoc assignment to r.
-    ///
-    /// This mutates self to record that a havoc relation was used for this
-    /// instance of havoc.
-    fn havoc_rel(&mut self, r: &Relation) -> Expr {
-        let name = format!("havoc_{}_{}", r.name, self.havoc_num);
-        *self.havoc_num += 1;
-        let havoc_rel = Relation {
-            name,
-            args: r.args.clone(),
-        };
-        self.havoc_relations.insert(havoc_rel.clone());
-        Expr::Relation(havoc_rel)
     }
 
     /// Record an assignment to a relation.
@@ -203,22 +208,22 @@ fn expr(e: &Expr) -> String {
     }
 }
 
-impl<'a> Relations<'a> {
-    fn step(&mut self, path_cond: Option<&Expr>, s: &Step) {
+impl SysState {
+    fn add_step_path(&mut self, rs: &mut Relations, path_cond: Option<&Expr>, s: &Step) {
         match s {
             Step::Assume(e) => {
                 let e = match path_cond {
-                    Some(cond) => Expr::implies(cond.clone(), self.eval(e)),
-                    None => self.eval(e),
+                    Some(cond) => Expr::implies(cond.clone(), rs.eval(e)),
+                    None => rs.eval(e),
                 };
-                self.assumes.push(e)
+                rs.assumes.push(e)
             }
-            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&self.eval(e))),
+            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&rs.eval(e))),
             Step::Assign(r, e) => {
                 let e = if e == &Expr::Havoc {
                     self.havoc_rel(r)
                 } else {
-                    self.eval(e)
+                    rs.eval(e)
                 };
 
                 let path_e = match path_cond {
@@ -228,13 +233,13 @@ impl<'a> Relations<'a> {
                     ),
                     None => e,
                 };
-                self.insert(r, &path_e);
+                rs.insert(r, &path_e);
             }
             Step::If { cond, then, else_ } => {
                 let cond = if cond == &Expr::Havoc {
                     self.havoc_rel(&Relation::ident("path".to_string()))
                 } else {
-                    self.eval(cond)
+                    rs.eval(cond)
                 };
                 let (then_cond, else_cond) = (cond.clone(), Expr::negate(cond));
                 let (then_cond, else_cond) = match path_cond {
@@ -245,45 +250,49 @@ impl<'a> Relations<'a> {
                     None => (then_cond, else_cond),
                 };
                 for s in then.iter() {
-                    self.step(Some(&then_cond), s);
+                    self.add_step_path(rs, Some(&then_cond), s);
                 }
                 for s in else_.iter() {
-                    self.step(Some(&else_cond), s);
+                    self.add_step_path(rs, Some(&else_cond), s);
                 }
             }
         }
     }
-}
 
-fn transition(havoc_num: &mut usize, t: &Transition) -> String {
-    printing::with_buf(|w| {
-        let args = match &t.bound {
-            Some(arg) => format!("({})", arg),
-            None => "".to_string(),
-        };
-        writeln!(w, "transition {}{}", t.name, args)?;
+    fn add_step(&mut self, rs: &mut Relations, s: &Step) {
+        self.add_step_path(rs, None, s);
+    }
 
-        let w = &mut indented(w);
-        let mut rs = Relations::new(havoc_num);
-        for s in &t.steps {
-            rs.step(None, s);
-        }
+    fn transition(&mut self, t: &Transition) -> String {
+        printing::with_buf(|w| {
+            let args = match &t.bound {
+                Some(arg) => format!("({})", arg),
+                None => "".to_string(),
+            };
+            writeln!(w, "transition {}{}", t.name, args)?;
 
-        writeln!(w, "modifies {}", rs.modified().join(", "))?;
-        writeln!(w, "# assumes:")?;
-        for e in rs.assumes.into_iter() {
-            writeln!(w, "& {}", parens(&expr(&e)))?;
-        }
-        writeln!(w, "# transitions:")?;
-        // print these in sorted order so output is stable
-        let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
-        new_relations.sort_by_key(|(k, _)| k.clone());
-        for (r, e) in new_relations.into_iter() {
-            let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
-            writeln!(w, "& ({conjunct})")?;
-        }
-        Ok(())
-    })
+            let w = &mut indented(w);
+            let mut rs = Relations::new();
+            for s in &t.steps {
+                self.add_step(&mut rs, s);
+            }
+
+            writeln!(w, "modifies {}", rs.modified().join(", "))?;
+            writeln!(w, "# assumes:")?;
+            for e in rs.assumes.into_iter() {
+                writeln!(w, "& {}", parens(&expr(&e)))?;
+            }
+            writeln!(w, "# transitions:")?;
+            // print these in sorted order so output is stable
+            let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
+            new_relations.sort_by_key(|(k, _)| k.clone());
+            for (r, e) in new_relations.into_iter() {
+                let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
+                writeln!(w, "& ({conjunct})")?;
+            }
+            Ok(())
+        })
+    }
 }
 
 fn init_step(step: &Step) -> String {
@@ -298,6 +307,7 @@ fn init_step(step: &Step) -> String {
 }
 
 pub fn fmt_system(sys: &System) -> String {
+    let mut state = SysState::new();
     printing::with_buf(|w| {
         let sys = names::clean_system(sys);
 
@@ -306,9 +316,12 @@ pub fn fmt_system(sys: &System) -> String {
         }
         writeln!(w)?;
 
-        let mut havoc_num = 0;
         for t in sys.transitions.into_iter() {
-            write!(w, "{}", transition(&mut havoc_num, &t))?;
+            // TODO: we need to run state.transition for all of the transitions
+            // to get the header for the file, so we should first run this
+            // (accumulating the output for the transitions section) and only
+            // then start generating the output file
+            write!(w, "{}", state.transition(&t))?;
             writeln!(w)?;
         }
         Ok(())
