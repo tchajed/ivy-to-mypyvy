@@ -7,17 +7,34 @@ use crate::printing::{self, indented, parens};
 
 #[derive(Debug)]
 struct SysState {
-    havoc_num: usize,
-    havoc_relations: Vec<Relation>,
+    havoc_relations: HashSet<Relation>,
     assigned_relations: HashSet<Relation>,
 }
 
 impl SysState {
     fn new() -> Self {
         Self {
-            havoc_num: 0,
-            havoc_relations: vec![],
+            havoc_relations: HashSet::new(),
             assigned_relations: HashSet::new(),
+        }
+    }
+
+    // NOTE: the whole handling of Relations (as opposed to names) will
+    // eventually be fixed
+    fn fresh_name(&self, r: &Relation) -> Relation {
+        if !self.havoc_relations.contains(r) {
+            return r.clone();
+        }
+        let mut n = 1;
+        loop {
+            let new_r = Relation {
+                name: format!("{}__{}", r.name, n),
+                args: r.args.clone(),
+            };
+            if !self.havoc_relations.contains(&new_r) {
+                return new_r;
+            }
+            n += 1;
         }
     }
 
@@ -26,13 +43,11 @@ impl SysState {
     /// This mutates self to record that a havoc relation was used for this
     /// instance of havoc.
     fn havoc_rel(&mut self, r: &Relation) -> Expr {
-        let name = format!("havoc_{}_{}", r.name, self.havoc_num);
-        self.havoc_num += 1;
-        let havoc_rel = Relation {
-            name,
+        let havoc_rel = self.fresh_name(&Relation {
+            name: format!("havoc_{}", r.name),
             args: r.args.clone(),
-        };
-        self.havoc_relations.push(havoc_rel.clone());
+        });
+        self.havoc_relations.insert(havoc_rel.clone());
         Expr::Relation(havoc_rel)
     }
 
