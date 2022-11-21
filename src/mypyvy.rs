@@ -1,12 +1,15 @@
+use std::collections::HashSet;
 use std::{collections::HashMap, fmt::Write};
 
 use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition};
 use crate::names;
 use crate::printing::{self, indented, parens};
 
+#[derive(Debug)]
 struct SysState {
     havoc_num: usize,
     havoc_relations: Vec<Relation>,
+    assigned_relations: HashSet<Relation>,
 }
 
 impl SysState {
@@ -14,6 +17,7 @@ impl SysState {
         Self {
             havoc_num: 0,
             havoc_relations: vec![],
+            assigned_relations: HashSet::new(),
         }
     }
 
@@ -30,6 +34,15 @@ impl SysState {
         };
         self.havoc_relations.push(havoc_rel.clone());
         Expr::Relation(havoc_rel)
+    }
+
+    fn all_relations(&self) -> Vec<&Relation> {
+        let mut rs: Vec<&Relation> = self.assigned_relations.iter().collect();
+        rs.sort();
+        let mut havoc_rs: Vec<&Relation> = self.havoc_relations.iter().collect();
+        havoc_rs.sort();
+        rs.append(&mut havoc_rs);
+        rs
     }
 }
 
@@ -155,11 +168,7 @@ impl Relations {
 }
 
 fn relation(r: &Relation) -> String {
-    if r.args.is_empty() {
-        r.name.clone()
-    } else {
-        format!("{}({})", r.name, r.args.join(", "))
-    }
+    r.to_string()
 }
 
 fn bin_op(op: &BinOp) -> &'static str {
@@ -220,6 +229,7 @@ impl SysState {
             }
             Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&rs.eval(e))),
             Step::Assign(r, e) => {
+                self.assigned_relations.insert(r.clone());
                 let e = if e == &Expr::Havoc {
                     self.havoc_rel(r)
                 } else {
@@ -307,22 +317,30 @@ fn init_step(step: &Step) -> String {
 }
 
 pub fn fmt_system(sys: &System) -> String {
+    let sys = names::clean_system(sys);
     let mut state = SysState::new();
-    printing::with_buf(|w| {
-        let sys = names::clean_system(sys);
 
-        for s in sys.init.into_iter() {
-            writeln!(w, "{}", init_step(&s))?;
+    let transitions: Vec<_> = sys
+        .transitions
+        .iter()
+        .map(|t| state.transition(t))
+        .collect();
+
+    printing::with_buf(|w| {
+        for r in state.all_relations() {
+            // TODO: not quite right, needs to have arguments that are the
+            // correct types
+            writeln!(w, "mutable relation {}", r)?;
         }
         writeln!(w)?;
 
-        for t in sys.transitions.into_iter() {
-            // TODO: we need to run state.transition for all of the transitions
-            // to get the header for the file, so we should first run this
-            // (accumulating the output for the transitions section) and only
-            // then start generating the output file
-            write!(w, "{}", state.transition(&t))?;
-            writeln!(w)?;
+        for s in sys.init.iter() {
+            writeln!(w, "{}", init_step(s))?;
+        }
+        writeln!(w)?;
+
+        for t in transitions.iter() {
+            writeln!(w, "{}", t)?;
         }
         Ok(())
     })

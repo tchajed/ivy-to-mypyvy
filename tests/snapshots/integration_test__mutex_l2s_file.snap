@@ -2,6 +2,69 @@
 source: tests/integration_test.rs
 expression: output
 ---
+mutable relation _old_l2s_g_0
+mutable relation _old_l2s_g_2(V0)
+mutable relation _old_l2s_g_3(V0)
+mutable relation _old_l2s_g_4(V0)
+mutable relation l2s_a(X:thread)
+mutable relation l2s_d(t)
+mutable relation l2s_d(t0)
+mutable relation l2s_frozen
+mutable relation l2s_g_0
+mutable relation l2s_g_2(V0)
+mutable relation l2s_g_3(V0)
+mutable relation l2s_g_4(V0)
+mutable relation l2s_s_0
+mutable relation l2s_s_1(V0)
+mutable relation l2s_s_2(V0)
+mutable relation l2s_s_3(V0)
+mutable relation l2s_s_4(V0)
+mutable relation l2s_s_5(V0)
+mutable relation l2s_s_6(V0)
+mutable relation l2s_s_7(V0)
+mutable relation l2s_saved
+mutable relation l2s_w_0
+mutable relation l2s_w_1(V0)
+mutable relation l2s_waiting
+mutable relation locked
+mutable relation pc_atomic_cas(t)
+mutable relation pc_atomic_store(t)
+mutable relation pc_finished(t)
+mutable relation pc_futex_wait(t)
+mutable relation pc_futex_wake(t)
+mutable relation pc_kernel_wait(t)
+mutable relation queue(t)
+mutable relation queue(t0)
+mutable relation scheduled(T)
+mutable relation havoc_l2s_g_0_4
+mutable relation havoc_l2s_g_2_5(V0)
+mutable relation havoc_l2s_g_3_0(V0)
+mutable relation havoc_l2s_g_3_10(V0)
+mutable relation havoc_l2s_g_3_12(V0)
+mutable relation havoc_l2s_g_3_14(V0)
+mutable relation havoc_l2s_g_3_16(V0)
+mutable relation havoc_l2s_g_3_18(V0)
+mutable relation havoc_l2s_g_3_2(V0)
+mutable relation havoc_l2s_g_3_20(V0)
+mutable relation havoc_l2s_g_3_22(V0)
+mutable relation havoc_l2s_g_3_24(V0)
+mutable relation havoc_l2s_g_3_6(V0)
+mutable relation havoc_l2s_g_3_8(V0)
+mutable relation havoc_l2s_g_4_1(V0)
+mutable relation havoc_l2s_g_4_11(V0)
+mutable relation havoc_l2s_g_4_13(V0)
+mutable relation havoc_l2s_g_4_15(V0)
+mutable relation havoc_l2s_g_4_17(V0)
+mutable relation havoc_l2s_g_4_19(V0)
+mutable relation havoc_l2s_g_4_21(V0)
+mutable relation havoc_l2s_g_4_23(V0)
+mutable relation havoc_l2s_g_4_25(V0)
+mutable relation havoc_l2s_g_4_3(V0)
+mutable relation havoc_l2s_g_4_7(V0)
+mutable relation havoc_l2s_g_4_9(V0)
+mutable relation havoc_path_26
+mutable relation havoc_path_27
+
 init pc_atomic_cas(T) <-> true
 init pc_futex_wait(T) <-> false
 init pc_kernel_wait(T) <-> false

@@ -8,11 +8,7 @@ use crate::{
 };
 
 fn relation(r: &Relation) -> String {
-    if r.args.is_empty() {
-        r.name.clone()
-    } else {
-        format!("{}({})", r.name, r.args.join(", "))
-    }
+    r.to_string()
 }
 
 fn bin_op(op: &BinOp) -> &'static str {

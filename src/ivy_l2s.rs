@@ -3,6 +3,7 @@ use pest::{
     pratt_parser::{Assoc, Op, PrattParser},
     Parser,
 };
+use std::fmt;
 
 #[derive(pest_derive::Parser)]
 #[grammar = "ivy.pest"]
@@ -104,6 +105,16 @@ impl Expr {
 pub struct Relation {
     pub name: String,
     pub args: Vec<String>,
+}
+
+impl fmt::Display for Relation {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.args.is_empty() {
+            write!(f, "{}", self.name)
+        } else {
+            write!(f, "{}({})", self.name, self.args.join(", "))
+        }
+    }
 }
 
 impl Relation {
