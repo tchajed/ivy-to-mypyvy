@@ -7,8 +7,9 @@ use crate::printing::{self, indented, parens};
 
 #[derive(Debug)]
 struct SysState {
-    havoc_relations: HashSet<Relation>,
-    assigned_relations: HashSet<Relation>,
+    // TODO: eventually will want to associate type information here
+    havoc_relations: HashSet<String>,
+    assigned_relations: HashSet<String>,
 }
 
 impl SysState {
@@ -19,18 +20,13 @@ impl SysState {
         }
     }
 
-    // NOTE: the whole handling of Relations (as opposed to names) will
-    // eventually be fixed
-    fn fresh_name(&self, r: &Relation) -> Relation {
+    fn fresh_name(&self, r: &str) -> String {
         if !self.havoc_relations.contains(r) {
-            return r.clone();
+            return r.to_string();
         }
         let mut n = 1;
         loop {
-            let new_r = Relation {
-                name: format!("{}__{}", r.name, n),
-                args: r.args.clone(),
-            };
+            let new_r = format!("{}__{}", r, n);
             if !self.havoc_relations.contains(&new_r) {
                 return new_r;
             }
@@ -43,18 +39,19 @@ impl SysState {
     /// This mutates self to record that a havoc relation was used for this
     /// instance of havoc.
     fn havoc_rel(&mut self, r: &Relation) -> Expr {
-        let havoc_rel = self.fresh_name(&Relation {
-            name: format!("havoc_{}", r.name),
+        let havoc_name = self.fresh_name(&format!("havoc_{}", r.name));
+        let havoc_rel = Relation {
+            name: havoc_name.clone(),
             args: r.args.clone(),
-        });
-        self.havoc_relations.insert(havoc_rel.clone());
+        };
+        self.havoc_relations.insert(havoc_name);
         Expr::Relation(havoc_rel)
     }
 
-    fn all_relations(&self) -> Vec<&Relation> {
-        let mut rs: Vec<&Relation> = self.assigned_relations.iter().collect();
+    fn all_relations(&self) -> Vec<&String> {
+        let mut rs: Vec<&String> = self.assigned_relations.iter().collect();
         rs.sort();
-        let mut havoc_rs: Vec<&Relation> = self.havoc_relations.iter().collect();
+        let mut havoc_rs: Vec<&String> = self.havoc_relations.iter().collect();
         havoc_rs.sort();
         rs.append(&mut havoc_rs);
         rs
@@ -244,7 +241,7 @@ impl SysState {
             }
             Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&rs.eval(e))),
             Step::Assign(r, e) => {
-                self.assigned_relations.insert(r.clone());
+                self.assigned_relations.insert(r.name.clone());
                 let e = if e == &Expr::Havoc {
                     self.havoc_rel(r)
                 } else {
