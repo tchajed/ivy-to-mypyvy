@@ -59,8 +59,70 @@ impl SysState {
 }
 
 struct Relations {
-    values: HashMap<Relation, Expr>,
+    /// Mapping from relation name to current value, stored as a vector of bound
+    /// variables and an expression with those variables (potentially) free.
+    values: HashMap<String, (Vec<String>, Expr)>,
     assumes: Vec<Expr>,
+}
+
+/// Parallel substitute all args for all vals, for a single identifier.
+/// [`subst`] is the usual substitution into an expression.
+fn subst_one_ident(e: &str, args: &[String], vals: &[String]) -> String {
+    let maybe_val = args
+        .iter()
+        .zip(vals.iter())
+        .find_map(|(arg, val)| if arg == e { Some(val) } else { None });
+    match maybe_val {
+        Some(val) => val.to_string(),
+        None => e.to_string(),
+    }
+}
+
+/// Substitute a bound variable for a different bound variable.
+///
+/// This limited form of substitution conforms to the restricted grammar of
+/// expressions, where relations are only applied to variables rather than
+/// arbitrary expressions.
+///
+/// TODO: write some tests
+fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
+    match e {
+        Expr::Relation(r) => {
+            let name = subst_one_ident(&r.name, args, vals);
+            let args = r
+                .args
+                .iter()
+                .map(|a| subst_one_ident(a, args, vals))
+                .collect();
+            Expr::Relation(Relation { name, args })
+        }
+        Expr::Infix { lhs, op, rhs } => Expr::Infix {
+            lhs: Box::new(subst(lhs, args, vals)),
+            op: *op,
+            rhs: Box::new(subst(rhs, args, vals)),
+        },
+        Expr::Quantified {
+            quantifier,
+            bound,
+            body,
+        } => {
+            let body = if args.contains(bound) {
+                body.clone()
+            } else {
+                Box::new(subst(body, args, vals))
+            };
+            Expr::Quantified {
+                quantifier: *quantifier,
+                bound: bound.to_string(),
+                body,
+            }
+        }
+        Expr::Prefix { op, e } => Expr::Prefix {
+            op: *op,
+            e: Box::new(subst(e, args, vals)),
+        },
+        Expr::Havoc => Expr::Havoc,
+    }
 }
 
 impl Relations {
@@ -71,9 +133,6 @@ impl Relations {
         }
     }
 
-    // TODO: this is wrong; we need to store the base relation name without
-    // arguments and then look that up. Capitalizing is only useful for
-    // identifying if something is already expressed as a forall.
     fn to_universal(r: &Relation) -> Relation {
         Relation {
             name: r.name.clone(),
@@ -99,15 +158,9 @@ impl Relations {
     }
 
     fn get(&self, r: &Relation) -> Expr {
-        let universal = Relations::to_universal(r);
-        match self.values.get(r) {
+        match self.values.get(&r.name) {
             None => Expr::Relation(r.clone()),
-            Some(e) => {
-                if r != &universal {
-                    unimplemented!("substitution into universal expressions is not yet supported");
-                }
-                e.clone()
-            }
+            Some((bound, e)) => subst(e, bound, &r.args),
         }
     }
 
@@ -144,7 +197,7 @@ impl Relations {
         let r_V = Relations::to_universal(r);
 
         if r == &r_V {
-            self.values.insert(r_V, e.clone());
+            self.values.insert(r_V.name, (r.args.clone(), e.clone()));
         } else {
             // r has at least one lower-case (specialized) argument
             //
@@ -160,20 +213,19 @@ impl Relations {
             let V_eq = Expr::equal(Expr::Relation(V), Expr::Relation(v));
             let r_V_eval = self.eval(&Expr::Relation(r_V.clone()));
             self.values.insert(
-                r_V,
+                r_V.name,
                 // (eval(R(V) & V != v) | (eval(e) & V = v))
-                Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e.clone(), V_eq)),
+                (
+                    r_V.args,
+                    Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e.clone(), V_eq)),
+                ),
             );
         }
     }
 
     /// Get a list of modified relation names
     fn modified(&self) -> Vec<String> {
-        let mut relations = self
-            .values
-            .keys()
-            .map(|r| r.name.clone())
-            .collect::<Vec<_>>();
+        let mut relations = self.values.keys().cloned().collect::<Vec<_>>();
         relations.sort();
         relations
     }
@@ -308,7 +360,8 @@ impl SysState {
             // print these in sorted order so output is stable
             let mut new_relations = rs.values.into_iter().collect::<Vec<_>>();
             new_relations.sort_by_key(|(k, _)| k.clone());
-            for (r, e) in new_relations.into_iter() {
+            for (name, (args, e)) in new_relations.into_iter() {
+                let r = Relation { name, args };
                 let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
                 writeln!(w, "& ({conjunct})")?;
             }

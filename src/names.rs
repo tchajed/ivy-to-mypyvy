@@ -6,19 +6,33 @@ fn ident(name: &str) -> String {
     let name = name.strip_prefix("fml:").unwrap_or(name);
     let name = name.strip_prefix("loc:").unwrap_or(name);
     let name = name.strip_prefix("ext:").unwrap_or(name);
-    // remove any foo. prefix from each : component (sometimes we have
-    // x:mutex_protocol.thread, for example, and we want to keep that type
-    // annotation)
-    name.split(':')
-        .map(|part| {
-            if let Some((_namespace, name)) = part.split_once('.') {
-                name.to_string()
-            } else {
-                part.to_string()
-            }
-        })
-        .collect::<Vec<_>>()
-        .join(":")
+
+    let name = name
+        .split_once(':')
+        .map(|(name, _typ)| name)
+        .unwrap_or(name);
+    let name = name
+        .split_once('.')
+        .map(|(_namespace, name)| name)
+        .unwrap_or(name);
+    name.to_string()
+
+    // TODO: the below code preserves types; these interfere with substitution
+    // but should otherwise be used for some type inference of relations
+
+    // // remove any foo. prefix from each : component (sometimes we have
+    // // x:mutex_protocol.thread, for example, and we want to keep that type
+    // // annotation)
+    // name.split(':')
+    //     .map(|part| {
+    //         if let Some((_namespace, name)) = part.split_once('.') {
+    //             name.to_string()
+    //         } else {
+    //             part.to_string()
+    //         }
+    //     })
+    //     .collect::<Vec<_>>()
+    //     .join(":")
 }
 
 fn relation(r: &Relation) -> Relation {
