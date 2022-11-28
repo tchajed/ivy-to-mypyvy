@@ -58,13 +58,6 @@ impl SysState {
     }
 }
 
-struct Relations {
-    /// Mapping from relation name to current value, stored as a vector of bound
-    /// variables and an expression with those variables (potentially) free.
-    values: HashMap<String, (Vec<String>, Expr)>,
-    assumes: Vec<Expr>,
-}
-
 /// Parallel substitute all args for all vals, for a single identifier.
 /// [`subst`] is the usual substitution into an expression.
 fn subst_one_ident<S1: AsRef<str>, S2: AsRef<str>>(e: &str, args: &[S1], vals: &[S2]) -> String {
@@ -125,6 +118,13 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
         },
         Expr::Havoc => Expr::Havoc,
     }
+}
+
+struct Relations {
+    /// Mapping from relation name to current value, stored as a vector of bound
+    /// variables and an expression with those variables (potentially) free.
+    values: HashMap<String, (Vec<String>, Expr)>,
+    assumes: Vec<Expr>,
 }
 
 impl Relations {
