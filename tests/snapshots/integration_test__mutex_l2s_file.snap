@@ -14,6 +14,7 @@ mutable relation l2s_a(?)
 mutable relation l2s_d(?)
 mutable relation l2s_frozen()
 mutable relation l2s_g_0()
+mutable relation l2s_g_1
 mutable relation l2s_g_2(?)
 mutable relation l2s_g_3(?)
 mutable relation l2s_g_4(?)

@@ -361,12 +361,28 @@ impl SysState {
         self.add_step_path(rs, None, s);
     }
 
+    fn expr_relations(&mut self, e: &Expr) {
+        match e {
+            Expr::Relation(r) => {
+                self.assigned_relations.insert(r.name.clone());
+            }
+            Expr::Infix { lhs, rhs, .. } => {
+                self.expr_relations(lhs);
+                self.expr_relations(rhs);
+            }
+            Expr::Quantified { body, .. } => self.expr_relations(body),
+            Expr::Prefix { e, .. } => self.expr_relations(e),
+            Expr::Havoc => (),
+        }
+    }
+
     fn init_step(&mut self, step: &Step) -> String {
         match step {
             Step::Assume(e) => format!("init {}", parens(&expr(e))),
             Step::Assert(_) => panic!("unexpected `assert` in init"),
             Step::Assign(r, e) => {
                 self.assigned_relations.insert(r.name.clone());
+                self.expr_relations(e);
                 format!("init {} <-> {}", relation(r), parens(&expr(e)))
             }
             Step::If { .. } => unimplemented!("unhandled `if` in init"),
@@ -427,6 +443,10 @@ pub fn fmt_system(sys: &System) -> String {
         writeln!(w)?;
 
         for r in state.all_relations() {
+            let r: &str = r;
+            if vec!["true", "false"].contains(&r) {
+                continue;
+            }
             if let Some(typ) = state.types.find(r) {
                 writeln!(
                     w,
