@@ -50,7 +50,7 @@ ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){
   assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
   assume mutex_protocol.pc_futex_wake(fml:t);
   mutex_protocol.pc_futex_wake(fml:t) := false;
-  if (some loc:t0. mutex_protocol.queue(loc:t0)) {
+  if some loc:t0. mutex_protocol.queue(loc:t0) {
     mutex_protocol.queue(loc:t0) := false
   };
   _old_l2s_g_0 := l2s_g_0;

@@ -3,7 +3,7 @@
 use std::fmt::Write;
 
 use crate::{
-    ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition},
+    ivy_l2s::{BinOp, Expr, IfCond, PrefixOp, Quantifier, Relation, Step, System, Transition},
     printing::{self, indented, parens},
 };
 
@@ -31,7 +31,6 @@ fn prefix_op(op: &PrefixOp) -> &'static str {
 fn quantifier(q: &Quantifier) -> &'static str {
     match q {
         Quantifier::Forall => "forall",
-        Quantifier::Some => "some",
         Quantifier::Exists => "exists",
     }
 }
@@ -59,6 +58,13 @@ fn expr(e: &Expr) -> String {
     }
 }
 
+fn if_cond(c: &IfCond) -> String {
+    match c {
+        IfCond::Expr(e) => expr(e),
+        IfCond::Some { name, e } => format!("some {name}. {}", expr(e)),
+    }
+}
+
 fn steps(steps: &[Step]) -> String {
     steps.iter().map(step).collect::<Vec<_>>().join(";\n")
 }
@@ -69,7 +75,7 @@ fn step(s: &Step) -> String {
         Step::Assert(e) => format!("assert {}", expr(e)),
         Step::Assign(r, e) => format!("{} := {}", relation(r), expr(e)),
         Step::If { cond, then, else_ } => printing::with_buf(|w| {
-            writeln!(w, "if {} {{", expr(cond))?;
+            writeln!(w, "if {} {{", if_cond(cond))?;
             writeln!(indented(w), "{}", steps(then))?;
             if else_.is_empty() {
                 write!(w, "}}")?;

@@ -1,7 +1,9 @@
 use std::collections::HashSet;
 use std::{collections::HashMap, fmt::Write};
 
-use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition};
+use crate::ivy_l2s::{
+    BinOp, Expr, IfCond, PrefixOp, Quantifier, Relation, Step, System, Transition,
+};
 use crate::names;
 use crate::printing::{self, indented, parens};
 use crate::types::Types;
@@ -196,6 +198,16 @@ impl Relations {
         }
     }
 
+    fn if_cond(&self, e: &IfCond) -> IfCond {
+        match e {
+            IfCond::Expr(e) => IfCond::Expr(self.eval(e)),
+            IfCond::Some { name, e } => IfCond::Some {
+                name: name.clone(),
+                e: self.eval(e),
+            },
+        }
+    }
+
     /// Record an assignment to a relation.
     ///
     /// Assumes e is already evaluated.
@@ -262,7 +274,6 @@ fn prefix_op(op: &PrefixOp) -> &'static str {
 fn quantifier(q: &Quantifier) -> &'static str {
     match q {
         Quantifier::Forall => "forall",
-        Quantifier::Some => "exists",
         Quantifier::Exists => "exists",
     }
 }
@@ -317,12 +328,14 @@ impl SysState {
                 rs.insert(r, &path_e);
             }
             Step::If { cond, then, else_ } => {
-                let cond = if cond == &Expr::Havoc {
-                    self.havoc_rel(&Relation::ident("path".to_string()))
+                let cond = if cond == &IfCond::Expr(Expr::Havoc) {
+                    let base_rel = Relation::ident("path".to_string());
+                    IfCond::Expr(self.havoc_rel(&base_rel))
                 } else {
-                    rs.eval(cond)
+                    rs.if_cond(cond)
                 };
-                let (then_cond, else_cond) = (cond.clone(), Expr::negate(cond));
+                let (then_cond, else_cond) =
+                    (Expr::pos_cond(cond.clone()), Expr::negate_cond(cond));
                 let (then_cond, else_cond) = match path_cond {
                     Some(c) => (
                         Expr::and(c.clone(), then_cond),

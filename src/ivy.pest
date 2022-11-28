@@ -29,8 +29,10 @@ relation = { ident ~
 assign = { relation ~ ":=" ~ expr }
 assume = {  "assume" ~ expr }
 assert = {  "assert" ~ expr }
+some = { "some" }
+if_cond = { some ~ ident ~ "." ~ expr | expr }
 if_step = {
-  "if" ~ expr ~ step_block_or_step ~
+  "if" ~ if_cond ~ step_block_or_step ~
   ("else" ~ step_block_or_step)?
 }
 
@@ -48,10 +50,8 @@ not = { "~" }
 
 // remaining expression constructs
 
-quantifier = _{ forall | some | exists }
+quantifier = _{ forall | exists }
 forall = { "forall" }
-// TODO: some x. e is not actually an expression, it's only part of an if statement
-some = { "some" }
 exists = { "exists" }
 quantified_expr = { quantifier ~ ident  ~ "." ~ expr }
 

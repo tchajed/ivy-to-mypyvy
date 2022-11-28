@@ -1,4 +1,4 @@
-use crate::ivy_l2s::{Expr, Relation, Step, System, Transition};
+use crate::ivy_l2s::{Expr, IfCond, Relation, Step, System, Transition};
 
 /// Clean up names from Ivy output.
 
@@ -74,6 +74,16 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
         }
     }
 
+    fn if_cond(&self, c: &IfCond) -> IfCond {
+        match c {
+            IfCond::Expr(e) => IfCond::Expr(self.expr(e)),
+            IfCond::Some { name, e } => IfCond::Some {
+                name: self.ident(name),
+                e: self.expr(e),
+            },
+        }
+    }
+
     fn steps(&self, s: &[Step]) -> Vec<Step> {
         s.iter().map(|s| self.step(s)).collect()
     }
@@ -84,7 +94,7 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
             Step::Assert(e) => Step::Assert(self.expr(e)),
             Step::Assign(r, e) => Step::Assign(self.relation(r), self.expr(e)),
             Step::If { cond, then, else_ } => Step::If {
-                cond: self.expr(cond),
+                cond: self.if_cond(cond),
                 then: self.steps(then),
                 else_: self.steps(else_),
             },

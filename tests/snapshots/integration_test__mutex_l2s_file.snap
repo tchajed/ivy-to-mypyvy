@@ -159,7 +159,7 @@ transition step_futex_wake(t)
   & (new(l2s_w_1(V0)) <-> (l2s_w_1(V0) & (!((V0 = t) & !havoc_l2s_g_3__2(V0)))) & (!(false & !havoc_l2s_g_3__3(V0))))
   & (new(pc_finished(T)) <-> (pc_finished(T) & (T != t)) | (true & (T = t)))
   & (new(pc_futex_wake(T)) <-> (pc_futex_wake(T) & (T != t)) | (false & (T = t)))
-  & (new(queue(T0)) <-> (queue(T0) & (T0 != t0)) | ((((exists t0. queue(t0)) & false) | ((!(exists t0. queue(t0))) & queue(t0))) & (T0 = t0)))
+  & (new(queue(T0)) <-> (queue(T0) & (T0 != t0)) | (((t0 & false) | (!t0 & queue(t0))) & (T0 = t0)))
   & (new(scheduled(T)) <-> false)
 
 transition step_futex_wait(t)

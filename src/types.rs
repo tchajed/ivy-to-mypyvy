@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::ivy_l2s::{Expr, Step, System, Transition};
+use crate::ivy_l2s::{Expr, IfCond, Step, System, Transition};
 
 pub type Type = Vec<String>;
 
@@ -77,7 +77,7 @@ impl Types {
                 self.infer_expr(e)
             }
             Step::If { cond, then, else_ } => {
-                self.infer_expr(cond);
+                self.infer_if_cond(cond);
                 self.infer_steps(then);
                 self.infer_steps(else_);
             }
@@ -85,4 +85,11 @@ impl Types {
     }
 
     fn infer_expr(&mut self, _e: &Expr) {}
+
+    fn infer_if_cond(&mut self, e: &IfCond) {
+        match e {
+            IfCond::Expr(e) => self.infer_expr(e),
+            IfCond::Some { name: _, e } => self.infer_expr(e),
+        }
+    }
 }

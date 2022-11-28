@@ -40,7 +40,6 @@ pub enum PrefixOp {
 #[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
 pub enum Quantifier {
     Forall,
-    Some, // TODO: Some quantifier is not really an expression, it's part of `if some ...`
     Exists,
 }
 
@@ -99,6 +98,24 @@ impl Expr {
             e: Box::new(e),
         }
     }
+
+    pub fn pos_cond(cond: IfCond) -> Expr {
+        match cond {
+            IfCond::Expr(e) => e,
+            IfCond::Some { name, e: _ } => Expr::Relation(Relation::ident(name)),
+        }
+    }
+
+    pub fn negate_cond(cond: IfCond) -> Expr {
+        match cond {
+            IfCond::Expr(e) => Self::negate(e),
+            IfCond::Some { name, e } => Expr::Quantified {
+                quantifier: Quantifier::Forall,
+                bound: name,
+                body: Box::new(Self::negate(e)),
+            },
+        }
+    }
 }
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, PartialOrd, Ord)]
@@ -124,6 +141,12 @@ impl Relation {
     }
 }
 
+#[derive(PartialEq, Eq, Debug, Clone)]
+pub enum IfCond {
+    Expr(Expr),
+    Some { name: String, e: Expr },
+}
+
 type Steps = Vec<Step>;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
@@ -132,7 +155,7 @@ pub enum Step {
     Assert(Expr),
     Assign(Relation, Expr),
     If {
-        cond: Expr,
+        cond: IfCond,
         then: Steps,
         else_: Steps,
     },
@@ -155,7 +178,6 @@ fn parse_relation(pair: Pair<Rule>) -> Relation {
 fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
     match quantifier.as_rule() {
         Rule::forall => Quantifier::Forall,
-        Rule::some => Quantifier::Some,
         Rule::exists => Quantifier::Exists,
         _ => unreachable!(),
     }
@@ -225,6 +247,24 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
         .parse(expr.into_inner())
 }
 
+fn parse_if_cond(step: Pair<Rule>) -> IfCond {
+    assert_eq!(step.as_rule(), Rule::if_cond);
+    let mut pairs = step.into_inner();
+    let e = pairs.next().unwrap();
+    match e.as_rule() {
+        Rule::expr => IfCond::Expr(parse_expr(e)),
+        Rule::some => {
+            let name = pairs.next().unwrap();
+            let e = pairs.next().unwrap();
+            IfCond::Some {
+                name: parse_ident(name),
+                e: parse_expr(e),
+            }
+        }
+        _ => unreachable!(),
+    }
+}
+
 fn parse_step(step: Pair<Rule>) -> Step {
     assert_eq!(step.as_rule(), Rule::step);
     // step has exactly one inner Pair
@@ -250,7 +290,7 @@ fn parse_step(step: Pair<Rule>) -> Step {
             let then = pairs.next().unwrap();
             let else_ = pairs.next();
             Step::If {
-                cond: parse_expr(cond),
+                cond: parse_if_cond(cond),
                 then: parse_steps(then),
                 else_: else_.map(parse_steps).unwrap_or_default(),
             }
