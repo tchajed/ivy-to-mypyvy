@@ -1,7 +1,7 @@
 extern crate pest;
 
 use clap::Parser;
-use ivy_to_mypyvy::{ivy_l2s, mypyvy, pretty::fmt_system};
+use ivy_to_mypyvy::{ivy_l2s, mypyvy, pretty};
 use std::{fs, process};
 
 #[derive(clap::Parser, Debug)]
@@ -28,7 +28,7 @@ fn main() {
     };
 
     if args.ivy {
-        print!("{}", fmt_system(&sys));
+        print!("{}", pretty::fmt_system(&sys));
     } else {
         print!("{}", mypyvy::fmt_system(&sys));
     }

@@ -3,250 +3,250 @@ source: tests/integration_test.rs
 expression: output
 ---
 let
-ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_atomic_store = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_atomic_store(fml:t);
-  mutex_protocol.pc_atomic_store(fml:t) := false;
-  mutex_protocol.pc_futex_wake(fml:t) := true;
-  mutex_protocol.locked := false;
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_atomic_store(t);
+  pc_atomic_store(t) := false;
+  pc_futex_wake(t) := true;
+  locked := false;
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
-ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_futex_wake = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_futex_wake(fml:t);
-  mutex_protocol.pc_futex_wake(fml:t) := false;
-  if some loc:t0. mutex_protocol.queue(loc:t0) {
-    mutex_protocol.queue(loc:t0) := false
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_futex_wake(t);
+  pc_futex_wake(t) := false;
+  if some t0. queue(t0) {
+    queue(t0) := false
   };
   _old_l2s_g_0 := l2s_g_0;
   l2s_g_0 := *;
   _old_l2s_g_2(V0) := l2s_g_2(V0);
   l2s_g_2(V0) := *;
   assume _old_l2s_g_0 -> l2s_g_0;
-  assume ~(_old_l2s_g_0 & (~(mutex_protocol.pc_finished(mutex_protocol.t0) -> ~l2s_g_0)));
+  assume ~(_old_l2s_g_0 & (~(pc_finished(t0) -> ~l2s_g_0)));
   assume (forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0));
-  assume (forall V0. ~(_old_l2s_g_2(V0) & (~(mutex_protocol.pc_finished(V0) -> ~l2s_g_2(V0)))));
-  mutex_protocol.pc_finished(fml:t) := true;
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
+  assume (forall V0. ~(_old_l2s_g_2(V0) & (~(pc_finished(V0) -> ~l2s_g_2(V0)))));
+  pc_finished(t) := true;
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
-ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_futex_wait = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_futex_wait(fml:t);
-  mutex_protocol.pc_futex_wait(fml:t) := false;
-  if mutex_protocol.locked {
-    mutex_protocol.pc_kernel_wait(fml:t) := true;
-    mutex_protocol.queue(fml:t) := true
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_futex_wait(t);
+  pc_futex_wait(t) := false;
+  if locked {
+    pc_kernel_wait(t) := true;
+    queue(t) := true
   } else {
-    mutex_protocol.pc_atomic_cas(fml:t) := true
+    pc_atomic_cas(t) := true
   };
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
-ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_finished = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_finished(fml:t);
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_finished(t);
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
-ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_atomic_cas = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_atomic_cas(fml:t);
-  mutex_protocol.pc_atomic_cas(fml:t) := false;
-  if mutex_protocol.locked {
-    mutex_protocol.pc_futex_wait(fml:t) := true
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_atomic_cas(t);
+  pc_atomic_cas(t) := false;
+  if locked {
+    pc_futex_wait(t) := true
   } else {
-    mutex_protocol.pc_atomic_store(fml:t) := true;
-    mutex_protocol.locked := true
+    pc_atomic_store(t) := true;
+    locked := true
   };
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
-ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){
-  l2s_d(fml:t) := true;
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+step_kernel_wait = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  assume mutex_protocol.pc_kernel_wait(fml:t);
-  if ~mutex_protocol.queue(fml:t) {
-    mutex_protocol.pc_kernel_wait(fml:t) := false;
-    mutex_protocol.pc_atomic_cas(fml:t) := true
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_kernel_wait(t);
+  if ~queue(t) {
+    pc_kernel_wait(t) := false;
+    pc_atomic_cas(t) := true
   };
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
   l2s_g_4(V0) := *;
   assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0)))));
+  assume (forall V0. ~(_old_l2s_g_3(V0) & (~(scheduled(V0) -> ~l2s_g_3(V0)))));
   assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
   assume (forall V0. ~(_old_l2s_g_4(V0) & (~(l2s_g_3(V0) -> ~l2s_g_4(V0)))));
-  mutex_protocol.scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := l2s_w_1(V0) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_d(mutex_protocol.t0) := true
+  l2s_w_1(V0) := l2s_w_1(V0) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_d(t0) := true
 }
 
 idle = action{
@@ -256,55 +256,55 @@ idle = action{
     l2s_frozen := true;
     assume (forall V0. ~l2s_w_1(V0));
     assume ~l2s_w_0;
-    l2s_a(X:mutex_protocol.thread) := l2s_d(X:mutex_protocol.thread)
+    l2s_a(X:thread) := l2s_d(X:thread)
   } else {
     if * {
       assume l2s_frozen;
       l2s_frozen := false;
       l2s_saved := true;
-      l2s_s_1(V0) := mutex_protocol.pc_atomic_cas(V0);
-      l2s_s_7(V0) := mutex_protocol.queue(V0);
-      l2s_s_2(V0) := mutex_protocol.pc_atomic_store(V0);
-      l2s_s_5(V0) := mutex_protocol.pc_futex_wake(V0);
-      l2s_s_6(V0) := mutex_protocol.pc_kernel_wait(V0);
-      l2s_s_4(V0) := mutex_protocol.pc_futex_wait(V0);
-      l2s_s_0 := mutex_protocol.locked;
-      l2s_s_3(V0) := mutex_protocol.pc_finished(V0);
-      l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-      l2s_w_0 := ~((forall T. mutex_protocol.d(T)) & ~l2s_g_1)
+      l2s_s_1(V0) := pc_atomic_cas(V0);
+      l2s_s_7(V0) := queue(V0);
+      l2s_s_2(V0) := pc_atomic_store(V0);
+      l2s_s_5(V0) := pc_futex_wake(V0);
+      l2s_s_6(V0) := pc_kernel_wait(V0);
+      l2s_s_4(V0) := pc_futex_wait(V0);
+      l2s_s_0 := locked;
+      l2s_s_3(V0) := pc_finished(V0);
+      l2s_w_1(V0) := l2s_d(V0:thread) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+      l2s_w_0 := ~((forall T. d(T)) & ~l2s_g_1)
     }
   };
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
-  l2s_d(mutex_protocol.t0) := true;
-  assert ~((l2s_saved & (forall V0. ~l2s_w_1(V0))) & (~((((((((l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> mutex_protocol.pc_atomic_cas(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> mutex_protocol.queue(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> mutex_protocol.pc_atomic_store(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> mutex_protocol.pc_futex_wake(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> mutex_protocol.pc_kernel_wait(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> mutex_protocol.pc_futex_wait(V0)))) & (l2s_s_0 <-> mutex_protocol.locked)) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> mutex_protocol.pc_finished(V0))))))
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  l2s_d(t0) := true;
+  assert ~((l2s_saved & (forall V0. ~l2s_w_1(V0))) & (~((((((((l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> pc_atomic_cas(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> queue(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> pc_atomic_store(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> pc_futex_wake(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> pc_kernel_wait(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> pc_futex_wait(V0)))) & (l2s_s_0 <-> locked)) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> pc_finished(V0))))))
 }
 
 in {
-  mutex_protocol.pc_atomic_cas(T) := true;
-  mutex_protocol.pc_futex_wait(T) := false;
-  mutex_protocol.pc_kernel_wait(T) := false;
-  mutex_protocol.pc_atomic_store(T) := false;
-  mutex_protocol.pc_futex_wake(T) := false;
-  mutex_protocol.pc_finished(T) := false;
-  mutex_protocol.locked := false;
-  mutex_protocol.queue(T) := false;
-  mutex_protocol.scheduled(T) := false;
-  mutex_protocol.d(T) := false;
+  pc_atomic_cas(T) := true;
+  pc_futex_wait(T) := false;
+  pc_kernel_wait(T) := false;
+  pc_atomic_store(T) := false;
+  pc_futex_wake(T) := false;
+  pc_finished(T) := false;
+  locked := false;
+  queue(T) := false;
+  scheduled(T) := false;
+  d(T) := false;
   l2s_waiting := true;
   l2s_frozen := false;
   l2s_saved := false;
-  l2s_d(mutex_protocol.t0) := true;
-  l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & (~(mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)));
-  l2s_w_0 := ~((forall T. mutex_protocol.d(T)) & ~l2s_g_1);
-  assume l2s_g_1 -> (~(forall T. mutex_protocol.d(T)));
+  l2s_d(t0) := true;
+  l2s_w_1(V0) := l2s_d(V0:thread) & (~(scheduled(V0) & ~l2s_g_3(V0)));
+  l2s_w_0 := ~((forall T. d(T)) & ~l2s_g_1);
+  assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
-  assume (forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0));
-  assume (forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0));
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
   assume ~(((exists T0. l2s_g_2(T0)) -> l2s_g_0) & (~(l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. ~l2s_g_2(T))))))
 }
 

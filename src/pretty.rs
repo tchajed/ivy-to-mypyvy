@@ -4,6 +4,7 @@ use std::fmt::Write;
 
 use crate::{
     ivy_l2s::{BinOp, Expr, IfCond, PrefixOp, Quantifier, Relation, Step, System, Transition},
+    names,
     printing::{self, indented, parens},
 };
 
@@ -103,6 +104,7 @@ fn transition(t: &Transition) -> String {
 }
 
 pub fn fmt_system(sys: &System) -> String {
+    let sys = names::clean_namespaces(sys);
     printing::with_buf(|w| {
         writeln!(w, "let")?;
         for t in sys.transitions.iter() {
