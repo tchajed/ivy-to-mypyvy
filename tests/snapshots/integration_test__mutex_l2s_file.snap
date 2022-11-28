@@ -2,28 +2,32 @@
 source: tests/integration_test.rs
 expression: output
 ---
+sort ?
+sort thread
+
 mutable relation _old_l2s_g_0()
-mutable relation _old_l2s_g_2
-mutable relation _old_l2s_g_3
-mutable relation _old_l2s_g_4
-mutable relation l2s_a
-mutable relation l2s_d(thread)
+mutable relation _old_l2s_g_2(?)
+mutable relation _old_l2s_g_3(?)
+mutable relation _old_l2s_g_4(?)
+mutable relation d(?)
+mutable relation l2s_a(?)
+mutable relation l2s_d(?)
 mutable relation l2s_frozen()
 mutable relation l2s_g_0()
-mutable relation l2s_g_2
-mutable relation l2s_g_3
-mutable relation l2s_g_4
+mutable relation l2s_g_2(?)
+mutable relation l2s_g_3(?)
+mutable relation l2s_g_4(?)
 mutable relation l2s_s_0()
-mutable relation l2s_s_1
-mutable relation l2s_s_2
-mutable relation l2s_s_3
-mutable relation l2s_s_4
-mutable relation l2s_s_5
-mutable relation l2s_s_6
-mutable relation l2s_s_7
+mutable relation l2s_s_1(?)
+mutable relation l2s_s_2(?)
+mutable relation l2s_s_3(?)
+mutable relation l2s_s_4(?)
+mutable relation l2s_s_5(?)
+mutable relation l2s_s_6(?)
+mutable relation l2s_s_7(?)
 mutable relation l2s_saved()
 mutable relation l2s_w_0()
-mutable relation l2s_w_1
+mutable relation l2s_w_1(?)
 mutable relation l2s_waiting()
 mutable relation locked()
 mutable relation pc_atomic_cas(thread)
@@ -33,33 +37,33 @@ mutable relation pc_futex_wait(thread)
 mutable relation pc_futex_wake(thread)
 mutable relation pc_kernel_wait(thread)
 mutable relation queue(thread)
-mutable relation scheduled
+mutable relation scheduled(?)
 mutable relation havoc_l2s_g_0()
-mutable relation havoc_l2s_g_2
-mutable relation havoc_l2s_g_3
-mutable relation havoc_l2s_g_3__1
-mutable relation havoc_l2s_g_3__10
-mutable relation havoc_l2s_g_3__11
-mutable relation havoc_l2s_g_3__2
-mutable relation havoc_l2s_g_3__3
-mutable relation havoc_l2s_g_3__4
-mutable relation havoc_l2s_g_3__5
-mutable relation havoc_l2s_g_3__6
-mutable relation havoc_l2s_g_3__7
-mutable relation havoc_l2s_g_3__8
-mutable relation havoc_l2s_g_3__9
-mutable relation havoc_l2s_g_4
-mutable relation havoc_l2s_g_4__1
-mutable relation havoc_l2s_g_4__10
-mutable relation havoc_l2s_g_4__11
-mutable relation havoc_l2s_g_4__2
-mutable relation havoc_l2s_g_4__3
-mutable relation havoc_l2s_g_4__4
-mutable relation havoc_l2s_g_4__5
-mutable relation havoc_l2s_g_4__6
-mutable relation havoc_l2s_g_4__7
-mutable relation havoc_l2s_g_4__8
-mutable relation havoc_l2s_g_4__9
+mutable relation havoc_l2s_g_2(?)
+mutable relation havoc_l2s_g_3(?)
+mutable relation havoc_l2s_g_3__1(?)
+mutable relation havoc_l2s_g_3__10(?)
+mutable relation havoc_l2s_g_3__11(?)
+mutable relation havoc_l2s_g_3__2(?)
+mutable relation havoc_l2s_g_3__3(?)
+mutable relation havoc_l2s_g_3__4(?)
+mutable relation havoc_l2s_g_3__5(?)
+mutable relation havoc_l2s_g_3__6(?)
+mutable relation havoc_l2s_g_3__7(?)
+mutable relation havoc_l2s_g_3__8(?)
+mutable relation havoc_l2s_g_3__9(?)
+mutable relation havoc_l2s_g_4(?)
+mutable relation havoc_l2s_g_4__1(?)
+mutable relation havoc_l2s_g_4__10(?)
+mutable relation havoc_l2s_g_4__11(?)
+mutable relation havoc_l2s_g_4__2(?)
+mutable relation havoc_l2s_g_4__3(?)
+mutable relation havoc_l2s_g_4__4(?)
+mutable relation havoc_l2s_g_4__5(?)
+mutable relation havoc_l2s_g_4__6(?)
+mutable relation havoc_l2s_g_4__7(?)
+mutable relation havoc_l2s_g_4__8(?)
+mutable relation havoc_l2s_g_4__9(?)
 mutable relation havoc_path
 mutable relation havoc_path__1
 
@@ -292,7 +296,7 @@ transition step_kernel_wait(t)
   & (new(pc_kernel_wait(T)) <-> (pc_kernel_wait(T) & (T != t)) | (((!queue(t) & false) | (!!queue(t) & pc_kernel_wait(t))) & (T = t)))
   & (new(scheduled(T)) <-> false)
 
-transition idle
+transition idle()
   modifies l2s_a, l2s_d, l2s_frozen, l2s_s_0, l2s_s_1, l2s_s_2, l2s_s_3, l2s_s_4, l2s_s_5, l2s_s_6, l2s_s_7, l2s_saved, l2s_w_0, l2s_w_1, l2s_waiting
   # assumes:
   & (havoc_path -> l2s_waiting)

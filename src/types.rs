@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use crate::ivy_l2s::{Expr, IfCond, Step, System, Transition};
 
@@ -27,6 +27,16 @@ impl Types {
 
     pub fn insert(&mut self, name: String, typ: Type) {
         self.typs.insert(name, typ);
+    }
+
+    pub fn all_sorts(&self) -> Vec<&String> {
+        let mut typs = HashSet::new();
+        for ts in self.typs.values() {
+            typs.extend(ts.iter());
+        }
+        let mut sorts = typs.into_iter().collect::<Vec<_>>();
+        sorts.sort();
+        sorts
     }
 
     fn with_bound<R, F: FnOnce(&mut Types) -> R>(&mut self, name: &str, typ: Type, f: F) -> R {
@@ -72,6 +82,9 @@ impl Types {
                 if r.args.len() == 1 {
                     if let Some(typ) = self.find(&r.args[0]) {
                         self.insert(r.name.to_string(), typ.clone());
+                    } else {
+                        // TODO: another hack, useful for recording that a relation is unary and not nullary
+                        self.insert(r.name.to_string(), vec!["?".to_string()]);
                     }
                 }
                 self.infer_expr(e)

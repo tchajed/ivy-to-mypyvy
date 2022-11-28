@@ -357,11 +357,23 @@ impl SysState {
         self.add_step_path(rs, None, s);
     }
 
+    fn init_step(&mut self, step: &Step) -> String {
+        match step {
+            Step::Assume(e) => format!("init {}", parens(&expr(e))),
+            Step::Assert(_) => panic!("unexpected `assert` in init"),
+            Step::Assign(r, e) => {
+                self.assigned_relations.insert(r.name.clone());
+                format!("init {} <-> {}", relation(r), parens(&expr(e)))
+            }
+            Step::If { .. } => unimplemented!("unhandled `if` in init"),
+        }
+    }
+
     fn transition(&mut self, t: &Transition) -> String {
         printing::with_buf(|w| {
             let args = match &t.bound {
                 Some(arg) => format!("({})", arg),
-                None => "".to_string(),
+                None => "()".to_string(),
             };
             writeln!(w, "transition {}{}", t.name, args)?;
 
@@ -390,17 +402,6 @@ impl SysState {
     }
 }
 
-fn init_step(step: &Step) -> String {
-    match step {
-        Step::Assume(e) => format!("init {}", parens(&expr(e))),
-        Step::Assert(_) => panic!("unexpected `assert` in init"),
-        Step::Assign(r, e) => {
-            format!("init {} <-> {}", relation(r), parens(&expr(e)))
-        }
-        Step::If { .. } => unimplemented!("unhandled `if` in init"),
-    }
-}
-
 pub fn fmt_system(sys: &System) -> String {
     let mut state = SysState::new();
 
@@ -408,13 +409,19 @@ pub fn fmt_system(sys: &System) -> String {
     state.types.infer(&sys);
     let sys = names::clean_types(&sys);
 
-    let transitions: Vec<_> = sys
+    let init_steps: Vec<String> = sys.init.iter().map(|s| state.init_step(s)).collect();
+    let transitions: Vec<String> = sys
         .transitions
         .iter()
         .map(|t| state.transition(t))
         .collect();
 
     printing::with_buf(|w| {
+        for s in state.types.all_sorts() {
+            writeln!(w, "sort {s}")?;
+        }
+        writeln!(w)?;
+
         for r in state.all_relations() {
             if let Some(typ) = state.types.find(r) {
                 writeln!(
@@ -429,13 +436,13 @@ pub fn fmt_system(sys: &System) -> String {
         }
         writeln!(w)?;
 
-        for s in sys.init.iter() {
-            writeln!(w, "{}", init_step(s))?;
+        for s in init_steps.into_iter() {
+            writeln!(w, "{s}")?;
         }
         writeln!(w)?;
 
-        for t in transitions.iter() {
-            writeln!(w, "{}", t)?;
+        for t in transitions.into_iter() {
+            writeln!(w, "{t}")?;
         }
         Ok(())
     })
