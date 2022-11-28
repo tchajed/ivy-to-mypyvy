@@ -2,18 +2,18 @@
 source: tests/integration_test.rs
 expression: output
 ---
-mutable relation _old_l2s_g_0
+mutable relation _old_l2s_g_0()
 mutable relation _old_l2s_g_2
 mutable relation _old_l2s_g_3
 mutable relation _old_l2s_g_4
 mutable relation l2s_a
-mutable relation l2s_d
-mutable relation l2s_frozen
-mutable relation l2s_g_0
+mutable relation l2s_d(thread)
+mutable relation l2s_frozen()
+mutable relation l2s_g_0()
 mutable relation l2s_g_2
 mutable relation l2s_g_3
 mutable relation l2s_g_4
-mutable relation l2s_s_0
+mutable relation l2s_s_0()
 mutable relation l2s_s_1
 mutable relation l2s_s_2
 mutable relation l2s_s_3
@@ -21,20 +21,20 @@ mutable relation l2s_s_4
 mutable relation l2s_s_5
 mutable relation l2s_s_6
 mutable relation l2s_s_7
-mutable relation l2s_saved
-mutable relation l2s_w_0
+mutable relation l2s_saved()
+mutable relation l2s_w_0()
 mutable relation l2s_w_1
-mutable relation l2s_waiting
-mutable relation locked
-mutable relation pc_atomic_cas
-mutable relation pc_atomic_store
-mutable relation pc_finished
-mutable relation pc_futex_wait
-mutable relation pc_futex_wake
-mutable relation pc_kernel_wait
-mutable relation queue
+mutable relation l2s_waiting()
+mutable relation locked()
+mutable relation pc_atomic_cas(thread)
+mutable relation pc_atomic_store(thread)
+mutable relation pc_finished(thread)
+mutable relation pc_futex_wait(thread)
+mutable relation pc_futex_wake(thread)
+mutable relation pc_kernel_wait(thread)
+mutable relation queue(thread)
 mutable relation scheduled
-mutable relation havoc_l2s_g_0
+mutable relation havoc_l2s_g_0()
 mutable relation havoc_l2s_g_2
 mutable relation havoc_l2s_g_3
 mutable relation havoc_l2s_g_3__1

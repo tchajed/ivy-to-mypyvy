@@ -4,10 +4,11 @@ use std::{collections::HashMap, fmt::Write};
 use crate::ivy_l2s::{BinOp, Expr, PrefixOp, Quantifier, Relation, Step, System, Transition};
 use crate::names;
 use crate::printing::{self, indented, parens};
+use crate::types::Types;
 
 #[derive(Debug)]
 struct SysState {
-    // TODO: eventually will want to associate type information here
+    types: Types,
     havoc_relations: HashSet<String>,
     assigned_relations: HashSet<String>,
 }
@@ -15,6 +16,7 @@ struct SysState {
 impl SysState {
     fn new() -> Self {
         Self {
+            types: Types::new(),
             havoc_relations: HashSet::new(),
             assigned_relations: HashSet::new(),
         }
@@ -44,7 +46,10 @@ impl SysState {
             name: havoc_name.clone(),
             args: r.args.clone(),
         };
-        self.havoc_relations.insert(havoc_name);
+        self.havoc_relations.insert(havoc_name.clone());
+        if let Some(typ) = self.types.find(&r.name) {
+            self.types.insert(havoc_name, typ.clone())
+        }
         Expr::Relation(havoc_rel)
     }
 
@@ -384,8 +389,11 @@ fn init_step(step: &Step) -> String {
 }
 
 pub fn fmt_system(sys: &System) -> String {
-    let sys = names::clean_system(sys);
     let mut state = SysState::new();
+
+    let sys = names::clean_namespaces(sys);
+    state.types.infer(&sys);
+    let sys = names::clean_types(&sys);
 
     let transitions: Vec<_> = sys
         .transitions
@@ -395,9 +403,16 @@ pub fn fmt_system(sys: &System) -> String {
 
     printing::with_buf(|w| {
         for r in state.all_relations() {
-            // TODO: not quite right, needs to have arguments that are the
-            // correct types
-            writeln!(w, "mutable relation {}", r)?;
+            if let Some(typ) = state.types.find(r) {
+                writeln!(
+                    w,
+                    "mutable relation {name}({args})",
+                    name = r,
+                    args = typ.join(", ")
+                )?;
+            } else {
+                writeln!(w, "mutable relation {}", r)?;
+            }
         }
         writeln!(w)?;
 
