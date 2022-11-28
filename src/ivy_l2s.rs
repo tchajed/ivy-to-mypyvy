@@ -102,7 +102,9 @@ impl Expr {
     pub fn pos_cond(cond: IfCond) -> Expr {
         match cond {
             IfCond::Expr(e) => e,
-            IfCond::Some { name, e: _ } => Expr::Relation(Relation::ident(name)),
+            // in the positive case of an if some, the transition should already
+            // have an argument and a precondition for the exists
+            IfCond::Some { name: _, e: _ } => Expr::Relation(Relation::ident("true".to_string())),
         }
     }
 

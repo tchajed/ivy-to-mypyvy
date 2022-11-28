@@ -334,6 +334,10 @@ impl SysState {
                 } else {
                     rs.if_cond(cond)
                 };
+                // TODO: take into account if some at an earlier stage; it will
+                // cause a transition to split into two transitions, one with an
+                // argument/precondition for the witness and the other with a
+                // precondition of the form `not exists (...)`.
                 let (then_cond, else_cond) =
                     (Expr::pos_cond(cond.clone()), Expr::negate_cond(cond));
                 let (then_cond, else_cond) = match path_cond {
