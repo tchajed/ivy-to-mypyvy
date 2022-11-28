@@ -67,13 +67,13 @@ struct Relations {
 
 /// Parallel substitute all args for all vals, for a single identifier.
 /// [`subst`] is the usual substitution into an expression.
-fn subst_one_ident(e: &str, args: &[String], vals: &[String]) -> String {
-    let maybe_val = args
-        .iter()
-        .zip(vals.iter())
-        .find_map(|(arg, val)| if arg == e { Some(val) } else { None });
+fn subst_one_ident<S1: AsRef<str>, S2: AsRef<str>>(e: &str, args: &[S1], vals: &[S2]) -> String {
+    let maybe_val =
+        args.iter()
+            .zip(vals.iter())
+            .find_map(|(arg, val)| if arg.as_ref() == e { Some(val) } else { None });
     match maybe_val {
-        Some(val) => val.to_string(),
+        Some(val) => val.as_ref().to_string(),
         None => e.to_string(),
     }
 }
@@ -106,11 +106,13 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
             bound,
             body,
         } => {
-            let body = if args.contains(bound) {
-                body.clone()
-            } else {
-                Box::new(subst(body, args, vals))
-            };
+            // remove bound from args, since it is shadowed
+            let args: Vec<String> = args
+                .iter()
+                .filter(|a| a != &bound)
+                .map(|s| s.to_string())
+                .collect();
+            let body = Box::new(subst(body, &args, vals));
             Expr::Quantified {
                 quantifier: *quantifier,
                 bound: bound.to_string(),
