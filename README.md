@@ -8,9 +8,13 @@ Convert an [Ivy](https://kenmcmil.github.io/ivy/) transition system (after its l
 ## Usage
 
 To get an input file suitable for `ivy-to-mypyvy`, run `ivy_check l2s_debug=true
-mutex.ivy > ivy.out`, then extract the relevant portion with `awk '/^after
-normalize_named_binders/{ p = 1; next } /while \*/{ p = 0 } p' ivy.out > l2s.out` (somebody the
-tool will probably do that for you).
+mutex.ivy > ivy.out`, then extract the relevant portion with
+
+```
+awk '/^after replace_named_binders/{ p = 1; next } /while \*/{ p = 0 } p' ivy.out | sed 's/;/;\n/g' > l2s.out
+```
+
+(Somebody perhaps the tool will do that for you.)
 
 Run with `cargo run -- l2s.out`.
 
