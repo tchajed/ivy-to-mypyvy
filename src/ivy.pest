@@ -6,9 +6,12 @@ WHITESPACE = _{ " " | "\t" | NEWLINE }
 ident = @{ char+ ~ ("." ~ char+)* }
 
 // the top-level rule
-file = { SOI ~ "let" ~ actions ~ "in" ~ step_block ~ EOI }
-actions = { action_def* }
+file = {
+  SOI ~ "let" ~
+  actions ~ "in" ~
+  step_block ~ EOI }
 
+actions = { action_def* }
 action_def = { ident ~ "=" ~  action }
 binders = _{ ident ~ ("," ~ ident)* }
 action_binders = { "(" ~ binders ~ ")" }
