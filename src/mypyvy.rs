@@ -132,6 +132,63 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
     }
 }
 
+fn split_if_havoc_steps(
+    before: Vec<&Step>,
+    then: &[Step],
+    else_: &[Step],
+    remaining: Vec<&Step>,
+) -> (Vec<Step>, Vec<Step>) {
+    let then_t = {
+        let mut steps = before.clone();
+        steps.extend(then);
+        steps.extend(remaining.clone());
+        steps.into_iter().cloned().collect()
+    };
+
+    let else_t = {
+        let mut steps = before;
+        steps.extend(else_);
+        steps.extend(remaining);
+        steps.into_iter().cloned().collect()
+    };
+
+    (then_t, else_t)
+}
+
+fn split_if_some_steps(
+    before: Vec<&Step>,
+    name: &str,
+    cond: &Expr,
+    then: &[Step],
+    else_: &[Step],
+    remaining: Vec<&Step>,
+) -> (Vec<Step>, Vec<Step>) {
+    let then_t = {
+        let mut steps = before.clone();
+        // assume that the parameter satisfies the bound condition
+        let if_some = Step::Assume(cond.clone());
+        steps.push(&if_some);
+        steps.extend(then);
+        steps.extend(remaining.clone());
+        steps.into_iter().cloned().collect()
+    };
+
+    let else_t = {
+        let mut steps = before;
+        let else_none = Step::Assume(Expr::Quantified {
+            quantifier: Quantifier::Forall,
+            bound: name.to_string(),
+            body: Box::new(Expr::negate(cond.clone())),
+        });
+        steps.push(&else_none);
+        steps.extend(else_);
+        steps.extend(remaining);
+        steps.into_iter().cloned().collect()
+    };
+
+    (then_t, else_t)
+}
+
 fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
     // gather steps prior to `if some` (if there is one)
     let mut steps = vec![];
@@ -146,29 +203,19 @@ fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
                 let remaining = i.collect::<Vec<_>>();
                 // stop processing and splice in the then and else branches
                 // between steps and remaining
-                let then_t = {
-                    let mut steps = steps.clone();
-                    steps.extend(then);
-                    steps.extend(remaining.clone());
+                let (then, else_) = split_if_havoc_steps(steps, then, else_, remaining);
+                return Some((
                     Transition {
                         name: format!("{}_then", t.name),
                         bound: t.bound.clone(),
-                        steps: steps.into_iter().cloned().collect(),
-                    }
-                };
-
-                let else_t = {
-                    let mut steps = steps;
-                    steps.extend(else_);
-                    steps.extend(remaining);
+                        steps: then,
+                    },
                     Transition {
                         name: format!("{}_else", t.name),
                         bound: t.bound.clone(),
-                        steps: steps.into_iter().cloned().collect(),
-                    }
-                };
-
-                return Some((then_t, else_t));
+                        steps: else_,
+                    },
+                ));
             }
             Some(Step::If {
                 cond: IfCond::Some { name, e: cond },
@@ -178,36 +225,23 @@ fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
                 let remaining = i.collect::<Vec<_>>();
                 // stop processing and splice in the then and else branches
                 // between steps and remaining
+                let (then, else_) = split_if_some_steps(steps, name, cond, then, else_, remaining);
+
                 let then_t = {
-                    let mut steps = steps.clone();
-                    // assume that the parameter satisfies the bound condition
-                    let if_some = Step::Assume(cond.clone());
-                    steps.push(&if_some);
-                    steps.extend(then);
-                    steps.extend(remaining.clone());
                     let mut then_bound = t.bound.clone();
                     then_bound.push(name.clone());
                     Transition {
                         name: format!("{}_if_some", t.name),
                         bound: then_bound,
-                        steps: steps.into_iter().cloned().collect(),
+                        steps: then,
                     }
                 };
 
                 let else_t = {
-                    let mut steps = steps;
-                    let else_none = Step::Assume(Expr::Quantified {
-                        quantifier: Quantifier::Forall,
-                        bound: name.clone(),
-                        body: Box::new(Expr::negate(cond.clone())),
-                    });
-                    steps.push(&else_none);
-                    steps.extend(else_);
-                    steps.extend(remaining);
                     Transition {
                         name: format!("{}_if_some_else", t.name),
                         bound: t.bound.clone(),
-                        steps: steps.into_iter().cloned().collect(),
+                        steps: else_,
                     }
                 };
 
