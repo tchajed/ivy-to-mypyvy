@@ -67,7 +67,7 @@ impl SysState {
 
 /// Parallel substitute all args for all vals, for a single identifier.
 /// [`subst`] is the usual substitution into an expression.
-fn subst_one_ident<S1: AsRef<str>, S2: AsRef<str>>(e: &str, args: &[S1], vals: &[S2]) -> String {
+fn subst_one_ident<S: AsRef<str>>(e: &str, args: &[S], vals: &[S]) -> String {
     let maybe_val =
         args.iter()
             .zip(vals.iter())
