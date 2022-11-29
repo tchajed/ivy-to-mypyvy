@@ -197,6 +197,7 @@ struct Relations {
     /// variables and an expression with those variables (potentially) free.
     values: HashMap<String, (Vec<String>, Expr)>,
     assumes: Vec<Expr>,
+    asserts: Vec<Expr>,
 }
 
 impl Relations {
@@ -204,6 +205,7 @@ impl Relations {
         Self {
             values: HashMap::new(),
             assumes: vec![],
+            asserts: vec![],
         }
     }
 
@@ -307,6 +309,9 @@ impl Relations {
     /// Get a list of modified relation names
     fn modified(&self) -> Vec<String> {
         let mut relations = self.values.keys().cloned().collect::<Vec<_>>();
+        if !self.asserts.is_empty() {
+            relations.push("__error".to_string());
+        }
         relations.sort();
         relations
     }
@@ -371,10 +376,9 @@ impl SysState {
                 };
                 rs.assumes.push(e)
             }
-            // TODO: need to translate these to check liveness property; easiest
-            // translation is to transition to an error state if the assertion
-            // is false
-            Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&rs.eval(e))),
+            Step::Assert(e) => {
+                rs.asserts.push(rs.eval(e));
+            }
             Step::Assign(r, e) => {
                 self.assigned_relations.insert(r.name.clone());
                 let e = if e == &Expr::Havoc {
@@ -476,6 +480,12 @@ impl SysState {
                 let conjunct = format!("new({}) <-> {}", relation(&r), expr(&e));
                 writeln!(w, "& ({conjunct})")?;
             }
+            if !rs.asserts.is_empty() {
+                writeln!(w, "# asserts:")?;
+                for e in rs.asserts {
+                    writeln!(w, "& {} | __error -> new(__error)", expr(&e))?;
+                }
+            }
             Ok(())
         })
     }
@@ -488,7 +498,8 @@ pub fn fmt_system(sys: &System) -> String {
     state.types.infer(&sys);
     let sys = names::clean_types(&sys);
 
-    let init_steps: Vec<String> = sys.init.iter().map(|s| state.init_step(s)).collect();
+    let mut init_steps = vec!["init !__error".to_string()];
+    init_steps.extend(sys.init.iter().map(|s| state.init_step(s)));
     let transitions: Vec<String> = sys
         .transitions
         .iter()
@@ -521,6 +532,8 @@ pub fn fmt_system(sys: &System) -> String {
                 writeln!(w, "mutable relation {}", r)?;
             }
         }
+        // used to implement assertions
+        writeln!(w, "mutable relation __error")?;
         writeln!(w)?;
 
         for s in init_steps.into_iter() {
@@ -531,6 +544,9 @@ pub fn fmt_system(sys: &System) -> String {
         for t in transitions.into_iter() {
             writeln!(w, "{t}")?;
         }
+        writeln!(w)?;
+
+        writeln!(w, "safety [assertions] !__error")?;
         Ok(())
     })
 }
