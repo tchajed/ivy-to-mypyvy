@@ -128,40 +128,63 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
 }
 
 fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
+    // gather steps prior to `if some` (if there is one)
     let mut steps = vec![];
-    for s in &t.steps {
-        match s {
-            Step::If {
-                cond: IfCond::Some { name, e },
+    let mut i = t.steps.iter();
+    loop {
+        match i.next() {
+            Some(Step::If {
+                cond: IfCond::Some { name, e: cond },
                 then,
                 else_,
-            } => {
-                let mut then_steps = steps.clone();
-                let if_some = Step::Assume(e.clone());
-                then_steps.push(&if_some);
-                then_steps.extend(then);
-                let then_t = Transition {
-                    name: format!("{}_if_some", t.name),
-                    bound: t.bound.clone(), // TODO: add support for multiple arguments
-                    steps: then_steps.into_iter().cloned().collect(),
+            }) => {
+                let remaining = i.collect::<Vec<_>>();
+                // stop processing and splice in the then and else branches
+                // between steps and remaining
+                let then_t = {
+                    let mut steps = steps.clone();
+                    // assume that the parameter satisfies the bound condition
+                    let if_some = Step::Assume(cond.clone());
+                    steps.push(&if_some);
+                    steps.extend(then);
+                    steps.extend(remaining.clone());
+                    let mut then_bound = t.bound.clone();
+                    then_bound.push(name.clone());
+                    Transition {
+                        name: format!("{}_if_some", t.name),
+                        bound: then_bound,
+                        steps: steps.into_iter().cloned().collect(),
+                    }
                 };
 
-                let mut else_steps = steps;
-                else_steps.extend(else_);
-                let else_t = Transition {
-                    name: format!("{}_if_some_else", t.name),
-                    bound: t.bound.clone(),
-                    steps: else_steps.into_iter().cloned().collect(),
+                let else_t = {
+                    let mut steps = steps;
+                    let else_none = Step::Assume(Expr::Quantified {
+                        quantifier: Quantifier::Forall,
+                        bound: name.clone(),
+                        body: Box::new(Expr::negate(cond.clone())),
+                    });
+                    steps.push(&else_none);
+                    steps.extend(else_);
+                    steps.extend(remaining);
+                    Transition {
+                        name: format!("{}_if_some_else", t.name),
+                        bound: t.bound.clone(),
+                        steps: steps.into_iter().cloned().collect(),
+                    }
                 };
 
                 return Some((then_t, else_t));
             }
-            _ => steps.push(s),
+            Some(s) => steps.push(s),
+            _ => return None,
         }
     }
-    return None;
 }
 
+/// Split all `if some` constructs into multiple transitions. The if branch
+/// binds a new variable that satisfies the condition while the else branch
+/// requires that no such variable exists.
 fn split_if_some(t: &Transition) -> Vec<Transition> {
     match split_if_some_one(t) {
         None => vec![t.clone()],
@@ -243,10 +266,7 @@ impl Relations {
     fn if_cond(&self, e: &IfCond) -> IfCond {
         match e {
             IfCond::Expr(e) => IfCond::Expr(self.eval(e)),
-            IfCond::Some { name, e } => IfCond::Some {
-                name: name.clone(),
-                e: self.eval(e),
-            },
+            IfCond::Some { .. } => panic!("if some {:?} should be eliminated before eval", e),
         }
     }
 
@@ -475,7 +495,8 @@ pub fn fmt_system(sys: &System) -> String {
     let transitions: Vec<String> = sys
         .transitions
         .iter()
-        .map(|t| state.transition(t))
+        .flat_map(split_if_some)
+        .map(|t| state.transition(&t))
         .collect();
 
     printing::with_buf(|w| {
