@@ -638,6 +638,11 @@ pub fn fmt_system(sys: &System) -> String {
         writeln!(w)?;
 
         writeln!(w, "safety [assertions] !__error")?;
+        writeln!(w)?;
+
+        for (_, e) in &sys.invariants {
+            writeln!(w, "invariant {}", expr(e))?;
+        }
         Ok(())
     })
 }
