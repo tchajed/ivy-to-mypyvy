@@ -2,7 +2,6 @@
 source: tests/integration_test.rs
 expression: output
 ---
-sort ?
 sort thread
 
 mutable relation _old_l2s_g_0()

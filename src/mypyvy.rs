@@ -309,6 +309,9 @@ impl SysState {
                 };
                 rs.assumes.push(e)
             }
+            // TODO: need to translate these to check liveness property; easiest
+            // translation is to transition to an error state if the assertion
+            // is false
             Step::Assert(e) => eprintln!("  # unhandled assert {}", expr(&rs.eval(e))),
             Step::Assign(r, e) => {
                 self.assigned_relations.insert(r.name.clone());
@@ -438,6 +441,9 @@ pub fn fmt_system(sys: &System) -> String {
 
     printing::with_buf(|w| {
         for s in state.types.all_sorts() {
+            if s == "?" {
+                continue;
+            }
             writeln!(w, "sort {s}")?;
         }
         writeln!(w)?;
