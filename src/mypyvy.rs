@@ -263,9 +263,9 @@ impl Relations {
         }
     }
 
-    fn if_cond(&self, e: &IfCond) -> IfCond {
+    fn if_cond(&self, e: &IfCond) -> Expr {
         match e {
-            IfCond::Expr(e) => IfCond::Expr(self.eval(e)),
+            IfCond::Expr(e) => self.eval(e),
             IfCond::Some { .. } => panic!("if some {:?} should be eliminated before eval", e),
         }
     }
@@ -395,16 +395,13 @@ impl SysState {
             Step::If { cond, then, else_ } => {
                 let cond = if cond == &IfCond::Expr(Expr::Havoc) {
                     let base_rel = Relation::ident("path".to_string());
-                    IfCond::Expr(self.havoc_rel(&base_rel))
+                    self.havoc_rel(&base_rel)
                 } else {
+                    // the cond is guaranteed to be an expr, which `rs.if_cond`
+                    // asserts
                     rs.if_cond(cond)
                 };
-                // TODO: take into account if some at an earlier stage; it will
-                // cause a transition to split into two transitions, one with an
-                // argument/precondition for the witness and the other with a
-                // precondition of the form `not exists (...)`.
-                let (then_cond, else_cond) =
-                    (Expr::pos_cond(cond.clone()), Expr::negate_cond(cond));
+                let (then_cond, else_cond) = (cond.clone(), Expr::negate(cond));
                 let (then_cond, else_cond) = match path_cond {
                     Some(c) => (
                         Expr::and(c.clone(), then_cond),

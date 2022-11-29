@@ -98,26 +98,6 @@ impl Expr {
             e: Box::new(e),
         }
     }
-
-    pub fn pos_cond(cond: IfCond) -> Expr {
-        match cond {
-            IfCond::Expr(e) => e,
-            // in the positive case of an if some, the transition should already
-            // have an argument and a precondition for the exists
-            IfCond::Some { name: _, e: _ } => Expr::Relation(Relation::ident("true".to_string())),
-        }
-    }
-
-    pub fn negate_cond(cond: IfCond) -> Expr {
-        match cond {
-            IfCond::Expr(e) => Self::negate(e),
-            IfCond::Some { name, e } => Expr::Quantified {
-                quantifier: Quantifier::Forall,
-                bound: name,
-                body: Box::new(Self::negate(e)),
-            },
-        }
-    }
 }
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, PartialOrd, Ord)]
