@@ -1,3 +1,7 @@
+
+
+
+
 let
     ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
@@ -34,7 +38,6 @@ let
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -43,7 +46,7 @@ let
  assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
  {{{{assume mutex_protocol.pc_futex_wake(fml:t)};
  {mutex_protocol.pc_futex_wake(fml:t) := false};
- {if some loc:t0. mutex_protocol.queue(loc:t0) {mutex_protocol.queue(loc:t0) := false}};
+ {if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}};
  {{_old_l2s_g_0 := l2s_g_0;
  l2s_g_0 := *;
  _old_l2s_g_2(V0) := l2s_g_2(V0);
@@ -80,7 +83,6 @@ let
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -117,7 +119,6 @@ else {mutex_protocol.pc_atomic_cas(fml:t) := true}};
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -150,7 +151,6 @@ else {mutex_protocol.pc_atomic_cas(fml:t) := true}};
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -187,7 +187,6 @@ else {{{mutex_protocol.pc_atomic_store(fml:t) := true};
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
  assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -222,7 +221,6 @@ else {{{mutex_protocol.pc_atomic_store(fml:t) := true};
  assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
  l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
  l2s_d(mutex_protocol.t0) := true}}
-
     idle = action{{if * {assume l2s_waiting;
  l2s_waiting := false;
  l2s_frozen := true;
@@ -250,7 +248,6 @@ else {};
  assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
  l2s_d(mutex_protocol.t0) := true;
  assert ~(l2s_saved & (forall V0. ~l2s_w_1(V0)) & ~l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> mutex_protocol.pc_atomic_cas(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> mutex_protocol.queue(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> mutex_protocol.pc_atomic_store(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> mutex_protocol.pc_futex_wake(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> mutex_protocol.pc_kernel_wait(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> mutex_protocol.pc_futex_wait(V0))) & (l2s_s_0 <-> mutex_protocol.locked) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> mutex_protocol.pc_finished(V0))))}}
-
 in
     {{{mutex_protocol.pc_atomic_cas(T) := true;
  mutex_protocol.pc_futex_wait(T) := false;
