@@ -114,10 +114,15 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
         }
     }
 
+    fn invariant(&self, inv: &(String, Expr)) -> (String, Expr) {
+        (self.ident(&inv.0), self.expr(&inv.1))
+    }
+
     fn system(&self, sys: &System) -> System {
         System {
             transitions: sys.transitions.iter().map(|t| self.transition(t)).collect(),
             init: self.steps(&sys.init),
+            invariants: sys.invariants.iter().map(|e| self.invariant(e)).collect(),
         }
     }
 }

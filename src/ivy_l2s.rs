@@ -20,6 +20,8 @@ pub struct Transition {
 pub struct System {
     pub transitions: Vec<Transition>,
     pub init: Vec<Step>,
+    /// (name, e)
+    pub invariants: Vec<(String, Expr)>,
 }
 
 #[derive(PartialEq, Eq, Debug, Hash, Copy, Clone)]
@@ -337,13 +339,28 @@ fn parse_actions(pair: Pair<Rule>) -> Vec<Transition> {
         .collect()
 }
 
+fn parse_invariant(pair: Pair<Rule>) -> (String, Expr) {
+    assert_eq!(pair.as_rule(), Rule::invariant);
+    let mut pairs = pair.into_inner();
+    let name = pairs.next().unwrap();
+    let e = pairs.next().unwrap();
+    (parse_ident(name), parse_expr(e))
+}
+
+fn parse_invariants(pair: Pair<Rule>) -> Vec<(String, Expr)> {
+    assert_eq!(pair.as_rule(), Rule::invariants);
+    pair.into_inner().map(parse_invariant).collect()
+}
+
 fn parse_file(file: Pair<Rule>) -> System {
     let mut pairs = file.into_inner();
     let actions = pairs.next().unwrap();
     let init = pairs.next().unwrap();
+    let invariants = pairs.next();
     System {
         transitions: parse_actions(actions),
         init: parse_steps(init),
+        invariants: invariants.map(parse_invariants).unwrap_or_default(),
     }
 }
 

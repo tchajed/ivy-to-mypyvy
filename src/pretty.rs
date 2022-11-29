@@ -121,6 +121,12 @@ pub fn fmt_system(sys: &System) -> String {
         writeln!(w, "in {{")?;
         writeln!(indented(w), "{}", steps(&sys.init))?;
         writeln!(w, "}}")?;
+        if !sys.invariants.is_empty() {
+            writeln!(w, "while *")?;
+            for (name, e) in sys.invariants.iter() {
+                writeln!(indented(w), "invariant [{name}] {}", expr(e))?;
+            }
+        }
         Ok(())
     })
 }

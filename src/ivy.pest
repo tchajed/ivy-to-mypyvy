@@ -9,7 +9,13 @@ ident = @{ char+ ~ ("." ~ char+)* }
 file = {
   SOI ~ "let" ~
   actions ~ "in" ~
-  step_block ~ EOI }
+  step_block ~
+  ("while" ~ "*" ~
+  invariants)? ~
+  EOI }
+
+invariants = { invariant* }
+invariant = { "invariant" ~ "[" ~ ident ~ "]" ~ expr }
 
 actions = { action_def* }
 action_def = { ident ~ "=" ~  action }
