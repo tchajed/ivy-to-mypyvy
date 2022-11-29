@@ -127,6 +127,48 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
     }
 }
 
+fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
+    let mut steps = vec![];
+    for s in &t.steps {
+        match s {
+            Step::If {
+                cond: IfCond::Some { name, e },
+                then,
+                else_,
+            } => {
+                let mut then_steps = steps.clone();
+                let if_some = Step::Assume(e.clone());
+                then_steps.push(&if_some);
+                then_steps.extend(then);
+                let then_t = Transition {
+                    name: format!("{}_if_some", t.name),
+                    bound: t.bound.clone(), // TODO: add support for multiple arguments
+                    steps: then_steps.into_iter().cloned().collect(),
+                };
+
+                let mut else_steps = steps;
+                else_steps.extend(else_);
+                let else_t = Transition {
+                    name: format!("{}_if_some_else", t.name),
+                    bound: t.bound.clone(),
+                    steps: else_steps.into_iter().cloned().collect(),
+                };
+
+                return Some((then_t, else_t));
+            }
+            _ => steps.push(s),
+        }
+    }
+    return None;
+}
+
+fn split_if_some(t: &Transition) -> Vec<Transition> {
+    match split_if_some_one(t) {
+        None => vec![t.clone()],
+        Some((t1, t2)) => vec![t1, t2].iter().flat_map(split_if_some).collect(),
+    }
+}
+
 struct Relations {
     /// Mapping from relation name to current value, stored as a vector of bound
     /// variables and an expression with those variables (potentially) free.
