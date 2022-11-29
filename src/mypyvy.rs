@@ -124,6 +124,11 @@ fn subst(e: &Expr, args: &[String], vals: &[String]) -> Expr {
             e: Box::new(subst(e, args, vals)),
         },
         Expr::Havoc => Expr::Havoc,
+        Expr::IfElse { cond, then, else_ } => Expr::IfElse {
+            cond: Box::new(subst(cond, args, vals)),
+            then: Box::new(subst(then, args, vals)),
+            else_: Box::new(subst(else_, args, vals)),
+        },
     }
 }
 
@@ -262,6 +267,11 @@ impl Relations {
                 e: Box::new(self.eval(e)),
             },
             Expr::Havoc => Expr::Havoc,
+            Expr::IfElse { cond, then, else_ } => Expr::IfElse {
+                cond: Box::new(self.eval(cond)),
+                then: Box::new(self.eval(then)),
+                else_: Box::new(self.eval(else_)),
+            },
         }
     }
 
@@ -292,15 +302,18 @@ impl Relations {
             let V = Relation::ident(Relations::arg(&r_V));
             // r is a relation at a particular value; need to manually construct an
             // expression for a mutation at a particular value
-            let V_not_eq = Expr::not_equal(Expr::Relation(V.clone()), Expr::Relation(v.clone()));
             let V_eq = Expr::equal(Expr::Relation(V), Expr::Relation(v));
             let r_V_eval = self.eval(&Expr::Relation(r_V.clone()));
             self.values.insert(
                 r_V.name,
-                // (eval(R(V) & V != v) | (eval(e) & V = v))
+                // if V = v then e else eval(R(V))
                 (
                     r_V.args,
-                    Expr::or(Expr::and(r_V_eval, V_not_eq), Expr::and(e.clone(), V_eq)),
+                    Expr::IfElse {
+                        cond: Box::new(V_eq),
+                        then: Box::new(e.clone()),
+                        else_: Box::new(r_V_eval),
+                    },
                 ),
             );
         }
@@ -363,6 +376,12 @@ fn expr(e: &Expr) -> String {
         } => format!("({} {bound}. {})", quantifier(q), expr(body)),
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
         Expr::Havoc => "*".to_string(),
+        Expr::IfElse { cond, then, else_ } => format!(
+            "if {} then {} else {}",
+            expr(cond),
+            parens(&expr(then)),
+            parens(&expr(else_))
+        ),
     }
 }
 
@@ -388,10 +407,11 @@ impl SysState {
                 };
 
                 let path_e = match path_cond {
-                    Some(cond) => Expr::or(
-                        Expr::and(cond.clone(), e),
-                        Expr::and(Expr::negate(cond.clone()), Expr::Relation(r.clone())),
-                    ),
+                    Some(cond) => Expr::IfElse {
+                        cond: Box::new(cond.clone()),
+                        then: Box::new(e),
+                        else_: Box::new(Expr::Relation(r.clone())),
+                    },
                     None => e,
                 };
                 rs.insert(r, &path_e);
@@ -439,6 +459,11 @@ impl SysState {
             Expr::Quantified { body, .. } => self.expr_relations(body),
             Expr::Prefix { e, .. } => self.expr_relations(e),
             Expr::Havoc => (),
+            Expr::IfElse { cond, then, else_ } => {
+                self.expr_relations(cond);
+                self.expr_relations(then);
+                self.expr_relations(else_);
+            }
         }
     }
 

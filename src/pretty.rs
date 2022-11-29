@@ -56,6 +56,12 @@ fn expr(e: &Expr) -> String {
         }
         Expr::Prefix { op, e } => format!("{}{}", prefix_op(op), parens(&expr(e))),
         Expr::Havoc => "*".to_string(),
+        Expr::IfElse { cond, then, else_ } => format!(
+            "{} if {} else {}",
+            parens(&expr(then)),
+            expr(cond),
+            parens(&expr(else_))
+        ),
     }
 }
 

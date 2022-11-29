@@ -60,6 +60,11 @@ pub enum Expr {
         op: PrefixOp,
         e: Box<Expr>,
     },
+    IfElse {
+        cond: Box<Expr>,
+        then: Box<Expr>,
+        else_: Box<Expr>,
+    },
     Havoc,
 }
 

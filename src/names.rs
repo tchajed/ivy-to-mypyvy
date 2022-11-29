@@ -71,6 +71,11 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
                 e: Box::new(self.expr(e)),
             },
             Expr::Havoc => Expr::Havoc,
+            Expr::IfElse { cond, then, else_ } => Expr::IfElse {
+                cond: Box::new(self.expr(cond)),
+                then: Box::new(self.expr(then)),
+                else_: Box::new(self.expr(else_)),
+            },
         }
     }
 
