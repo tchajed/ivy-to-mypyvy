@@ -181,7 +181,7 @@ fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
     match quantifier.as_rule() {
         Rule::forall => Quantifier::Forall,
         Rule::exists => Quantifier::Exists,
-        _ => unreachable!(),
+        r => unreachable!("rule {:?}", r),
     }
 }
 
@@ -201,7 +201,7 @@ fn parse_base_expr(expr: Pair<Rule>) -> Expr {
         }
         Rule::havoc_expr => Expr::Havoc,
         Rule::expr => parse_expr(expr),
-        _ => unreachable!(),
+        r => unreachable!("rule {:?}", r),
     }
 }
 
@@ -231,7 +231,7 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
                 Rule::implies => BinOp::Implies,
                 Rule::iff => BinOp::Iff,
                 Rule::equal => BinOp::Equal,
-                _ => unreachable!(),
+                r => unreachable!("rule {:?}", r),
             };
             Expr::Infix {
                 lhs: Box::new(lhs),
@@ -242,7 +242,7 @@ fn parse_expr(expr: Pair<Rule>) -> Expr {
         .map_prefix(|op, e| {
             let op = match op.as_rule() {
                 Rule::not => PrefixOp::Not,
-                _ => unreachable!(),
+                r => unreachable!("rule {:?}", r),
             };
             Expr::Prefix { op, e: Box::new(e) }
         })
@@ -263,7 +263,7 @@ fn parse_if_cond(step: Pair<Rule>) -> IfCond {
                 e: parse_expr(e),
             }
         }
-        _ => unreachable!(),
+        r => unreachable!("rule {:?}", r),
     }
 }
 
@@ -297,7 +297,7 @@ fn parse_step(step: Pair<Rule>) -> Step {
                 else_: else_.map(parse_steps).unwrap_or_default(),
             }
         }
-        _ => unreachable!(),
+        r => unreachable!("rule {:?}", r),
     }
 }
 
@@ -308,7 +308,7 @@ fn flatten_steps(pair: Pair<Rule>) -> Vec<Pair<Rule>> {
     match pair.as_rule() {
         Rule::step => vec![pair],
         Rule::step_block => pair.into_inner().flat_map(flatten_steps).collect(),
-        _ => unreachable!(),
+        r => unreachable!("rule {:?}", r),
     }
 }
 
