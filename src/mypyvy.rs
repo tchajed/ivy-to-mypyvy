@@ -139,6 +139,38 @@ fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
     loop {
         match i.next() {
             Some(Step::If {
+                cond: IfCond::Expr(Expr::Havoc),
+                then,
+                else_,
+            }) => {
+                let remaining = i.collect::<Vec<_>>();
+                // stop processing and splice in the then and else branches
+                // between steps and remaining
+                let then_t = {
+                    let mut steps = steps.clone();
+                    steps.extend(then);
+                    steps.extend(remaining.clone());
+                    Transition {
+                        name: format!("{}_then", t.name),
+                        bound: t.bound.clone(),
+                        steps: steps.into_iter().cloned().collect(),
+                    }
+                };
+
+                let else_t = {
+                    let mut steps = steps;
+                    steps.extend(else_);
+                    steps.extend(remaining);
+                    Transition {
+                        name: format!("{}_else", t.name),
+                        bound: t.bound.clone(),
+                        steps: steps.into_iter().cloned().collect(),
+                    }
+                };
+
+                return Some((then_t, else_t));
+            }
+            Some(Step::If {
                 cond: IfCond::Some { name, e: cond },
                 then,
                 else_,
@@ -508,7 +540,7 @@ impl SysState {
             if !rs.asserts.is_empty() {
                 writeln!(w, "# asserts:")?;
                 for e in rs.asserts {
-                    writeln!(w, "& (!__error & {}) -> !new(__error)", parens(&expr(&e)))?;
+                    writeln!(w, "& ((!__error & {}) -> !new(__error))", parens(&expr(&e)))?;
                 }
             }
             Ok(())

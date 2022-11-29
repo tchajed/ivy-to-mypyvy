@@ -70,8 +70,6 @@ mutable relation havoc_l2s_g_4__6(?)
 mutable relation havoc_l2s_g_4__7(?)
 mutable relation havoc_l2s_g_4__8(?)
 mutable relation havoc_l2s_g_4__9(?)
-mutable relation havoc_path
-mutable relation havoc_path__1
 mutable relation __error
 
 init !__error
@@ -348,36 +346,63 @@ transition step_kernel_wait(t)
   & (new(pc_kernel_wait(T)) <-> if T = t then (if !queue(t) then false else pc_kernel_wait(t)) else pc_kernel_wait(T))
   & (new(scheduled(T)) <-> false)
 
-transition idle()
-  modifies __error, l2s_a, l2s_d, l2s_frozen, l2s_s_0, l2s_s_1, l2s_s_2, l2s_s_3, l2s_s_4, l2s_s_5, l2s_s_6, l2s_s_7, l2s_saved, l2s_w_0, l2s_w_1, l2s_waiting
+transition idle_then()
+  modifies __error, l2s_a, l2s_d, l2s_frozen, l2s_waiting
   # assumes:
-  & (havoc_path -> l2s_waiting)
-  & (havoc_path -> (forall V0. !l2s_w_1(V0)))
-  & (havoc_path -> !l2s_w_0)
-  & ((!havoc_path & havoc_path__1) -> (if havoc_path then true else l2s_frozen))
+  & l2s_waiting
+  & (forall V0. !l2s_w_1(V0))
+  & !l2s_w_0
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !pc_finished(t0))
   & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (forall V0. l2s_g_2(V0) -> !pc_finished(V0))
   # transitions:
-  & (new(l2s_a(X)) <-> if havoc_path then l2s_d(X) else l2s_a(X))
+  & (new(l2s_a(X)) <-> l2s_d(X))
   & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
-  & (new(l2s_frozen) <-> if !havoc_path & havoc_path__1 then false else l2s_frozen)
-  & (new(l2s_s_0) <-> if !havoc_path & havoc_path__1 then locked else l2s_s_0)
-  & (new(l2s_s_1(V0)) <-> if !havoc_path & havoc_path__1 then pc_atomic_cas(V0) else l2s_s_1(V0))
-  & (new(l2s_s_2(V0)) <-> if !havoc_path & havoc_path__1 then pc_atomic_store(V0) else l2s_s_2(V0))
-  & (new(l2s_s_3(V0)) <-> if !havoc_path & havoc_path__1 then pc_finished(V0) else l2s_s_3(V0))
-  & (new(l2s_s_4(V0)) <-> if !havoc_path & havoc_path__1 then pc_futex_wait(V0) else l2s_s_4(V0))
-  & (new(l2s_s_5(V0)) <-> if !havoc_path & havoc_path__1 then pc_futex_wake(V0) else l2s_s_5(V0))
-  & (new(l2s_s_6(V0)) <-> if !havoc_path & havoc_path__1 then pc_kernel_wait(V0) else l2s_s_6(V0))
-  & (new(l2s_s_7(V0)) <-> if !havoc_path & havoc_path__1 then queue(V0) else l2s_s_7(V0))
-  & (new(l2s_saved) <-> if !havoc_path & havoc_path__1 then true else l2s_saved)
-  & (new(l2s_w_0) <-> if !havoc_path & havoc_path__1 then (!((forall T. d(T)) & !l2s_g_1)) else l2s_w_0)
-  & (new(l2s_w_1(V0)) <-> if !havoc_path & havoc_path__1 then (l2s_d(V0) & (!(scheduled(V0) & !l2s_g_3(V0)))) else l2s_w_1(V0))
-  & (new(l2s_waiting) <-> if havoc_path then false else l2s_waiting)
+  & (new(l2s_frozen) <-> true)
+  & (new(l2s_waiting) <-> false)
   # asserts:
-  & (!__error & (!(((if !havoc_path & havoc_path__1 then true else l2s_saved) & (forall V0. !(if !havoc_path & havoc_path__1 then (l2s_d(V0) & (!(scheduled(V0) & !l2s_g_3(V0)))) else l2s_w_1(V0)))) & (!(((((((((if !havoc_path & havoc_path__1 then (!((forall T. d(T)) & !l2s_g_1)) else l2s_w_0) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_atomic_cas(V0) else l2s_s_1(V0)) <-> pc_atomic_cas(V0)))) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then queue(V0) else l2s_s_7(V0)) <-> queue(V0)))) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_atomic_store(V0) else l2s_s_2(V0)) <-> pc_atomic_store(V0)))) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_futex_wake(V0) else l2s_s_5(V0)) <-> pc_futex_wake(V0)))) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_kernel_wait(V0) else l2s_s_6(V0)) <-> pc_kernel_wait(V0)))) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_futex_wait(V0) else l2s_s_4(V0)) <-> pc_futex_wait(V0)))) & ((if !havoc_path & havoc_path__1 then locked else l2s_s_0) <-> locked)) & (forall V0. (if havoc_path then l2s_d(V0) else l2s_a(V0)) -> ((if !havoc_path & havoc_path__1 then pc_finished(V0) else l2s_s_3(V0)) <-> pc_finished(V0)))))))) -> !new(__error)
+  & (!__error & (!((l2s_saved & (forall V0. !l2s_w_1(V0))) & (!((((((((l2s_w_0 & (forall V0. l2s_d(V0) -> (l2s_s_1(V0) <-> pc_atomic_cas(V0)))) & (forall V0. l2s_d(V0) -> (l2s_s_7(V0) <-> queue(V0)))) & (forall V0. l2s_d(V0) -> (l2s_s_2(V0) <-> pc_atomic_store(V0)))) & (forall V0. l2s_d(V0) -> (l2s_s_5(V0) <-> pc_futex_wake(V0)))) & (forall V0. l2s_d(V0) -> (l2s_s_6(V0) <-> pc_kernel_wait(V0)))) & (forall V0. l2s_d(V0) -> (l2s_s_4(V0) <-> pc_futex_wait(V0)))) & (l2s_s_0 <-> locked)) & (forall V0. l2s_d(V0) -> (l2s_s_3(V0) <-> pc_finished(V0)))))))) -> !new(__error)
+
+transition idle_else_then()
+  modifies __error, l2s_d, l2s_frozen, l2s_s_0, l2s_s_1, l2s_s_2, l2s_s_3, l2s_s_4, l2s_s_5, l2s_s_6, l2s_s_7, l2s_saved, l2s_w_0, l2s_w_1
+  # assumes:
+  & l2s_frozen
+  & (l2s_g_1 -> (!(forall T. d(T))))
+  & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
+  & (l2s_g_0 -> !pc_finished(t0))
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
+  & (forall V0. l2s_g_2(V0) -> !pc_finished(V0))
+  # transitions:
+  & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
+  & (new(l2s_frozen) <-> false)
+  & (new(l2s_s_0) <-> locked)
+  & (new(l2s_s_1(V0)) <-> pc_atomic_cas(V0))
+  & (new(l2s_s_2(V0)) <-> pc_atomic_store(V0))
+  & (new(l2s_s_3(V0)) <-> pc_finished(V0))
+  & (new(l2s_s_4(V0)) <-> pc_futex_wait(V0))
+  & (new(l2s_s_5(V0)) <-> pc_futex_wake(V0))
+  & (new(l2s_s_6(V0)) <-> pc_kernel_wait(V0))
+  & (new(l2s_s_7(V0)) <-> queue(V0))
+  & (new(l2s_saved) <-> true)
+  & (new(l2s_w_0) <-> !((forall T. d(T)) & !l2s_g_1))
+  & (new(l2s_w_1(V0)) <-> l2s_d(V0) & (!(scheduled(V0) & !l2s_g_3(V0))))
+  # asserts:
+  & (!__error & (!((true & (forall V0. !(l2s_d(V0) & (!(scheduled(V0) & !l2s_g_3(V0)))))) & (!(((((((((!((forall T. d(T)) & !l2s_g_1)) & (forall V0. l2s_a(V0) -> (pc_atomic_cas(V0) <-> pc_atomic_cas(V0)))) & (forall V0. l2s_a(V0) -> (queue(V0) <-> queue(V0)))) & (forall V0. l2s_a(V0) -> (pc_atomic_store(V0) <-> pc_atomic_store(V0)))) & (forall V0. l2s_a(V0) -> (pc_futex_wake(V0) <-> pc_futex_wake(V0)))) & (forall V0. l2s_a(V0) -> (pc_kernel_wait(V0) <-> pc_kernel_wait(V0)))) & (forall V0. l2s_a(V0) -> (pc_futex_wait(V0) <-> pc_futex_wait(V0)))) & (locked <-> locked)) & (forall V0. l2s_a(V0) -> (pc_finished(V0) <-> pc_finished(V0)))))))) -> !new(__error)
+
+transition idle_else_else()
+  modifies __error, l2s_d
+  # assumes:
+  & (l2s_g_1 -> (!(forall T. d(T))))
+  & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
+  & (l2s_g_0 -> !pc_finished(t0))
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
+  & (forall V0. l2s_g_2(V0) -> !pc_finished(V0))
+  # transitions:
+  & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
+  # asserts:
+  & (!__error & (!((l2s_saved & (forall V0. !l2s_w_1(V0))) & (!((((((((l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> pc_atomic_cas(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> queue(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> pc_atomic_store(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> pc_futex_wake(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> pc_kernel_wait(V0)))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> pc_futex_wait(V0)))) & (l2s_s_0 <-> locked)) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> pc_finished(V0)))))))) -> !new(__error)
 
 
 safety [assertions] !__error
