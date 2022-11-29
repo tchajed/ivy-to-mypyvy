@@ -483,7 +483,7 @@ impl SysState {
             if !rs.asserts.is_empty() {
                 writeln!(w, "# asserts:")?;
                 for e in rs.asserts {
-                    writeln!(w, "& {} | __error -> new(__error)", expr(&e))?;
+                    writeln!(w, "& (!__error & {}) -> !new(__error)", parens(&expr(&e)))?;
                 }
             }
             Ok(())
