@@ -104,7 +104,7 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
     fn transition(&self, t: &Transition) -> Transition {
         Transition {
             name: self.ident(&t.name),
-            bound: t.bound.as_ref().map(|name| self.ident(name)),
+            bound: t.bound.iter().map(|name| self.ident(name)).collect(),
             steps: self.steps(&t.steps),
         }
     }

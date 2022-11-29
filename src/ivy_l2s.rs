@@ -12,8 +12,8 @@ struct IvyParser;
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Transition {
     pub name: String,
-    /// parameter to the transition (first argument to "action")
-    pub bound: Option<String>,
+    /// parameters to the transition (first argument to "action")
+    pub bound: Vec<String>,
     pub steps: Vec<Step>,
 }
 
@@ -316,6 +316,10 @@ fn parse_steps(pair: Pair<Rule>) -> Vec<Step> {
     flatten_steps(pair).into_iter().map(parse_step).collect()
 }
 
+fn parse_action_binder(pair: Pair<Rule>) -> Vec<String> {
+    pair.into_inner().map(parse_ident).collect()
+}
+
 fn parse_transition(action_def: Pair<Rule>) -> Transition {
     assert_eq!(action_def.as_rule(), Rule::action_def);
     let mut pairs = action_def.into_inner();
@@ -323,10 +327,10 @@ fn parse_transition(action_def: Pair<Rule>) -> Transition {
     let action = pairs.next().unwrap();
     let mut action_pairs = action.into_inner();
     let first = action_pairs.next().unwrap();
-    let (bound, steps) = if first.as_rule() == Rule::ident {
-        (Some(parse_ident(first)), action_pairs.next().unwrap())
+    let (bound, steps) = if first.as_rule() == Rule::action_binders {
+        (parse_action_binder(first), action_pairs.next().unwrap())
     } else {
-        (None, first)
+        (vec![], first)
     };
     Transition {
         name,

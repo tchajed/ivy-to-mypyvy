@@ -10,7 +10,9 @@ file = { SOI ~ "let" ~ actions ~ "in" ~ step_block ~ EOI }
 actions = { action_def* }
 
 action_def = { ident ~ "=" ~  action }
-action = { "action" ~ ("(" ~ ident ~ ")")? ~ step_block }
+binders = _{ ident ~ ("," ~ ident)* }
+action_binders = { "(" ~ binders ~ ")" }
+action = { "action" ~ action_binders? ~ step_block }
 step_block_or_step = _{ step_block | step }
 step_block = {
   // an empty step block
@@ -25,7 +27,7 @@ relation = { ident ~
   ( // explicit call to nullary relation
     "(" ~ ")" |
     // some arguments
-    "(" ~ ident ~ ("," ~ ident)* ~ ")" )? }
+    "(" ~ binders ~ ")" )? }
 assign = { relation ~ ":=" ~ expr }
 assume = {  "assume" ~ expr }
 assert = {  "assert" ~ expr }

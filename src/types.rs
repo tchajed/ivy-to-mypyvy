@@ -39,13 +39,6 @@ impl Types {
         sorts
     }
 
-    fn with_bound<R, F: FnOnce(&mut Types) -> R>(&mut self, name: &str, typ: Type, f: F) -> R {
-        self.insert(name.to_string(), typ);
-        let x = f(self);
-        self.typs.remove(name);
-        return x;
-    }
-
     pub fn infer(&mut self, sys: &System) {
         self.infer_steps(&sys.init);
         for t in &sys.transitions {
@@ -54,13 +47,14 @@ impl Types {
     }
 
     fn infer_transition(&mut self, t: &Transition) {
-        if let Some(ident) = &t.bound {
-            if let Some((name, typ)) = ident_typ(ident) {
-                self.with_bound(&name, typ, |typs| typs.infer_steps(&t.steps));
-                return;
-            }
+        let bounds: Vec<_> = t.bound.iter().flat_map(|ident| ident_typ(ident)).collect();
+        for (name, typ) in bounds.iter() {
+            self.insert(name.clone(), typ.clone())
         }
         self.infer_steps(&t.steps);
+        for (name, _) in bounds.iter() {
+            self.typs.remove(name);
+        }
     }
 
     fn infer_steps(&mut self, steps: &[Step]) {

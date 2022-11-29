@@ -91,9 +91,10 @@ fn step(s: &Step) -> String {
 }
 
 fn transition(t: &Transition) -> String {
-    let arg = match &t.bound {
-        Some(name) => format!("({name})"),
-        None => "".to_string(),
+    let arg = if t.bound.is_empty() {
+        "".to_string()
+    } else {
+        format!("({})", t.bound.join(", "))
     };
     printing::with_buf(|w| {
         writeln!(w, "{} = action{}{{", t.name, arg)?;

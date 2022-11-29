@@ -436,10 +436,7 @@ impl SysState {
 
     fn transition(&mut self, t: &Transition) -> String {
         printing::with_buf(|w| {
-            let args = match &t.bound {
-                Some(arg) => format!("({})", arg),
-                None => "()".to_string(),
-            };
+            let args = format!("({})", t.bound.join(", "));
             writeln!(w, "transition {}{}", t.name, args)?;
 
             let w = &mut indented(w);
