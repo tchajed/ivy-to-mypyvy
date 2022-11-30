@@ -19,7 +19,7 @@ fn mutex_l2s_output_parses() {
     let sys = parse_input();
     assert_eq!(
         sys.transitions.len(),
-        7,
+        8,
         "incorrect number of transitions parsed"
     );
     assert_eq!(

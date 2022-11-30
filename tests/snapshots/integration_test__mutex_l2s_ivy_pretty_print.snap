@@ -91,6 +91,41 @@ step_futex_wake = action(t:thread){
   l2s_d(t0) := true
 }
 
+step_finished = action(t:thread){
+  l2s_d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
+  assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
+  assume l2s_g_0 -> ~pc_finished(t0);
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume pc_finished(t);
+  _old_l2s_g_3(V0) := l2s_g_3(V0);
+  l2s_g_3(V0) := *;
+  _old_l2s_g_4(V0) := l2s_g_4(V0);
+  l2s_g_4(V0) := *;
+  assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
+  assume (forall V0. (~_old_l2s_g_3(V0) & ~scheduled(V0)) -> ~l2s_g_3(V0));
+  assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
+  assume (forall V0. (~_old_l2s_g_4(V0) & ~l2s_g_3(V0)) -> ~l2s_g_4(V0));
+  scheduled(T) := T:thread = t;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
+  l2s_w_1(V0) := (l2s_w_1(V0) & ~scheduled(V0)) & ~l2s_g_3(V0);
+  _old_l2s_g_3(V0) := l2s_g_3(V0);
+  l2s_g_3(V0) := *;
+  _old_l2s_g_4(V0) := l2s_g_4(V0);
+  l2s_g_4(V0) := *;
+  assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
+  assume (forall V0. (~_old_l2s_g_3(V0) & ~scheduled(V0)) -> ~l2s_g_3(V0));
+  assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
+  assume (forall V0. (~_old_l2s_g_4(V0) & ~l2s_g_3(V0)) -> ~l2s_g_4(V0));
+  scheduled(T) := false;
+  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
+  assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
+  l2s_w_1(V0) := (l2s_w_1(V0) & ~scheduled(V0)) & ~l2s_g_3(V0);
+  l2s_d(t0) := true
+}
+
 step_futex_wait = action(t:thread){
   l2s_d(t) := true;
   assume l2s_g_1 -> (~(forall T. d(T)));
@@ -133,38 +168,20 @@ step_futex_wait = action(t:thread){
   l2s_d(t0) := true
 }
 
-step_finished = action(t:thread){
+add_to_d = action(t:thread){
   l2s_d(t) := true;
   assume l2s_g_1 -> (~(forall T. d(T)));
   assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
   assume l2s_g_0 -> ~pc_finished(t0);
   assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
   assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
-  assume pc_finished(t);
-  _old_l2s_g_3(V0) := l2s_g_3(V0);
-  l2s_g_3(V0) := *;
-  _old_l2s_g_4(V0) := l2s_g_4(V0);
-  l2s_g_4(V0) := *;
-  assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. (~_old_l2s_g_3(V0) & ~scheduled(V0)) -> ~l2s_g_3(V0));
-  assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
-  assume (forall V0. (~_old_l2s_g_4(V0) & ~l2s_g_3(V0)) -> ~l2s_g_4(V0));
-  scheduled(T) := T:thread = t;
-  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
-  assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := (l2s_w_1(V0) & ~scheduled(V0)) & ~l2s_g_3(V0);
-  _old_l2s_g_3(V0) := l2s_g_3(V0);
-  l2s_g_3(V0) := *;
-  _old_l2s_g_4(V0) := l2s_g_4(V0);
-  l2s_g_4(V0) := *;
-  assume (forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0));
-  assume (forall V0. (~_old_l2s_g_3(V0) & ~scheduled(V0)) -> ~l2s_g_3(V0));
-  assume (forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0));
-  assume (forall V0. (~_old_l2s_g_4(V0) & ~l2s_g_3(V0)) -> ~l2s_g_4(V0));
-  scheduled(T) := false;
-  assume (forall V0. l2s_g_3(V0) -> ~scheduled(V0));
-  assume (forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0));
-  l2s_w_1(V0) := (l2s_w_1(V0) & ~scheduled(V0)) & ~l2s_g_3(V0);
+  _old_l2s_g_1 := l2s_g_1;
+  l2s_g_1 := *;
+  assume _old_l2s_g_1 -> l2s_g_1;
+  assume (~_old_l2s_g_1 & (~(forall T. d(T)))) -> ~l2s_g_1;
+  d(t) := true;
+  assume l2s_g_1 -> (~(forall T. d(T)));
+  l2s_w_0 := (l2s_w_0 & (~(forall T. d(T)))) & ~l2s_g_1;
   l2s_d(t0) := true
 }
 
