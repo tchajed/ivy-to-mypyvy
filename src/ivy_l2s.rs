@@ -356,11 +356,17 @@ fn parse_file(file: Pair<Rule>) -> System {
     let mut pairs = file.into_inner();
     let actions = pairs.next().unwrap();
     let init = pairs.next().unwrap();
-    let invariants = pairs.next();
+    let invariants = pairs.next().unwrap();
+    let invariants = if invariants.as_rule() == Rule::invariants {
+        parse_invariants(invariants)
+    } else {
+        // reached end of file without an invariants block
+        vec![]
+    };
     System {
         transitions: parse_actions(actions),
         init: parse_steps(init),
-        invariants: invariants.map(parse_invariants).unwrap_or_default(),
+        invariants,
     }
 }
 
