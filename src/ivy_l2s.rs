@@ -150,6 +150,70 @@ pub enum Step {
     },
 }
 
+peg::parser! {
+    grammar ivy_parser() for str {
+        rule whitespace() = quiet!{[' ' | '\n' | '\t']+}
+
+        rule _ = whitespace()?
+
+        rule ident_start_char()
+            = [ 'a'..='z' | 'A'..='Z' | '_' | ':' ]
+
+        rule ident_part()
+            = ident_start_char() (ident_start_char() / ['0'..='9'])*
+
+        pub rule ident() -> String
+            = s:$(quiet!{ident_part() ++ ['.']} / expected!("identifier")) { s.to_string() }
+
+        pub rule expr() -> Expr = precedence!{
+            x:(@) _ "&" _ y:@ { Expr::Infix {
+                lhs: Box::new(x),
+                op: BinOp::And,
+                rhs: Box::new(y)
+            } }
+            --
+            x:(@) _ "|" _ y:@ { Expr::Infix {
+                lhs: Box::new(x),
+                op: BinOp::Or,
+                rhs: Box::new(y)
+            } }
+            --
+            i:ident() { Expr::Relation(Relation{name: i, args: vec![]}) }
+            "(" _ e:expr() _ ")" { e }
+        }
+    }
+}
+
+#[cfg(test)]
+mod peg_tests {
+    use super::ivy_parser::{expr, ident};
+
+    #[test]
+    fn test_ident() {
+        assert!(ident("a1").is_ok());
+        assert!(ident("a.b").is_ok());
+        assert!(ident("foo:thread").is_ok());
+        assert!(ident("hello there").is_err());
+        assert!(ident(".b").is_err());
+    }
+
+    #[test]
+    fn test_expr() {
+        assert!(expr("p&q|r").is_ok());
+        assert!(expr("p|r|bar").is_ok());
+
+        assert!(expr("(p|r)&bar").is_ok());
+        assert!(expr("(p|r) & bar").is_ok());
+        assert!(expr("(p | r)&bar").is_ok());
+
+        let e = expr("(p|r)&bar").unwrap();
+        assert_eq!(e, expr("p|r&bar").unwrap());
+        assert_eq!(e, expr("p | r & bar").unwrap());
+
+        assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
+    }
+}
+
 fn parse_ident(ident: Pair<Rule>) -> String {
     ident.as_str().to_string()
 }
