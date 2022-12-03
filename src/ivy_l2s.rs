@@ -195,6 +195,31 @@ peg::parser! {
             r:relation() { Expr::Relation(r) }
             "(" _ e:expr() _ ")" { e }
         }
+
+        // TODO: implement this with block support
+        rule steps() -> Vec<Step>
+            = step() ** (_ ";" _)
+
+        rule assign() -> Step
+            = r:relation() _ ":=" _ e:expr() { Step::Assign(r, e) }
+
+        rule assert() -> Step
+            = "assert" _ e:expr() { Step::Assert(e) }
+
+        rule assume() -> Step
+            = "assume" _ e:expr() { Step::Assume(e) }
+
+        rule if_cond() -> IfCond
+            = ("some" __ name:ident() _ "." _ e:expr() { IfCond::Some{name, e} }) /
+              e:expr() { IfCond::Expr(e) }
+
+        rule if_step() -> Step
+            = "if" __ cond:if_cond() _ then:steps() _
+              else_:("else" __ ss:steps() { ss })?
+            { Step::If { cond, then, else_: else_.unwrap_or_default() }}
+
+        rule step() -> Step
+            = assign() / assert() / assume() / if_step()
     }
 }
 
@@ -226,7 +251,7 @@ mod peg_tests {
 
         assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
 
-        assert!(expr("forall x. p(x) & x = y").is_ok());
+        assert!(expr("forall x. p(x) & x = y").is_ok())
     }
 }
 
