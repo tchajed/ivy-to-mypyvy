@@ -154,6 +154,7 @@ peg::parser! {
     grammar ivy_parser() for str {
         rule whitespace() = quiet!{[' ' | '\n' | '\t']+}
 
+        rule __ = whitespace()
         rule _ = whitespace()?
 
         rule ident_start_char()
@@ -165,20 +166,33 @@ peg::parser! {
         pub rule ident() -> String
             = s:$(quiet!{ident_part() ++ ['.']} / expected!("identifier")) { s.to_string() }
 
+        rule args() -> Vec<String>
+            = args:("(" _ binders:(ident() ** (_ "," _)) _ ")" { binders })?
+                { args.unwrap_or_default() }
+
+        rule relation() -> Relation
+            = name:ident() _ args:args() { Relation{name, args} }
+
+        rule quantified_expr() -> Expr
+            = quantifier:("forall" {Quantifier::Forall} / "exists" {Quantifier::Exists})
+                __ bound:ident() _ "." _ e:expr()
+              { Expr::Quantified { quantifier, bound, body: Box::new(e) } }
+
         pub rule expr() -> Expr = precedence!{
-            x:(@) _ "&" _ y:@ { Expr::Infix {
-                lhs: Box::new(x),
-                op: BinOp::And,
-                rhs: Box::new(y)
-            } }
+            x:(@) _ "->" _ y:@ { Expr::infix(BinOp::Implies, x, y) }
+            x:(@) _ "<->" _ y:@ { Expr::infix(BinOp::Iff, x, y) }
             --
-            x:(@) _ "|" _ y:@ { Expr::Infix {
-                lhs: Box::new(x),
-                op: BinOp::Or,
-                rhs: Box::new(y)
-            } }
+            x:(@) _ "|" _ y:@ { Expr::infix(BinOp::Or, x, y) }
             --
-            i:ident() { Expr::Relation(Relation{name: i, args: vec![]}) }
+            x:(@) _ "&" _ y:@ { Expr::infix(BinOp::And, x, y) }
+            --
+            "~" _ x:@ { Expr::Prefix{op: PrefixOp::Not, e: Box::new(x)} }
+            --
+            x:(@) _ "=" _ y:@ { Expr::infix(BinOp::Equal, x, y) }
+            --
+            e:quantified_expr() { e }
+            "*" { Expr::Havoc }
+            r:relation() { Expr::Relation(r) }
             "(" _ e:expr() _ ")" { e }
         }
     }
@@ -206,11 +220,13 @@ mod peg_tests {
         assert!(expr("(p|r) & bar").is_ok());
         assert!(expr("(p | r)&bar").is_ok());
 
-        let e = expr("(p|r)&bar").unwrap();
+        let e = expr("p|(r&bar)").unwrap();
         assert_eq!(e, expr("p|r&bar").unwrap());
         assert_eq!(e, expr("p | r & bar").unwrap());
 
         assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
+
+        assert!(expr("forall x. p(x) & x = y").is_ok());
     }
 }
 
