@@ -163,8 +163,8 @@ peg::parser! {
         rule ident_part()
             = ident_start_char() (ident_start_char() / ['0'..='9'])*
 
-        pub rule ident() -> String
-            = s:$(quiet!{ident_part() ++ ['.']} / expected!("identifier")) { s.to_string() }
+        pub(super) rule ident() -> String
+            = s:$(quiet!{ident_part() ++ "."} / expected!("identifier")) { s.to_string() }
 
         rule args() -> Vec<String>
             = args:("(" _ binders:(ident() ** (_ "," _)) _ ")" { binders })?
@@ -178,7 +178,7 @@ peg::parser! {
                 __ bound:ident() _ "." _ e:expr()
               { Expr::Quantified { quantifier, bound, body: Box::new(e) } }
 
-        pub rule expr() -> Expr = precedence!{
+        pub(super) rule expr() -> Expr = precedence!{
             x:(@) _ "->" _ y:@ { Expr::infix(BinOp::Implies, x, y) }
             x:(@) _ "<->" _ y:@ { Expr::infix(BinOp::Iff, x, y) }
             --
@@ -195,10 +195,6 @@ peg::parser! {
             r:relation() { Expr::Relation(r) }
             "(" _ e:expr() _ ")" { e }
         }
-
-        // TODO: implement this with block support
-        rule steps() -> Vec<Step>
-            = step() ** (_ ";" _)
 
         rule assign() -> Step
             = r:relation() _ ":=" _ e:expr() { Step::Assign(r, e) }
@@ -220,12 +216,19 @@ peg::parser! {
 
         rule step() -> Step
             = assign() / assert() / assume() / if_step()
+
+        rule step_block() -> Vec<Step>
+            = "{" _ ss:(steps() ** (_ ";" _)) _ "}" { ss.concat() }
+
+        pub(super) rule steps() -> Vec<Step>
+            = step_block() /
+              step() ** (_ ";" _)
     }
 }
 
 #[cfg(test)]
 mod peg_tests {
-    use super::ivy_parser::{expr, ident};
+    use super::ivy_parser::{expr, ident, steps};
 
     #[test]
     fn test_ident() {
@@ -252,6 +255,12 @@ mod peg_tests {
         assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
 
         assert!(expr("forall x. p(x) & x = y").is_ok())
+    }
+
+    #[test]
+    fn test_steps() {
+        assert!(steps("if p(x) { r(Y) := true } else { g(Y) := x = Y }").is_ok());
+        assert!(steps("assume foo; assert bar").is_ok());
     }
 }
 
