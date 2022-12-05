@@ -30,7 +30,7 @@ impl SysState {
         }
         let mut n = 1;
         loop {
-            let new_r = format!("{}__{}", r, n);
+            let new_r = format!("{r}__{n}");
             if !self.havoc_relations.contains(&new_r) {
                 return new_r;
             }
@@ -344,7 +344,7 @@ impl Relations {
     fn if_cond(&self, e: &IfCond) -> Expr {
         match e {
             IfCond::Expr(e) => self.eval(e),
-            IfCond::Some { .. } => panic!("if some {:?} should be eliminated before eval", e),
+            IfCond::Some { .. } => panic!("if some {e:?} should be eliminated before eval"),
         }
     }
 
@@ -620,7 +620,7 @@ pub fn fmt_system(sys: &System) -> String {
                     args = typ.join(", ")
                 )?;
             } else {
-                writeln!(w, "mutable relation {}", r)?;
+                writeln!(w, "mutable relation {r}")?;
             }
         }
         // used to implement assertions
