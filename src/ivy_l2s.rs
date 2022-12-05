@@ -1,13 +1,4 @@
-use pest::{
-    iterators::Pair,
-    pratt_parser::{Assoc, Op, PrattParser},
-    Parser,
-};
 use std::fmt;
-
-#[derive(pest_derive::Parser)]
-#[grammar = "ivy.pest"]
-struct IvyParser;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Transition {
@@ -150,256 +141,212 @@ pub enum Step {
     },
 }
 
-fn parse_ident(ident: Pair<Rule>) -> String {
-    ident.as_str().to_string()
-}
+peg::parser! {
+    grammar ivy_parser() for str {
+        rule whitespace() = quiet!{[' ' | '\n' | '\t']+}
 
-fn parse_relation(pair: Pair<Rule>) -> Relation {
-    assert_eq!(pair.as_rule(), Rule::relation);
-    let mut pairs = pair.into_inner();
-    let name = parse_ident(pairs.next().unwrap());
-    Relation {
-        name,
-        args: pairs.map(parse_ident).collect(),
-    }
-}
+        rule __ = whitespace()
+        rule _ = whitespace()?
 
-fn parse_quantifer(quantifier: Pair<Rule>) -> Quantifier {
-    match quantifier.as_rule() {
-        Rule::forall => Quantifier::Forall,
-        Rule::exists => Quantifier::Exists,
-        r => unreachable!("rule {:?}", r),
-    }
-}
+        rule ident_start_char()
+            = [ 'a'..='z' | 'A'..='Z' | '_' | ':' ]
 
-fn parse_base_expr(expr: Pair<Rule>) -> Expr {
-    match expr.as_rule() {
-        Rule::relation => Expr::Relation(parse_relation(expr)),
-        Rule::quantified_expr => {
-            let mut pairs = expr.into_inner();
-            let quantifier = pairs.next().unwrap();
-            let bound = pairs.next().unwrap();
-            let e = pairs.next().unwrap();
-            Expr::Quantified {
-                quantifier: parse_quantifer(quantifier),
-                bound: parse_ident(bound),
-                body: Box::new(parse_expr(e)),
+        rule ident_part()
+            = ident_start_char() (ident_start_char() / ['0'..='9'])*
+
+        pub(super) rule ident() -> String
+            = s:$(quiet!{ident_part() ++ "."} / expected!("identifier")) { s.to_string() }
+
+        pub(super) rule args() -> Vec<String>
+            = args:("(" _ binders:(ident() ** (_ "," _)) _ ")" { binders })?
+                { args.unwrap_or_default() }
+
+        rule relation() -> Relation
+            = name:ident() _ args:args() { Relation{name, args} }
+
+        rule quantified_expr() -> Expr
+            = quantifier:("forall" {Quantifier::Forall} / "exists" {Quantifier::Exists})
+                __ bound:ident() _ "." _ e:expr()
+              { Expr::Quantified { quantifier, bound, body: Box::new(e) } }
+
+        pub(super) rule expr() -> Expr = precedence!{
+            x:(@) _ "->" _ y:@ { Expr::infix(BinOp::Implies, x, y) }
+            x:(@) _ "<->" _ y:@ { Expr::infix(BinOp::Iff, x, y) }
+            --
+            x:(@) _ "|" _ y:@ { Expr::infix(BinOp::Or, x, y) }
+            --
+            x:(@) _ "&" _ y:@ { Expr::infix(BinOp::And, x, y) }
+            --
+            "~" _ x:@ { Expr::Prefix{op: PrefixOp::Not, e: Box::new(x)} }
+            --
+            x:(@) _ "=" _ y:@ { Expr::infix(BinOp::Equal, x, y) }
+            --
+            e:quantified_expr() { e }
+            "*" { Expr::Havoc }
+            r:relation() { Expr::Relation(r) }
+            "(" _ e:expr() _ ")" { e }
+        }
+
+        rule assign() -> Step
+            = r:relation() _ ":=" _ e:expr() { Step::Assign(r, e) }
+
+        rule assert() -> Step
+            = "assert" _ e:expr() { Step::Assert(e) }
+
+        rule assume() -> Step
+            = "assume" _ e:expr() { Step::Assume(e) }
+
+        rule if_cond() -> IfCond
+            = ("some" __ name:ident() _ "." _ e:expr() { IfCond::Some{name, e} }) /
+              e:expr() { IfCond::Expr(e) }
+
+        rule step_or_block() -> Vec<Step>
+            = s:step() { vec![s] } / step_block()
+
+        rule if_step() -> Step
+            = "if" __ cond:if_cond() _ then:step_or_block() _
+              else_:("else" __ ss:step_or_block() { ss })?
+            { Step::If { cond, then, else_: else_.unwrap_or_default() }}
+
+        rule step() -> Step
+            = assign() / assert() / assume() / if_step()
+
+        rule step_block() -> Vec<Step>
+            = "{" _ ss:(steps() ** (_ ";" _)) _ "}" { ss.concat() }
+
+        pub(super) rule steps() -> Vec<Step>
+            = step_block() /
+              step() ** (_ ";" _)
+
+        pub(super) rule action_def() -> Transition
+            = name:ident() _ "=" _
+              "action" _ args:args() _ steps:step_block()
+              { Transition { name, bound: args, steps } }
+
+        rule invariant() -> (String, Expr)
+            = "invariant" _ "[" _ name:ident() _ "]" _ e:expr()
+              { (name, e) }
+
+        rule invariants() -> Vec<(String, Expr)>
+            = invs:("while" __ "*" _ invs:(inv:invariant() _ { inv })* { invs })?
+              { invs.unwrap_or_default() }
+
+        rule eof() = ![_]
+
+        rule actions() -> Vec<Transition>
+            = (a:action_def() _ { a })*
+
+        rule system() -> System
+            = "let" _ transitions:actions() _ "in" __
+              init:step_block() _
+              invariants:invariants()
+              { System { transitions, init, invariants } }
+
+        rule file0() -> System
+            = _ s:system() _ eof() { s }
+
+        pub rule file() -> System = traced(<file0()>)
+
+        // wrap a rule with tracing support, gated under the trace feature
+        rule traced<T>(e: rule<T>) -> T =
+            &(input:$([_]*) {
+                #[cfg(feature = "trace")]
+                println!("[PEG_INPUT_START]\n{}\n[PEG_TRACE_START]", input);
+            })
+            e:e()? {?
+                #[cfg(feature = "trace")]
+                println!("[PEG_TRACE_STOP]");
+                e.ok_or("")
             }
-        }
-        Rule::havoc_expr => Expr::Havoc,
-        Rule::expr => parse_expr(expr),
-        r => unreachable!("rule {:?}", r),
     }
 }
 
-fn make_pratt() -> PrattParser<Rule> {
-    // these operators should be from lowest priority to highest
-    // see https://kenmcmil.github.io/ivy/language.html#expressions
-    PrattParser::new()
-        // implies is actually left-associative (considered a bug in Ivy)
-        //
-        // therefore p -> q -> r means (p -> q) -> r (which is unintuitive)
-        .op(Op::infix(Rule::implies, Assoc::Left) | Op::infix(Rule::iff, Assoc::Left))
-        .op(Op::infix(Rule::or, Assoc::Left))
-        .op(Op::infix(Rule::and, Assoc::Left))
-        .op(Op::prefix(Rule::not))
-        .op(Op::infix(Rule::equal, Assoc::Left))
-}
+#[cfg(test)]
+mod peg_tests {
+    use super::ivy_parser::{action_def, args, expr, ident, steps};
 
-fn parse_expr(expr: Pair<Rule>) -> Expr {
-    assert_eq!(expr.as_rule(), Rule::expr);
-    let pratt = make_pratt();
-    pratt
-        .map_primary(parse_base_expr)
-        .map_infix(|lhs, op, rhs| {
-            let op = match op.as_rule() {
-                Rule::and => BinOp::And,
-                Rule::or => BinOp::Or,
-                Rule::implies => BinOp::Implies,
-                Rule::iff => BinOp::Iff,
-                Rule::equal => BinOp::Equal,
-                r => unreachable!("rule {:?}", r),
-            };
-            Expr::Infix {
-                lhs: Box::new(lhs),
-                op,
-                rhs: Box::new(rhs),
-            }
-        })
-        .map_prefix(|op, e| {
-            let op = match op.as_rule() {
-                Rule::not => PrefixOp::Not,
-                r => unreachable!("rule {:?}", r),
-            };
-            Expr::Prefix { op, e: Box::new(e) }
-        })
-        .parse(expr.into_inner())
-}
-
-fn parse_if_cond(step: Pair<Rule>) -> IfCond {
-    assert_eq!(step.as_rule(), Rule::if_cond);
-    let mut pairs = step.into_inner();
-    let e = pairs.next().unwrap();
-    match e.as_rule() {
-        Rule::expr => IfCond::Expr(parse_expr(e)),
-        Rule::some => {
-            let name = pairs.next().unwrap();
-            let e = pairs.next().unwrap();
-            IfCond::Some {
-                name: parse_ident(name),
-                e: parse_expr(e),
-            }
-        }
-        r => unreachable!("rule {:?}", r),
+    #[test]
+    fn test_ident() {
+        assert!(ident("a1").is_ok());
+        assert!(ident("a.b").is_ok());
+        assert!(ident("foo:thread").is_ok());
+        assert!(ident("fml:t:mutex_protocol.thread").is_ok());
+        assert!(ident("hello there").is_err());
+        assert!(ident(".b").is_err());
     }
-}
 
-fn parse_step(step: Pair<Rule>) -> Step {
-    assert_eq!(step.as_rule(), Rule::step);
-    // step has exactly one inner Pair
-    let step = step.into_inner().next().unwrap();
-    match step.as_rule() {
-        Rule::assign => {
-            let mut pairs = step.into_inner();
-            let lexpr = pairs.next().unwrap();
-            let e = pairs.next().unwrap();
-            Step::Assign(parse_relation(lexpr), parse_expr(e))
-        }
-        Rule::assert => {
-            let e = step.into_inner().next().unwrap();
-            Step::Assert(parse_expr(e))
-        }
-        Rule::assume => {
-            let e = step.into_inner().next().unwrap();
-            Step::Assume(parse_expr(e))
-        }
-        Rule::if_step => {
-            let mut pairs = step.into_inner();
-            let cond = pairs.next().unwrap();
-            let then = pairs.next().unwrap();
-            let else_ = pairs.next();
-            Step::If {
-                cond: parse_if_cond(cond),
-                then: parse_steps(then),
-                else_: else_.map(parse_steps).unwrap_or_default(),
-            }
-        }
-        r => unreachable!("rule {:?}", r),
+    #[test]
+    fn test_args() {
+        assert!(args("(fml:t:mutex_protocol.thread)").is_ok());
+        assert!(args("()").is_ok());
+        assert!(args("").is_ok());
     }
-}
 
-/// Flatten the structure of a sequence of steps, producing Rule::step Pairs.
-///
-/// applies to step and step_block
-fn flatten_steps(pair: Pair<Rule>) -> Vec<Pair<Rule>> {
-    match pair.as_rule() {
-        Rule::step => vec![pair],
-        Rule::step_block => pair.into_inner().flat_map(flatten_steps).collect(),
-        r => unreachable!("rule {:?}", r),
+    #[test]
+    fn test_expr() {
+        assert!(expr("p&q|r").is_ok());
+        assert!(expr("p|r|bar").is_ok());
+
+        assert!(expr("(p|r)&bar").is_ok());
+        assert!(expr("(p|r) & bar").is_ok());
+        assert!(expr("(p | r)&bar").is_ok());
+
+        let e = expr("p|(r&bar)").unwrap();
+        assert_eq!(e, expr("p|r&bar").unwrap());
+        assert_eq!(e, expr("p | r & bar").unwrap());
+
+        assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
+
+        assert!(expr("forall x. p(x) & x = y").is_ok())
     }
-}
 
-fn parse_steps(pair: Pair<Rule>) -> Vec<Step> {
-    flatten_steps(pair).into_iter().map(parse_step).collect()
-}
-
-fn parse_action_binder(pair: Pair<Rule>) -> Vec<String> {
-    pair.into_inner().map(parse_ident).collect()
-}
-
-fn parse_transition(action_def: Pair<Rule>) -> Transition {
-    assert_eq!(action_def.as_rule(), Rule::action_def);
-    let mut pairs = action_def.into_inner();
-    let name = parse_ident(pairs.next().unwrap());
-    let action = pairs.next().unwrap();
-    let mut action_pairs = action.into_inner();
-    let first = action_pairs.next().unwrap();
-    let (bound, steps) = if first.as_rule() == Rule::action_binders {
-        (parse_action_binder(first), action_pairs.next().unwrap())
-    } else {
-        (vec![], first)
-    };
-    Transition {
-        name,
-        bound,
-        steps: parse_steps(steps),
+    #[test]
+    fn test_steps() {
+        assert!(steps("if p(x) { r(Y) := true } else { g(Y) := x = Y }").is_ok());
+        assert!(steps("assume foo; assert bar").is_ok());
     }
-}
 
-fn parse_actions(pair: Pair<Rule>) -> Vec<Transition> {
-    assert_eq!(pair.as_rule(), Rule::actions);
-    pair.into_inner()
-        .flat_map(|pair| {
-            if pair.as_rule() == Rule::EOI {
-                None
-            } else {
-                Some(parse_transition(pair))
-            }
-        })
-        .collect()
-}
-
-fn parse_invariant(pair: Pair<Rule>) -> (String, Expr) {
-    assert_eq!(pair.as_rule(), Rule::invariant);
-    let mut pairs = pair.into_inner();
-    let name = pairs.next().unwrap();
-    let e = pairs.next().unwrap();
-    (parse_ident(name), parse_expr(e))
-}
-
-fn parse_invariants(pair: Pair<Rule>) -> Vec<(String, Expr)> {
-    assert_eq!(pair.as_rule(), Rule::invariants);
-    pair.into_inner().map(parse_invariant).collect()
-}
-
-fn parse_file(file: Pair<Rule>) -> System {
-    let mut pairs = file.into_inner();
-    let actions = pairs.next().unwrap();
-    let init = pairs.next().unwrap();
-    let invariants = pairs.next().unwrap();
-    let invariants = if invariants.as_rule() == Rule::invariants {
-        parse_invariants(invariants)
-    } else {
-        // reached end of file without an invariants block
-        vec![]
-    };
-    System {
-        transitions: parse_actions(actions),
-        init: parse_steps(init),
-        invariants,
+    #[test]
+    fn test_action_def() {
+        assert!(action_def(
+"ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
+    assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
+    {{{{assume mutex_protocol.pc_atomic_store(fml:t)};
+    {mutex_protocol.pc_atomic_store(fml:t) := false};
+    {mutex_protocol.pc_futex_wake(fml:t) := true};
+    {mutex_protocol.locked := false};
+    {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+    l2s_g_3(V0) := *;
+    _old_l2s_g_4(V0) := l2s_g_4(V0);
+    l2s_g_4(V0) := *;
+    assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+    assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
+    assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+    assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+    mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
+    {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+    l2s_g_3(V0) := *;
+    _old_l2s_g_4(V0) := l2s_g_4(V0);
+    l2s_g_4(V0) := *;
+    assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+    assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
+    assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+    assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+    mutex_protocol.scheduled(T) := false};
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
+    l2s_d(mutex_protocol.t0) := true}}").is_ok())
     }
 }
 
 pub fn parse(s: &str) -> Result<System, String> {
-    IvyParser::parse(Rule::file, s)
-        .map(|mut pairs| parse_file(pairs.next().unwrap()))
-        // NOTE: it's possible to rename rules for better parsing error
-        // reporting, but we don't expect users to get parsing errors since the
-        // input is machine generated
-        .map_err(|err| format!("{err}"))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::{IvyParser, Rule};
-    use pest::Parser as _;
-
-    #[test]
-    fn ident_tests() {
-        IvyParser::parse(Rule::ident, "ext:mutex_protocol.step_atomic_store")
-            .expect("unsuccessful ident parse");
-        IvyParser::parse(Rule::ident, "fml:t:mutex_protocol.thread")
-            .expect("unsuccessful ident parse");
-    }
-
-    #[test]
-    fn expr_tests() {
-        IvyParser::parse(Rule::expr, "forall V0.  l2s_a(V0)").expect("unsuccessful expr parse");
-        IvyParser::parse(Rule::expr, "l2s_g_1 -> ~(forall T. mutex_protocol.d(T))")
-            .expect("unsuccessful expr parse");
-        IvyParser::parse(Rule::quantified_expr, "forall T. mutex_protocol.d(T)")
-            .expect("unsuccessful forall parse");
-        IvyParser::parse(Rule::expr, "forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0)")
-            .expect("unsuccessful expr parse");
-    }
+    ivy_parser::file(s).map_err(|err| format!("{err}"))
 }
