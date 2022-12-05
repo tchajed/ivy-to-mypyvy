@@ -159,7 +159,7 @@ fn quantified_expr(q: Quantifier, binders: &[String], e: Expr) -> Expr {
 
 peg::parser! {
     grammar ivy_parser() for str {
-        rule whitespace() = quiet!{[' ' | '\n' | '\t']+}
+        rule whitespace() = quiet!{[' ' | '\n' | '\t' | '\r']+}
 
         rule __ = whitespace()
         rule _ = whitespace()?
