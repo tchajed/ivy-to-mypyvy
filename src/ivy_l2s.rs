@@ -166,7 +166,7 @@ peg::parser! {
         pub(super) rule ident() -> String
             = s:$(quiet!{ident_part() ++ "."} / expected!("identifier")) { s.to_string() }
 
-        rule args() -> Vec<String>
+        pub(super) rule args() -> Vec<String>
             = args:("(" _ binders:(ident() ** (_ "," _)) _ ")" { binders })?
                 { args.unwrap_or_default() }
 
@@ -209,9 +209,12 @@ peg::parser! {
             = ("some" __ name:ident() _ "." _ e:expr() { IfCond::Some{name, e} }) /
               e:expr() { IfCond::Expr(e) }
 
+        rule step_or_block() -> Vec<Step>
+            = s:step() { vec![s] } / step_block()
+
         rule if_step() -> Step
-            = "if" __ cond:if_cond() _ then:steps() _
-              else_:("else" __ ss:steps() { ss })?
+            = "if" __ cond:if_cond() _ then:step_or_block() _
+              else_:("else" __ ss:step_or_block() { ss })?
             { Step::If { cond, then, else_: else_.unwrap_or_default() }}
 
         rule step() -> Step
@@ -223,20 +226,69 @@ peg::parser! {
         pub(super) rule steps() -> Vec<Step>
             = step_block() /
               step() ** (_ ";" _)
+
+        pub(super) rule action_def() -> Transition
+            = name:ident() _ "=" _
+              "action" _ args:args() _ steps:step_block()
+              { Transition { name, bound: args, steps } }
+
+        rule invariant() -> (String, Expr)
+            = "invariant" _ "[" _ name:ident() _ "]" _ e:expr()
+              { (name, e) }
+
+        rule invariants() -> Vec<(String, Expr)>
+            = invs:("while" __ "*" _ invs:(inv:invariant() _ { inv })* { invs })?
+              { invs.unwrap_or_default() }
+
+        rule eof() = ![_]
+
+        rule actions() -> Vec<Transition>
+            = (a:action_def() _ { a })*
+
+        rule system() -> System
+            = "let" _ transitions:actions() _ "in" __
+              init:step_block() _
+              invariants:invariants()
+              { System { transitions, init, invariants } }
+
+        rule file0() -> System
+            = _ s:system() _ eof() { s }
+
+        pub rule file() -> System = traced(<file0()>)
+
+        // pegviz stuff
+        rule traced<T>(e: rule<T>) -> T =
+            &(input:$([_]*) {
+                #[cfg(feature = "trace")]
+                println!("[PEG_INPUT_START]\n{}\n[PEG_TRACE_START]", input);
+            })
+            e:e()? {?
+                #[cfg(feature = "trace")]
+                println!("[PEG_TRACE_STOP]");
+                e.ok_or("")
+            }
     }
 }
 
 #[cfg(test)]
 mod peg_tests {
-    use super::ivy_parser::{expr, ident, steps};
+    use super::ivy_parser::{action_def, args, expr, ident, steps};
 
     #[test]
     fn test_ident() {
         assert!(ident("a1").is_ok());
         assert!(ident("a.b").is_ok());
         assert!(ident("foo:thread").is_ok());
+        assert!(ident("fml:t:mutex_protocol.thread").is_ok());
         assert!(ident("hello there").is_err());
         assert!(ident(".b").is_err());
+    }
+
+    #[test]
+    fn test_args() {
+        assert!(args("(fml:t:mutex_protocol.thread)").is_ok());
+        assert!(args("()").is_ok());
+        assert!(args("").is_ok());
     }
 
     #[test]
@@ -261,6 +313,46 @@ mod peg_tests {
     fn test_steps() {
         assert!(steps("if p(x) { r(Y) := true } else { g(Y) := x = Y }").is_ok());
         assert!(steps("assume foo; assert bar").is_ok());
+    }
+
+    #[test]
+    fn test_action_def() {
+        assert!(action_def(
+"ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
+    assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
+    {{{{assume mutex_protocol.pc_atomic_store(fml:t)};
+    {mutex_protocol.pc_atomic_store(fml:t) := false};
+    {mutex_protocol.pc_futex_wake(fml:t) := true};
+    {mutex_protocol.locked := false};
+    {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+    l2s_g_3(V0) := *;
+    _old_l2s_g_4(V0) := l2s_g_4(V0);
+    l2s_g_4(V0) := *;
+    assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+    assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
+    assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+    assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+    mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
+    {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+    l2s_g_3(V0) := *;
+    _old_l2s_g_4(V0) := l2s_g_4(V0);
+    l2s_g_4(V0) := *;
+    assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+    assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
+    assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+    assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+    mutex_protocol.scheduled(T) := false};
+    assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
+    assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+    l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
+    l2s_d(mutex_protocol.t0) := true}}").is_ok())
     }
 }
 
@@ -485,12 +577,7 @@ fn parse_file(file: Pair<Rule>) -> System {
 }
 
 pub fn parse(s: &str) -> Result<System, String> {
-    IvyParser::parse(Rule::file, s)
-        .map(|mut pairs| parse_file(pairs.next().unwrap()))
-        // NOTE: it's possible to rename rules for better parsing error
-        // reporting, but we don't expect users to get parsing errors since the
-        // input is machine generated
-        .map_err(|err| format!("{err}"))
+    ivy_parser::file(s).map_err(|err| format!("{err}"))
 }
 
 #[cfg(test)]
