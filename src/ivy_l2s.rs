@@ -141,6 +141,22 @@ pub enum Step {
     },
 }
 
+/// Construct a quantified expression with multiple binders by recursively
+/// nesting the single-quantifier Expr::Quantified construct.
+fn quantified_expr(q: Quantifier, binders: &[String], e: Expr) -> Expr {
+    if binders.is_empty() {
+        e
+    } else {
+        let bound = binders[0].clone();
+        let e = quantified_expr(q, &binders[1..], e);
+        Expr::Quantified {
+            quantifier: q,
+            bound,
+            body: Box::new(e),
+        }
+    }
+}
+
 peg::parser! {
     grammar ivy_parser() for str {
         rule whitespace() = quiet!{[' ' | '\n' | '\t']+}
@@ -166,8 +182,8 @@ peg::parser! {
 
         rule quantified_expr() -> Expr
             = quantifier:("forall" {Quantifier::Forall} / "exists" {Quantifier::Exists})
-                __ bound:ident() _ "." _ e:expr()
-              { Expr::Quantified { quantifier, bound, body: Box::new(e) } }
+                __ binders:(ident() ++ (_ ","  _)) _ "." _ e:expr()
+              { quantified_expr(quantifier, &binders, e) }
 
         pub(super) rule expr() -> Expr = precedence!{
             x:(@) _ "->" _ y:@ { Expr::infix(BinOp::Implies, x, y) }
