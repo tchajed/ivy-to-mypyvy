@@ -1,0 +1,548 @@
+
+
+
+
+let
+    ext:better_mutex.step_unlock_store = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.unlock_store(fml:t)};
+ {better_mutex.unlock_store(fml:t) := false};
+ {better_mutex.futex_wake(fml:t) := true};
+ {better_mutex.lock_free := true};
+ {better_mutex.lock_w0 := false};
+ {better_mutex.lock_ws := false};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_lock_set_wait = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.lock_set_wait(fml:t)};
+ {better_mutex.lock_set_wait(fml:t) := false};
+ {if better_mutex.lock_free {better_mutex.lock_acq2(fml:t) := true}
+else {if better_mutex.lock_w0 {{{better_mutex.lock_w0 := false};
+ {better_mutex.lock_ws := true};
+ {better_mutex.futex_wait(fml:t) := true}}}
+else {if better_mutex.lock_ws {better_mutex.futex_wait(fml:t) := true}}}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_lock_acq2 = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.lock_acq2(fml:t)};
+ {better_mutex.lock_acq2(fml:t) := false};
+ {if better_mutex.lock_free {{{better_mutex.lock_free := false};
+ {better_mutex.lock_ws := true};
+ {better_mutex.unlock_sub(fml:t) := true}}}
+else {if better_mutex.lock_w0 {better_mutex.lock_set_wait(fml:t) := true}
+else {if better_mutex.lock_ws {better_mutex.futex_wait(fml:t) := true}}}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_futex_wait = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.futex_wait(fml:t)};
+ {better_mutex.futex_wait(fml:t) := false};
+ {if better_mutex.lock_ws {{{better_mutex.kernel_wait(fml:t) := true};
+ {better_mutex.queue(fml:t) := true}}}
+else {better_mutex.lock_acq2(fml:t) := true}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_lock_acq = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.lock_acq(fml:t)};
+ {better_mutex.lock_acq(fml:t) := false};
+ {if better_mutex.lock_free {{{better_mutex.unlock_sub(fml:t) := true};
+ {better_mutex.lock_free := false};
+ {better_mutex.lock_w0 := true}}}
+else {if better_mutex.lock_w0 {better_mutex.lock_set_wait(fml:t) := true}
+else {if better_mutex.lock_ws {better_mutex.futex_wait(fml:t) := true}}}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_futex_wake = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.futex_wake(fml:t)};
+ {better_mutex.futex_wake(fml:t) := false};
+ {if some loc:t_q. better_mutex.queue(loc:t_q) {better_mutex.queue(loc:t_q) := false}};
+ {{_old_l2s_g_2(V0) := l2s_g_2(V0);
+ l2s_g_2(V0) := *;
+ _old_l2s_g_0 := l2s_g_0;
+ l2s_g_0 := *;
+ assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0);
+ assume forall V0. ~_old_l2s_g_2(V0) & ~better_mutex.finished(V0) -> ~l2s_g_2(V0);
+ assume _old_l2s_g_0 -> l2s_g_0;
+ assume ~_old_l2s_g_0 & ~better_mutex.finished(better_mutex.t0) -> ~l2s_g_0;
+ better_mutex.finished(fml:t) := true};
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_finished = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.finished(fml:t)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_kernel_wait = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.kernel_wait(fml:t)};
+ {if ~better_mutex.queue(fml:t) {{{better_mutex.kernel_wait(fml:t) := false};
+ {better_mutex.lock_acq2(fml:t) := true}}}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    ext:better_mutex.step_unlock_sub = action(fml:t:better_mutex.thread){{l2s_d(fml:t) := true;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ {{{{assume better_mutex.unlock_sub(fml:t)};
+ {better_mutex.unlock_sub(fml:t) := false};
+ {if better_mutex.lock_ws {{{better_mutex.unlock_store(fml:t) := true};
+ {better_mutex.lock_ws := false};
+ {better_mutex.lock_w0 := true}}}
+else {if better_mutex.lock_w0 {{{{_old_l2s_g_2(V0) := l2s_g_2(V0);
+ l2s_g_2(V0) := *;
+ _old_l2s_g_0 := l2s_g_0;
+ l2s_g_0 := *;
+ assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0);
+ assume forall V0. ~_old_l2s_g_2(V0) & ~better_mutex.finished(V0) -> ~l2s_g_2(V0);
+ assume _old_l2s_g_0 -> l2s_g_0;
+ assume ~_old_l2s_g_0 & ~better_mutex.finished(better_mutex.t0) -> ~l2s_g_0;
+ better_mutex.finished(fml:t) := true};
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0)};
+ {better_mutex.lock_w0 := false};
+ {better_mutex.lock_free := true}}}
+else {assume false}}};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := T:better_mutex.thread = fml:t};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)};
+ {{_old_l2s_g_3(V0) := l2s_g_3(V0);
+ l2s_g_3(V0) := *;
+ _old_l2s_g_4(V0) := l2s_g_4(V0);
+ l2s_g_4(V0) := *;
+ assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
+ assume forall V0. ~_old_l2s_g_3(V0) & ~better_mutex.scheduled(V0) -> ~l2s_g_3(V0);
+ assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
+ assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
+ better_mutex.scheduled(T) := false};
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ l2s_w_1(V0) := l2s_w_1(V0) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0)}}}};
+ l2s_d(better_mutex.t0) := true}}
+    idle = action{{if * {assume l2s_waiting;
+ l2s_waiting := false;
+ l2s_frozen := true;
+ assume forall V0. ~l2s_w_1(V0);
+ assume ~l2s_w_0;
+ l2s_a(X:better_mutex.thread) := l2s_d(X:better_mutex.thread)}
+else if * {assume l2s_frozen;
+ l2s_frozen := false;
+ l2s_saved := true;
+ l2s_s_1 := better_mutex.lock_w0;
+ l2s_s_12(V0) := better_mutex.unlock_sub(V0);
+ l2s_s_3(V0) := better_mutex.finished(V0);
+ l2s_s_5(V0) := better_mutex.futex_wake(V0);
+ l2s_s_6(V0) := better_mutex.kernel_wait(V0);
+ l2s_s_2 := better_mutex.lock_ws;
+ l2s_s_0 := better_mutex.lock_free;
+ l2s_s_10(V0) := better_mutex.queue(V0);
+ l2s_s_9(V0) := better_mutex.lock_set_wait(V0);
+ l2s_s_7(V0) := better_mutex.lock_acq(V0);
+ l2s_s_8(V0) := better_mutex.lock_acq2(V0);
+ l2s_s_4(V0) := better_mutex.futex_wait(V0);
+ l2s_s_11(V0) := better_mutex.unlock_store(V0);
+ l2s_w_1(V0) := l2s_d(V0:better_mutex.thread) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0);
+ l2s_w_0 := ~(forall T. better_mutex.d(T)) & ~l2s_g_1}
+else {};
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ l2s_d(better_mutex.t0) := true;
+ assert ~(l2s_saved & (forall V0. ~l2s_w_1(V0)) & ~l2s_w_0 & (l2s_s_1 <-> better_mutex.lock_w0) & (forall V0. l2s_a(V0) -> (l2s_s_12(V0) <-> better_mutex.unlock_sub(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> better_mutex.finished(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> better_mutex.futex_wake(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> better_mutex.kernel_wait(V0))) & (l2s_s_2 <-> better_mutex.lock_ws) & (l2s_s_0 <-> better_mutex.lock_free) & (forall V0. l2s_a(V0) -> (l2s_s_10(V0) <-> better_mutex.queue(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_9(V0) <-> better_mutex.lock_set_wait(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> better_mutex.lock_acq(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_8(V0) <-> better_mutex.lock_acq2(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> better_mutex.futex_wait(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_11(V0) <-> better_mutex.unlock_store(V0))))}}
+in
+    {{{better_mutex.lock_acq(T) := true;
+ better_mutex.lock_set_wait(T) := false;
+ better_mutex.futex_wait(T) := false;
+ better_mutex.kernel_wait(T) := false;
+ better_mutex.lock_acq2(T) := false;
+ better_mutex.unlock_sub(T) := false;
+ better_mutex.unlock_store(T) := false;
+ better_mutex.futex_wake(T) := false;
+ better_mutex.finished(T) := false;
+ better_mutex.lock_free := true;
+ better_mutex.lock_w0 := false;
+ better_mutex.lock_ws := false;
+ better_mutex.queue(T) := false;
+ better_mutex.scheduled(T) := false};
+ better_mutex.d(T) := false};
+ l2s_waiting := true;
+ l2s_frozen := false;
+ l2s_saved := false;
+ l2s_d(better_mutex.t0) := true;
+ l2s_w_1(V0) := l2s_d(V0:better_mutex.thread) & ~better_mutex.scheduled(V0) & ~l2s_g_3(V0);
+ l2s_w_0 := ~(forall T. better_mutex.d(T)) & ~l2s_g_1;
+ assume l2s_g_1 -> ~(forall T. better_mutex.d(T));
+ assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
+ assume l2s_g_0 -> ~better_mutex.finished(better_mutex.t0);
+ assume forall V0. l2s_g_2(V0) -> ~better_mutex.finished(V0);
+ assume forall V0. l2s_g_3(V0) -> ~better_mutex.scheduled(V0);
+ assume ~((exists T0. l2s_g_2(T0)) -> l2s_g_0 & ~l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. ~l2s_g_2(T))))}
+    while *
+        invariant [better_mutex.invar11] better_mutex.lock_free | better_mutex.lock_w0 | better_mutex.lock_ws
+        invariant [better_mutex.invar12] ~better_mutex.lock_free | ~better_mutex.lock_w0
+        invariant [better_mutex.invar13] ~better_mutex.lock_free | ~better_mutex.lock_ws
+        invariant [better_mutex.invar14] ~better_mutex.lock_w0 | ~better_mutex.lock_ws
+        invariant [better_mutex.invar15] better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T) | better_mutex.unlock_sub(T) | better_mutex.unlock_store(T) | better_mutex.futex_wake(T) | better_mutex.finished(T)
+        invariant [better_mutex.invar16] ~better_mutex.lock_acq(T) | ~better_mutex.lock_set_wait(T)
+        invariant [better_mutex.invar17] ~better_mutex.lock_acq(T) | ~better_mutex.futex_wait(T)
+        invariant [better_mutex.invar18] ~better_mutex.lock_acq(T) | ~better_mutex.kernel_wait(T)
+        invariant [better_mutex.invar19] ~better_mutex.lock_acq(T) | ~better_mutex.lock_acq2(T)
+        invariant [better_mutex.invar20] ~better_mutex.lock_acq(T) | ~better_mutex.unlock_sub(T)
+        invariant [better_mutex.invar21] ~better_mutex.lock_acq(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar22] ~better_mutex.lock_acq(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar23] ~better_mutex.lock_acq(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar24] ~better_mutex.lock_set_wait(T) | ~better_mutex.futex_wait(T)
+        invariant [better_mutex.invar25] ~better_mutex.lock_set_wait(T) | ~better_mutex.kernel_wait(T)
+        invariant [better_mutex.invar26] ~better_mutex.lock_set_wait(T) | ~better_mutex.lock_acq2(T)
+        invariant [better_mutex.invar27] ~better_mutex.lock_set_wait(T) | ~better_mutex.unlock_sub(T)
+        invariant [better_mutex.invar28] ~better_mutex.lock_set_wait(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar29] ~better_mutex.lock_set_wait(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar30] ~better_mutex.lock_set_wait(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar31] ~better_mutex.futex_wait(T) | ~better_mutex.kernel_wait(T)
+        invariant [better_mutex.invar32] ~better_mutex.futex_wait(T) | ~better_mutex.lock_acq2(T)
+        invariant [better_mutex.invar33] ~better_mutex.futex_wait(T) | ~better_mutex.unlock_sub(T)
+        invariant [better_mutex.invar34] ~better_mutex.futex_wait(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar35] ~better_mutex.futex_wait(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar36] ~better_mutex.futex_wait(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar37] ~better_mutex.kernel_wait(T) | ~better_mutex.lock_acq2(T)
+        invariant [better_mutex.invar38] ~better_mutex.kernel_wait(T) | ~better_mutex.unlock_sub(T)
+        invariant [better_mutex.invar39] ~better_mutex.kernel_wait(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar40] ~better_mutex.kernel_wait(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar41] ~better_mutex.kernel_wait(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar42] ~better_mutex.lock_acq2(T) | ~better_mutex.unlock_sub(T)
+        invariant [better_mutex.invar43] ~better_mutex.lock_acq2(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar44] ~better_mutex.lock_acq2(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar45] ~better_mutex.lock_acq2(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar46] ~better_mutex.unlock_sub(T) | ~better_mutex.unlock_store(T)
+        invariant [better_mutex.invar47] ~better_mutex.unlock_sub(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar48] ~better_mutex.unlock_sub(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar49] ~better_mutex.unlock_store(T) | ~better_mutex.futex_wake(T)
+        invariant [better_mutex.invar50] ~better_mutex.unlock_store(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar51] ~better_mutex.futex_wake(T) | ~better_mutex.finished(T)
+        invariant [better_mutex.invar52] better_mutex.unlock_sub(T) -> better_mutex.lock_w0 | better_mutex.lock_ws
+        invariant [better_mutex.invar53] better_mutex.unlock_store(T) -> better_mutex.lock_w0 | better_mutex.lock_ws
+        invariant [better_mutex.invar54] better_mutex.unlock_sub(T1) & better_mutex.unlock_sub(T2) -> T1 = T2
+        invariant [better_mutex.invar55] better_mutex.unlock_store(T1) & better_mutex.unlock_store(T2) -> T1 = T2
+        invariant [better_mutex.invar56] better_mutex.unlock_sub(T1) & better_mutex.unlock_store(T2) -> false
+        invariant [better_mutex.invar57] (better_mutex.unlock_sub(T1) | better_mutex.unlock_sub(T1)) & (better_mutex.unlock_sub(T2) | better_mutex.unlock_sub(T2)) -> T1 = T2
+        invariant [better_mutex.invar58] better_mutex.lock_w0 | better_mutex.lock_ws -> (exists T. better_mutex.unlock_sub(T) | better_mutex.unlock_store(T))
+        invariant [invar61] ~better_mutex.scheduled(T)
+        invariant [invar62] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar63] ~l2s_waiting | ~l2s_frozen
+        invariant [invar64] ~l2s_waiting | ~l2s_saved
+        invariant [invar65] ~l2s_frozen | ~l2s_saved
+        invariant [invar66] l2s_g_4(T)
+        invariant [invar67] l2s_g_0
+        invariant [invar68] ~better_mutex.finished(better_mutex.t0)
+        invariant [invar69] ~l2s_g_1
+        invariant [invar70] l2s_w_0 | (forall T. better_mutex.d(T))
+        invariant [invar71] better_mutex.d(T) -> l2s_d(T)
+        invariant [invar72] l2s_frozen | l2s_saved -> (forall T. l2s_d(T:better_mutex.thread))
+        invariant [invar73] l2s_frozen | l2s_saved -> (forall T. l2s_a(T:better_mutex.thread))
+        invariant [invar74] l2s_saved -> l2s_s_0 | l2s_s_1 | l2s_s_2
+        invariant [invar75] l2s_saved -> ~l2s_s_0 | ~l2s_s_1
+        invariant [invar76] l2s_saved -> ~l2s_s_0 | ~l2s_s_2
+        invariant [invar77] l2s_saved -> ~l2s_s_1 | ~l2s_s_2
+        invariant [invar78] l2s_saved -> l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) | l2s_s_12(T) | l2s_s_11(T) | l2s_s_5(T) | l2s_s_3(T)
+        invariant [invar79] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_9(T)
+        invariant [invar80] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_4(T)
+        invariant [invar81] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_6(T)
+        invariant [invar82] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_8(T)
+        invariant [invar83] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_12(T)
+        invariant [invar84] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_11(T)
+        invariant [invar85] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_5(T)
+        invariant [invar86] l2s_saved -> ~l2s_s_7(T) | ~l2s_s_3(T)
+        invariant [invar87] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_4(T)
+        invariant [invar88] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_6(T)
+        invariant [invar89] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_8(T)
+        invariant [invar90] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_12(T)
+        invariant [invar91] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_11(T)
+        invariant [invar92] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_5(T)
+        invariant [invar93] l2s_saved -> ~l2s_s_9(T) | ~l2s_s_3(T)
+        invariant [invar94] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_6(T)
+        invariant [invar95] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_8(T)
+        invariant [invar96] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_12(T)
+        invariant [invar97] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_11(T)
+        invariant [invar98] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_5(T)
+        invariant [invar99] l2s_saved -> ~l2s_s_4(T) | ~l2s_s_3(T)
+        invariant [invar100] l2s_saved -> ~l2s_s_6(T) | ~l2s_s_8(T)
+        invariant [invar101] l2s_saved -> ~l2s_s_6(T) | ~l2s_s_12(T)
+        invariant [invar102] l2s_saved -> ~l2s_s_6(T) | ~l2s_s_11(T)
+        invariant [invar103] l2s_saved -> ~l2s_s_6(T) | ~l2s_s_5(T)
+        invariant [invar104] l2s_saved -> ~l2s_s_6(T) | ~l2s_s_3(T)
+        invariant [invar105] l2s_saved -> ~l2s_s_8(T) | ~l2s_s_12(T)
+        invariant [invar106] l2s_saved -> ~l2s_s_8(T) | ~l2s_s_11(T)
+        invariant [invar107] l2s_saved -> ~l2s_s_8(T) | ~l2s_s_5(T)
+        invariant [invar108] l2s_saved -> ~l2s_s_8(T) | ~l2s_s_3(T)
+        invariant [invar109] l2s_saved -> ~l2s_s_12(T) | ~l2s_s_11(T)
+        invariant [invar110] l2s_saved -> ~l2s_s_12(T) | ~l2s_s_5(T)
+        invariant [invar111] l2s_saved -> ~l2s_s_12(T) | ~l2s_s_3(T)
+        invariant [invar112] l2s_saved -> ~l2s_s_11(T) | ~l2s_s_5(T)
+        invariant [invar113] l2s_saved -> ~l2s_s_11(T) | ~l2s_s_3(T)
+        invariant [invar114] l2s_saved -> ~l2s_s_5(T) | ~l2s_s_3(T)
+        invariant [invar115] l2s_saved -> (l2s_s_12(T) -> l2s_s_1 | l2s_s_2)
+        invariant [invar116] l2s_saved -> (l2s_s_11(T) -> l2s_s_1 | l2s_s_2)
+        invariant [invar117] l2s_saved -> (l2s_s_12(T1) & l2s_s_12(T2) -> T1 = T2)
+        invariant [invar118] l2s_saved -> (l2s_s_11(T1) & l2s_s_11(T2) -> T1 = T2)
+        invariant [invar119] l2s_saved -> (l2s_s_12(T1) & l2s_s_11(T2) -> false)
+        invariant [invar120] l2s_saved -> ((l2s_s_12(T1) | l2s_s_12(T1)) & (l2s_s_12(T2) | l2s_s_12(T2)) -> T1 = T2)
+        invariant [invar121] l2s_saved -> (l2s_s_1 | l2s_s_2 -> (exists T. l2s_s_12(T) | l2s_s_11(T)))
+        invariant [invar122] l2s_saved & l2s_w_1(T) -> (l2s_s_7(T) <-> better_mutex.lock_acq(T))
+        invariant [invar123] l2s_saved & l2s_w_1(T) -> (l2s_s_9(T) <-> better_mutex.lock_set_wait(T))
+        invariant [invar124] l2s_saved & l2s_w_1(T) -> (l2s_s_4(T) <-> better_mutex.futex_wait(T))
+        invariant [invar125] l2s_saved & l2s_w_1(T) -> (l2s_s_6(T) <-> better_mutex.kernel_wait(T))
+        invariant [invar126] l2s_saved & l2s_w_1(T) -> (l2s_s_8(T) <-> better_mutex.lock_acq2(T))
+        invariant [invar127] l2s_saved & l2s_w_1(T) -> (l2s_s_12(T) <-> better_mutex.unlock_sub(T))
+        invariant [invar128] l2s_saved & l2s_w_1(T) -> (l2s_s_11(T) <-> better_mutex.unlock_store(T))
+        invariant [invar129] l2s_saved & l2s_w_1(T) -> (l2s_s_5(T) <-> better_mutex.futex_wake(T))
+        invariant [invar130] l2s_saved & l2s_w_1(T) -> (l2s_s_3(T) <-> better_mutex.finished(T))
+        invariant [invar131] l2s_saved -> (l2s_s_12(T) & ~l2s_w_1(T) -> better_mutex.unlock_store(T) | better_mutex.futex_wake(T) | better_mutex.finished(T))
+        invariant [invar132] l2s_saved -> (l2s_s_11(T) & ~l2s_w_1(T) -> better_mutex.futex_wake(T) | better_mutex.finished(T))
+        invariant [invar133] l2s_saved -> (l2s_s_5(T) & ~l2s_w_1(T) -> better_mutex.finished(T))
+        invariant [invar134] l2s_saved -> (l2s_s_3(T) -> better_mutex.finished(T))
+        invariant [invar135] l2s_saved -> (l2s_s_7(T) & ~l2s_w_1(T) -> ~better_mutex.lock_acq(T))
+        invariant [invar136] better_mutex.queue(T) -> better_mutex.kernel_wait(T)
+        invariant [invar137] forall T1. better_mutex.kernel_wait(T1) & better_mutex.queue(T1) & better_mutex.lock_ws -> (exists T2. better_mutex.unlock_sub(T2) | better_mutex.unlock_store(T2))
+        invariant [invar138] forall T1. better_mutex.kernel_wait(T1) & better_mutex.queue(T1) & better_mutex.lock_w0 -> (exists T2. better_mutex.unlock_store(T2) | better_mutex.kernel_wait(T2) & ~better_mutex.queue(T2) | better_mutex.lock_acq2(T2) | better_mutex.futex_wake(T2) | better_mutex.lock_set_wait(T2))
+        invariant [invar139] forall T1. better_mutex.kernel_wait(T1) & better_mutex.queue(T1) & better_mutex.lock_free -> (exists T2. better_mutex.futex_wake(T2) | better_mutex.lock_acq2(T2) | better_mutex.lock_set_wait(T2) | better_mutex.kernel_wait(T2) & ~better_mutex.queue(T2))
+        invariant [invar140] forall T1. better_mutex.kernel_wait(T1) & better_mutex.queue(T1) -> (exists T2. better_mutex.unlock_sub(T2) & better_mutex.lock_ws | better_mutex.unlock_store(T2) | better_mutex.futex_wake(T2) | better_mutex.lock_acq2(T2) | better_mutex.lock_set_wait(T2) | better_mutex.kernel_wait(T2) & ~better_mutex.queue(T2))
+        invariant [invar141] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> better_mutex.lock_free)
+        invariant [invar142] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> ((l2s_s_7(T) | l2s_s_8(T)) & ~l2s_w_1(T) -> false))
+        invariant [invar143] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> (l2s_s_9(T) & ~l2s_w_1(T) -> better_mutex.lock_acq2(T)))
+        invariant [invar144] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> (l2s_s_4(T) & ~l2s_w_1(T) -> better_mutex.lock_acq2(T)))
+        invariant [invar145] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> (~l2s_s_10(T) -> ~better_mutex.queue(T)))
+        invariant [invar146] l2s_saved -> (l2s_s_0 & (forall T. l2s_s_7(T) | l2s_s_9(T) | l2s_s_4(T) | l2s_s_6(T) | l2s_s_8(T) -> better_mutex.lock_acq(T) | better_mutex.lock_set_wait(T) | better_mutex.futex_wait(T) | better_mutex.kernel_wait(T) | better_mutex.lock_acq2(T)) -> (l2s_s_6(T) & ~l2s_s_10(T) & ~l2s_w_1(T) -> better_mutex.lock_acq2(T)))
