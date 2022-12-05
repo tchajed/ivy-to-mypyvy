@@ -18,7 +18,7 @@ fn bin_op(op: &BinOp) -> &'static str {
         BinOp::Or => "|",
         BinOp::Implies => "->",
         BinOp::Equal => "=",
-        BinOp::NotEqual => "!=",
+        BinOp::NotEqual => "~=",
         BinOp::Iff => "<->",
     }
 }

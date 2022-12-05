@@ -21,7 +21,7 @@ pub enum BinOp {
     Or,
     Implies,
     Equal,
-    NotEqual, // not in Ivy but available in mypyvy
+    NotEqual,
     Iff,
 }
 
@@ -196,6 +196,7 @@ peg::parser! {
             "~" _ x:@ { Expr::Prefix{op: PrefixOp::Not, e: Box::new(x)} }
             --
             x:(@) _ "=" _ y:@ { Expr::infix(BinOp::Equal, x, y) }
+            x:(@) _ "~=" _ y:@ { Expr::infix(BinOp::NotEqual, x, y) }
             --
             e:quantified_expr() { e }
             "*" { Expr::Havoc }
