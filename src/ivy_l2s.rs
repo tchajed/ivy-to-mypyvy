@@ -256,7 +256,7 @@ peg::parser! {
 
         pub rule file() -> System = traced(<file0()>)
 
-        // pegviz stuff
+        // wrap a rule with tracing support, gated under the trace feature
         rule traced<T>(e: rule<T>) -> T =
             &(input:$([_]*) {
                 #[cfg(feature = "trace")]

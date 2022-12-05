@@ -36,6 +36,11 @@ Install with `cargo install cargo-insta` and then run `cargo insta test
 --review`, which will prompt to accept changes if the output has changed. The
 tests still run as usual with `cargo test`.
 
-The Ivy grammar is specified in [ivy.pest](src/ivy.pest), which is used during
-compilation by the Rust pest library. The grammar is a [PEG
-grammar](https://pest.rs/book/grammars/peg.html). PEGs are pretty cool.
+The Ivy grammar is written using rust-peg as an embedded DSL in
+[ivy_l2s.rs](src/ivy_l2s.rs). The grammar is a [PEG
+grammar](https://docs.rs/peg/latest/peg/).  PEGs are pretty cool. You can debug
+the parser using [pegviz](https://github.com/fasterthanlime/pegviz); after
+installing the pegviz tool, run `cargo run --release --features trace --
+tests/l2s.out | pegviz --output pegviz.html` and then look at the generated
+`pegviz.html` file. On the Rust side this just traces the grammar, and then
+outside the trace is visualized into a parse trace.
