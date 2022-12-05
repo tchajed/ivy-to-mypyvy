@@ -155,6 +155,34 @@ fn split_if_havoc_steps(
     (then_t, else_t)
 }
 
+fn split_if_e_steps(
+    before: Vec<&Step>,
+    cond: &Expr,
+    then: &[Step],
+    else_: &[Step],
+    remaining: Vec<&Step>,
+) -> (Vec<Step>, Vec<Step>) {
+    let then_t = {
+        let mut steps = before.clone();
+        let if_cond = Step::Assume(cond.clone());
+        steps.push(&if_cond);
+        steps.extend(then);
+        steps.extend(remaining.clone());
+        steps.into_iter().cloned().collect()
+    };
+
+    let else_t = {
+        let mut steps = before;
+        let else_cond = Step::Assume(Expr::negate(cond.clone()));
+        steps.push(&else_cond);
+        steps.extend(else_);
+        steps.extend(remaining);
+        steps.into_iter().cloned().collect()
+    };
+
+    (then_t, else_t)
+}
+
 fn split_if_some_steps(
     before: Vec<&Step>,
     name: &str,
@@ -204,6 +232,28 @@ fn split_if_some_one(t: &Transition) -> Option<(Transition, Transition)> {
                 // stop processing and splice in the then and else branches
                 // between steps and remaining
                 let (then, else_) = split_if_havoc_steps(steps, then, else_, remaining);
+                return Some((
+                    Transition {
+                        name: format!("{}_then", t.name),
+                        bound: t.bound.clone(),
+                        steps: then,
+                    },
+                    Transition {
+                        name: format!("{}_else", t.name),
+                        bound: t.bound.clone(),
+                        steps: else_,
+                    },
+                ));
+            }
+            Some(Step::If {
+                cond: IfCond::Expr(e),
+                then,
+                else_,
+            }) => {
+                let remaining = i.collect::<Vec<_>>();
+                // stop processing and splice in the then and else branches
+                // between steps and remaining
+                let (then, else_) = split_if_e_steps(steps, e, then, else_, remaining);
                 return Some((
                     Transition {
                         name: format!("{}_then", t.name),
