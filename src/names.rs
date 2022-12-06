@@ -1,4 +1,4 @@
-use crate::ivy_l2s::{Expr, IfCond, Relation, Step, System, Transition};
+use crate::ivy_l2s::{Expr, IfCond, Relation, Step, Sub, Subs, System, Transition};
 
 /// Clean up names from Ivy output.
 
@@ -125,6 +125,19 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
             invariants: sys.invariants.iter().map(|e| self.invariant(e)).collect(),
         }
     }
+
+    fn sub(&self, s: &Sub) -> Sub {
+        Sub {
+            l2s_binder: self.ident(&s.l2s_binder),
+            binders: s.binders.iter().map(|i| self.ident(i)).collect(),
+            expr: s.expr.clone(),
+            name: self.ident(&s.name),
+        }
+    }
+
+    fn subs(&self, ss: &Subs) -> Subs {
+        ss.iter().map(|s| self.sub(s)).collect()
+    }
 }
 
 pub fn clean_namespaces(sys: &System) -> System {
@@ -133,4 +146,8 @@ pub fn clean_namespaces(sys: &System) -> System {
 
 pub fn clean_types(sys: &System) -> System {
     IdentFn(ident_remove_types).system(sys)
+}
+
+pub fn clean_namespaces_subs(subs: &Subs) -> Subs {
+    IdentFn(ident_remove_namespaces).subs(subs)
 }

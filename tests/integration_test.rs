@@ -34,14 +34,14 @@ fn mutex_l2s_output_parses() {
 fn mutex_l2s_file() {
     let (subs, sys) = parse_input("mutex.l2s.out");
     insta::assert_debug_snapshot!(subs);
-    let output = mypyvy::fmt_system(&sys);
+    let output = mypyvy::fmt_system(&subs, &sys);
     insta::assert_display_snapshot!(output);
 }
 
 #[test]
 fn better_mutex_l2s_file() {
-    let (_, sys) = parse_input("better_mutex.l2s.out");
-    let output = mypyvy::fmt_system(&sys);
+    let (subs, sys) = parse_input("better_mutex.l2s.out");
+    let output = mypyvy::fmt_system(&subs, &sys);
     insta::assert_display_snapshot!(output);
 }
 

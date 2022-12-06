@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
-use crate::ivy_l2s::{Expr, IfCond, Step, System, Transition};
+use crate::ivy_l2s::{Expr, IfCond, Step, Sub, Subs, System, Transition};
 
 pub type Type = Vec<String>;
 
@@ -12,6 +12,18 @@ pub struct Types {
 fn ident_typ(name: &str) -> Option<(String, Type)> {
     name.split_once(':')
         .map(|(name, typ)| (name.to_string(), vec![typ.to_string()]))
+}
+
+fn idents_typ(names: &[String]) -> Option<Type> {
+    let mut typs = vec![];
+    for i in names {
+        if let Some((_, typ)) = ident_typ(i) {
+            typs.extend(typ)
+        } else {
+            return None;
+        }
+    }
+    Some(typs)
 }
 
 impl Types {
@@ -42,10 +54,19 @@ impl Types {
         sorts
     }
 
-    pub fn infer(&mut self, sys: &System) {
+    pub fn infer(&mut self, subs: &Subs, sys: &System) {
+        for sub in subs {
+            self.infer_sub(sub);
+        }
         self.infer_steps(&sys.init);
         for t in &sys.transitions {
             self.infer_transition(t)
+        }
+    }
+
+    fn infer_sub(&mut self, sub: &Sub) {
+        if let Some(typ) = idents_typ(&sub.binders) {
+            self.insert(sub.name.clone(), typ);
         }
     }
 
@@ -87,7 +108,10 @@ impl Types {
                 }
                 // TODO: hack, useful for recording that a relation's arity
                 let args: Vec<String> = (0..r.args.len()).map(|_| "?".to_string()).collect();
-                self.insert(r.name.to_string(), args);
+                let name = r.name.to_string();
+                if !self.typs.contains_key(&name) {
+                    self.insert(r.name.to_string(), args);
+                }
                 self.infer_expr(e);
             }
             Step::If { cond, then, else_ } => {

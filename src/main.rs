@@ -18,7 +18,7 @@ fn main() {
     let args = Args::parse();
 
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
-    let (_subs, sys) = match ivy_l2s::parse(&unparsed_file) {
+    let (subs, sys) = match ivy_l2s::parse(&unparsed_file) {
         Ok(v) => v,
         Err(err) => {
             eprintln!("could not parse input:");
@@ -30,6 +30,6 @@ fn main() {
     if args.ivy {
         print!("{}", pretty::fmt_system(&sys));
     } else {
-        print!("{}", mypyvy::fmt_system(&sys));
+        print!("{}", mypyvy::fmt_system(&subs, &sys));
     }
 }

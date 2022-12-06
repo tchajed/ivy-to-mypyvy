@@ -143,10 +143,10 @@ pub enum Step {
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Sub {
-    l2s_binder: String,
-    binders: Vec<String>,
-    expr: String,
-    name: String,
+    pub l2s_binder: String,
+    pub binders: Vec<String>,
+    pub expr: String,
+    pub name: String,
 }
 
 pub type Subs = Vec<Sub>;

@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::{collections::HashMap, fmt::Write};
 
 use crate::ivy_l2s::{
-    BinOp, Expr, IfCond, PrefixOp, Quantifier, Relation, Step, System, Transition,
+    BinOp, Expr, IfCond, PrefixOp, Quantifier, Relation, Step, Subs, System, Transition,
 };
 use crate::names;
 use crate::printing::{self, indented, parens};
@@ -621,11 +621,12 @@ impl SysState {
     }
 }
 
-pub fn fmt_system(sys: &System) -> String {
+pub fn fmt_system(subs: &Subs, sys: &System) -> String {
     let mut state = SysState::new();
 
     let sys = names::clean_namespaces(sys);
-    state.types.infer(&sys);
+    let subs = names::clean_namespaces_subs(subs);
+    state.types.infer(&subs, &sys);
     let sys = names::clean_types(&sys);
 
     let mut init_steps = vec!["init !__error".to_string()];
