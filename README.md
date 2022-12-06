@@ -18,12 +18,15 @@ cargo run -- tests/mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable consta
 cargo run -- tests/better_mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > better_mutex.pyv
 ```
 
+For `ticket.ivy` the manual work is more involved, so it's wrapped up in a script. Run `./scripts/ticket.sh > ticket.pyv` to generate that file.
+
 You can then verify the liveness property using the hand-written invariants, for
 example:
 
 ```sh
 mypyvy verify mutex.pyv
 mypyvy verify better_mutex.pyv
+mypyvy verify ticket.pyv
 ```
 
 (I have an alias for `mypyvy`, without that you'd pass the path to
