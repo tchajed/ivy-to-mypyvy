@@ -8,19 +8,13 @@ Convert an [Ivy](https://kenmcmil.github.io/ivy/) transition system (after its l
 ## Usage
 
 To get an input file suitable for `ivy-to-mypyvy`, run `ivy_check l2s_debug=true
-mutex.ivy > ivy.out`, then extract the relevant portion with
-
-```sh
-awk '/^after replace_named_binders/{ p = 1; next } /while \*/{ p = 0 } p' ivy.out | sed 's/;/;\n/g' > l2s.out
-```
-
-(Somebody perhaps the tool will do that for you.)
+mutex.ivy > l2s.out`.
 
 Run with `cargo run -- l2s.out`. Currently for the mutex example in l2s.out the
 required cleanup is the following:
 
 ```sh
-cargo run -- tests/l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > mutex.pyv
+cargo run -- tests/mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > mutex.pyv
 ```
 
 For debugging purposes, `cargo run -- --ivy l2s.out` will parse and then print
