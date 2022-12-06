@@ -141,6 +141,16 @@ pub enum Step {
     },
 }
 
+#[derive(PartialEq, Eq, Debug, Clone)]
+pub struct Sub {
+    l2s_binder: String,
+    binders: Vec<String>,
+    expr: String,
+    name: String,
+}
+
+pub type Subs = Vec<Sub>;
+
 /// Construct a quantified expression with multiple binders by recursively
 /// nesting the single-quantifier Expr::Quantified construct.
 fn quantified_expr(q: Quantifier, binders: &[String], e: Expr) -> Expr {
@@ -262,7 +272,28 @@ peg::parser! {
         rule file0() -> System
             = _ s:system() _ eof() { s }
 
-        pub rule file() -> System = traced(<file0()>)
+        pub rule file() -> System = file0()
+
+        rule sub_expr_component() -> String
+            = s:$([^ ' ' | '\t' | '\n' | '\r']*)
+            {?  if s == ":" {
+                    Err("reached type")
+                } else {
+                    Ok(s.to_string())
+                } }
+
+        rule sub_expr() -> String
+           = cs:(sub_expr_component() ** " ") { cs.join(" ") }
+
+        pub(super) rule sub() -> Sub
+            = "$" l2s_binder:ident() _ binders:(ident() ** (_ "," _)) "." _
+            expr:sub_expr() _ ":" _ name:ident()
+            { Sub { l2s_binder, binders, expr, name } }
+
+        rule subs0() -> Vec<Sub>
+            = _ ss:(sub() ** _) _ { ss }
+
+        pub rule subs() -> Vec<Sub> = traced(<subs0()>)
 
         // wrap a rule with tracing support, gated under the trace feature
         rule traced<T>(e: rule<T>) -> T =
@@ -280,7 +311,7 @@ peg::parser! {
 
 #[cfg(test)]
 mod peg_tests {
-    use super::ivy_parser::{action_def, args, expr, ident, steps};
+    use super::ivy_parser::{action_def, args, expr, ident, steps, sub};
 
     #[test]
     fn test_ident() {
@@ -301,12 +332,12 @@ mod peg_tests {
 
     #[test]
     fn test_expr() {
-        assert!(expr("p&q|r").is_ok());
-        assert!(expr("p|r|bar").is_ok());
+        expr("p&q|r").unwrap();
+        expr("p|r|bar").unwrap();
 
-        assert!(expr("(p|r)&bar").is_ok());
-        assert!(expr("(p|r) & bar").is_ok());
-        assert!(expr("(p | r)&bar").is_ok());
+        expr("(p|r)&bar").unwrap();
+        expr("(p|r) & bar").unwrap();
+        expr("(p | r)&bar").unwrap();
 
         let e = expr("p|(r&bar)").unwrap();
         assert_eq!(e, expr("p|r&bar").unwrap());
@@ -314,18 +345,18 @@ mod peg_tests {
 
         assert_eq!(expr("p&q&r").unwrap(), expr("(p&q)&r").unwrap());
 
-        assert!(expr("forall x. p(x) & x = y").is_ok())
+        expr("forall x. p(x) & x = y").unwrap();
     }
 
     #[test]
     fn test_steps() {
-        assert!(steps("if p(x) { r(Y) := true } else { g(Y) := x = Y }").is_ok());
-        assert!(steps("assume foo; assert bar").is_ok());
+        steps("if p(x) { r(Y) := true } else { g(Y) := x = Y }").unwrap();
+        steps("assume foo; assert bar").unwrap();
     }
 
     #[test]
     fn test_action_def() {
-        assert!(action_def(
+        action_def(
 "ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
     assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
     assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
@@ -360,25 +391,43 @@ mod peg_tests {
     assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
     assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
     l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
-    l2s_d(mutex_protocol.t0) := true}}").is_ok())
+    l2s_d(mutex_protocol.t0) := true}}").unwrap();
     }
+
+    #[test]
+    fn test_sub() {
+        let s = sub("$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)  :  l2s_g_4").unwrap();
+        assert_eq!(s.l2s_binder, "l2s_g");
+        assert_eq!(s.name, "l2s_g_4");
+    }
+}
+
+fn between<'a>(s: &'a str, start: &str, end: &str) -> Option<&'a str> {
+    s.find(start).and_then(|n| {
+        let s = &s[n + start.len()..];
+        s.find(end).map(|n| &s[..n])
+    })
+}
+
+fn find_subs_section(s: &str) -> Result<&str, String> {
+    let start_marker = "\nsubs:\n";
+    let end_marker = "===================";
+    between(s, start_marker, end_marker).ok_or("could not find subs section".to_string())
 }
 
 fn find_l2s_section(s: &str) -> Result<&str, String> {
     let start_marker = "\nafter replace_named_binders\n";
-    let s = match s.find(start_marker) {
-        Some(n) => &s[n + start_marker.len()..],
-        None => return Err("could not find replace_named_binders marker".to_string()),
-    };
     let end_marker = "    {\n";
-    let s = match s.find(end_marker) {
-        Some(n) => &s[..n],
-        None => return Err("could not find end of replace_named_binders section".to_string()),
-    };
-    Ok(s)
+    between(s, start_marker, end_marker)
+        .ok_or("could not find replace_named_binders section".to_string())
 }
 
-pub fn parse(s: &str) -> Result<System, String> {
-    let s = find_l2s_section(s)?;
-    ivy_parser::file(s).map_err(|err| format!("{err}"))
+pub fn parse(s: &str) -> Result<(Subs, System), String> {
+    let subs_text = find_subs_section(s)?;
+    let subs = ivy_parser::subs(subs_text).map_err(|err| format!("subs: {err}"))?;
+
+    let l2s_text = find_l2s_section(s)?;
+    let sys = ivy_parser::file(l2s_text).map_err(|err| format!("file: {err}"))?;
+
+    Ok((subs, sys))
 }

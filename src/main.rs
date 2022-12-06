@@ -18,8 +18,8 @@ fn main() {
     let args = Args::parse();
 
     let unparsed_file = fs::read_to_string(args.file).expect("could not read input file");
-    let sys = match ivy_l2s::parse(&unparsed_file) {
-        Ok(sys) => sys,
+    let (_subs, sys) = match ivy_l2s::parse(&unparsed_file) {
+        Ok(v) => v,
         Err(err) => {
             eprintln!("could not parse input:");
             eprintln!("{err}");

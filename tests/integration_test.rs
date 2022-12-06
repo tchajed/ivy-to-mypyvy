@@ -1,7 +1,7 @@
 use std::fs;
 
 use ivy_to_mypyvy::{
-    ivy_l2s::{self, System},
+    ivy_l2s::{self, Subs, System},
     mypyvy, pretty,
 };
 
@@ -9,7 +9,7 @@ fn read_input(name: &str) -> String {
     fs::read_to_string(format!("tests/{name}")).expect("could not read input file")
 }
 
-fn parse_input(name: &str) -> System {
+fn parse_input(name: &str) -> (Subs, System) {
     let input = read_input(name);
     ivy_l2s::parse(&input)
         .unwrap_or_else(|err| panic!("unsuccessful parse of input file {name}: {err}"))
@@ -17,7 +17,8 @@ fn parse_input(name: &str) -> System {
 
 #[test]
 fn mutex_l2s_output_parses() {
-    let sys = parse_input("mutex.l2s.out");
+    let (subs, sys) = parse_input("mutex.l2s.out");
+    assert_eq!(subs.len(), 20, "incorrect number of subs parsed");
     assert_eq!(
         sys.transitions.len(),
         8,
@@ -31,21 +32,22 @@ fn mutex_l2s_output_parses() {
 
 #[test]
 fn mutex_l2s_file() {
-    let sys = parse_input("mutex.l2s.out");
+    let (subs, sys) = parse_input("mutex.l2s.out");
+    insta::assert_debug_snapshot!(subs);
     let output = mypyvy::fmt_system(&sys);
     insta::assert_display_snapshot!(output);
 }
 
 #[test]
 fn better_mutex_l2s_file() {
-    let sys = parse_input("better_mutex.l2s.out");
+    let (_, sys) = parse_input("better_mutex.l2s.out");
     let output = mypyvy::fmt_system(&sys);
     insta::assert_display_snapshot!(output);
 }
 
 #[test]
 fn mutex_l2s_ivy_pretty_print() {
-    let sys = parse_input("mutex.l2s.out");
+    let (_, sys) = parse_input("mutex.l2s.out");
     let output = pretty::fmt_system(&sys);
     insta::assert_display_snapshot!(output);
 }
