@@ -412,14 +412,14 @@ fn between<'a>(s: &'a str, start: &str, end: &str) -> Option<&'a str> {
 fn find_subs_section(s: &str) -> Result<&str, String> {
     let start_marker = "\nsubs:\n";
     let end_marker = "===================";
-    between(s, start_marker, end_marker).ok_or("could not find subs section".to_string())
+    between(s, start_marker, end_marker).ok_or_else(|| "could not find subs section".to_string())
 }
 
 fn find_l2s_section(s: &str) -> Result<&str, String> {
     let start_marker = "\nafter replace_named_binders\n";
     let end_marker = "    {\n";
     between(s, start_marker, end_marker)
-        .ok_or("could not find replace_named_binders section".to_string())
+        .ok_or_else(|| "could not find replace_named_binders section".to_string())
 }
 
 pub fn parse(s: &str) -> Result<(Subs, System), String> {
