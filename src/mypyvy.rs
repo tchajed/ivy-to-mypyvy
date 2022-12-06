@@ -24,26 +24,12 @@ impl SysState {
         }
     }
 
-    fn fresh_name(&self, r: &str) -> String {
-        if !self.havoc_relations.contains(r) {
-            return r.to_string();
-        }
-        let mut n = 1;
-        loop {
-            let new_r = format!("{r}__{n}");
-            if !self.havoc_relations.contains(&new_r) {
-                return new_r;
-            }
-            n += 1;
-        }
-    }
-
     /// Compute the right-hand side of a havoc assignment to r.
     ///
     /// This mutates self to record that a havoc relation was used for this
     /// instance of havoc.
     fn havoc_rel(&mut self, r: &Relation) -> Expr {
-        let havoc_name = self.fresh_name(&format!("havoc_{}", r.name));
+        let havoc_name = format!("havoc_{}", r.name);
         let havoc_rel = Relation {
             name: havoc_name.clone(),
             args: r.args.clone(),
