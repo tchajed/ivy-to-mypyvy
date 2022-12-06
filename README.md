@@ -10,14 +10,26 @@ Convert an [Ivy](https://kenmcmil.github.io/ivy/) transition system (after its l
 To get an input file suitable for `ivy-to-mypyvy`, run `ivy_check l2s_debug=true
 mutex.ivy > l2s.out`.
 
-Run with `cargo run -- l2s.out`. Currently for the mutex example in l2s.out the
+Run with `cargo run -- l2s.out`. Currently for the `mutex` and `better_mutex` examples the
 required cleanup is the following:
 
 ```sh
 cargo run -- tests/mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > mutex.pyv
+cargo run -- tests/better_mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > better_mutex.pyv
 ```
 
-For debugging purposes, `cargo run -- --ivy l2s.out` will parse and then print
+You can then verify the liveness property using the hand-written invariants, for
+example:
+
+```sh
+mypyvy verify mutex.pyv
+mypyvy verify better_mutex.pyv
+```
+
+(I have an alias for `mypyvy`, without that you'd pass the path to
+`mypyvy.sh`.)
+
+For debugging purposes, `cargo run -- --ivy tests/mutex.l2s.out` will parse and then print
 back the Ivy input.
 
 ## Development notes
