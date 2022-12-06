@@ -46,6 +46,13 @@ fn better_mutex_l2s_file() {
 }
 
 #[test]
+fn ticket_l2s_file() {
+    let (subs, sys) = parse_input("ticket.l2s.out");
+    let output = mypyvy::fmt_system(&subs, &sys);
+    insta::assert_display_snapshot!(output);
+}
+
+#[test]
 fn mutex_l2s_ivy_pretty_print() {
     let (_, sys) = parse_input("mutex.l2s.out");
     let output = pretty::fmt_system(&sys);

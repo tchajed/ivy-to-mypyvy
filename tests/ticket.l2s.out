@@ -1,0 +1,1233 @@
+
+Isolate this:
+
+    The following properties are assumed as axioms:
+        /ivy/ticket.ivy: line 33: ticket_protocol.axiom1
+        /ivy/ticket.ivy: line 34: ticket_protocol.axiom2
+        /ivy/ticket.ivy: line 35: ticket_protocol.axiom3
+        /ivy/ticket.ivy: line 36: ticket_protocol.axiom4
+        /ivy/ticket.ivy: line 63: ticket_protocol.axiom5
+
+    The following properties are to be checked:
+
+    The following action implementations are present:
+        /ivy/ticket.ivy: line 50: implementation of ticket_protocol.step12
+        /ivy/ticket.ivy: line 51: implementation of ticket_protocol.step22
+        /ivy/ticket.ivy: line 52: implementation of ticket_protocol.step23
+        /ivy/ticket.ivy: line 53: implementation of ticket_protocol.step31
+
+    The following action monitors are present:
+        /ivy/ticket.ivy: line 86: monitor of ticket_protocol.step12
+        /ivy/ticket.ivy: line 99: monitor of ticket_protocol.step22
+        /ivy/ticket.ivy: line 109: monitor of ticket_protocol.step23
+        /ivy/ticket.ivy: line 120: monitor of ticket_protocol.step31
+
+    The following initializers are present:
+        /ivy/ticket.ivy: line 76: ticket_protocol.init[after6]
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action ticket_protocol.step12 when called from the environment:
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+            /ivy/ticket.ivy: line 87: assumption
+            /ivy/ticket.ivy: line 88: assumption
+            /ivy/ticket.ivy: line 91: assumption
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+        in action ticket_protocol.step22 when called from the environment:
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+            /ivy/ticket.ivy: line 100: assumption
+            /ivy/ticket.ivy: line 101: assumption
+            /ivy/ticket.ivy: line 102: assumption
+            /ivy/ticket.ivy: line 103: assumption
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+        in action ticket_protocol.step23 when called from the environment:
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+            /ivy/ticket.ivy: line 110: assumption
+            /ivy/ticket.ivy: line 111: assumption
+            /ivy/ticket.ivy: line 112: assumption
+            /ivy/ticket.ivy: line 113: assumption
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+        in action ticket_protocol.step31 when called from the environment:
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+            /ivy/ticket.ivy: line 121: assumption
+            /ivy/ticket.ivy: line 122: assumption
+            /ivy/ticket.ivy: line 124: assumption
+            /ivy/ticket.ivy: line 150: assumption
+            /ivy/ticket.ivy: line 139: assumption
+            /ivy/ticket.ivy: line 148: assumption
+            /ivy/ticket.ivy: line 140: assumption
+            /ivy/ticket.ivy: line 144: assumption
+            /ivy/ticket.ivy: line 147: assumption
+            /ivy/ticket.ivy: line 149: assumption
+            /ivy/ticket.ivy: line 143: assumption
+            /ivy/ticket.ivy: line 161: assumption
+            /ivy/ticket.ivy: line 160: assumption
+            /ivy/ticket.ivy: line 163: assumption
+            /ivy/ticket.ivy: line 162: assumption
+            /ivy/ticket.ivy: line 157: assumption
+            /ivy/ticket.ivy: line 154: assumption
+            /ivy/ticket.ivy: line 159: assumption
+            /ivy/ticket.ivy: line 158: assumption
+            /ivy/ticket.ivy: line 164: assumption
+            /ivy/ticket.ivy: line 151: assumption
+
+Isolate ticket_protocol:
+
+    The following properties are assumed as axioms:
+        /ivy/ticket.ivy: line 33: ticket_protocol.axiom1
+        /ivy/ticket.ivy: line 34: ticket_protocol.axiom2
+        /ivy/ticket.ivy: line 35: ticket_protocol.axiom3
+        /ivy/ticket.ivy: line 36: ticket_protocol.axiom4
+        /ivy/ticket.ivy: line 63: ticket_protocol.axiom5
+
+    The following properties are to be checked:
+
+    The inductive invariant consists of the following conjectures:
+        /ivy/ticket.ivy: line 139: ticket_protocol.invar11
+        /ivy/ticket.ivy: line 140: ticket_protocol.invar12
+        /ivy/ticket.ivy: line 143: ticket_protocol.invar13
+        /ivy/ticket.ivy: line 144: ticket_protocol.invar14
+        /ivy/ticket.ivy: line 147: ticket_protocol.invar15
+        /ivy/ticket.ivy: line 148: ticket_protocol.invar16
+        /ivy/ticket.ivy: line 149: ticket_protocol.invar17
+        /ivy/ticket.ivy: line 150: ticket_protocol.invar18
+        /ivy/ticket.ivy: line 151: ticket_protocol.invar19
+        /ivy/ticket.ivy: line 154: ticket_protocol.invar20
+        /ivy/ticket.ivy: line 157: ticket_protocol.invar21
+        /ivy/ticket.ivy: line 158: ticket_protocol.invar22
+        /ivy/ticket.ivy: line 159: ticket_protocol.invar23
+        /ivy/ticket.ivy: line 160: ticket_protocol.invar24
+        /ivy/ticket.ivy: line 161: ticket_protocol.invar25
+        /ivy/ticket.ivy: line 162: ticket_protocol.invar26
+        /ivy/ticket.ivy: line 163: ticket_protocol.invar27
+        /ivy/ticket.ivy: line 164: ticket_protocol.invar28
+
+    The following action implementations are present:
+        /ivy/ticket.ivy: line 50: implementation of ticket_protocol.step12
+        /ivy/ticket.ivy: line 51: implementation of ticket_protocol.step22
+        /ivy/ticket.ivy: line 52: implementation of ticket_protocol.step23
+        /ivy/ticket.ivy: line 53: implementation of ticket_protocol.step31
+
+    The following action monitors are present:
+        /ivy/ticket.ivy: line 86: monitor of ticket_protocol.step12
+        /ivy/ticket.ivy: line 99: monitor of ticket_protocol.step22
+        /ivy/ticket.ivy: line 109: monitor of ticket_protocol.step23
+        /ivy/ticket.ivy: line 120: monitor of ticket_protocol.step31
+
+    The following initializers are present:
+        /ivy/ticket.ivy: line 76: ticket_protocol.init[after6]
+
+    Initialization must establish the invariant
+        /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+        /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+        /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+        /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+        /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+        /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+        /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+        /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+        /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+        /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+        /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+        /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+        /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+        /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+        /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+        /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+        /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+        /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following set of external actions must preserve the invariant:
+        (internal) ext:ticket_protocol.step12
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+        (internal) ext:ticket_protocol.step22
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+        (internal) ext:ticket_protocol.step23
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+        (internal) ext:ticket_protocol.step31
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action ticket_protocol.step12 when called from the environment:
+            /ivy/ticket.ivy: line 87: assumption
+            /ivy/ticket.ivy: line 88: assumption
+            /ivy/ticket.ivy: line 91: assumption
+        in action ticket_protocol.step22 when called from the environment:
+            /ivy/ticket.ivy: line 100: assumption
+            /ivy/ticket.ivy: line 101: assumption
+            /ivy/ticket.ivy: line 102: assumption
+            /ivy/ticket.ivy: line 103: assumption
+        in action ticket_protocol.step23 when called from the environment:
+            /ivy/ticket.ivy: line 110: assumption
+            /ivy/ticket.ivy: line 111: assumption
+            /ivy/ticket.ivy: line 112: assumption
+            /ivy/ticket.ivy: line 113: assumption
+        in action ticket_protocol.step31 when called from the environment:
+            /ivy/ticket.ivy: line 121: assumption
+            /ivy/ticket.ivy: line 122: assumption
+            /ivy/ticket.ivy: line 124: assumption
+
+    The following temporal property is being proved:
+
+        /ivy/ticket.ivy: line 174: ticket_protocol.nonstarvation ... ================================================================================
+after replace_temporals_by_named_binder_g_ast
+
+
+
+================================================================================
+l2s_gs:
+() ~ticket_protocol.pc3(ticket_protocol.t0) None
+() ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) None
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~ticket_protocol.pc3(V0) None
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~ticket_protocol.scheduled(V0) None
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) None
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) None
+================================================================================
+
+
+
+
+let
+    ext:ticket_protocol.step12 = action(fml:t:ticket_protocol.thread,fml:next_ticket0:ticket_protocol.ticket,fml:s:ticket_protocol.ticket){{{assume ticket_protocol.pc1(fml:t); assume ticket_protocol.next_ticket(fml:next_ticket0); ticket_protocol.m(T,K) := T:ticket_protocol.thread = fml:t & K:ticket_protocol.ticket = fml:next_ticket0 | T ~= fml:t & ticket_protocol.m(T,K); assume ~ticket_protocol.le(fml:s,fml:next_ticket0) & (forall Z. ~ticket_protocol.le(Z,fml:next_ticket0) -> ticket_protocol.le(fml:s,Z)); ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = fml:s; ticket_protocol.pc1(fml:t) := false; ticket_protocol.pc2(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step22 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc2(fml:t); assume ticket_protocol.m(fml:t,fml:k); assume ticket_protocol.service(fml:service0); assume ~ticket_protocol.le(fml:k,fml:service0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step23 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc2(fml:t); assume ticket_protocol.m(fml:t,fml:k); assume ticket_protocol.service(fml:service0); assume ticket_protocol.le(fml:k,fml:service0); ticket_protocol.pc2(fml:t) := false; ticket_protocol.pc3(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step31 = action(fml:t:ticket_protocol.thread,fml:s:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc3(fml:t); assume ticket_protocol.service(fml:service0); assume ~ticket_protocol.le(fml:s,fml:service0) & (forall Z. ~ticket_protocol.le(Z,fml:service0) -> ticket_protocol.le(fml:s,Z)); ticket_protocol.service(K) := K:ticket_protocol.ticket = fml:s; ticket_protocol.pc3(fml:t) := false; ticket_protocol.pc1(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+in
+    {{ticket_protocol.pc1(T) := true; ticket_protocol.pc2(T) := false; ticket_protocol.pc3(T) := false; ticket_protocol.service(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.m(T,K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.scheduled(T) := false}}
+    while *
+        invariant [ticket_protocol.invar11] exists Service0. ticket_protocol.service(Service0)
+        invariant [ticket_protocol.invar12] ticket_protocol.service(K1) & ticket_protocol.service(K2) -> K1 = K2
+        invariant [ticket_protocol.invar13] exists Next_ticket0. ticket_protocol.next_ticket(Next_ticket0)
+        invariant [ticket_protocol.invar14] ticket_protocol.next_ticket(K1) & ticket_protocol.next_ticket(K2) -> K1 = K2
+        invariant [ticket_protocol.invar15] ticket_protocol.pc1(T) | ticket_protocol.pc2(T) | ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar16] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc2(T)
+        invariant [ticket_protocol.invar17] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar18] ~ticket_protocol.pc2(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar19] ticket_protocol.m(T,K1) & ticket_protocol.m(T,K2) -> K1 = K2
+        invariant [ticket_protocol.invar20] ticket_protocol.pc3(T1) & ticket_protocol.pc3(T2) -> T1 = T2
+        invariant [ticket_protocol.invar21] ticket_protocol.next_ticket(ticket_protocol.zero) -> ticket_protocol.m(T,ticket_protocol.zero)
+        invariant [ticket_protocol.invar22] ~ticket_protocol.next_ticket(ticket_protocol.zero) & ticket_protocol.m(T,M) & ticket_protocol.next_ticket(N) -> ~ticket_protocol.le(N,M)
+        invariant [ticket_protocol.invar23] ticket_protocol.pc2(T) | ticket_protocol.pc3(T) -> ~ticket_protocol.next_ticket(ticket_protocol.zero)
+        invariant [ticket_protocol.invar24] ticket_protocol.m(T1,M) & ticket_protocol.m(T2,M) & M ~= ticket_protocol.zero -> T1 = T2
+        invariant [ticket_protocol.invar25] ticket_protocol.pc2(T) & ticket_protocol.m(T,M) & ticket_protocol.service(S) -> ticket_protocol.le(S,M)
+        invariant [ticket_protocol.invar26] ticket_protocol.pc3(T) & ticket_protocol.service(S) -> ticket_protocol.m(T,S)
+        invariant [ticket_protocol.invar27] ticket_protocol.service(S) & ticket_protocol.next_ticket(N) -> ticket_protocol.le(S,N)
+        invariant [ticket_protocol.invar28] ~(~ticket_protocol.pc1(T1) & ~ticket_protocol.pc1(T2) & ticket_protocol.m(T1,ticket_protocol.zero) & ticket_protocol.m(T2,ticket_protocol.zero) & T1 ~= T2)
+        invariant [invar29] ~ticket_protocol.scheduled(T)
+        invariant [invar30] $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(T)
+        invariant [invar31] ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))
+        invariant [invar32] ~($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) <-> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar33] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar34] ~l2s_waiting | ~l2s_frozen
+        invariant [invar35] ~l2s_waiting | ~l2s_saved
+        invariant [invar36] ~l2s_frozen | ~l2s_saved
+        invariant [invar37] l2s_frozen -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar38] l2s_saved -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar39] l2s_saved -> ($l2s_s T:ticket_protocol.thread,K:ticket_protocol.ticket. ticket_protocol.m(T,K)(ticket_protocol.t0,K) <-> ticket_protocol.m(ticket_protocol.t0,K))
+        invariant [invar40] l2s_saved -> ($l2s_s S:ticket_protocol.ticket. ticket_protocol.service(S)(S1) & ticket_protocol.service(S2) -> ticket_protocol.le(S1,S2))
+        invariant [invar41] l2s_saved -> ($l2s_s N:ticket_protocol.ticket. ticket_protocol.next_ticket(N)(N1) & ticket_protocol.next_ticket(N2) -> ticket_protocol.le(N1,N2))
+        invariant [invar42] ticket_protocol.pc1(T) & ticket_protocol.m(T,M) & M ~= ticket_protocol.zero & ticket_protocol.service(S) -> ~ticket_protocol.le(S,M)
+        invariant [invar43] ticket_protocol.next_ticket(N) & ticket_protocol.service(S) -> (forall K. ~ticket_protocol.le(N,K) & ticket_protocol.le(S,K) -> (exists T. ticket_protocol.m(T,K) & ~ticket_protocol.pc1(T)))
+        invariant [invar44] exists M. ticket_protocol.m(ticket_protocol.t0,M)
+        invariant [invar45] l2s_d(ticket_protocol.t0)
+        invariant [invar46] ~ticket_protocol.pc1(T) -> l2s_d(T)
+        invariant [invar47] ticket_protocol.next_ticket(N) & ticket_protocol.le(K,N) -> l2s_d(K)
+        invariant [invar48] ~l2s_waiting -> l2s_a(ticket_protocol.t0)
+        invariant [invar49] ~l2s_waiting & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) & ~ticket_protocol.le(K0,K) & ~ticket_protocol.pc1(T) -> l2s_a(T)
+        invariant [invar50] ~l2s_waiting & ticket_protocol.m(ticket_protocol.t0,K0) & ticket_protocol.le(K,K0) -> l2s_a(K)
+        invariant [invar51] l2s_saved & $l2s_w T:ticket_protocol.thread. ticket_protocol.scheduled(T)(T) -> ($l2s_s T:ticket_protocol.thread. ticket_protocol.pc1(T)(T) <-> ticket_protocol.pc1(T))
+        invariant [invar52] l2s_saved & $l2s_w T:ticket_protocol.thread. ticket_protocol.scheduled(T)(T) -> ($l2s_s T:ticket_protocol.thread. ticket_protocol.pc2(T)(T) <-> ticket_protocol.pc2(T))
+        invariant [invar53] l2s_saved & $l2s_w T:ticket_protocol.thread. ticket_protocol.scheduled(T)(T) -> ($l2s_s T:ticket_protocol.thread. ticket_protocol.pc3(T)(T) <-> ticket_protocol.pc3(T))
+        invariant [invar54] l2s_saved & $l2s_w T:ticket_protocol.thread. ticket_protocol.scheduled(T)(T) -> ($l2s_s T:ticket_protocol.thread,K:ticket_protocol.ticket. ticket_protocol.m(T,K)(T,K) <-> ticket_protocol.m(T,K))
+        invariant [invar55] l2s_saved & $l2s_s S:ticket_protocol.ticket. ticket_protocol.service(S)(S1) & $l2s_s T:ticket_protocol.thread,K:ticket_protocol.ticket. ticket_protocol.m(T,K)(T,S1) & ~$l2s_w X:ticket_protocol.thread. ticket_protocol.scheduled(X)(T) & $l2s_s T:ticket_protocol.thread. ticket_protocol.pc2(T)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0) | ticket_protocol.pc3(T) & K = S1
+        invariant [invar56] l2s_saved & $l2s_s S:ticket_protocol.ticket. ticket_protocol.service(S)(S1) & $l2s_s T:ticket_protocol.thread,K:ticket_protocol.ticket. ticket_protocol.m(T,K)(T,S1) & ticket_protocol.service(S2) & ~$l2s_w T:ticket_protocol.thread. ticket_protocol.scheduled(T)(T) & $l2s_s T:ticket_protocol.thread. ticket_protocol.pc3(T)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 & ~ticket_protocol.le(S2,K) | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0)
+    {
+        diverge;
+        call one of {ext:ticket_protocol.step12,ext:ticket_protocol.step22,ext:ticket_protocol.step23,ext:ticket_protocol.step31}
+    }
+
+================================================================================
+
+
+
+================================================================================
+after normalize_named_binders
+
+
+
+
+let
+    ext:ticket_protocol.step12 = action(fml:t:ticket_protocol.thread,fml:next_ticket0:ticket_protocol.ticket,fml:s:ticket_protocol.ticket){{{assume ticket_protocol.pc1(fml:t); assume ticket_protocol.next_ticket(fml:next_ticket0); ticket_protocol.m(T,K) := T:ticket_protocol.thread = fml:t & K:ticket_protocol.ticket = fml:next_ticket0 | T ~= fml:t & ticket_protocol.m(T,K); assume ~ticket_protocol.le(fml:s,fml:next_ticket0) & (forall Z. ~ticket_protocol.le(Z,fml:next_ticket0) -> ticket_protocol.le(fml:s,Z)); ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = fml:s; ticket_protocol.pc1(fml:t) := false; ticket_protocol.pc2(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step22 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc2(fml:t); assume ticket_protocol.m(fml:t,fml:k); assume ticket_protocol.service(fml:service0); assume ~ticket_protocol.le(fml:k,fml:service0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step23 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc2(fml:t); assume ticket_protocol.m(fml:t,fml:k); assume ticket_protocol.service(fml:service0); assume ticket_protocol.le(fml:k,fml:service0); ticket_protocol.pc2(fml:t) := false; ticket_protocol.pc3(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+    ext:ticket_protocol.step31 = action(fml:t:ticket_protocol.thread,fml:s:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{{assume ticket_protocol.pc3(fml:t); assume ticket_protocol.service(fml:service0); assume ~ticket_protocol.le(fml:s,fml:service0) & (forall Z. ~ticket_protocol.le(Z,fml:service0) -> ticket_protocol.le(fml:s,Z)); ticket_protocol.service(K) := K:ticket_protocol.ticket = fml:s; ticket_protocol.pc3(fml:t) := false; ticket_protocol.pc1(fml:t) := true; ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t; ticket_protocol.scheduled(T) := false}}}
+in
+    {{ticket_protocol.pc1(T) := true; ticket_protocol.pc2(T) := false; ticket_protocol.pc3(T) := false; ticket_protocol.service(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.m(T,K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.scheduled(T) := false}}
+    while *
+        invariant [ticket_protocol.invar11] exists Service0. ticket_protocol.service(Service0)
+        invariant [ticket_protocol.invar12] ticket_protocol.service(K1) & ticket_protocol.service(K2) -> K1 = K2
+        invariant [ticket_protocol.invar13] exists Next_ticket0. ticket_protocol.next_ticket(Next_ticket0)
+        invariant [ticket_protocol.invar14] ticket_protocol.next_ticket(K1) & ticket_protocol.next_ticket(K2) -> K1 = K2
+        invariant [ticket_protocol.invar15] ticket_protocol.pc1(T) | ticket_protocol.pc2(T) | ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar16] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc2(T)
+        invariant [ticket_protocol.invar17] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar18] ~ticket_protocol.pc2(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar19] ticket_protocol.m(T,K1) & ticket_protocol.m(T,K2) -> K1 = K2
+        invariant [ticket_protocol.invar20] ticket_protocol.pc3(T1) & ticket_protocol.pc3(T2) -> T1 = T2
+        invariant [ticket_protocol.invar21] ticket_protocol.next_ticket(ticket_protocol.zero) -> ticket_protocol.m(T,ticket_protocol.zero)
+        invariant [ticket_protocol.invar22] ~ticket_protocol.next_ticket(ticket_protocol.zero) & ticket_protocol.m(T,M) & ticket_protocol.next_ticket(N) -> ~ticket_protocol.le(N,M)
+        invariant [ticket_protocol.invar23] ticket_protocol.pc2(T) | ticket_protocol.pc3(T) -> ~ticket_protocol.next_ticket(ticket_protocol.zero)
+        invariant [ticket_protocol.invar24] ticket_protocol.m(T1,M) & ticket_protocol.m(T2,M) & M ~= ticket_protocol.zero -> T1 = T2
+        invariant [ticket_protocol.invar25] ticket_protocol.pc2(T) & ticket_protocol.m(T,M) & ticket_protocol.service(S) -> ticket_protocol.le(S,M)
+        invariant [ticket_protocol.invar26] ticket_protocol.pc3(T) & ticket_protocol.service(S) -> ticket_protocol.m(T,S)
+        invariant [ticket_protocol.invar27] ticket_protocol.service(S) & ticket_protocol.next_ticket(N) -> ticket_protocol.le(S,N)
+        invariant [ticket_protocol.invar28] ~(~ticket_protocol.pc1(T1) & ~ticket_protocol.pc1(T2) & ticket_protocol.m(T1,ticket_protocol.zero) & ticket_protocol.m(T2,ticket_protocol.zero) & T1 ~= T2)
+        invariant [invar29] ~ticket_protocol.scheduled(T)
+        invariant [invar30] $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(T)
+        invariant [invar31] ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))
+        invariant [invar32] ~($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) <-> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar33] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar34] ~l2s_waiting | ~l2s_frozen
+        invariant [invar35] ~l2s_waiting | ~l2s_saved
+        invariant [invar36] ~l2s_frozen | ~l2s_saved
+        invariant [invar37] l2s_frozen -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar38] l2s_saved -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar39] l2s_saved -> ($l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(ticket_protocol.t0,K) <-> ticket_protocol.m(ticket_protocol.t0,K))
+        invariant [invar40] l2s_saved -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & ticket_protocol.service(S2) -> ticket_protocol.le(S1,S2))
+        invariant [invar41] l2s_saved -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.next_ticket(V0)(N1) & ticket_protocol.next_ticket(N2) -> ticket_protocol.le(N1,N2))
+        invariant [invar42] ticket_protocol.pc1(T) & ticket_protocol.m(T,M) & M ~= ticket_protocol.zero & ticket_protocol.service(S) -> ~ticket_protocol.le(S,M)
+        invariant [invar43] ticket_protocol.next_ticket(N) & ticket_protocol.service(S) -> (forall K. ~ticket_protocol.le(N,K) & ticket_protocol.le(S,K) -> (exists T. ticket_protocol.m(T,K) & ~ticket_protocol.pc1(T)))
+        invariant [invar44] exists M. ticket_protocol.m(ticket_protocol.t0,M)
+        invariant [invar45] l2s_d(ticket_protocol.t0)
+        invariant [invar46] ~ticket_protocol.pc1(T) -> l2s_d(T)
+        invariant [invar47] ticket_protocol.next_ticket(N) & ticket_protocol.le(K,N) -> l2s_d(K)
+        invariant [invar48] ~l2s_waiting -> l2s_a(ticket_protocol.t0)
+        invariant [invar49] ~l2s_waiting & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) & ~ticket_protocol.le(K0,K) & ~ticket_protocol.pc1(T) -> l2s_a(T)
+        invariant [invar50] ~l2s_waiting & ticket_protocol.m(ticket_protocol.t0,K0) & ticket_protocol.le(K,K0) -> l2s_a(K)
+        invariant [invar51] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc1(V0)(T) <-> ticket_protocol.pc1(T))
+        invariant [invar52] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(T) <-> ticket_protocol.pc2(T))
+        invariant [invar53] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(T) <-> ticket_protocol.pc3(T))
+        invariant [invar54] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,K) <-> ticket_protocol.m(T,K))
+        invariant [invar55] l2s_saved & $l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & $l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,S1) & ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) & $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0) | ticket_protocol.pc3(T) & K = S1
+        invariant [invar56] l2s_saved & $l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & $l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,S1) & ticket_protocol.service(S2) & ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) & $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 & ~ticket_protocol.le(S2,K) | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0)
+    {
+        diverge;
+        call one of {ext:ticket_protocol.step12,ext:ticket_protocol.step22,ext:ticket_protocol.step23,ext:ticket_protocol.step31}
+    }
+
+================================================================================
+
+
+
+========================================
+to_wait:
+
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ticket_protocol.scheduled(V0)
+True
+
+() ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+True
+
+========================================
+========================================
+to_g:
+
+() ~ticket_protocol.pc3(ticket_protocol.t0) 
+
+() ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) 
+
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~ticket_protocol.pc3(V0) 
+
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~ticket_protocol.scheduled(V0) 
+
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) 
+
+(Var('V0', UninterpretedSort('ticket_protocol.thread',)),) ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) 
+
+========================================
+public_actions: ['ext:ticket_protocol.step12', 'ext:ticket_protocol.step22', 'ext:ticket_protocol.step23', 'ext:ticket_protocol.step31']
+================================================================================
+after patching actions
+
+
+
+
+let
+    ext:ticket_protocol.step12 = action(fml:t:ticket_protocol.thread,fml:next_ticket0:ticket_protocol.ticket,fml:s:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:next_ticket0) := true; l2s_d(fml:s) := true; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc1(fml:t)}; {assume ticket_protocol.next_ticket(fml:next_ticket0)}; {ticket_protocol.m(T,K) := T:ticket_protocol.thread = fml:t & K:ticket_protocol.ticket = fml:next_ticket0 | T ~= fml:t & ticket_protocol.m(T,K)}; {assume ~ticket_protocol.le(fml:s,fml:next_ticket0) & (forall Z. ~ticket_protocol.le(Z,fml:next_ticket0) -> ticket_protocol.le(fml:s,Z))}; {ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = fml:s}; {ticket_protocol.pc1(fml:t) := false}; {{$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := *; $_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) & ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) -> ~$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume ($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume ~($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) -> ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); ticket_protocol.pc2(fml:t) := true}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step22 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:k) := true; l2s_d(fml:service0) := true; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc2(fml:t)}; {assume ticket_protocol.m(fml:t,fml:k)}; {assume ticket_protocol.service(fml:service0)}; {assume ~ticket_protocol.le(fml:k,fml:service0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step23 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:k) := true; l2s_d(fml:service0) := true; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc2(fml:t)}; {assume ticket_protocol.m(fml:t,fml:k)}; {assume ticket_protocol.service(fml:service0)}; {assume ticket_protocol.le(fml:k,fml:service0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := *; $_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) & ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) -> ~$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume ($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume ~($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) -> ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); ticket_protocol.pc2(fml:t) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))}; {{$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := *; $_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0) := $l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0); $l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0) := *; $_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := *; $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) & ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) -> ~$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume ($_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)); assume ~($_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) & ~ticket_protocol.pc3(ticket_protocol.t0) -> ~($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)); assume ($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume ~($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) -> ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) & ~ticket_protocol.pc3(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); ticket_protocol.pc3(fml:t) := true}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step31 = action(fml:t:ticket_protocol.thread,fml:s:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:s) := true; l2s_d(fml:service0) := true; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc3(fml:t)}; {assume ticket_protocol.service(fml:service0)}; {assume ~ticket_protocol.le(fml:s,fml:service0) & (forall Z. ~ticket_protocol.le(Z,fml:service0) -> ticket_protocol.le(fml:s,Z))}; {ticket_protocol.service(K) := K:ticket_protocol.ticket = fml:s}; {{$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) := *; $_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0) := $l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0); $l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0) := *; $_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); $l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) := *; $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) & ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)) -> ~$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0); assume ($_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)); assume ~($_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) & ~ticket_protocol.pc3(ticket_protocol.t0) -> ~($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)); assume ($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume ~($_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) -> ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) & ~ticket_protocol.pc3(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0); ticket_protocol.pc3(fml:t) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))}; {ticket_protocol.pc1(fml:t) := true}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    idle = action{{if * {assume l2s_waiting; l2s_waiting := false; l2s_frozen := true; assume forall V0. ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0); assume ~($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); l2s_a(X:ticket_protocol.ticket) := l2s_d(X:ticket_protocol.ticket); l2s_a(X:ticket_protocol.thread) := l2s_d(X:ticket_protocol.thread)}
+else if * {assume l2s_frozen; l2s_frozen := false; l2s_saved := true; $l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(V0,V1) := ticket_protocol.m(V0,V1); $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc1(V0)(V0) := ticket_protocol.pc1(V0); $l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(V0) := ticket_protocol.service(V0); $l2s_s V0:ticket_protocol.ticket. ticket_protocol.next_ticket(V0)(V0) := ticket_protocol.next_ticket(V0); $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(V0) := ticket_protocol.pc2(V0); $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(V0) := ticket_protocol.pc3(V0); $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := l2s_d(V0:ticket_protocol.thread) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))}
+else {}; assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true; assert ~(l2s_saved & (forall V0. ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0)) & ~($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & (forall V1,V0. l2s_a(V0) & l2s_a(V1:ticket_protocol.ticket) -> ($l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(V0,V1) <-> ticket_protocol.m(V0,V1))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc1(V0)(V0) <-> ticket_protocol.pc1(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(V0) <-> ticket_protocol.service(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.next_ticket(V0)(V0) <-> ticket_protocol.next_ticket(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(V0) <-> ticket_protocol.pc2(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(V0) <-> ticket_protocol.pc3(V0))))}}
+in
+    {{{ticket_protocol.pc1(T) := true; ticket_protocol.pc2(T) := false; ticket_protocol.pc3(T) := false; ticket_protocol.service(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.m(T,K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.scheduled(T) := false}}; l2s_waiting := true; l2s_frozen := false; l2s_saved := false; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true; $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(V0) := l2s_d(V0:ticket_protocol.thread) & ~ticket_protocol.scheduled(V0) & ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); $l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) := ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) & ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0) -> ~ticket_protocol.scheduled(V0); assume ($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))); assume ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)) -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(V0) -> ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0)); assume forall V0. $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0) -> ~ticket_protocol.pc3(V0); assume ~((exists T0. ~$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(T0)) -> ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))) -> ((forall T. $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(T)) -> (forall T. $l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))(T))))}
+    while *
+        invariant [ticket_protocol.invar11] exists Service0. ticket_protocol.service(Service0)
+        invariant [ticket_protocol.invar12] ticket_protocol.service(K1) & ticket_protocol.service(K2) -> K1 = K2
+        invariant [ticket_protocol.invar13] exists Next_ticket0. ticket_protocol.next_ticket(Next_ticket0)
+        invariant [ticket_protocol.invar14] ticket_protocol.next_ticket(K1) & ticket_protocol.next_ticket(K2) -> K1 = K2
+        invariant [ticket_protocol.invar15] ticket_protocol.pc1(T) | ticket_protocol.pc2(T) | ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar16] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc2(T)
+        invariant [ticket_protocol.invar17] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar18] ~ticket_protocol.pc2(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar19] ticket_protocol.m(T,K1) & ticket_protocol.m(T,K2) -> K1 = K2
+        invariant [ticket_protocol.invar20] ticket_protocol.pc3(T1) & ticket_protocol.pc3(T2) -> T1 = T2
+        invariant [ticket_protocol.invar21] ticket_protocol.next_ticket(ticket_protocol.zero) -> ticket_protocol.m(T,ticket_protocol.zero)
+        invariant [ticket_protocol.invar22] ~ticket_protocol.next_ticket(ticket_protocol.zero) & ticket_protocol.m(T,M) & ticket_protocol.next_ticket(N) -> ~ticket_protocol.le(N,M)
+        invariant [ticket_protocol.invar23] ticket_protocol.pc2(T) | ticket_protocol.pc3(T) -> ~ticket_protocol.next_ticket(ticket_protocol.zero)
+        invariant [ticket_protocol.invar24] ticket_protocol.m(T1,M) & ticket_protocol.m(T2,M) & M ~= ticket_protocol.zero -> T1 = T2
+        invariant [ticket_protocol.invar25] ticket_protocol.pc2(T) & ticket_protocol.m(T,M) & ticket_protocol.service(S) -> ticket_protocol.le(S,M)
+        invariant [ticket_protocol.invar26] ticket_protocol.pc3(T) & ticket_protocol.service(S) -> ticket_protocol.m(T,S)
+        invariant [ticket_protocol.invar27] ticket_protocol.service(S) & ticket_protocol.next_ticket(N) -> ticket_protocol.le(S,N)
+        invariant [ticket_protocol.invar28] ~(~ticket_protocol.pc1(T1) & ~ticket_protocol.pc1(T2) & ticket_protocol.m(T1,ticket_protocol.zero) & ticket_protocol.m(T2,ticket_protocol.zero) & T1 ~= T2)
+        invariant [invar29] ~ticket_protocol.scheduled(T)
+        invariant [invar30] $l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)(T)
+        invariant [invar31] ~($l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))))
+        invariant [invar32] ~($l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))) <-> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar33] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar34] ~l2s_waiting | ~l2s_frozen
+        invariant [invar35] ~l2s_waiting | ~l2s_saved
+        invariant [invar36] ~l2s_frozen | ~l2s_saved
+        invariant [invar37] l2s_frozen -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar38] l2s_saved -> ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))
+        invariant [invar39] l2s_saved -> ($l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(ticket_protocol.t0,K) <-> ticket_protocol.m(ticket_protocol.t0,K))
+        invariant [invar40] l2s_saved -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & ticket_protocol.service(S2) -> ticket_protocol.le(S1,S2))
+        invariant [invar41] l2s_saved -> ($l2s_s V0:ticket_protocol.ticket. ticket_protocol.next_ticket(V0)(N1) & ticket_protocol.next_ticket(N2) -> ticket_protocol.le(N1,N2))
+        invariant [invar42] ticket_protocol.pc1(T) & ticket_protocol.m(T,M) & M ~= ticket_protocol.zero & ticket_protocol.service(S) -> ~ticket_protocol.le(S,M)
+        invariant [invar43] ticket_protocol.next_ticket(N) & ticket_protocol.service(S) -> (forall K. ~ticket_protocol.le(N,K) & ticket_protocol.le(S,K) -> (exists T. ticket_protocol.m(T,K) & ~ticket_protocol.pc1(T)))
+        invariant [invar44] exists M. ticket_protocol.m(ticket_protocol.t0,M)
+        invariant [invar45] l2s_d(ticket_protocol.t0)
+        invariant [invar46] ~ticket_protocol.pc1(T) -> l2s_d(T)
+        invariant [invar47] ticket_protocol.next_ticket(N) & ticket_protocol.le(K,N) -> l2s_d(K)
+        invariant [invar48] ~l2s_waiting -> l2s_a(ticket_protocol.t0)
+        invariant [invar49] ~l2s_waiting & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) & ~ticket_protocol.le(K0,K) & ~ticket_protocol.pc1(T) -> l2s_a(T)
+        invariant [invar50] ~l2s_waiting & ticket_protocol.m(ticket_protocol.t0,K0) & ticket_protocol.le(K,K0) -> l2s_a(K)
+        invariant [invar51] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc1(V0)(T) <-> ticket_protocol.pc1(T))
+        invariant [invar52] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(T) <-> ticket_protocol.pc2(T))
+        invariant [invar53] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(T) <-> ticket_protocol.pc3(T))
+        invariant [invar54] l2s_saved & $l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) -> ($l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,K) <-> ticket_protocol.m(T,K))
+        invariant [invar55] l2s_saved & $l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & $l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,S1) & ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) & $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0) | ticket_protocol.pc3(T) & K = S1
+        invariant [invar56] l2s_saved & $l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)(S1) & $l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)(T,S1) & ticket_protocol.service(S2) & ~$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)(T) & $l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 & ~ticket_protocol.le(S2,K) | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0)
+    {
+        diverge;
+        call one of {ext:ticket_protocol.step12,ext:ticket_protocol.step22,ext:ticket_protocol.step23,ext:ticket_protocol.step31,idle}
+    }
+
+================================================================================
+
+
+
+================================================================================
+subs:
+
+
+
+$l2s_s V0:ticket_protocol.ticket. ticket_protocol.service(V0)  :  l2s_s_5 
+
+$l2s_s V0:ticket_protocol.thread. ticket_protocol.pc3(V0)  :  l2s_s_2 
+
+$_old_l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))  :  _old_l2s_g_1 
+
+$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)  :  _old_l2s_g_2 
+
+$l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)  :  l2s_g_0 
+
+$l2s_g . ~(ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)))  :  l2s_g_1 
+
+$l2s_s V0:ticket_protocol.ticket. ticket_protocol.next_ticket(V0)  :  l2s_s_4 
+
+$l2s_w V0:ticket_protocol.thread. ticket_protocol.scheduled(V0)  :  l2s_w_1 
+
+$_old_l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))  :  _old_l2s_g_5 
+
+$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)  :  l2s_g_3 
+
+$l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)  :  l2s_g_4 
+
+$l2s_w . ticket_protocol.pc2(ticket_protocol.t0) & ($l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0))  :  l2s_w_0 
+
+$_old_l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)  :  _old_l2s_g_3 
+
+$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)  :  l2s_g_2 
+
+$l2s_s V0:ticket_protocol.thread,V1:ticket_protocol.ticket. ticket_protocol.m(V0,V1)  :  l2s_s_3 
+
+$l2s_s V0:ticket_protocol.thread. ticket_protocol.pc1(V0)  :  l2s_s_0 
+
+$l2s_s V0:ticket_protocol.thread. ticket_protocol.pc2(V0)  :  l2s_s_1 
+
+$l2s_g V0:ticket_protocol.thread. ~(ticket_protocol.pc2(V0) & $l2s_g V0:ticket_protocol.thread. ~ticket_protocol.pc3(V0)(V0))  :  l2s_g_5 
+
+$_old_l2s_g V0:ticket_protocol.thread. ~$l2s_g V0:ticket_protocol.thread. ~ticket_protocol.scheduled(V0)(V0)  :  _old_l2s_g_4 
+
+$_old_l2s_g . ~ticket_protocol.pc3(ticket_protocol.t0)  :  _old_l2s_g_0 
+
+================================================================================
+
+
+
+================================================================================
+after replace_named_binders
+
+
+
+
+let
+    ext:ticket_protocol.step12 = action(fml:t:ticket_protocol.thread,fml:next_ticket0:ticket_protocol.ticket,fml:s:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:next_ticket0) := true; l2s_d(fml:s) := true; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc1(fml:t)}; {assume ticket_protocol.next_ticket(fml:next_ticket0)}; {ticket_protocol.m(T,K) := T:ticket_protocol.thread = fml:t & K:ticket_protocol.ticket = fml:next_ticket0 | T ~= fml:t & ticket_protocol.m(T,K)}; {assume ~ticket_protocol.le(fml:s,fml:next_ticket0) & (forall Z. ~ticket_protocol.le(Z,fml:next_ticket0) -> ticket_protocol.le(fml:s,Z))}; {ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = fml:s}; {ticket_protocol.pc1(fml:t) := false}; {{_old_l2s_g_5(V0) := l2s_g_5(V0); l2s_g_5(V0) := *; _old_l2s_g_1 := l2s_g_1; l2s_g_1 := *; assume forall V0. _old_l2s_g_5(V0) -> l2s_g_5(V0); assume forall V0. ~_old_l2s_g_5(V0) & ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)) -> ~l2s_g_5(V0); assume _old_l2s_g_1 -> l2s_g_1; assume ~_old_l2s_g_1 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) -> ~l2s_g_1; ticket_protocol.pc2(fml:t) := true}; assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); l2s_w_0 := l2s_w_0 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step22 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:k) := true; l2s_d(fml:service0) := true; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc2(fml:t)}; {assume ticket_protocol.m(fml:t,fml:k)}; {assume ticket_protocol.service(fml:service0)}; {assume ~ticket_protocol.le(fml:k,fml:service0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step23 = action(fml:t:ticket_protocol.thread,fml:k:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:k) := true; l2s_d(fml:service0) := true; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc2(fml:t)}; {assume ticket_protocol.m(fml:t,fml:k)}; {assume ticket_protocol.service(fml:service0)}; {assume ticket_protocol.le(fml:k,fml:service0)}; {{_old_l2s_g_5(V0) := l2s_g_5(V0); l2s_g_5(V0) := *; _old_l2s_g_1 := l2s_g_1; l2s_g_1 := *; assume forall V0. _old_l2s_g_5(V0) -> l2s_g_5(V0); assume forall V0. ~_old_l2s_g_5(V0) & ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)) -> ~l2s_g_5(V0); assume _old_l2s_g_1 -> l2s_g_1; assume ~_old_l2s_g_1 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) -> ~l2s_g_1; ticket_protocol.pc2(fml:t) := false}; assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); l2s_w_0 := l2s_w_0 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1}; {{_old_l2s_g_5(V0) := l2s_g_5(V0); l2s_g_5(V0) := *; _old_l2s_g_0 := l2s_g_0; l2s_g_0 := *; _old_l2s_g_1 := l2s_g_1; l2s_g_1 := *; _old_l2s_g_2(V0) := l2s_g_2(V0); l2s_g_2(V0) := *; assume forall V0. _old_l2s_g_5(V0) -> l2s_g_5(V0); assume forall V0. ~_old_l2s_g_5(V0) & ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)) -> ~l2s_g_5(V0); assume _old_l2s_g_0 -> l2s_g_0; assume ~_old_l2s_g_0 & ~ticket_protocol.pc3(ticket_protocol.t0) -> ~l2s_g_0; assume _old_l2s_g_1 -> l2s_g_1; assume ~_old_l2s_g_1 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) -> ~l2s_g_1; assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0); assume forall V0. ~_old_l2s_g_2(V0) & ~ticket_protocol.pc3(V0) -> ~l2s_g_2(V0); ticket_protocol.pc3(fml:t) := true}; assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); l2s_w_0 := l2s_w_0 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    ext:ticket_protocol.step31 = action(fml:t:ticket_protocol.thread,fml:s:ticket_protocol.ticket,fml:service0:ticket_protocol.ticket){{l2s_d(fml:t) := true; l2s_d(fml:s) := true; l2s_d(fml:service0) := true; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); {{{{assume ticket_protocol.pc3(fml:t)}; {assume ticket_protocol.service(fml:service0)}; {assume ~ticket_protocol.le(fml:s,fml:service0) & (forall Z. ~ticket_protocol.le(Z,fml:service0) -> ticket_protocol.le(fml:s,Z))}; {ticket_protocol.service(K) := K:ticket_protocol.ticket = fml:s}; {{_old_l2s_g_5(V0) := l2s_g_5(V0); l2s_g_5(V0) := *; _old_l2s_g_0 := l2s_g_0; l2s_g_0 := *; _old_l2s_g_1 := l2s_g_1; l2s_g_1 := *; _old_l2s_g_2(V0) := l2s_g_2(V0); l2s_g_2(V0) := *; assume forall V0. _old_l2s_g_5(V0) -> l2s_g_5(V0); assume forall V0. ~_old_l2s_g_5(V0) & ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)) -> ~l2s_g_5(V0); assume _old_l2s_g_0 -> l2s_g_0; assume ~_old_l2s_g_0 & ~ticket_protocol.pc3(ticket_protocol.t0) -> ~l2s_g_0; assume _old_l2s_g_1 -> l2s_g_1; assume ~_old_l2s_g_1 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) -> ~l2s_g_1; assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0); assume forall V0. ~_old_l2s_g_2(V0) & ~ticket_protocol.pc3(V0) -> ~l2s_g_2(V0); ticket_protocol.pc3(fml:t) := false}; assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); l2s_w_0 := l2s_w_0 & ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1}; {ticket_protocol.pc1(fml:t) := true}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := T:ticket_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~ticket_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); ticket_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true}}
+    idle = action{{if * {assume l2s_waiting; l2s_waiting := false; l2s_frozen := true; assume forall V0. ~l2s_w_1(V0); assume ~l2s_w_0; l2s_a(X:ticket_protocol.ticket) := l2s_d(X:ticket_protocol.ticket); l2s_a(X:ticket_protocol.thread) := l2s_d(X:ticket_protocol.thread)}
+else if * {assume l2s_frozen; l2s_frozen := false; l2s_saved := true; l2s_s_3(V0,V1) := ticket_protocol.m(V0,V1); l2s_s_0(V0) := ticket_protocol.pc1(V0); l2s_s_5(V0) := ticket_protocol.service(V0); l2s_s_4(V0) := ticket_protocol.next_ticket(V0); l2s_s_1(V0) := ticket_protocol.pc2(V0); l2s_s_2(V0) := ticket_protocol.pc3(V0); l2s_w_1(V0) := l2s_d(V0:ticket_protocol.thread) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0); l2s_w_0 := ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1}
+else {}; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true; assert ~(l2s_saved & (forall V0. ~l2s_w_1(V0)) & ~l2s_w_0 & (forall V1,V0. l2s_a(V0) & l2s_a(V1:ticket_protocol.ticket) -> (l2s_s_3(V0,V1) <-> ticket_protocol.m(V0,V1))) & (forall V0. l2s_a(V0) -> (l2s_s_0(V0) <-> ticket_protocol.pc1(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> ticket_protocol.service(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> ticket_protocol.next_ticket(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> ticket_protocol.pc2(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> ticket_protocol.pc3(V0))))}}
+in
+    {{{ticket_protocol.pc1(T) := true; ticket_protocol.pc2(T) := false; ticket_protocol.pc3(T) := false; ticket_protocol.service(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.next_ticket(K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.m(T,K) := K:ticket_protocol.ticket = ticket_protocol.zero; ticket_protocol.scheduled(T) := false}}; l2s_waiting := true; l2s_frozen := false; l2s_saved := false; l2s_d(ticket_protocol.zero) := true; l2s_d(ticket_protocol.t0) := true; l2s_w_1(V0) := l2s_d(V0:ticket_protocol.thread) & ~ticket_protocol.scheduled(V0) & ~l2s_g_3(V0); l2s_w_0 := ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0) & ~l2s_g_1; assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume forall V0. l2s_g_3(V0) -> ~ticket_protocol.scheduled(V0); assume l2s_g_1 -> ~(ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0); assume l2s_g_0 -> ~ticket_protocol.pc3(ticket_protocol.t0); assume forall V0. l2s_g_5(V0) -> ~(ticket_protocol.pc2(V0) & l2s_g_2(V0)); assume forall V0. l2s_g_2(V0) -> ~ticket_protocol.pc3(V0); assume ~((exists T0. ~l2s_g_5(T0)) -> ~l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. l2s_g_5(T))))}
+    while *
+        invariant [ticket_protocol.invar11] exists Service0. ticket_protocol.service(Service0)
+        invariant [ticket_protocol.invar12] ticket_protocol.service(K1) & ticket_protocol.service(K2) -> K1 = K2
+        invariant [ticket_protocol.invar13] exists Next_ticket0. ticket_protocol.next_ticket(Next_ticket0)
+        invariant [ticket_protocol.invar14] ticket_protocol.next_ticket(K1) & ticket_protocol.next_ticket(K2) -> K1 = K2
+        invariant [ticket_protocol.invar15] ticket_protocol.pc1(T) | ticket_protocol.pc2(T) | ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar16] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc2(T)
+        invariant [ticket_protocol.invar17] ~ticket_protocol.pc1(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar18] ~ticket_protocol.pc2(T) | ~ticket_protocol.pc3(T)
+        invariant [ticket_protocol.invar19] ticket_protocol.m(T,K1) & ticket_protocol.m(T,K2) -> K1 = K2
+        invariant [ticket_protocol.invar20] ticket_protocol.pc3(T1) & ticket_protocol.pc3(T2) -> T1 = T2
+        invariant [ticket_protocol.invar21] ticket_protocol.next_ticket(ticket_protocol.zero) -> ticket_protocol.m(T,ticket_protocol.zero)
+        invariant [ticket_protocol.invar22] ~ticket_protocol.next_ticket(ticket_protocol.zero) & ticket_protocol.m(T,M) & ticket_protocol.next_ticket(N) -> ~ticket_protocol.le(N,M)
+        invariant [ticket_protocol.invar23] ticket_protocol.pc2(T) | ticket_protocol.pc3(T) -> ~ticket_protocol.next_ticket(ticket_protocol.zero)
+        invariant [ticket_protocol.invar24] ticket_protocol.m(T1,M) & ticket_protocol.m(T2,M) & M ~= ticket_protocol.zero -> T1 = T2
+        invariant [ticket_protocol.invar25] ticket_protocol.pc2(T) & ticket_protocol.m(T,M) & ticket_protocol.service(S) -> ticket_protocol.le(S,M)
+        invariant [ticket_protocol.invar26] ticket_protocol.pc3(T) & ticket_protocol.service(S) -> ticket_protocol.m(T,S)
+        invariant [ticket_protocol.invar27] ticket_protocol.service(S) & ticket_protocol.next_ticket(N) -> ticket_protocol.le(S,N)
+        invariant [ticket_protocol.invar28] ~(~ticket_protocol.pc1(T1) & ~ticket_protocol.pc1(T2) & ticket_protocol.m(T1,ticket_protocol.zero) & ticket_protocol.m(T2,ticket_protocol.zero) & T1 ~= T2)
+        invariant [invar29] ~ticket_protocol.scheduled(T)
+        invariant [invar30] l2s_g_4(T)
+        invariant [invar31] ~l2s_g_1
+        invariant [invar32] ~l2s_w_0 <-> ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0
+        invariant [invar33] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar34] ~l2s_waiting | ~l2s_frozen
+        invariant [invar35] ~l2s_waiting | ~l2s_saved
+        invariant [invar36] ~l2s_frozen | ~l2s_saved
+        invariant [invar37] l2s_frozen -> ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0
+        invariant [invar38] l2s_saved -> ticket_protocol.pc2(ticket_protocol.t0) & l2s_g_0
+        invariant [invar39] l2s_saved -> (l2s_s_3(ticket_protocol.t0,K) <-> ticket_protocol.m(ticket_protocol.t0,K))
+        invariant [invar40] l2s_saved -> (l2s_s_5(S1) & ticket_protocol.service(S2) -> ticket_protocol.le(S1,S2))
+        invariant [invar41] l2s_saved -> (l2s_s_4(N1) & ticket_protocol.next_ticket(N2) -> ticket_protocol.le(N1,N2))
+        invariant [invar42] ticket_protocol.pc1(T) & ticket_protocol.m(T,M) & M ~= ticket_protocol.zero & ticket_protocol.service(S) -> ~ticket_protocol.le(S,M)
+        invariant [invar43] ticket_protocol.next_ticket(N) & ticket_protocol.service(S) -> (forall K. ~ticket_protocol.le(N,K) & ticket_protocol.le(S,K) -> (exists T. ticket_protocol.m(T,K) & ~ticket_protocol.pc1(T)))
+        invariant [invar44] exists M. ticket_protocol.m(ticket_protocol.t0,M)
+        invariant [invar45] l2s_d(ticket_protocol.t0)
+        invariant [invar46] ~ticket_protocol.pc1(T) -> l2s_d(T)
+        invariant [invar47] ticket_protocol.next_ticket(N) & ticket_protocol.le(K,N) -> l2s_d(K)
+        invariant [invar48] ~l2s_waiting -> l2s_a(ticket_protocol.t0)
+        invariant [invar49] ~l2s_waiting & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) & ~ticket_protocol.le(K0,K) & ~ticket_protocol.pc1(T) -> l2s_a(T)
+        invariant [invar50] ~l2s_waiting & ticket_protocol.m(ticket_protocol.t0,K0) & ticket_protocol.le(K,K0) -> l2s_a(K)
+        invariant [invar51] l2s_saved & l2s_w_1(T) -> (l2s_s_0(T) <-> ticket_protocol.pc1(T))
+        invariant [invar52] l2s_saved & l2s_w_1(T) -> (l2s_s_1(T) <-> ticket_protocol.pc2(T))
+        invariant [invar53] l2s_saved & l2s_w_1(T) -> (l2s_s_2(T) <-> ticket_protocol.pc3(T))
+        invariant [invar54] l2s_saved & l2s_w_1(T) -> (l2s_s_3(T,K) <-> ticket_protocol.m(T,K))
+        invariant [invar55] l2s_saved & l2s_s_5(S1) & l2s_s_3(T,S1) & ~l2s_w_1(T) & l2s_s_1(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0) | ticket_protocol.pc3(T) & K = S1
+        invariant [invar56] l2s_saved & l2s_s_5(S1) & l2s_s_3(T,S1) & ticket_protocol.service(S2) & ~l2s_w_1(T) & l2s_s_2(T) & ticket_protocol.m(T,K) & ticket_protocol.m(ticket_protocol.t0,K0) -> ticket_protocol.pc1(T) & K = S1 & ~ticket_protocol.le(S2,K) | ticket_protocol.pc2(T) & ~ticket_protocol.le(K,K0)
+    {
+        diverge;
+        call one of {ext:ticket_protocol.step12,ext:ticket_protocol.step22,ext:ticket_protocol.step23,ext:ticket_protocol.step31,idle}
+    }
+
+================================================================================
+
+
+
+
+    The following properties are assumed as axioms:
+        /ivy/ticket.ivy: line 33: ticket_protocol.axiom1
+        /ivy/ticket.ivy: line 34: ticket_protocol.axiom2
+        /ivy/ticket.ivy: line 35: ticket_protocol.axiom3
+        /ivy/ticket.ivy: line 36: ticket_protocol.axiom4
+        /ivy/ticket.ivy: line 63: ticket_protocol.axiom5
+
+    The inductive invariant consists of the following conjectures:
+        /ivy/ticket.ivy: line 139: ticket_protocol.invar11
+        /ivy/ticket.ivy: line 140: ticket_protocol.invar12
+        /ivy/ticket.ivy: line 143: ticket_protocol.invar13
+        /ivy/ticket.ivy: line 144: ticket_protocol.invar14
+        /ivy/ticket.ivy: line 147: ticket_protocol.invar15
+        /ivy/ticket.ivy: line 148: ticket_protocol.invar16
+        /ivy/ticket.ivy: line 149: ticket_protocol.invar17
+        /ivy/ticket.ivy: line 150: ticket_protocol.invar18
+        /ivy/ticket.ivy: line 151: ticket_protocol.invar19
+        /ivy/ticket.ivy: line 154: ticket_protocol.invar20
+        /ivy/ticket.ivy: line 157: ticket_protocol.invar21
+        /ivy/ticket.ivy: line 158: ticket_protocol.invar22
+        /ivy/ticket.ivy: line 159: ticket_protocol.invar23
+        /ivy/ticket.ivy: line 160: ticket_protocol.invar24
+        /ivy/ticket.ivy: line 161: ticket_protocol.invar25
+        /ivy/ticket.ivy: line 162: ticket_protocol.invar26
+        /ivy/ticket.ivy: line 163: ticket_protocol.invar27
+        /ivy/ticket.ivy: line 164: ticket_protocol.invar28
+        /ivy/ticket.ivy: line 191: invar29
+        /ivy/ticket.ivy: line 192: invar30
+        /ivy/ticket.ivy: line 193: invar31
+        /ivy/ticket.ivy: line 194: invar32
+        /ivy/ticket.ivy: line 197: invar33
+        /ivy/ticket.ivy: line 198: invar34
+        /ivy/ticket.ivy: line 199: invar35
+        /ivy/ticket.ivy: line 200: invar36
+        /ivy/ticket.ivy: line 203: invar37
+        /ivy/ticket.ivy: line 204: invar38
+        /ivy/ticket.ivy: line 205: invar39
+        /ivy/ticket.ivy: line 206: invar40
+        /ivy/ticket.ivy: line 207: invar41
+        /ivy/ticket.ivy: line 210: invar42
+        /ivy/ticket.ivy: line 211: invar43
+        /ivy/ticket.ivy: line 213: invar44
+        /ivy/ticket.ivy: line 216: invar45
+        /ivy/ticket.ivy: line 217: invar46
+        /ivy/ticket.ivy: line 218: invar47
+        /ivy/ticket.ivy: line 220: invar48
+        /ivy/ticket.ivy: line 221: invar49
+        /ivy/ticket.ivy: line 222: invar50
+        /ivy/ticket.ivy: line 225: invar51
+        /ivy/ticket.ivy: line 226: invar52
+        /ivy/ticket.ivy: line 227: invar53
+        /ivy/ticket.ivy: line 228: invar54
+        /ivy/ticket.ivy: line 239: invar55
+        /ivy/ticket.ivy: line 253: invar56
+
+    The following action implementations are present:
+        /ivy/ticket.ivy: line 50: implementation of ticket_protocol.step12
+        /ivy/ticket.ivy: line 51: implementation of ticket_protocol.step22
+        /ivy/ticket.ivy: line 52: implementation of ticket_protocol.step23
+        /ivy/ticket.ivy: line 53: implementation of ticket_protocol.step31
+
+    The following action monitors are present:
+        /ivy/ticket.ivy: line 86: monitor of ticket_protocol.step12
+        /ivy/ticket.ivy: line 99: monitor of ticket_protocol.step22
+        /ivy/ticket.ivy: line 109: monitor of ticket_protocol.step23
+        /ivy/ticket.ivy: line 120: monitor of ticket_protocol.step31
+
+    The following initializers are present:
+        Noneinit
+
+    Initialization must establish the invariant
+        /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+        /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+        /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+        /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+        /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+        /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+        /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+        /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+        /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+        /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+        /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+        /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+        /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+        /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+        /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+        /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+        /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+        /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+        /ivy/ticket.ivy: line 191: invar29 ... PASS
+        /ivy/ticket.ivy: line 192: invar30 ... PASS
+        /ivy/ticket.ivy: line 193: invar31 ... PASS
+        /ivy/ticket.ivy: line 194: invar32 ... PASS
+        /ivy/ticket.ivy: line 197: invar33 ... PASS
+        /ivy/ticket.ivy: line 198: invar34 ... PASS
+        /ivy/ticket.ivy: line 199: invar35 ... PASS
+        /ivy/ticket.ivy: line 200: invar36 ... PASS
+        /ivy/ticket.ivy: line 203: invar37 ... PASS
+        /ivy/ticket.ivy: line 204: invar38 ... PASS
+        /ivy/ticket.ivy: line 205: invar39 ... PASS
+        /ivy/ticket.ivy: line 206: invar40 ... PASS
+        /ivy/ticket.ivy: line 207: invar41 ... PASS
+        /ivy/ticket.ivy: line 210: invar42 ... PASS
+        /ivy/ticket.ivy: line 211: invar43 ... PASS
+        /ivy/ticket.ivy: line 213: invar44 ... PASS
+        /ivy/ticket.ivy: line 216: invar45 ... PASS
+        /ivy/ticket.ivy: line 217: invar46 ... PASS
+        /ivy/ticket.ivy: line 218: invar47 ... PASS
+        /ivy/ticket.ivy: line 220: invar48 ... PASS
+        /ivy/ticket.ivy: line 221: invar49 ... PASS
+        /ivy/ticket.ivy: line 222: invar50 ... PASS
+        /ivy/ticket.ivy: line 225: invar51 ... PASS
+        /ivy/ticket.ivy: line 226: invar52 ... PASS
+        /ivy/ticket.ivy: line 227: invar53 ... PASS
+        /ivy/ticket.ivy: line 228: invar54 ... PASS
+        /ivy/ticket.ivy: line 239: invar55 ... PASS
+        /ivy/ticket.ivy: line 253: invar56 ... PASS
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following set of external actions must preserve the invariant:
+        (internal) ext:ticket_protocol.step12
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+            /ivy/ticket.ivy: line 191: invar29 ... PASS
+            /ivy/ticket.ivy: line 192: invar30 ... PASS
+            /ivy/ticket.ivy: line 193: invar31 ... PASS
+            /ivy/ticket.ivy: line 194: invar32 ... PASS
+            /ivy/ticket.ivy: line 197: invar33 ... PASS
+            /ivy/ticket.ivy: line 198: invar34 ... PASS
+            /ivy/ticket.ivy: line 199: invar35 ... PASS
+            /ivy/ticket.ivy: line 200: invar36 ... PASS
+            /ivy/ticket.ivy: line 203: invar37 ... PASS
+            /ivy/ticket.ivy: line 204: invar38 ... PASS
+            /ivy/ticket.ivy: line 205: invar39 ... PASS
+            /ivy/ticket.ivy: line 206: invar40 ... PASS
+            /ivy/ticket.ivy: line 207: invar41 ... PASS
+            /ivy/ticket.ivy: line 210: invar42 ... PASS
+            /ivy/ticket.ivy: line 211: invar43 ... PASS
+            /ivy/ticket.ivy: line 213: invar44 ... PASS
+            /ivy/ticket.ivy: line 216: invar45 ... PASS
+            /ivy/ticket.ivy: line 217: invar46 ... PASS
+            /ivy/ticket.ivy: line 218: invar47 ... PASS
+            /ivy/ticket.ivy: line 220: invar48 ... PASS
+            /ivy/ticket.ivy: line 221: invar49 ... PASS
+            /ivy/ticket.ivy: line 222: invar50 ... PASS
+            /ivy/ticket.ivy: line 225: invar51 ... PASS
+            /ivy/ticket.ivy: line 226: invar52 ... PASS
+            /ivy/ticket.ivy: line 227: invar53 ... PASS
+            /ivy/ticket.ivy: line 228: invar54 ... PASS
+            /ivy/ticket.ivy: line 239: invar55 ... PASS
+            /ivy/ticket.ivy: line 253: invar56 ... PASS
+        (internal) ext:ticket_protocol.step22
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+            /ivy/ticket.ivy: line 191: invar29 ... PASS
+            /ivy/ticket.ivy: line 192: invar30 ... PASS
+            /ivy/ticket.ivy: line 193: invar31 ... PASS
+            /ivy/ticket.ivy: line 194: invar32 ... PASS
+            /ivy/ticket.ivy: line 197: invar33 ... PASS
+            /ivy/ticket.ivy: line 198: invar34 ... PASS
+            /ivy/ticket.ivy: line 199: invar35 ... PASS
+            /ivy/ticket.ivy: line 200: invar36 ... PASS
+            /ivy/ticket.ivy: line 203: invar37 ... PASS
+            /ivy/ticket.ivy: line 204: invar38 ... PASS
+            /ivy/ticket.ivy: line 205: invar39 ... PASS
+            /ivy/ticket.ivy: line 206: invar40 ... PASS
+            /ivy/ticket.ivy: line 207: invar41 ... PASS
+            /ivy/ticket.ivy: line 210: invar42 ... PASS
+            /ivy/ticket.ivy: line 211: invar43 ... PASS
+            /ivy/ticket.ivy: line 213: invar44 ... PASS
+            /ivy/ticket.ivy: line 216: invar45 ... PASS
+            /ivy/ticket.ivy: line 217: invar46 ... PASS
+            /ivy/ticket.ivy: line 218: invar47 ... PASS
+            /ivy/ticket.ivy: line 220: invar48 ... PASS
+            /ivy/ticket.ivy: line 221: invar49 ... PASS
+            /ivy/ticket.ivy: line 222: invar50 ... PASS
+            /ivy/ticket.ivy: line 225: invar51 ... PASS
+            /ivy/ticket.ivy: line 226: invar52 ... PASS
+            /ivy/ticket.ivy: line 227: invar53 ... PASS
+            /ivy/ticket.ivy: line 228: invar54 ... PASS
+            /ivy/ticket.ivy: line 239: invar55 ... PASS
+            /ivy/ticket.ivy: line 253: invar56 ... PASS
+        (internal) ext:ticket_protocol.step23
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+            /ivy/ticket.ivy: line 191: invar29 ... PASS
+            /ivy/ticket.ivy: line 192: invar30 ... PASS
+            /ivy/ticket.ivy: line 193: invar31 ... PASS
+            /ivy/ticket.ivy: line 194: invar32 ... PASS
+            /ivy/ticket.ivy: line 197: invar33 ... PASS
+            /ivy/ticket.ivy: line 198: invar34 ... PASS
+            /ivy/ticket.ivy: line 199: invar35 ... PASS
+            /ivy/ticket.ivy: line 200: invar36 ... PASS
+            /ivy/ticket.ivy: line 203: invar37 ... PASS
+            /ivy/ticket.ivy: line 204: invar38 ... PASS
+            /ivy/ticket.ivy: line 205: invar39 ... PASS
+            /ivy/ticket.ivy: line 206: invar40 ... PASS
+            /ivy/ticket.ivy: line 207: invar41 ... PASS
+            /ivy/ticket.ivy: line 210: invar42 ... PASS
+            /ivy/ticket.ivy: line 211: invar43 ... PASS
+            /ivy/ticket.ivy: line 213: invar44 ... PASS
+            /ivy/ticket.ivy: line 216: invar45 ... PASS
+            /ivy/ticket.ivy: line 217: invar46 ... PASS
+            /ivy/ticket.ivy: line 218: invar47 ... PASS
+            /ivy/ticket.ivy: line 220: invar48 ... PASS
+            /ivy/ticket.ivy: line 221: invar49 ... PASS
+            /ivy/ticket.ivy: line 222: invar50 ... PASS
+            /ivy/ticket.ivy: line 225: invar51 ... PASS
+            /ivy/ticket.ivy: line 226: invar52 ... PASS
+            /ivy/ticket.ivy: line 227: invar53 ... PASS
+            /ivy/ticket.ivy: line 228: invar54 ... PASS
+            /ivy/ticket.ivy: line 239: invar55 ... PASS
+            /ivy/ticket.ivy: line 253: invar56 ... PASS
+        (internal) ext:ticket_protocol.step31
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+            /ivy/ticket.ivy: line 191: invar29 ... PASS
+            /ivy/ticket.ivy: line 192: invar30 ... PASS
+            /ivy/ticket.ivy: line 193: invar31 ... PASS
+            /ivy/ticket.ivy: line 194: invar32 ... PASS
+            /ivy/ticket.ivy: line 197: invar33 ... PASS
+            /ivy/ticket.ivy: line 198: invar34 ... PASS
+            /ivy/ticket.ivy: line 199: invar35 ... PASS
+            /ivy/ticket.ivy: line 200: invar36 ... PASS
+            /ivy/ticket.ivy: line 203: invar37 ... PASS
+            /ivy/ticket.ivy: line 204: invar38 ... PASS
+            /ivy/ticket.ivy: line 205: invar39 ... PASS
+            /ivy/ticket.ivy: line 206: invar40 ... PASS
+            /ivy/ticket.ivy: line 207: invar41 ... PASS
+            /ivy/ticket.ivy: line 210: invar42 ... PASS
+            /ivy/ticket.ivy: line 211: invar43 ... PASS
+            /ivy/ticket.ivy: line 213: invar44 ... PASS
+            /ivy/ticket.ivy: line 216: invar45 ... PASS
+            /ivy/ticket.ivy: line 217: invar46 ... PASS
+            /ivy/ticket.ivy: line 218: invar47 ... PASS
+            /ivy/ticket.ivy: line 220: invar48 ... PASS
+            /ivy/ticket.ivy: line 221: invar49 ... PASS
+            /ivy/ticket.ivy: line 222: invar50 ... PASS
+            /ivy/ticket.ivy: line 225: invar51 ... PASS
+            /ivy/ticket.ivy: line 226: invar52 ... PASS
+            /ivy/ticket.ivy: line 227: invar53 ... PASS
+            /ivy/ticket.ivy: line 228: invar54 ... PASS
+            /ivy/ticket.ivy: line 239: invar55 ... PASS
+            /ivy/ticket.ivy: line 253: invar56 ... PASS
+        (internal) idle
+            /ivy/ticket.ivy: line 139: ticket_protocol.invar11 ... PASS
+            /ivy/ticket.ivy: line 140: ticket_protocol.invar12 ... PASS
+            /ivy/ticket.ivy: line 143: ticket_protocol.invar13 ... PASS
+            /ivy/ticket.ivy: line 144: ticket_protocol.invar14 ... PASS
+            /ivy/ticket.ivy: line 147: ticket_protocol.invar15 ... PASS
+            /ivy/ticket.ivy: line 148: ticket_protocol.invar16 ... PASS
+            /ivy/ticket.ivy: line 149: ticket_protocol.invar17 ... PASS
+            /ivy/ticket.ivy: line 150: ticket_protocol.invar18 ... PASS
+            /ivy/ticket.ivy: line 151: ticket_protocol.invar19 ... PASS
+            /ivy/ticket.ivy: line 154: ticket_protocol.invar20 ... PASS
+            /ivy/ticket.ivy: line 157: ticket_protocol.invar21 ... PASS
+            /ivy/ticket.ivy: line 158: ticket_protocol.invar22 ... PASS
+            /ivy/ticket.ivy: line 159: ticket_protocol.invar23 ... PASS
+            /ivy/ticket.ivy: line 160: ticket_protocol.invar24 ... PASS
+            /ivy/ticket.ivy: line 161: ticket_protocol.invar25 ... PASS
+            /ivy/ticket.ivy: line 162: ticket_protocol.invar26 ... PASS
+            /ivy/ticket.ivy: line 163: ticket_protocol.invar27 ... PASS
+            /ivy/ticket.ivy: line 164: ticket_protocol.invar28 ... PASS
+            /ivy/ticket.ivy: line 191: invar29 ... PASS
+            /ivy/ticket.ivy: line 192: invar30 ... PASS
+            /ivy/ticket.ivy: line 193: invar31 ... PASS
+            /ivy/ticket.ivy: line 194: invar32 ... PASS
+            /ivy/ticket.ivy: line 197: invar33 ... PASS
+            /ivy/ticket.ivy: line 198: invar34 ... PASS
+            /ivy/ticket.ivy: line 199: invar35 ... PASS
+            /ivy/ticket.ivy: line 200: invar36 ... PASS
+            /ivy/ticket.ivy: line 203: invar37 ... PASS
+            /ivy/ticket.ivy: line 204: invar38 ... PASS
+            /ivy/ticket.ivy: line 205: invar39 ... PASS
+            /ivy/ticket.ivy: line 206: invar40 ... PASS
+            /ivy/ticket.ivy: line 207: invar41 ... PASS
+            /ivy/ticket.ivy: line 210: invar42 ... PASS
+            /ivy/ticket.ivy: line 211: invar43 ... PASS
+            /ivy/ticket.ivy: line 213: invar44 ... PASS
+            /ivy/ticket.ivy: line 216: invar45 ... PASS
+            /ivy/ticket.ivy: line 217: invar46 ... PASS
+            /ivy/ticket.ivy: line 218: invar47 ... PASS
+            /ivy/ticket.ivy: line 220: invar48 ... PASS
+            /ivy/ticket.ivy: line 221: invar49 ... PASS
+            /ivy/ticket.ivy: line 222: invar50 ... PASS
+            /ivy/ticket.ivy: line 225: invar51 ... PASS
+            /ivy/ticket.ivy: line 226: invar52 ... PASS
+            /ivy/ticket.ivy: line 227: invar53 ... PASS
+            /ivy/ticket.ivy: line 228: invar54 ... PASS
+            /ivy/ticket.ivy: line 239: invar55 ... PASS
+            /ivy/ticket.ivy: line 253: invar56 ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action ticket_protocol.step31 when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/ticket.ivy: line 121: assumption
+            /ivy/ticket.ivy: line 122: assumption
+            /ivy/ticket.ivy: line 124: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action ticket_protocol.step12 when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/ticket.ivy: line 87: assumption
+            /ivy/ticket.ivy: line 88: assumption
+            /ivy/ticket.ivy: line 91: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action idle when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action ticket_protocol.step22 when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/ticket.ivy: line 100: assumption
+            /ivy/ticket.ivy: line 101: assumption
+            /ivy/ticket.ivy: line 102: assumption
+            /ivy/ticket.ivy: line 103: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action ticket_protocol.step23 when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/ticket.ivy: line 110: assumption
+            /ivy/ticket.ivy: line 111: assumption
+            /ivy/ticket.ivy: line 112: assumption
+            /ivy/ticket.ivy: line 113: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+
+    The following program assertions are treated as guarantees:
+        in action idle when called from the environment,the environment:
+            /ivy/ticket.ivy: line 174: guarantee ... PASS
+
+OK
