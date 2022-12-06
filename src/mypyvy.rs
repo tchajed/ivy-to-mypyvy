@@ -50,7 +50,7 @@ impl SysState {
         };
         self.havoc_relations.insert(havoc_name.clone());
         if let Some(typ) = self.types.find(&r.name) {
-            self.types.insert(havoc_name, typ.clone())
+            self.types.insert(havoc_name, typ)
         }
         Expr::Relation(havoc_rel)
     }
@@ -572,7 +572,10 @@ impl SysState {
                 self.expr_relations(lhs);
                 self.expr_relations(rhs);
             }
-            Expr::Quantified { body, .. } => self.expr_relations(body),
+            Expr::Quantified { body, bound, .. } => {
+                self.expr_relations(body);
+                self.assigned_relations.remove(bound);
+            }
             Expr::Prefix { e, .. } => self.expr_relations(e),
             Expr::Havoc => (),
             Expr::IfElse { cond, then, else_ } => {
@@ -660,6 +663,10 @@ pub fn fmt_system(sys: &System) -> String {
         for r in state.all_relations() {
             let r: &str = r;
             if vec!["true", "false"].contains(&r) {
+                continue;
+            }
+            // implicitly universally qualified relation
+            if r.to_uppercase() == r {
                 continue;
             }
             if let Some(typ) = state.types.find(r) {

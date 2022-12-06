@@ -21,8 +21,11 @@ impl Types {
         }
     }
 
-    pub fn find(&self, name: &str) -> Option<&Type> {
-        self.typs.get(name)
+    pub fn find(&self, name: &str) -> Option<Type> {
+        if let Some((_, typ)) = ident_typ(name) {
+            return Some(typ);
+        }
+        self.typs.get(name).cloned()
     }
 
     pub fn insert(&mut self, name: String, typ: Type) {
@@ -70,18 +73,22 @@ impl Types {
             Step::Assign(r, e) => {
                 if r.args.is_empty() {
                     self.insert(r.name.to_string(), vec![]);
+                    self.infer_expr(e);
+                    return;
                 }
                 // TODO: this is really a bit of a hack due to the lack of type
                 // variables
                 if r.args.len() == 1 {
                     if let Some(typ) = self.find(&r.args[0]) {
-                        self.insert(r.name.to_string(), typ.clone());
-                    } else {
-                        // TODO: another hack, useful for recording that a relation is unary and not nullary
-                        self.insert(r.name.to_string(), vec!["?".to_string()]);
+                        self.insert(r.name.to_string(), typ);
+                        self.infer_expr(e);
+                        return;
                     }
                 }
-                self.infer_expr(e)
+                // TODO: hack, useful for recording that a relation's arity
+                let args: Vec<String> = (0..r.args.len()).map(|_| "?".to_string()).collect();
+                self.insert(r.name.to_string(), args);
+                self.infer_expr(e);
             }
             Step::If { cond, then, else_ } => {
                 self.infer_if_cond(cond);
