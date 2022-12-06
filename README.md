@@ -18,7 +18,18 @@ cargo run -- tests/mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable consta
 cargo run -- tests/better_mutex.l2s.out | sed -e 's/\?/thread/g' -e '2aimmutable constant t0: thread' > better_mutex.pyv
 ```
 
-For `ticket.ivy` the manual work is more involved, so it's wrapped up in a script. Run `./scripts/ticket.sh > ticket.pyv` to generate that file.
+For `ticket.ivy`, we start with the example in the Ivy repo, then manually
+simplify it (removing fancy Ivy features) to
+[ticket.ivy](https://gist.github.com/tchajed/9222bb1195c93f8a799f2c028bca9039).
+There is still some manual work which is more involved than above, so it's
+wrapped up in a script: Run `./scripts/ticket.sh > ticket.pyv` to generate that
+file.
+
+The ticket example is tricky to support because in Ivy it uses actions with
+return values, and after manually implementing that it's still tricky because
+the liveness-to-safety reduction uses relations `l2s_d` and `l2s_a` over
+arbitrary values rather than values from just one of the two sorts (thread and
+ticket). In the other examples there's only one sort so this isn't an issue.
 
 You can then verify the liveness property using the hand-written invariants, for
 example:
