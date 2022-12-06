@@ -76,21 +76,21 @@ init l2s_saved <-> false
 init l2s_d(t0) <-> true
 init l2s_w_1(V0) <-> ((l2s_d(V0) & !scheduled(V0)) & !l2s_g_3(V0))
 init l2s_w_0 <-> ((!(forall T. d(T))) & !l2s_g_1)
+init (forall V0. l2s_g_3(V0) -> !scheduled(V0))
 init (l2s_g_1 -> (!(forall T. d(T))))
 init (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
 init (l2s_g_0 -> !finished(t0))
 init (forall V0. l2s_g_2(V0) -> !finished(V0))
-init (forall V0. l2s_g_3(V0) -> !scheduled(V0))
 init (!(((exists T0. l2s_g_2(T0)) -> (l2s_g_0 & !l2s_g_1)) -> ((forall T. l2s_g_4(T)) -> (forall T. !l2s_g_2(T)))))
 
 transition step_unlock_store(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wake, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_free, lock_w0, lock_ws, scheduled, unlock_store
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & unlock_store(t)
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
   & (forall V0. (!l2s_g_3(V0) & !scheduled(V0)) -> !havoc_l2s_g_3(V0))
@@ -121,11 +121,11 @@ transition step_unlock_store(t)
 transition step_lock_set_wait_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, lock_set_wait, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_set_wait(t)
   & lock_free
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -154,11 +154,11 @@ transition step_lock_set_wait_then(t)
 transition step_lock_set_wait_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_set_wait, lock_w0, lock_ws, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_set_wait(t)
   & !lock_free
   & lock_w0
@@ -190,11 +190,11 @@ transition step_lock_set_wait_else_then(t)
 transition step_lock_set_wait_else_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_set_wait, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_set_wait(t)
   & !lock_free
   & !lock_w0
@@ -225,11 +225,11 @@ transition step_lock_set_wait_else_else_then(t)
 transition step_lock_set_wait_else_else_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_set_wait, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_set_wait(t)
   & !lock_free
   & !lock_w0
@@ -259,11 +259,11 @@ transition step_lock_set_wait_else_else_else(t)
 transition step_lock_acq2_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, lock_free, lock_ws, scheduled, unlock_sub
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq2(t)
   & lock_free
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -294,11 +294,11 @@ transition step_lock_acq2_then(t)
 transition step_lock_acq2_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, lock_set_wait, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq2(t)
   & !lock_free
   & lock_w0
@@ -328,11 +328,11 @@ transition step_lock_acq2_else_then(t)
 transition step_lock_acq2_else_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq2(t)
   & !lock_free
   & !lock_w0
@@ -363,11 +363,11 @@ transition step_lock_acq2_else_else_then(t)
 transition step_lock_acq2_else_else_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq2(t)
   & !lock_free
   & !lock_w0
@@ -397,11 +397,11 @@ transition step_lock_acq2_else_else_else(t)
 transition step_futex_wait_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, kernel_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, queue, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & futex_wait(t)
   & lock_ws
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -431,11 +431,11 @@ transition step_futex_wait_then(t)
 transition step_futex_wait_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & futex_wait(t)
   & !lock_ws
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -464,11 +464,11 @@ transition step_futex_wait_else(t)
 transition step_lock_acq_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq, lock_free, lock_w0, scheduled, unlock_sub
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq(t)
   & lock_free
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -499,11 +499,11 @@ transition step_lock_acq_then(t)
 transition step_lock_acq_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq, lock_set_wait, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq(t)
   & !lock_free
   & lock_w0
@@ -533,11 +533,11 @@ transition step_lock_acq_else_then(t)
 transition step_lock_acq_else_else_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, futex_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq(t)
   & !lock_free
   & !lock_w0
@@ -568,11 +568,11 @@ transition step_lock_acq_else_else_then(t)
 transition step_lock_acq_else_else_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & lock_acq(t)
   & !lock_free
   & !lock_w0
@@ -602,19 +602,19 @@ transition step_lock_acq_else_else_else(t)
 transition step_futex_wake_if_some(t, t_q)
   modifies _old_l2s_g_0, _old_l2s_g_2, _old_l2s_g_3, _old_l2s_g_4, finished, futex_wake, l2s_d, l2s_g_0, l2s_g_2, l2s_g_3, l2s_g_4, l2s_w_1, queue, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & futex_wake(t)
   & queue(t_q)
-  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
-  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (l2s_g_0 -> havoc_l2s_g_0)
   & ((!l2s_g_0 & !finished(t0)) -> !havoc_l2s_g_0)
-  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
+  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
+  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (havoc_l2s_g_0 -> (!(if t0 = t then true else finished(t0))))
+  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
   & (forall V0. (!l2s_g_3(V0) & !scheduled(V0)) -> !havoc_l2s_g_3(V0))
   & (forall V0. l2s_g_4(V0) -> havoc_l2s_g_4(V0))
@@ -646,19 +646,19 @@ transition step_futex_wake_if_some(t, t_q)
 transition step_futex_wake_if_some_else(t)
   modifies _old_l2s_g_0, _old_l2s_g_2, _old_l2s_g_3, _old_l2s_g_4, finished, futex_wake, l2s_d, l2s_g_0, l2s_g_2, l2s_g_3, l2s_g_4, l2s_w_1, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & futex_wake(t)
   & (forall t_q. !queue(t_q))
-  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
-  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (l2s_g_0 -> havoc_l2s_g_0)
   & ((!l2s_g_0 & !finished(t0)) -> !havoc_l2s_g_0)
-  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
+  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
+  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (havoc_l2s_g_0 -> (!(if t0 = t then true else finished(t0))))
+  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
   & (forall V0. (!l2s_g_3(V0) & !scheduled(V0)) -> !havoc_l2s_g_3(V0))
   & (forall V0. l2s_g_4(V0) -> havoc_l2s_g_4(V0))
@@ -689,11 +689,11 @@ transition step_futex_wake_if_some_else(t)
 transition step_finished(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & finished(t)
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
   & (forall V0. (!l2s_g_3(V0) & !scheduled(V0)) -> !havoc_l2s_g_3(V0))
@@ -719,11 +719,11 @@ transition step_finished(t)
 transition step_kernel_wait_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, kernel_wait, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_acq2, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & kernel_wait(t)
   & !queue(t)
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -752,11 +752,11 @@ transition step_kernel_wait_then(t)
 transition step_kernel_wait_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, scheduled
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & kernel_wait(t)
   & !!queue(t)
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -783,11 +783,11 @@ transition step_kernel_wait_else(t)
 transition step_unlock_sub_then(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, lock_w0, lock_ws, scheduled, unlock_store, unlock_sub
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & unlock_sub(t)
   & lock_ws
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
@@ -818,20 +818,20 @@ transition step_unlock_sub_then(t)
 transition step_unlock_sub_else_then(t)
   modifies _old_l2s_g_0, _old_l2s_g_2, _old_l2s_g_3, _old_l2s_g_4, finished, l2s_d, l2s_g_0, l2s_g_2, l2s_g_3, l2s_g_4, l2s_w_1, lock_free, lock_w0, scheduled, unlock_sub
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & unlock_sub(t)
   & !lock_ws
   & lock_w0
-  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
-  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (l2s_g_0 -> havoc_l2s_g_0)
   & ((!l2s_g_0 & !finished(t0)) -> !havoc_l2s_g_0)
-  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
+  & (forall V0. l2s_g_2(V0) -> havoc_l2s_g_2(V0))
+  & (forall V0. (!l2s_g_2(V0) & !finished(V0)) -> !havoc_l2s_g_2(V0))
   & (havoc_l2s_g_0 -> (!(if t0 = t then true else finished(t0))))
+  & (forall V0. havoc_l2s_g_2(V0) -> (!(if V0 = t then true else finished(V0))))
   & (forall V0. l2s_g_3(V0) -> havoc_l2s_g_3(V0))
   & (forall V0. (!l2s_g_3(V0) & !scheduled(V0)) -> !havoc_l2s_g_3(V0))
   & (forall V0. l2s_g_4(V0) -> havoc_l2s_g_4(V0))
@@ -864,11 +864,11 @@ transition step_unlock_sub_else_then(t)
 transition step_unlock_sub_else_else(t)
   modifies _old_l2s_g_3, _old_l2s_g_4, l2s_d, l2s_g_3, l2s_g_4, l2s_w_1, scheduled, unlock_sub
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & unlock_sub(t)
   & !lock_ws
   & !lock_w0
@@ -901,11 +901,11 @@ transition idle_then()
   & l2s_waiting
   & (forall V0. !l2s_w_1(V0))
   & !l2s_w_0
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   # transitions:
   & (new(l2s_a(X)) <-> l2s_d(X))
   & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
@@ -918,11 +918,11 @@ transition idle_else_then()
   modifies __error, l2s_d, l2s_frozen, l2s_s_0, l2s_s_1, l2s_s_10, l2s_s_11, l2s_s_12, l2s_s_2, l2s_s_3, l2s_s_4, l2s_s_5, l2s_s_6, l2s_s_7, l2s_s_8, l2s_s_9, l2s_saved, l2s_w_0, l2s_w_1
   # assumes:
   & l2s_frozen
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   # transitions:
   & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
   & (new(l2s_frozen) <-> false)
@@ -948,11 +948,11 @@ transition idle_else_then()
 transition idle_else_else()
   modifies __error, l2s_d
   # assumes:
+  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   & (l2s_g_1 -> (!(forall T. d(T))))
   & (forall V0. l2s_g_4(V0) -> !l2s_g_3(V0))
   & (l2s_g_0 -> !finished(t0))
   & (forall V0. l2s_g_2(V0) -> !finished(V0))
-  & (forall V0. l2s_g_3(V0) -> !scheduled(V0))
   # transitions:
   & (new(l2s_d(T0)) <-> if T0 = t0 then true else l2s_d(T0))
   # asserts:

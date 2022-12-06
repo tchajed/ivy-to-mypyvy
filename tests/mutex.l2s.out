@@ -1,290 +1,617 @@
 
+Isolate mutex_protocol:
+
+    The following properties are to be checked:
+
+    The inductive invariant consists of the following conjectures:
+        /ivy/mutex.ivy: line 128: mutex_protocol.invar8
+        /ivy/mutex.ivy: line 129: mutex_protocol.invar9
+        /ivy/mutex.ivy: line 130: mutex_protocol.invar10
+        /ivy/mutex.ivy: line 131: mutex_protocol.invar11
+        /ivy/mutex.ivy: line 132: mutex_protocol.invar12
+        /ivy/mutex.ivy: line 133: mutex_protocol.invar13
+        /ivy/mutex.ivy: line 134: mutex_protocol.invar14
+        /ivy/mutex.ivy: line 135: mutex_protocol.invar15
+        /ivy/mutex.ivy: line 136: mutex_protocol.invar16
+        /ivy/mutex.ivy: line 137: mutex_protocol.invar17
+        /ivy/mutex.ivy: line 138: mutex_protocol.invar18
+        /ivy/mutex.ivy: line 139: mutex_protocol.invar19
+        /ivy/mutex.ivy: line 140: mutex_protocol.invar20
+        /ivy/mutex.ivy: line 141: mutex_protocol.invar21
+        /ivy/mutex.ivy: line 142: mutex_protocol.invar22
+        /ivy/mutex.ivy: line 143: mutex_protocol.invar23
+        /ivy/mutex.ivy: line 148: mutex_protocol.invar24
+        /ivy/mutex.ivy: line 151: mutex_protocol.invar25
+
+    The following action implementations are present:
+        /ivy/mutex.ivy: line 25: implementation of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 19: implementation of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 22: implementation of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 24: implementation of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 20: implementation of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 23: implementation of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 21: implementation of mutex_protocol.step_kernel_wait
+
+    The following action monitors are present:
+        /ivy/mutex.ivy: line 168: monitor of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 56: monitor of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 94: monitor of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 114: monitor of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 70: monitor of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 103: monitor of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 84: monitor of mutex_protocol.step_kernel_wait
+
+    The following initializers are present:
+        /ivy/mutex.ivy: line 44: mutex_protocol.init[after1]
+        /ivy/mutex.ivy: line 166: mutex_protocol.init[after26]
+
+    Initialization must establish the invariant
+        /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+        /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+        /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+        /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+        /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+        /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+        /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+        /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+        /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+        /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+        /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+        /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+        /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+        /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+        /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+        /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+        /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+        /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following set of external actions must preserve the invariant:
+        (internal) ext:mutex_protocol.add_to_d
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_atomic_cas
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_atomic_store
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_finished
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_futex_wait
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_futex_wake
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        (internal) ext:mutex_protocol.step_kernel_wait
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action mutex_protocol.step_atomic_store when called from the environment:
+            /ivy/mutex.ivy: line 95: assumption
+        in action mutex_protocol.step_futex_wake when called from the environment:
+            /ivy/mutex.ivy: line 104: assumption
+        in action mutex_protocol.step_finished when called from the environment:
+            /ivy/mutex.ivy: line 115: assumption
+        in action mutex_protocol.step_futex_wait when called from the environment:
+            /ivy/mutex.ivy: line 71: assumption
+        in action mutex_protocol.step_atomic_cas when called from the environment:
+            /ivy/mutex.ivy: line 57: assumption
+        in action mutex_protocol.step_kernel_wait when called from the environment:
+            /ivy/mutex.ivy: line 85: assumption
+
+    The following temporal property is being proved:
+
+        /ivy/mutex.ivy: line 173: mutex_protocol.nonstarvation ... ================================================================================
+after replace_temporals_by_named_binder_g_ast
+
+
+
+================================================================================
+l2s_gs:
+() ~mutex_protocol.pc_finished(mutex_protocol.t0) None
+() ~(forall T. mutex_protocol.d(T)) None
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~mutex_protocol.pc_finished(V0) None
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~mutex_protocol.scheduled(V0) None
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) None
+================================================================================
+
 
 
 
 let
-    ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_atomic_store(fml:t)};
- {mutex_protocol.pc_atomic_store(fml:t) := false};
- {mutex_protocol.pc_futex_wake(fml:t) := true};
- {mutex_protocol.locked := false};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_futex_wake(fml:t)};
- {mutex_protocol.pc_futex_wake(fml:t) := false};
- {if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}};
- {{_old_l2s_g_0 := l2s_g_0;
- l2s_g_0 := *;
- _old_l2s_g_2(V0) := l2s_g_2(V0);
- l2s_g_2(V0) := *;
- assume _old_l2s_g_0 -> l2s_g_0;
- assume ~_old_l2s_g_0 & ~mutex_protocol.pc_finished(mutex_protocol.t0) -> ~l2s_g_0;
- assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0);
- assume forall V0. ~_old_l2s_g_2(V0) & ~mutex_protocol.pc_finished(V0) -> ~l2s_g_2(V0);
- mutex_protocol.pc_finished(fml:t) := true};
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_finished(fml:t)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_futex_wait(fml:t)};
- {mutex_protocol.pc_futex_wait(fml:t) := false};
- {if mutex_protocol.locked {{{mutex_protocol.pc_kernel_wait(fml:t) := true};
- {mutex_protocol.queue(fml:t) := true}}}
-else {mutex_protocol.pc_atomic_cas(fml:t) := true}};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.add_to_d = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{{_old_l2s_g_1 := l2s_g_1;
- l2s_g_1 := *;
- assume _old_l2s_g_1 -> l2s_g_1;
- assume ~_old_l2s_g_1 & ~(forall T. mutex_protocol.d(T)) -> ~l2s_g_1;
- mutex_protocol.d(fml:t) := true};
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- l2s_w_0 := l2s_w_0 & ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_atomic_cas(fml:t)};
- {mutex_protocol.pc_atomic_cas(fml:t) := false};
- {if mutex_protocol.locked {mutex_protocol.pc_futex_wait(fml:t) := true}
-else {{{mutex_protocol.pc_atomic_store(fml:t) := true};
- {mutex_protocol.locked := true}}}};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- {{{{assume mutex_protocol.pc_kernel_wait(fml:t)};
- {if ~mutex_protocol.queue(fml:t) {{{mutex_protocol.pc_kernel_wait(fml:t) := false};
- {mutex_protocol.pc_atomic_cas(fml:t) := true}}}};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)};
- {{_old_l2s_g_3(V0) := l2s_g_3(V0);
- l2s_g_3(V0) := *;
- _old_l2s_g_4(V0) := l2s_g_4(V0);
- l2s_g_4(V0) := *;
- assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0);
- assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0);
- assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0);
- assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0);
- mutex_protocol.scheduled(T) := false};
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}};
- l2s_d(mutex_protocol.t0) := true}}
-    idle = action{{if * {assume l2s_waiting;
- l2s_waiting := false;
- l2s_frozen := true;
- assume forall V0. ~l2s_w_1(V0);
- assume ~l2s_w_0;
- l2s_a(X:mutex_protocol.thread) := l2s_d(X:mutex_protocol.thread)}
-else if * {assume l2s_frozen;
- l2s_frozen := false;
- l2s_saved := true;
- l2s_s_1(V0) := mutex_protocol.pc_atomic_cas(V0);
- l2s_s_7(V0) := mutex_protocol.queue(V0);
- l2s_s_2(V0) := mutex_protocol.pc_atomic_store(V0);
- l2s_s_5(V0) := mutex_protocol.pc_futex_wake(V0);
- l2s_s_6(V0) := mutex_protocol.pc_kernel_wait(V0);
- l2s_s_4(V0) := mutex_protocol.pc_futex_wait(V0);
- l2s_s_0 := mutex_protocol.locked;
- l2s_s_3(V0) := mutex_protocol.pc_finished(V0);
- l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0);
- l2s_w_0 := ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1}
-else {};
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- l2s_d(mutex_protocol.t0) := true;
- assert ~(l2s_saved & (forall V0. ~l2s_w_1(V0)) & ~l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> mutex_protocol.pc_atomic_cas(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> mutex_protocol.queue(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> mutex_protocol.pc_atomic_store(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> mutex_protocol.pc_futex_wake(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> mutex_protocol.pc_kernel_wait(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> mutex_protocol.pc_futex_wait(V0))) & (l2s_s_0 <-> mutex_protocol.locked) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> mutex_protocol.pc_finished(V0))))}}
+    ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_atomic_store(fml:t); mutex_protocol.pc_atomic_store(fml:t) := false; mutex_protocol.pc_futex_wake(fml:t) := true; mutex_protocol.locked := false; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_futex_wake(fml:t); mutex_protocol.pc_futex_wake(fml:t) := false; if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}; mutex_protocol.pc_finished(fml:t) := true; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_finished(fml:t); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_futex_wait(fml:t); mutex_protocol.pc_futex_wait(fml:t) := false; if mutex_protocol.locked {mutex_protocol.pc_kernel_wait(fml:t) := true; mutex_protocol.queue(fml:t) := true}
+else {mutex_protocol.pc_atomic_cas(fml:t) := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.add_to_d = action(fml:t:mutex_protocol.thread){{{mutex_protocol.d(fml:t) := true}}}
+    ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_atomic_cas(fml:t); mutex_protocol.pc_atomic_cas(fml:t) := false; if mutex_protocol.locked {mutex_protocol.pc_futex_wait(fml:t) := true}
+else {mutex_protocol.pc_atomic_store(fml:t) := true; mutex_protocol.locked := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_kernel_wait(fml:t); if ~mutex_protocol.queue(fml:t) {mutex_protocol.pc_kernel_wait(fml:t) := false; mutex_protocol.pc_atomic_cas(fml:t) := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
 in
-    {{{mutex_protocol.pc_atomic_cas(T) := true;
- mutex_protocol.pc_futex_wait(T) := false;
- mutex_protocol.pc_kernel_wait(T) := false;
- mutex_protocol.pc_atomic_store(T) := false;
- mutex_protocol.pc_futex_wake(T) := false;
- mutex_protocol.pc_finished(T) := false;
- mutex_protocol.locked := false;
- mutex_protocol.queue(T) := false;
- mutex_protocol.scheduled(T) := false};
- mutex_protocol.d(T) := false};
- l2s_waiting := true;
- l2s_frozen := false;
- l2s_saved := false;
- l2s_d(mutex_protocol.t0) := true;
- l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0);
- l2s_w_0 := ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1;
- assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T));
- assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0);
- assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0);
- assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0);
- assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0);
- assume ~((exists T0. l2s_g_2(T0)) -> l2s_g_0 & ~l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. ~l2s_g_2(T))))}
+    {{mutex_protocol.pc_atomic_cas(T) := true; mutex_protocol.pc_futex_wait(T) := false; mutex_protocol.pc_kernel_wait(T) := false; mutex_protocol.pc_atomic_store(T) := false; mutex_protocol.pc_futex_wake(T) := false; mutex_protocol.pc_finished(T) := false; mutex_protocol.locked := false; mutex_protocol.queue(T) := false; mutex_protocol.scheduled(T) := false}; mutex_protocol.d(T) := false}
+    while *
+        invariant [mutex_protocol.invar8] mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T) | mutex_protocol.pc_atomic_store(T) | mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar9] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wait(T)
+        invariant [mutex_protocol.invar10] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar11] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar12] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar13] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar14] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar15] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar16] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar17] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar18] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar19] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar20] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar21] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar22] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar23] ~mutex_protocol.pc_futex_wake(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar24] mutex_protocol.pc_atomic_store(T1) & mutex_protocol.pc_atomic_store(T2) -> T1 = T2
+        invariant [mutex_protocol.invar25] mutex_protocol.pc_atomic_store(T) -> mutex_protocol.locked
+        invariant [invar28] ~mutex_protocol.scheduled(T)
+        invariant [invar29] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar30] ~l2s_waiting | ~l2s_frozen
+        invariant [invar31] ~l2s_waiting | ~l2s_saved
+        invariant [invar32] ~l2s_frozen | ~l2s_saved
+        invariant [invar33] l2s_saved -> $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar34] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T)
+        invariant [invar35] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T)
+        invariant [invar36] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T)
+        invariant [invar37] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T)
+        invariant [invar38] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar39] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T)
+        invariant [invar40] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T)
+        invariant [invar41] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T)
+        invariant [invar42] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar43] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T)
+        invariant [invar44] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T)
+        invariant [invar45] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar46] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T)
+        invariant [invar47] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar48] l2s_saved -> ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T) | ~$l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T)
+        invariant [invar49] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T1) & $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T2) -> T1 = T2)
+        invariant [invar50] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) -> ($l2s_s . mutex_protocol.locked))
+        invariant [invar51] $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(T)
+        invariant [invar52] $l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar53] ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar54] ~($l2s_g . ~(forall T. mutex_protocol.d(T)))
+        invariant [invar55] ($l2s_w . (forall T. mutex_protocol.d(T))) | (forall T. mutex_protocol.d(T))
+        invariant [invar56] mutex_protocol.d(T) -> l2s_d(T)
+        invariant [invar57] l2s_frozen | l2s_saved -> (forall T. l2s_d(T:mutex_protocol.thread))
+        invariant [invar58] l2s_frozen | l2s_saved -> (forall T. l2s_a(T:mutex_protocol.thread))
+        invariant [invar59] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) <-> mutex_protocol.pc_atomic_cas(T))
+        invariant [invar60] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) <-> mutex_protocol.pc_futex_wait(T))
+        invariant [invar61] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) <-> mutex_protocol.pc_kernel_wait(T))
+        invariant [invar62] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) <-> mutex_protocol.pc_atomic_store(T))
+        invariant [invar63] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T) <-> mutex_protocol.pc_futex_wake(T))
+        invariant [invar64] l2s_saved & $l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T) <-> mutex_protocol.pc_finished(T))
+        invariant [invar65] mutex_protocol.queue(T) -> mutex_protocol.pc_kernel_wait(T)
+        invariant [invar66] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.queue(T)(T) -> $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T))
+        invariant [atomic_store_progress] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_store(T)(T) & ~$l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T))
+        invariant [futex_wake_progress] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wake(T)(T) & ~$l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> mutex_protocol.pc_finished(T))
+        invariant [finished_stable] l2s_saved -> ($l2s_s T:mutex_protocol.thread. mutex_protocol.pc_finished(T)(T) -> mutex_protocol.pc_finished(T))
+        invariant [locked_thread] mutex_protocol.locked -> (exists T. mutex_protocol.pc_atomic_store(T))
+        invariant [kernel_wait_exist] forall T1. mutex_protocol.pc_kernel_wait(T1) & mutex_protocol.queue(T1) & ~mutex_protocol.locked -> (exists T2. mutex_protocol.pc_futex_wake(T2) | mutex_protocol.pc_atomic_cas(T2) | mutex_protocol.pc_kernel_wait(T2) & ~mutex_protocol.queue(T2))
+        invariant [invar67] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> ~mutex_protocol.locked)
+        invariant [atomic_cas_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) & ~$l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> false))
+        invariant [futex_wait_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) & ~$l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [kernel_wait_unqueued] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) & ~$l2s_s T:mutex_protocol.thread. mutex_protocol.queue(T)(T) & ~$l2s_w T:mutex_protocol.thread. mutex_protocol.scheduled(T)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [invar68] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_futex_wait(T)(T) | $l2s_s T:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(T)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. ~$l2s_s T:mutex_protocol.thread. mutex_protocol.queue(T)(T) -> ~mutex_protocol.queue(T)))
+    {
+        diverge;
+        call one of {ext:mutex_protocol.add_to_d,ext:mutex_protocol.step_atomic_cas,ext:mutex_protocol.step_atomic_store,ext:mutex_protocol.step_finished,ext:mutex_protocol.step_futex_wait,ext:mutex_protocol.step_futex_wake,ext:mutex_protocol.step_kernel_wait}
+    }
+
+================================================================================
+
+
+
+================================================================================
+after normalize_named_binders
+
+
+
+
+let
+    ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_atomic_store(fml:t); mutex_protocol.pc_atomic_store(fml:t) := false; mutex_protocol.pc_futex_wake(fml:t) := true; mutex_protocol.locked := false; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_futex_wake(fml:t); mutex_protocol.pc_futex_wake(fml:t) := false; if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}; mutex_protocol.pc_finished(fml:t) := true; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_finished(fml:t); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_futex_wait(fml:t); mutex_protocol.pc_futex_wait(fml:t) := false; if mutex_protocol.locked {mutex_protocol.pc_kernel_wait(fml:t) := true; mutex_protocol.queue(fml:t) := true}
+else {mutex_protocol.pc_atomic_cas(fml:t) := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.add_to_d = action(fml:t:mutex_protocol.thread){{{mutex_protocol.d(fml:t) := true}}}
+    ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_atomic_cas(fml:t); mutex_protocol.pc_atomic_cas(fml:t) := false; if mutex_protocol.locked {mutex_protocol.pc_futex_wait(fml:t) := true}
+else {mutex_protocol.pc_atomic_store(fml:t) := true; mutex_protocol.locked := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+    ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{{assume mutex_protocol.pc_kernel_wait(fml:t); if ~mutex_protocol.queue(fml:t) {mutex_protocol.pc_kernel_wait(fml:t) := false; mutex_protocol.pc_atomic_cas(fml:t) := true}; mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t; mutex_protocol.scheduled(T) := false}}}
+in
+    {{mutex_protocol.pc_atomic_cas(T) := true; mutex_protocol.pc_futex_wait(T) := false; mutex_protocol.pc_kernel_wait(T) := false; mutex_protocol.pc_atomic_store(T) := false; mutex_protocol.pc_futex_wake(T) := false; mutex_protocol.pc_finished(T) := false; mutex_protocol.locked := false; mutex_protocol.queue(T) := false; mutex_protocol.scheduled(T) := false}; mutex_protocol.d(T) := false}
+    while *
+        invariant [mutex_protocol.invar8] mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T) | mutex_protocol.pc_atomic_store(T) | mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar9] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wait(T)
+        invariant [mutex_protocol.invar10] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar11] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar12] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar13] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar14] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar15] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar16] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar17] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar18] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar19] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar20] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar21] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar22] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar23] ~mutex_protocol.pc_futex_wake(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar24] mutex_protocol.pc_atomic_store(T1) & mutex_protocol.pc_atomic_store(T2) -> T1 = T2
+        invariant [mutex_protocol.invar25] mutex_protocol.pc_atomic_store(T) -> mutex_protocol.locked
+        invariant [invar28] ~mutex_protocol.scheduled(T)
+        invariant [invar29] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar30] ~l2s_waiting | ~l2s_frozen
+        invariant [invar31] ~l2s_waiting | ~l2s_saved
+        invariant [invar32] ~l2s_frozen | ~l2s_saved
+        invariant [invar33] l2s_saved -> $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar34] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T)
+        invariant [invar35] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T)
+        invariant [invar36] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar37] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar38] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar39] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T)
+        invariant [invar40] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar41] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar42] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar43] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar44] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar45] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar46] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar47] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar48] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar49] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T1) & $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T2) -> T1 = T2)
+        invariant [invar50] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) -> ($l2s_s . mutex_protocol.locked))
+        invariant [invar51] $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(T)
+        invariant [invar52] $l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar53] ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar54] ~($l2s_g . ~(forall T. mutex_protocol.d(T)))
+        invariant [invar55] ($l2s_w . (forall T. mutex_protocol.d(T))) | (forall T. mutex_protocol.d(T))
+        invariant [invar56] mutex_protocol.d(T) -> l2s_d(T)
+        invariant [invar57] l2s_frozen | l2s_saved -> (forall T. l2s_d(T:mutex_protocol.thread))
+        invariant [invar58] l2s_frozen | l2s_saved -> (forall T. l2s_a(T:mutex_protocol.thread))
+        invariant [invar59] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) <-> mutex_protocol.pc_atomic_cas(T))
+        invariant [invar60] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) <-> mutex_protocol.pc_futex_wait(T))
+        invariant [invar61] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) <-> mutex_protocol.pc_kernel_wait(T))
+        invariant [invar62] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) <-> mutex_protocol.pc_atomic_store(T))
+        invariant [invar63] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) <-> mutex_protocol.pc_futex_wake(T))
+        invariant [invar64] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T) <-> mutex_protocol.pc_finished(T))
+        invariant [invar65] mutex_protocol.queue(T) -> mutex_protocol.pc_kernel_wait(T)
+        invariant [invar66] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) -> $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T))
+        invariant [atomic_store_progress] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T))
+        invariant [futex_wake_progress] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_finished(T))
+        invariant [finished_stable] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T) -> mutex_protocol.pc_finished(T))
+        invariant [locked_thread] mutex_protocol.locked -> (exists T. mutex_protocol.pc_atomic_store(T))
+        invariant [kernel_wait_exist] forall T1. mutex_protocol.pc_kernel_wait(T1) & mutex_protocol.queue(T1) & ~mutex_protocol.locked -> (exists T2. mutex_protocol.pc_futex_wake(T2) | mutex_protocol.pc_atomic_cas(T2) | mutex_protocol.pc_kernel_wait(T2) & ~mutex_protocol.queue(T2))
+        invariant [invar67] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> ~mutex_protocol.locked)
+        invariant [atomic_cas_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> false))
+        invariant [futex_wait_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [kernel_wait_unqueued] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) & ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [invar68] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) -> ~mutex_protocol.queue(T)))
+    {
+        diverge;
+        call one of {ext:mutex_protocol.add_to_d,ext:mutex_protocol.step_atomic_cas,ext:mutex_protocol.step_atomic_store,ext:mutex_protocol.step_finished,ext:mutex_protocol.step_futex_wait,ext:mutex_protocol.step_futex_wake,ext:mutex_protocol.step_kernel_wait}
+    }
+
+================================================================================
+
+
+
+========================================
+to_wait:
+
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) mutex_protocol.scheduled(V0)
+True
+
+() forall T. mutex_protocol.d(T)
+True
+
+========================================
+========================================
+to_g:
+
+() ~mutex_protocol.pc_finished(mutex_protocol.t0) 
+
+() ~(forall T. mutex_protocol.d(T)) 
+
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~mutex_protocol.pc_finished(V0) 
+
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~mutex_protocol.scheduled(V0) 
+
+(Var('V0', UninterpretedSort('mutex_protocol.thread',)),) ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) 
+
+========================================
+public_actions: ['ext:mutex_protocol.add_to_d', 'ext:mutex_protocol.step_atomic_cas', 'ext:mutex_protocol.step_atomic_store', 'ext:mutex_protocol.step_finished', 'ext:mutex_protocol.step_futex_wait', 'ext:mutex_protocol.step_futex_wake', 'ext:mutex_protocol.step_kernel_wait']
+================================================================================
+after patching actions
+
+
+
+
+let
+    ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_atomic_store(fml:t)}; {mutex_protocol.pc_atomic_store(fml:t) := false}; {mutex_protocol.pc_futex_wake(fml:t) := true}; {mutex_protocol.locked := false}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_futex_wake(fml:t)}; {mutex_protocol.pc_futex_wake(fml:t) := false}; {if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) := *; $_old_l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0) := $l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0); $l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) & ~mutex_protocol.pc_finished(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0); assume ($_old_l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)); assume ~($_old_l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) & ~mutex_protocol.pc_finished(mutex_protocol.t0) -> ~($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)); mutex_protocol.pc_finished(fml:t) := true}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_finished(fml:t)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_futex_wait(fml:t)}; {mutex_protocol.pc_futex_wait(fml:t) := false}; {if mutex_protocol.locked {{{mutex_protocol.pc_kernel_wait(fml:t) := true}; {mutex_protocol.queue(fml:t) := true}}}
+else {mutex_protocol.pc_atomic_cas(fml:t) := true}}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.add_to_d = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{{$_old_l2s_g . ~(forall T. mutex_protocol.d(T)) := $l2s_g . ~(forall T. mutex_protocol.d(T)); $l2s_g . ~(forall T. mutex_protocol.d(T)) := *; assume ($_old_l2s_g . ~(forall T. mutex_protocol.d(T))) -> ($l2s_g . ~(forall T. mutex_protocol.d(T))); assume ~($_old_l2s_g . ~(forall T. mutex_protocol.d(T))) & ~(forall T. mutex_protocol.d(T)) -> ~($l2s_g . ~(forall T. mutex_protocol.d(T))); mutex_protocol.d(fml:t) := true}; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); $l2s_w . (forall T. mutex_protocol.d(T)) := ($l2s_w . (forall T. mutex_protocol.d(T))) & ~(forall T. mutex_protocol.d(T)) & ~($l2s_g . ~(forall T. mutex_protocol.d(T)))}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_atomic_cas(fml:t)}; {mutex_protocol.pc_atomic_cas(fml:t) := false}; {if mutex_protocol.locked {mutex_protocol.pc_futex_wait(fml:t) := true}
+else {{{mutex_protocol.pc_atomic_store(fml:t) := true}; {mutex_protocol.locked := true}}}}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_kernel_wait(fml:t)}; {if ~mutex_protocol.queue(fml:t) {{{mutex_protocol.pc_kernel_wait(fml:t) := false}; {mutex_protocol.pc_atomic_cas(fml:t) := true}}}}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}; {{$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) := *; $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) := *; assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume forall V0. $_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); assume forall V0. ~$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    idle = action{{if * {assume l2s_waiting; l2s_waiting := false; l2s_frozen := true; assume forall V0. ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0); assume ~($l2s_w . (forall T. mutex_protocol.d(T))); l2s_a(X:mutex_protocol.thread) := l2s_d(X:mutex_protocol.thread)}
+else if * {assume l2s_frozen; l2s_frozen := false; l2s_saved := true; $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(V0) := mutex_protocol.pc_atomic_cas(V0); $l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(V0) := mutex_protocol.queue(V0); $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(V0) := mutex_protocol.pc_atomic_store(V0); $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(V0) := mutex_protocol.pc_futex_wake(V0); $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(V0) := mutex_protocol.pc_kernel_wait(V0); $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(V0) := mutex_protocol.pc_futex_wait(V0); $l2s_s . mutex_protocol.locked := mutex_protocol.locked; $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(V0) := mutex_protocol.pc_finished(V0); $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w . (forall T. mutex_protocol.d(T)) := ~(forall T. mutex_protocol.d(T)) & ~($l2s_g . ~(forall T. mutex_protocol.d(T)))}
+else {}; assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); l2s_d(mutex_protocol.t0) := true; assert ~(l2s_saved & (forall V0. ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0)) & ~($l2s_w . (forall T. mutex_protocol.d(T))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(V0) <-> mutex_protocol.pc_atomic_cas(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(V0) <-> mutex_protocol.queue(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(V0) <-> mutex_protocol.pc_atomic_store(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(V0) <-> mutex_protocol.pc_futex_wake(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(V0) <-> mutex_protocol.pc_kernel_wait(V0))) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(V0) <-> mutex_protocol.pc_futex_wait(V0))) & (($l2s_s . mutex_protocol.locked) <-> mutex_protocol.locked) & (forall V0. l2s_a(V0) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(V0) <-> mutex_protocol.pc_finished(V0))))}}
+in
+    {{{mutex_protocol.pc_atomic_cas(T) := true; mutex_protocol.pc_futex_wait(T) := false; mutex_protocol.pc_kernel_wait(T) := false; mutex_protocol.pc_atomic_store(T) := false; mutex_protocol.pc_futex_wake(T) := false; mutex_protocol.pc_finished(T) := false; mutex_protocol.locked := false; mutex_protocol.queue(T) := false; mutex_protocol.scheduled(T) := false}; mutex_protocol.d(T) := false}; l2s_waiting := true; l2s_frozen := false; l2s_saved := false; l2s_d(mutex_protocol.t0) := true; $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); $l2s_w . (forall T. mutex_protocol.d(T)) := ~(forall T. mutex_protocol.d(T)) & ~($l2s_g . ~(forall T. mutex_protocol.d(T))); assume ($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ~(forall T. mutex_protocol.d(T)); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(V0) -> ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0); assume ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(V0) -> ~mutex_protocol.pc_finished(V0); assume ~((exists T0. $l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(T0)) -> ($l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)) & ~($l2s_g . ~(forall T. mutex_protocol.d(T))) -> ((forall T. $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(T)) -> (forall T. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)(T))))}
+    while *
+        invariant [mutex_protocol.invar8] mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T) | mutex_protocol.pc_atomic_store(T) | mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar9] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wait(T)
+        invariant [mutex_protocol.invar10] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar11] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar12] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar13] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar14] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_kernel_wait(T)
+        invariant [mutex_protocol.invar15] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar16] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar17] ~mutex_protocol.pc_futex_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar18] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_atomic_store(T)
+        invariant [mutex_protocol.invar19] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar20] ~mutex_protocol.pc_kernel_wait(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar21] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_futex_wake(T)
+        invariant [mutex_protocol.invar22] ~mutex_protocol.pc_atomic_store(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar23] ~mutex_protocol.pc_futex_wake(T) | ~mutex_protocol.pc_finished(T)
+        invariant [mutex_protocol.invar24] mutex_protocol.pc_atomic_store(T1) & mutex_protocol.pc_atomic_store(T2) -> T1 = T2
+        invariant [mutex_protocol.invar25] mutex_protocol.pc_atomic_store(T) -> mutex_protocol.locked
+        invariant [invar28] ~mutex_protocol.scheduled(T)
+        invariant [invar29] l2s_waiting | l2s_frozen | l2s_saved
+        invariant [invar30] ~l2s_waiting | ~l2s_frozen
+        invariant [invar31] ~l2s_waiting | ~l2s_saved
+        invariant [invar32] ~l2s_frozen | ~l2s_saved
+        invariant [invar33] l2s_saved -> $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar34] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T)
+        invariant [invar35] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T)
+        invariant [invar36] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar37] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar38] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar39] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T)
+        invariant [invar40] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar41] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar42] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar43] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T)
+        invariant [invar44] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar45] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar46] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T)
+        invariant [invar47] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar48] l2s_saved -> ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) | ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T)
+        invariant [invar49] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T1) & $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T2) -> T1 = T2)
+        invariant [invar50] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) -> ($l2s_s . mutex_protocol.locked))
+        invariant [invar51] $l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)(T)
+        invariant [invar52] $l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar53] ~mutex_protocol.pc_finished(mutex_protocol.t0)
+        invariant [invar54] ~($l2s_g . ~(forall T. mutex_protocol.d(T)))
+        invariant [invar55] ($l2s_w . (forall T. mutex_protocol.d(T))) | (forall T. mutex_protocol.d(T))
+        invariant [invar56] mutex_protocol.d(T) -> l2s_d(T)
+        invariant [invar57] l2s_frozen | l2s_saved -> (forall T. l2s_d(T:mutex_protocol.thread))
+        invariant [invar58] l2s_frozen | l2s_saved -> (forall T. l2s_a(T:mutex_protocol.thread))
+        invariant [invar59] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) <-> mutex_protocol.pc_atomic_cas(T))
+        invariant [invar60] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) <-> mutex_protocol.pc_futex_wait(T))
+        invariant [invar61] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) <-> mutex_protocol.pc_kernel_wait(T))
+        invariant [invar62] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) <-> mutex_protocol.pc_atomic_store(T))
+        invariant [invar63] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) <-> mutex_protocol.pc_futex_wake(T))
+        invariant [invar64] l2s_saved & $l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T) <-> mutex_protocol.pc_finished(T))
+        invariant [invar65] mutex_protocol.queue(T) -> mutex_protocol.pc_kernel_wait(T)
+        invariant [invar66] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) -> $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T))
+        invariant [atomic_store_progress] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T))
+        invariant [futex_wake_progress] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_finished(T))
+        invariant [finished_stable] l2s_saved -> ($l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)(T) -> mutex_protocol.pc_finished(T))
+        invariant [locked_thread] mutex_protocol.locked -> (exists T. mutex_protocol.pc_atomic_store(T))
+        invariant [kernel_wait_exist] forall T1. mutex_protocol.pc_kernel_wait(T1) & mutex_protocol.queue(T1) & ~mutex_protocol.locked -> (exists T2. mutex_protocol.pc_futex_wake(T2) | mutex_protocol.pc_atomic_cas(T2) | mutex_protocol.pc_kernel_wait(T2) & ~mutex_protocol.queue(T2))
+        invariant [invar67] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> ~mutex_protocol.locked)
+        invariant [atomic_cas_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> false))
+        invariant [futex_wait_progress] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [kernel_wait_unqueued] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) & ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) & ~$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)(T) -> mutex_protocol.pc_atomic_cas(T)))
+        invariant [invar68] l2s_saved -> (~($l2s_s . mutex_protocol.locked) & (forall T. $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)(T) | $l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. ~$l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)(T) -> ~mutex_protocol.queue(T)))
+    {
+        diverge;
+        call one of {ext:mutex_protocol.add_to_d,ext:mutex_protocol.step_atomic_cas,ext:mutex_protocol.step_atomic_store,ext:mutex_protocol.step_finished,ext:mutex_protocol.step_futex_wait,ext:mutex_protocol.step_futex_wake,ext:mutex_protocol.step_kernel_wait,idle}
+    }
+
+================================================================================
+
+
+
+================================================================================
+subs:
+
+
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_finished(V0)  :  l2s_s_3 
+
+$l2s_w V0:mutex_protocol.thread. mutex_protocol.scheduled(V0)  :  l2s_w_1 
+
+$l2s_g . ~(forall T. mutex_protocol.d(T))  :  l2s_g_1 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_store(V0)  :  l2s_s_2 
+
+$_old_l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)  :  _old_l2s_g_0 
+
+$_old_l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)  :  _old_l2s_g_4 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_kernel_wait(V0)  :  l2s_s_6 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wait(V0)  :  l2s_s_4 
+
+$l2s_s . mutex_protocol.locked  :  l2s_s_0 
+
+$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)  :  _old_l2s_g_3 
+
+$l2s_w . (forall T. mutex_protocol.d(T))  :  l2s_w_0 
+
+$_old_l2s_g . ~(forall T. mutex_protocol.d(T))  :  _old_l2s_g_1 
+
+$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)  :  l2s_g_2 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_atomic_cas(V0)  :  l2s_s_1 
+
+$l2s_g V0:mutex_protocol.thread. ~$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)(V0)  :  l2s_g_4 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.pc_futex_wake(V0)  :  l2s_s_5 
+
+$l2s_s V0:mutex_protocol.thread. mutex_protocol.queue(V0)  :  l2s_s_7 
+
+$l2s_g V0:mutex_protocol.thread. ~mutex_protocol.scheduled(V0)  :  l2s_g_3 
+
+$l2s_g . ~mutex_protocol.pc_finished(mutex_protocol.t0)  :  l2s_g_0 
+
+$_old_l2s_g V0:mutex_protocol.thread. ~mutex_protocol.pc_finished(V0)  :  _old_l2s_g_2 
+
+================================================================================
+
+
+
+================================================================================
+after replace_named_binders
+
+
+
+
+let
+    ext:mutex_protocol.step_atomic_store = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_atomic_store(fml:t)}; {mutex_protocol.pc_atomic_store(fml:t) := false}; {mutex_protocol.pc_futex_wake(fml:t) := true}; {mutex_protocol.locked := false}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_futex_wake = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_futex_wake(fml:t)}; {mutex_protocol.pc_futex_wake(fml:t) := false}; {if some loc:t_q. mutex_protocol.queue(loc:t_q) {mutex_protocol.queue(loc:t_q) := false}}; {{_old_l2s_g_2(V0) := l2s_g_2(V0); l2s_g_2(V0) := *; _old_l2s_g_0 := l2s_g_0; l2s_g_0 := *; assume forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0); assume forall V0. ~_old_l2s_g_2(V0) & ~mutex_protocol.pc_finished(V0) -> ~l2s_g_2(V0); assume _old_l2s_g_0 -> l2s_g_0; assume ~_old_l2s_g_0 & ~mutex_protocol.pc_finished(mutex_protocol.t0) -> ~l2s_g_0; mutex_protocol.pc_finished(fml:t) := true}; assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_finished = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_finished(fml:t)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_futex_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_futex_wait(fml:t)}; {mutex_protocol.pc_futex_wait(fml:t) := false}; {if mutex_protocol.locked {{{mutex_protocol.pc_kernel_wait(fml:t) := true}; {mutex_protocol.queue(fml:t) := true}}}
+else {mutex_protocol.pc_atomic_cas(fml:t) := true}}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.add_to_d = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{{_old_l2s_g_1 := l2s_g_1; l2s_g_1 := *; assume _old_l2s_g_1 -> l2s_g_1; assume ~_old_l2s_g_1 & ~(forall T. mutex_protocol.d(T)) -> ~l2s_g_1; mutex_protocol.d(fml:t) := true}; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); l2s_w_0 := l2s_w_0 & ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_atomic_cas = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_atomic_cas(fml:t)}; {mutex_protocol.pc_atomic_cas(fml:t) := false}; {if mutex_protocol.locked {mutex_protocol.pc_futex_wait(fml:t) := true}
+else {{{mutex_protocol.pc_atomic_store(fml:t) := true}; {mutex_protocol.locked := true}}}}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    ext:mutex_protocol.step_kernel_wait = action(fml:t:mutex_protocol.thread){{l2s_d(fml:t) := true; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); {{{{assume mutex_protocol.pc_kernel_wait(fml:t)}; {if ~mutex_protocol.queue(fml:t) {{{mutex_protocol.pc_kernel_wait(fml:t) := false}; {mutex_protocol.pc_atomic_cas(fml:t) := true}}}}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := T:mutex_protocol.thread = fml:t}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}; {{_old_l2s_g_3(V0) := l2s_g_3(V0); l2s_g_3(V0) := *; _old_l2s_g_4(V0) := l2s_g_4(V0); l2s_g_4(V0) := *; assume forall V0. _old_l2s_g_3(V0) -> l2s_g_3(V0); assume forall V0. ~_old_l2s_g_3(V0) & ~mutex_protocol.scheduled(V0) -> ~l2s_g_3(V0); assume forall V0. _old_l2s_g_4(V0) -> l2s_g_4(V0); assume forall V0. ~_old_l2s_g_4(V0) & ~l2s_g_3(V0) -> ~l2s_g_4(V0); mutex_protocol.scheduled(T) := false}; assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); l2s_w_1(V0) := l2s_w_1(V0) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0)}}}}; l2s_d(mutex_protocol.t0) := true}}
+    idle = action{{if * {assume l2s_waiting; l2s_waiting := false; l2s_frozen := true; assume forall V0. ~l2s_w_1(V0); assume ~l2s_w_0; l2s_a(X:mutex_protocol.thread) := l2s_d(X:mutex_protocol.thread)}
+else if * {assume l2s_frozen; l2s_frozen := false; l2s_saved := true; l2s_s_1(V0) := mutex_protocol.pc_atomic_cas(V0); l2s_s_7(V0) := mutex_protocol.queue(V0); l2s_s_2(V0) := mutex_protocol.pc_atomic_store(V0); l2s_s_5(V0) := mutex_protocol.pc_futex_wake(V0); l2s_s_6(V0) := mutex_protocol.pc_kernel_wait(V0); l2s_s_4(V0) := mutex_protocol.pc_futex_wait(V0); l2s_s_0 := mutex_protocol.locked; l2s_s_3(V0) := mutex_protocol.pc_finished(V0); l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0); l2s_w_0 := ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1}
+else {}; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); l2s_d(mutex_protocol.t0) := true; assert ~(l2s_saved & (forall V0. ~l2s_w_1(V0)) & ~l2s_w_0 & (forall V0. l2s_a(V0) -> (l2s_s_1(V0) <-> mutex_protocol.pc_atomic_cas(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_7(V0) <-> mutex_protocol.queue(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_2(V0) <-> mutex_protocol.pc_atomic_store(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_5(V0) <-> mutex_protocol.pc_futex_wake(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_6(V0) <-> mutex_protocol.pc_kernel_wait(V0))) & (forall V0. l2s_a(V0) -> (l2s_s_4(V0) <-> mutex_protocol.pc_futex_wait(V0))) & (l2s_s_0 <-> mutex_protocol.locked) & (forall V0. l2s_a(V0) -> (l2s_s_3(V0) <-> mutex_protocol.pc_finished(V0))))}}
+in
+    {{{mutex_protocol.pc_atomic_cas(T) := true; mutex_protocol.pc_futex_wait(T) := false; mutex_protocol.pc_kernel_wait(T) := false; mutex_protocol.pc_atomic_store(T) := false; mutex_protocol.pc_futex_wake(T) := false; mutex_protocol.pc_finished(T) := false; mutex_protocol.locked := false; mutex_protocol.queue(T) := false; mutex_protocol.scheduled(T) := false}; mutex_protocol.d(T) := false}; l2s_waiting := true; l2s_frozen := false; l2s_saved := false; l2s_d(mutex_protocol.t0) := true; l2s_w_1(V0) := l2s_d(V0:mutex_protocol.thread) & ~mutex_protocol.scheduled(V0) & ~l2s_g_3(V0); l2s_w_0 := ~(forall T. mutex_protocol.d(T)) & ~l2s_g_1; assume l2s_g_1 -> ~(forall T. mutex_protocol.d(T)); assume forall V0. l2s_g_4(V0) -> ~l2s_g_3(V0); assume l2s_g_0 -> ~mutex_protocol.pc_finished(mutex_protocol.t0); assume forall V0. l2s_g_3(V0) -> ~mutex_protocol.scheduled(V0); assume forall V0. l2s_g_2(V0) -> ~mutex_protocol.pc_finished(V0); assume ~((exists T0. l2s_g_2(T0)) -> l2s_g_0 & ~l2s_g_1 -> ((forall T. l2s_g_4(T)) -> (forall T. ~l2s_g_2(T))))}
     while *
         invariant [mutex_protocol.invar8] mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T) | mutex_protocol.pc_atomic_store(T) | mutex_protocol.pc_futex_wake(T) | mutex_protocol.pc_finished(T)
         invariant [mutex_protocol.invar9] ~mutex_protocol.pc_atomic_cas(T) | ~mutex_protocol.pc_futex_wait(T)
@@ -353,3 +680,1161 @@ in
         invariant [futex_wait_progress] l2s_saved -> (~l2s_s_0 & (forall T. l2s_s_1(T) | l2s_s_4(T) | l2s_s_6(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. l2s_s_4(T) & ~l2s_w_1(T) -> mutex_protocol.pc_atomic_cas(T)))
         invariant [kernel_wait_unqueued] l2s_saved -> (~l2s_s_0 & (forall T. l2s_s_1(T) | l2s_s_4(T) | l2s_s_6(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. l2s_s_6(T) & ~l2s_s_7(T) & ~l2s_w_1(T) -> mutex_protocol.pc_atomic_cas(T)))
         invariant [invar68] l2s_saved -> (~l2s_s_0 & (forall T. l2s_s_1(T) | l2s_s_4(T) | l2s_s_6(T) -> mutex_protocol.pc_atomic_cas(T) | mutex_protocol.pc_futex_wait(T) | mutex_protocol.pc_kernel_wait(T)) -> (forall T. ~l2s_s_7(T) -> ~mutex_protocol.queue(T)))
+    {
+        diverge;
+        call one of {ext:mutex_protocol.add_to_d,ext:mutex_protocol.step_atomic_cas,ext:mutex_protocol.step_atomic_store,ext:mutex_protocol.step_finished,ext:mutex_protocol.step_futex_wait,ext:mutex_protocol.step_futex_wake,ext:mutex_protocol.step_kernel_wait,idle}
+    }
+
+================================================================================
+
+
+
+
+    The inductive invariant consists of the following conjectures:
+        /ivy/mutex.ivy: line 128: mutex_protocol.invar8
+        /ivy/mutex.ivy: line 129: mutex_protocol.invar9
+        /ivy/mutex.ivy: line 130: mutex_protocol.invar10
+        /ivy/mutex.ivy: line 131: mutex_protocol.invar11
+        /ivy/mutex.ivy: line 132: mutex_protocol.invar12
+        /ivy/mutex.ivy: line 133: mutex_protocol.invar13
+        /ivy/mutex.ivy: line 134: mutex_protocol.invar14
+        /ivy/mutex.ivy: line 135: mutex_protocol.invar15
+        /ivy/mutex.ivy: line 136: mutex_protocol.invar16
+        /ivy/mutex.ivy: line 137: mutex_protocol.invar17
+        /ivy/mutex.ivy: line 138: mutex_protocol.invar18
+        /ivy/mutex.ivy: line 139: mutex_protocol.invar19
+        /ivy/mutex.ivy: line 140: mutex_protocol.invar20
+        /ivy/mutex.ivy: line 141: mutex_protocol.invar21
+        /ivy/mutex.ivy: line 142: mutex_protocol.invar22
+        /ivy/mutex.ivy: line 143: mutex_protocol.invar23
+        /ivy/mutex.ivy: line 148: mutex_protocol.invar24
+        /ivy/mutex.ivy: line 151: mutex_protocol.invar25
+        /ivy/mutex.ivy: line 185: invar28
+        /ivy/mutex.ivy: line 188: invar29
+        /ivy/mutex.ivy: line 189: invar30
+        /ivy/mutex.ivy: line 190: invar31
+        /ivy/mutex.ivy: line 191: invar32
+        /ivy/mutex.ivy: line 194: invar33
+        /ivy/mutex.ivy: line 198: invar34
+        /ivy/mutex.ivy: line 199: invar35
+        /ivy/mutex.ivy: line 200: invar36
+        /ivy/mutex.ivy: line 201: invar37
+        /ivy/mutex.ivy: line 202: invar38
+        /ivy/mutex.ivy: line 203: invar39
+        /ivy/mutex.ivy: line 204: invar40
+        /ivy/mutex.ivy: line 205: invar41
+        /ivy/mutex.ivy: line 206: invar42
+        /ivy/mutex.ivy: line 207: invar43
+        /ivy/mutex.ivy: line 208: invar44
+        /ivy/mutex.ivy: line 209: invar45
+        /ivy/mutex.ivy: line 210: invar46
+        /ivy/mutex.ivy: line 211: invar47
+        /ivy/mutex.ivy: line 212: invar48
+        /ivy/mutex.ivy: line 215: invar49
+        /ivy/mutex.ivy: line 218: invar50
+        /ivy/mutex.ivy: line 222: invar51
+        /ivy/mutex.ivy: line 223: invar52
+        /ivy/mutex.ivy: line 224: invar53
+        /ivy/mutex.ivy: line 230: invar54
+        /ivy/mutex.ivy: line 231: invar55
+        /ivy/mutex.ivy: line 232: invar56
+        /ivy/mutex.ivy: line 233: invar57
+        /ivy/mutex.ivy: line 234: invar58
+        /ivy/mutex.ivy: line 237: invar59
+        /ivy/mutex.ivy: line 238: invar60
+        /ivy/mutex.ivy: line 239: invar61
+        /ivy/mutex.ivy: line 240: invar62
+        /ivy/mutex.ivy: line 241: invar63
+        /ivy/mutex.ivy: line 242: invar64
+        /ivy/mutex.ivy: line 246: invar65
+        /ivy/mutex.ivy: line 247: invar66
+        /ivy/mutex.ivy: line 250: atomic_store_progress
+        /ivy/mutex.ivy: line 254: futex_wake_progress
+        /ivy/mutex.ivy: line 258: finished_stable
+        /ivy/mutex.ivy: line 265: locked_thread
+        /ivy/mutex.ivy: line 272: kernel_wait_exist
+        /ivy/mutex.ivy: line 309: invar67
+        /ivy/mutex.ivy: line 322: atomic_cas_progress
+        /ivy/mutex.ivy: line 338: futex_wait_progress
+        /ivy/mutex.ivy: line 355: kernel_wait_unqueued
+        /ivy/mutex.ivy: line 377: invar68
+
+    The following action implementations are present:
+        /ivy/mutex.ivy: line 25: implementation of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 19: implementation of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 22: implementation of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 24: implementation of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 20: implementation of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 23: implementation of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 21: implementation of mutex_protocol.step_kernel_wait
+
+    The following action monitors are present:
+        /ivy/mutex.ivy: line 168: monitor of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 56: monitor of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 94: monitor of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 114: monitor of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 70: monitor of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 103: monitor of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 84: monitor of mutex_protocol.step_kernel_wait
+
+    The following initializers are present:
+        Noneinit
+
+    Initialization must establish the invariant
+        /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+        /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+        /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+        /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+        /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+        /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+        /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+        /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+        /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+        /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+        /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+        /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+        /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+        /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+        /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+        /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+        /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+        /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+        /ivy/mutex.ivy: line 185: invar28 ... PASS
+        /ivy/mutex.ivy: line 188: invar29 ... PASS
+        /ivy/mutex.ivy: line 189: invar30 ... PASS
+        /ivy/mutex.ivy: line 190: invar31 ... PASS
+        /ivy/mutex.ivy: line 191: invar32 ... PASS
+        /ivy/mutex.ivy: line 194: invar33 ... PASS
+        /ivy/mutex.ivy: line 198: invar34 ... PASS
+        /ivy/mutex.ivy: line 199: invar35 ... PASS
+        /ivy/mutex.ivy: line 200: invar36 ... PASS
+        /ivy/mutex.ivy: line 201: invar37 ... PASS
+        /ivy/mutex.ivy: line 202: invar38 ... PASS
+        /ivy/mutex.ivy: line 203: invar39 ... PASS
+        /ivy/mutex.ivy: line 204: invar40 ... PASS
+        /ivy/mutex.ivy: line 205: invar41 ... PASS
+        /ivy/mutex.ivy: line 206: invar42 ... PASS
+        /ivy/mutex.ivy: line 207: invar43 ... PASS
+        /ivy/mutex.ivy: line 208: invar44 ... PASS
+        /ivy/mutex.ivy: line 209: invar45 ... PASS
+        /ivy/mutex.ivy: line 210: invar46 ... PASS
+        /ivy/mutex.ivy: line 211: invar47 ... PASS
+        /ivy/mutex.ivy: line 212: invar48 ... PASS
+        /ivy/mutex.ivy: line 215: invar49 ... PASS
+        /ivy/mutex.ivy: line 218: invar50 ... PASS
+        /ivy/mutex.ivy: line 222: invar51 ... PASS
+        /ivy/mutex.ivy: line 223: invar52 ... PASS
+        /ivy/mutex.ivy: line 224: invar53 ... PASS
+        /ivy/mutex.ivy: line 230: invar54 ... PASS
+        /ivy/mutex.ivy: line 231: invar55 ... PASS
+        /ivy/mutex.ivy: line 232: invar56 ... PASS
+        /ivy/mutex.ivy: line 233: invar57 ... PASS
+        /ivy/mutex.ivy: line 234: invar58 ... PASS
+        /ivy/mutex.ivy: line 237: invar59 ... PASS
+        /ivy/mutex.ivy: line 238: invar60 ... PASS
+        /ivy/mutex.ivy: line 239: invar61 ... PASS
+        /ivy/mutex.ivy: line 240: invar62 ... PASS
+        /ivy/mutex.ivy: line 241: invar63 ... PASS
+        /ivy/mutex.ivy: line 242: invar64 ... PASS
+        /ivy/mutex.ivy: line 246: invar65 ... PASS
+        /ivy/mutex.ivy: line 247: invar66 ... PASS
+        /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+        /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+        /ivy/mutex.ivy: line 258: finished_stable ... PASS
+        /ivy/mutex.ivy: line 265: locked_thread ... PASS
+        /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+        /ivy/mutex.ivy: line 309: invar67 ... PASS
+        /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+        /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+        /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+        /ivy/mutex.ivy: line 377: invar68 ... PASS
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following set of external actions must preserve the invariant:
+        (internal) ext:mutex_protocol.add_to_d
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_atomic_cas
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_atomic_store
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_finished
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_futex_wait
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_futex_wake
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) ext:mutex_protocol.step_kernel_wait
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+        (internal) idle
+            /ivy/mutex.ivy: line 128: mutex_protocol.invar8 ... PASS
+            /ivy/mutex.ivy: line 129: mutex_protocol.invar9 ... PASS
+            /ivy/mutex.ivy: line 130: mutex_protocol.invar10 ... PASS
+            /ivy/mutex.ivy: line 131: mutex_protocol.invar11 ... PASS
+            /ivy/mutex.ivy: line 132: mutex_protocol.invar12 ... PASS
+            /ivy/mutex.ivy: line 133: mutex_protocol.invar13 ... PASS
+            /ivy/mutex.ivy: line 134: mutex_protocol.invar14 ... PASS
+            /ivy/mutex.ivy: line 135: mutex_protocol.invar15 ... PASS
+            /ivy/mutex.ivy: line 136: mutex_protocol.invar16 ... PASS
+            /ivy/mutex.ivy: line 137: mutex_protocol.invar17 ... PASS
+            /ivy/mutex.ivy: line 138: mutex_protocol.invar18 ... PASS
+            /ivy/mutex.ivy: line 139: mutex_protocol.invar19 ... PASS
+            /ivy/mutex.ivy: line 140: mutex_protocol.invar20 ... PASS
+            /ivy/mutex.ivy: line 141: mutex_protocol.invar21 ... PASS
+            /ivy/mutex.ivy: line 142: mutex_protocol.invar22 ... PASS
+            /ivy/mutex.ivy: line 143: mutex_protocol.invar23 ... PASS
+            /ivy/mutex.ivy: line 148: mutex_protocol.invar24 ... PASS
+            /ivy/mutex.ivy: line 151: mutex_protocol.invar25 ... PASS
+            /ivy/mutex.ivy: line 185: invar28 ... PASS
+            /ivy/mutex.ivy: line 188: invar29 ... PASS
+            /ivy/mutex.ivy: line 189: invar30 ... PASS
+            /ivy/mutex.ivy: line 190: invar31 ... PASS
+            /ivy/mutex.ivy: line 191: invar32 ... PASS
+            /ivy/mutex.ivy: line 194: invar33 ... PASS
+            /ivy/mutex.ivy: line 198: invar34 ... PASS
+            /ivy/mutex.ivy: line 199: invar35 ... PASS
+            /ivy/mutex.ivy: line 200: invar36 ... PASS
+            /ivy/mutex.ivy: line 201: invar37 ... PASS
+            /ivy/mutex.ivy: line 202: invar38 ... PASS
+            /ivy/mutex.ivy: line 203: invar39 ... PASS
+            /ivy/mutex.ivy: line 204: invar40 ... PASS
+            /ivy/mutex.ivy: line 205: invar41 ... PASS
+            /ivy/mutex.ivy: line 206: invar42 ... PASS
+            /ivy/mutex.ivy: line 207: invar43 ... PASS
+            /ivy/mutex.ivy: line 208: invar44 ... PASS
+            /ivy/mutex.ivy: line 209: invar45 ... PASS
+            /ivy/mutex.ivy: line 210: invar46 ... PASS
+            /ivy/mutex.ivy: line 211: invar47 ... PASS
+            /ivy/mutex.ivy: line 212: invar48 ... PASS
+            /ivy/mutex.ivy: line 215: invar49 ... PASS
+            /ivy/mutex.ivy: line 218: invar50 ... PASS
+            /ivy/mutex.ivy: line 222: invar51 ... PASS
+            /ivy/mutex.ivy: line 223: invar52 ... PASS
+            /ivy/mutex.ivy: line 224: invar53 ... PASS
+            /ivy/mutex.ivy: line 230: invar54 ... PASS
+            /ivy/mutex.ivy: line 231: invar55 ... PASS
+            /ivy/mutex.ivy: line 232: invar56 ... PASS
+            /ivy/mutex.ivy: line 233: invar57 ... PASS
+            /ivy/mutex.ivy: line 234: invar58 ... PASS
+            /ivy/mutex.ivy: line 237: invar59 ... PASS
+            /ivy/mutex.ivy: line 238: invar60 ... PASS
+            /ivy/mutex.ivy: line 239: invar61 ... PASS
+            /ivy/mutex.ivy: line 240: invar62 ... PASS
+            /ivy/mutex.ivy: line 241: invar63 ... PASS
+            /ivy/mutex.ivy: line 242: invar64 ... PASS
+            /ivy/mutex.ivy: line 246: invar65 ... PASS
+            /ivy/mutex.ivy: line 247: invar66 ... PASS
+            /ivy/mutex.ivy: line 250: atomic_store_progress ... PASS
+            /ivy/mutex.ivy: line 254: futex_wake_progress ... PASS
+            /ivy/mutex.ivy: line 258: finished_stable ... PASS
+            /ivy/mutex.ivy: line 265: locked_thread ... PASS
+            /ivy/mutex.ivy: line 272: kernel_wait_exist ... PASS
+            /ivy/mutex.ivy: line 309: invar67 ... PASS
+            /ivy/mutex.ivy: line 322: atomic_cas_progress ... PASS
+            /ivy/mutex.ivy: line 338: futex_wait_progress ... PASS
+            /ivy/mutex.ivy: line 355: kernel_wait_unqueued ... PASS
+            /ivy/mutex.ivy: line 377: invar68 ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action mutex_protocol.step_atomic_store when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 95: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.step_futex_wake when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 104: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.step_finished when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 115: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.step_futex_wait when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 71: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.add_to_d when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action idle when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.step_kernel_wait when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 85: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+        in action mutex_protocol.step_atomic_cas when called from the environment:
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            /ivy/mutex.ivy: line 57: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+            nowhere: assumption
+
+    The following program assertions are treated as guarantees:
+        in action idle when called from the environment,the environment:
+            /ivy/mutex.ivy: line 173: guarantee ... PASS
+
+Isolate this:
+
+    The following properties are to be checked:
+
+    The following action implementations are present:
+        /ivy/mutex.ivy: line 25: implementation of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 19: implementation of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 22: implementation of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 24: implementation of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 20: implementation of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 23: implementation of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 21: implementation of mutex_protocol.step_kernel_wait
+
+    The following action monitors are present:
+        /ivy/mutex.ivy: line 168: monitor of mutex_protocol.add_to_d
+        /ivy/mutex.ivy: line 56: monitor of mutex_protocol.step_atomic_cas
+        /ivy/mutex.ivy: line 94: monitor of mutex_protocol.step_atomic_store
+        /ivy/mutex.ivy: line 114: monitor of mutex_protocol.step_finished
+        /ivy/mutex.ivy: line 70: monitor of mutex_protocol.step_futex_wait
+        /ivy/mutex.ivy: line 103: monitor of mutex_protocol.step_futex_wake
+        /ivy/mutex.ivy: line 84: monitor of mutex_protocol.step_kernel_wait
+
+    The following initializers are present:
+        /ivy/mutex.ivy: line 44: mutex_protocol.init[after1]
+        /ivy/mutex.ivy: line 166: mutex_protocol.init[after26]
+
+    Any assertions in initializers must be checked ... PASS
+
+    The following program assertions are treated as assumptions:
+        in action mutex_protocol.step_atomic_store when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 95: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.step_futex_wake when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 104: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.step_finished when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 115: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.step_futex_wait when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 71: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.add_to_d when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.step_atomic_cas when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 57: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+        in action mutex_protocol.step_kernel_wait when called from the environment:
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+            /ivy/mutex.ivy: line 85: assumption
+            /ivy/mutex.ivy: line 151: assumption
+            /ivy/mutex.ivy: line 138: assumption
+            /ivy/mutex.ivy: line 130: assumption
+            /ivy/mutex.ivy: line 131: assumption
+            /ivy/mutex.ivy: line 132: assumption
+            /ivy/mutex.ivy: line 133: assumption
+            /ivy/mutex.ivy: line 134: assumption
+            /ivy/mutex.ivy: line 135: assumption
+            /ivy/mutex.ivy: line 136: assumption
+            /ivy/mutex.ivy: line 137: assumption
+            /ivy/mutex.ivy: line 129: assumption
+            /ivy/mutex.ivy: line 148: assumption
+            /ivy/mutex.ivy: line 141: assumption
+            /ivy/mutex.ivy: line 140: assumption
+            /ivy/mutex.ivy: line 143: assumption
+            /ivy/mutex.ivy: line 142: assumption
+            /ivy/mutex.ivy: line 139: assumption
+            /ivy/mutex.ivy: line 128: assumption
+
+OK

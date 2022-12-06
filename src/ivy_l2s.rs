@@ -364,6 +364,21 @@ mod peg_tests {
     }
 }
 
+fn find_l2s_section(s: &str) -> Result<&str, String> {
+    let start_marker = "\nafter replace_named_binders\n";
+    let s = match s.find(start_marker) {
+        Some(n) => &s[n + start_marker.len()..],
+        None => return Err("could not find replace_named_binders marker".to_string()),
+    };
+    let end_marker = "    {\n";
+    let s = match s.find(end_marker) {
+        Some(n) => &s[..n],
+        None => return Err("could not find end of replace_named_binders section".to_string()),
+    };
+    Ok(s)
+}
+
 pub fn parse(s: &str) -> Result<System, String> {
+    let s = find_l2s_section(s)?;
     ivy_parser::file(s).map_err(|err| format!("{err}"))
 }

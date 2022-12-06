@@ -53,17 +53,17 @@ step_futex_wake = action(t:thread){
   if some t_q. queue(t_q) {
     queue(t_q) := false
   };
-  _old_l2s_g_0 := l2s_g_0;
-  l2s_g_0 := *;
   _old_l2s_g_2(V0) := l2s_g_2(V0);
   l2s_g_2(V0) := *;
-  assume _old_l2s_g_0 -> l2s_g_0;
-  assume (~_old_l2s_g_0 & ~pc_finished(t0)) -> ~l2s_g_0;
+  _old_l2s_g_0 := l2s_g_0;
+  l2s_g_0 := *;
   assume (forall V0. _old_l2s_g_2(V0) -> l2s_g_2(V0));
   assume (forall V0. (~_old_l2s_g_2(V0) & ~pc_finished(V0)) -> ~l2s_g_2(V0));
+  assume _old_l2s_g_0 -> l2s_g_0;
+  assume (~_old_l2s_g_0 & ~pc_finished(t0)) -> ~l2s_g_0;
   pc_finished(t) := true;
-  assume l2s_g_0 -> ~pc_finished(t0);
   assume (forall V0. l2s_g_2(V0) -> ~pc_finished(V0));
+  assume l2s_g_0 -> ~pc_finished(t0);
   _old_l2s_g_3(V0) := l2s_g_3(V0);
   l2s_g_3(V0) := *;
   _old_l2s_g_4(V0) := l2s_g_4(V0);
