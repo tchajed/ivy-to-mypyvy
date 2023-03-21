@@ -7,6 +7,7 @@ use std::{fs, process};
 #[derive(clap::Parser, Debug)]
 #[command(about, long_about=None)]
 struct Args {
+    /// (for debugging parser) print back an Ivy file
     #[arg(long)]
     ivy: bool,
 
