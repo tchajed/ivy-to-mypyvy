@@ -1,5 +1,12 @@
+//! Syntax and parsing for an Ivy transition system produced by l2s_debug=true.
+//!
+//! There are two parts of this output that are used: the section "after
+//! replace_named_binders", and a list of substitutions output before that which
+//! give expressions associated with some of the generated l2s functions.
+
 use std::fmt;
 
+/// A Transition is an Ivy `action`.
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Transition {
     pub name: String,
@@ -8,6 +15,7 @@ pub struct Transition {
     pub steps: Vec<Step>,
 }
 
+/// A System is a whole Ivy transition system.
 pub struct System {
     pub transitions: Vec<Transition>,
     pub init: Vec<Step>,
@@ -98,6 +106,7 @@ impl Expr {
     }
 }
 
+/// Declaration of a relation
 #[derive(PartialEq, Eq, Hash, Debug, Clone, PartialOrd, Ord)]
 pub struct Relation {
     pub name: String,
@@ -121,6 +130,8 @@ impl Relation {
     }
 }
 
+/// Condition for an `if` (which can be either an expression or "some" with a
+/// binder).
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum IfCond {
     Expr(Expr),
@@ -129,6 +140,7 @@ pub enum IfCond {
 
 type Steps = Vec<Step>;
 
+/// A Step is a single statement within an action (for example, `r(X) := X = x`).
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Step {
     Assume(Expr),
@@ -141,11 +153,18 @@ pub enum Step {
     },
 }
 
+/// A Sub (short for "substitution") is a name for a relation that the l2s
+/// reduction created.
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct Sub {
+    /// The type of l2s binder (eg, $l2s_s or $_old_l2s_g)
     pub l2s_binder: String,
+    /// Bound variables (and types)
     pub binders: Vec<String>,
+    /// The expression under the binder
     pub expr: String,
+    /// The name of the relation being created (a typical example would be
+    /// `l2s_s_3`)
     pub name: String,
 }
 

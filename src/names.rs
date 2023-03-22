@@ -1,6 +1,6 @@
-use crate::ivy_l2s::{Expr, IfCond, Relation, Step, Sub, Subs, System, Transition};
+//! Functions that clean up names from Ivy output.
 
-/// Clean up names from Ivy output.
+use crate::ivy_l2s::{Expr, IfCond, Relation, Step, Sub, Subs, System, Transition};
 
 struct IdentFn<F: Fn(&str) -> String>(F);
 
@@ -140,14 +140,18 @@ impl<F: Fn(&str) -> String> IdentFn<F> {
     }
 }
 
+/// Remove namespaces from all names (for example, mutex_protocol.thread will
+/// become mutex_protocol).
 pub fn clean_namespaces(sys: &System) -> System {
     IdentFn(ident_remove_namespaces).system(sys)
 }
 
+/// Remove types from all names.
 pub fn clean_types(sys: &System) -> System {
     IdentFn(ident_remove_types).system(sys)
 }
 
+/// Remove namepaces from all names in a set of substitutions.
 pub fn clean_namespaces_subs(subs: &Subs) -> Subs {
     IdentFn(ident_remove_namespaces).subs(subs)
 }

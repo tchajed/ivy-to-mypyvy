@@ -1,3 +1,10 @@
+//! A collection of hacks to get types from the information available.
+//!
+//! We need to emit a signature with types for mypyvy. The l2s_debug output
+//! doesn't have a signature, we make some attempt to infer it, but without a
+//! proper type inference procedure. Instead, we rely on the substitutions and
+//! any type annotations that happen to be present in the file.
+
 use std::collections::{HashMap, HashSet};
 
 use crate::ivy_l2s::{Expr, IfCond, Step, Sub, Subs, System, Transition};
@@ -106,7 +113,7 @@ impl Types {
                         return;
                     }
                 }
-                // TODO: hack, useful for recording that a relation's arity
+                // TODO: hack, useful for recording a relation's arity for manual correction
                 let args: Vec<String> = (0..r.args.len()).map(|_| "?".to_string()).collect();
                 let name = r.name.to_string();
                 if !self.typs.contains_key(&name) {

@@ -1,3 +1,10 @@
+//! This module implements evaluating and printing an [`crate::ivy_l2s::System`] as a
+//! mypyvy file.
+//!
+//! The most complex part of the translation is converting the imperative list
+//! of statements in an Ivy action to a mypyvy transition, which is just a
+//! relation between the current and `new()` versions of all the mutable symbols.
+
 use std::collections::HashSet;
 use std::{collections::HashMap, fmt::Write};
 
